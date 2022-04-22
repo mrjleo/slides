@@ -1,0 +1,1797 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>Fast-Forward Indexes</title>
+	<link rel="stylesheet" href="../node_modules/reveal.js/dist/reveal.css">
+	<link rel="stylesheet" href="../node_modules/reveal.js/dist/theme/night.css">
+	<link rel="stylesheet" href="../node_modules/reveal.js/plugin/highlight/monokai.css">
+	<link rel="stylesheet" href="../node_modules/charts.css/dist/charts.min.css">
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<!-- title -->
+			<section id="title-slide">
+				<div style="display: flex; justify-content: center; align-items: center; height: 2em">
+					<img style="height: 80%;" src="img/logos/l3s_white.png">
+					<p style="margin: 0.5em"></p>
+					<img style="height: 80%;" src="img/logos/sobigdata.png">
+					<p style="margin: auto"></p>
+					<img style="height: 100%;" src="img/logos/luh.png">
+				</div>
+				<hr class="hide" style="height: 2em;">
+				<h3>Efficient Neural Ranking using Forward Indexes</h3>
+				<p style="font-size: large;">
+					<b><u>Jurek Leonhardt</u></b>, Koustav Rudra, Megha Khosla, Abhijit Anand, Avishek Anand
+				</p>
+			</section>
+			<!-- end: title -->
+
+			<!-- retrieve-then-rank -->
+			<section>
+				<section id="rtr-title-slide" data-auto-animate data-auto-animate-id="rtr">
+					<h3>Retrieve-then-Rank Approach</h3>
+				</section>
+
+				<!-- indexing -->
+				<section id="rtr-indexing-slide" data-auto-animate data-auto-animate-id="rtr">
+					<h3>Retrieve-then-Rank Approach</h3>
+					<h4>Sparse Retrieval: Lexical Indexing</h4>
+
+					<div class="r-stretch column-desc-layout">
+						<div class="column-item fragment" data-fragment-index="1">
+							<img class="rtr-icon" src="img/documents.png">
+						</div>
+						<p class="column-label fragment" data-fragment-index="1">Corpus</p>
+
+						<div class="column-item fragment" data-fragment-index="2">
+							➔
+						</div>
+						<p class="column-label"></p>
+
+						<div class="column-item fragment" data-fragment-index="2">
+							<p style="font-size: large; margin: 0.2em;">Document ID: <b>D001</b></p>
+							<p style="	font-size: small;
+										text-align: justify;
+										border: 0.2em solid;
+										border-radius: 1em;
+										padding: 1em;
+										margin: 0;">
+								<span class="fragment highlight-red" data-fragment-index="4">Life</span>
+								is a
+								<span class="fragment highlight-green" data-fragment-index="5">characteristic</span>
+								that
+								<span class="fragment highlight-blue" data-fragment-index="6">distinguishes</span>
+								physical entities that have biological processes, such as signaling and self-sustaining
+								processes, from those that do not, either because such functions have ceased (they have
+								died) or because they never had such functions and are classified as inanimate. Various
+								forms of
+								<span class="fragment highlight-red" data-fragment-index="4">life</span>
+								exist, such as plants, animals, fungi, protists, archaea, and bacteria. Biology is the
+								science that studies
+								<span class="fragment highlight-red" data-fragment-index="4">life</span>.
+								[...]
+							</p>
+							<p style="font-size: x-small; margin: 0.5em;">Source: https://en.wikipedia.org/wiki/Life</p>
+						</div>
+						<p class="column-label fragment" data-fragment-index="2">Document</p>
+
+						<div class="column-item fragment" data-fragment-index="3">
+							➔
+						</div>
+						<p class="column-label"></p>
+
+						<div class="column-item fragment" data-fragment-index="3">
+							<table style="font-size: large; border-collapse: collapse;">
+								<thead>
+									<tr>
+										<th>Term</th>
+										<th>Freq.</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><span class="fragment highlight-red" data-fragment-index="4">life</span>
+										</td>
+										<td><b>D001</b>: 3</td>
+									</tr>
+									<tr>
+										<td><span class="fragment highlight-green"
+												data-fragment-index="5">characteristic</span>
+										</td>
+										<td><b>D001</b>: 1</td>
+									</tr>
+									<tr>
+										<td><span class="fragment highlight-blue"
+												data-fragment-index="6">distinguishes</span></td>
+										<td><b>D001</b>: 1</td>
+									</tr>
+									<tr>
+										<td>...</td>
+										<td>...</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<p class="column-label fragment" data-fragment-index="3">Term frequencies</p>
+
+						<div class="column-item fragment" data-fragment-index="7">
+							➔
+						</div>
+						<p class="column-label"></p>
+
+						<div class="column-item fragment" data-fragment-index="7">
+							<img class="rtr-icon" src="img/database.png">
+						</div>
+						<p class="column-label fragment" data-fragment-index="7">Inverted index</p>
+					</div>
+				</section>
+				<!-- end: indexing -->
+
+				<!-- retrieval -->
+				<section id="rtr-retrieval-slide" data-auto-animate data-auto-animate-id="rtr">
+					<h3>Retrieve-then-Rank Approach</h3>
+					<h4>Sparse Retrieval: Lexical Matching</h4>
+
+					<div class="r-stretch column-desc-layout">
+						<div class="column-item">
+							<div class="fragment" data-fragment-index="1">
+								<p style="margin: 0;">🤔</p>
+								<p style="font-size: large; margin: 0;">What is the meaning of life?</p>
+								<p style="margin: 0;">↓</p>
+							</div>
+							<img class="rtr-icon" src="img/database.png">
+						</div>
+						<p class="column-label">Inverted index</p>
+
+						<div class="column-item fragment" data-fragment-index="2">
+							<p style="margin: 0;">➔</p>
+							<p style="font-size: medium; margin: 0;">Term matching (BM25)</p>
+						</div>
+						<p class="column-label"></p>
+
+						<div class="column-item fragment" data-fragment-index="2">
+							<div id="rtr-candidate-docs">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+							</div>
+						</div>
+						<p class="column-label fragment" data-fragment-index="2">Candidate documents</p>
+					</div>
+				</section>
+				<!-- end: retrieval -->
+
+				<!-- re-ranking -->
+				<section id="rtr-rerank-slide" data-auto-animate data-auto-animate-id="rtr">
+					<h3>Retrieve-then-Rank Approach</h3>
+					<h4>Re-Ranking</h4>
+
+					<div class="r-stretch column-desc-layout">
+						<div class="column-item">
+							<div id="rtr-candidate-docs">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+								<img class="rtr-candidate-doc" src="img/document.png">
+							</div>
+						</div>
+						<p class="column-label">Candidate documents</p>
+
+						<div class="column-item fragment" data-fragment-index="1">
+							<div style="display: grid">
+								<img class="rtr-rerank-griditem" id="rtr-reranker" src="img/ml.png">
+							</div>
+							<p style="font-size: medium;">Re-ranking model</p>
+						</div>
+						<p class="column-label fragment" data-fragment-index="1">Re-ranking step</p>
+				</section>
+
+				<section id="rtr-rerank-slide" data-auto-animate data-auto-animate-id="rtr">
+					<h3>Retrieve-then-Rank Approach</h3>
+					<h4>Re-Ranking</h4>
+
+					<div class="r-stretch column-desc-layout">
+						<div class="column-item">
+							<div id="rtr-candidate-docs" data-id="rtr-candidate-docs">
+							</div>
+						</div>
+						<p class="column-label">Candidate documents</p>
+
+						<div class="column-item">
+							<div>
+								<p style="margin: 0;">🤔</p>
+								<p style="font-size: large; margin: 0;">What is the meaning of life?</p>
+								<p style="margin: 0;">↓</p>
+							</div>
+							<div style="display: grid">
+								<img class="rtr-rerank-griditem" id="rtr-reranker" src="img/ml.png">
+								<img class="rtr-rerank-griditem hide" src="img/doc1.png">
+								<img class="rtr-rerank-griditem hide" src="img/doc2.png">
+								<img class="rtr-rerank-griditem hide" src="img/doc3.png">
+								<img class="rtr-rerank-griditem hide" src="img/doc4.png">
+								<img class="rtr-rerank-griditem hide" src="img/doc5.png">
+								<img class="rtr-rerank-griditem hide" src="img/document.png">
+								<img class="rtr-rerank-griditem hide" src="img/document.png">
+								<img class="rtr-rerank-griditem hide" src="img/document.png">
+								<img class="rtr-rerank-griditem hide" src="img/document.png">
+								<img class="rtr-rerank-griditem hide" src="img/document.png">
+								<img class="rtr-rerank-griditem hide" src="img/document.png">
+								<img class="rtr-rerank-griditem hide" src="img/document.png">
+								<img class="rtr-rerank-griditem hide" src="img/document.png">
+								<img class="rtr-rerank-griditem hide" src="img/document.png">
+								<img class="rtr-rerank-griditem hide" src="img/document.png">
+								<img class="rtr-rerank-griditem hide" src="img/document.png">
+								<img class="rtr-rerank-griditem hide" src="img/document.png">
+								<img class="rtr-rerank-griditem hide" src="img/document.png">
+								<img class="rtr-rerank-griditem hide" src="img/document.png">
+								<img class="rtr-rerank-griditem hide" src="img/document.png">
+								<img class="rtr-rerank-griditem hide" src="img/document.png">
+								<img class="rtr-rerank-griditem hide" src="img/document.png">
+								<img class="rtr-rerank-griditem hide" src="img/document.png">
+								<img class="rtr-rerank-griditem hide" src="img/document.png">
+								<img class="rtr-rerank-griditem hide" src="img/document.png">
+								<img class="rtr-rerank-griditem hide" src="img/document.png">
+								<img class="rtr-rerank-griditem hide" src="img/document.png">
+								<img class="rtr-rerank-griditem hide" src="img/document.png">
+								<img class="rtr-rerank-griditem hide" src="img/document.png">
+								<img class="rtr-rerank-griditem hide" src="img/document.png">
+								<img class="rtr-rerank-griditem hide" src="img/document.png">
+								<img class="rtr-rerank-griditem hide" src="img/document.png">
+								<img class="rtr-rerank-griditem hide" src="img/document.png">
+								<img class="rtr-rerank-griditem hide" src="img/document.png">
+								<img class="rtr-rerank-griditem hide" src="img/document.png">
+							</div>
+							<p style="font-size: medium;">Re-ranking model</p>
+						</div>
+						<p class="column-label">Re-ranking step</p>
+				</section>
+
+				<section id="rtr-rerank-slide" data-auto-animate data-auto-animate-id="rtr">
+					<h3>Retrieve-then-Rank Approach</h3>
+					<h4>Re-Ranking</h4>
+
+					<div class="r-stretch column-desc-layout">
+						<div class="column-item">
+							<div id="rtr-candidate-docs" data-id="rtr-candidate-docs"></div>
+						</div>
+						<p class="column-label">Candidate documents</p>
+
+						<div class="column-item">
+							<div>
+								<p style="margin: 0;">🤔</p>
+								<p style="font-size: large; margin: 0;">What is the meaning of life?</p>
+								<p style="margin: 0;">↓</p>
+							</div>
+							<div style="display: grid">
+								<img class="rtr-rerank-griditem" id="rtr-reranker" src="img/ml.png">
+							</div>
+							<p style="font-size: medium;">Re-ranking model</p>
+						</div>
+						<p class="column-label">Re-ranking step</p>
+
+						<div class="column-item">
+							<div class="rtr-doc-container">
+								<img class="rtr-doc" src="img/doc1.png">
+								<div class="rtr-doc-desc">
+									<p>#1 D371</p>
+									<p>Score: 0.95</p>
+								</div>
+							</div>
+							<div class="rtr-doc-container">
+								<img class="rtr-doc" src="img/doc2.png">
+								<div class="rtr-doc-desc">
+									<p>#2 D222</p>
+									<p>Score: 0.85</p>
+								</div>
+							</div>
+							<div class="rtr-doc-container">
+								<img class="rtr-doc" src="img/doc3.png">
+								<div class="rtr-doc-desc">
+									<p>#3 D984</p>
+									<p>Score: 0.71</p>
+								</div>
+							</div>
+							<div class="rtr-doc-container">
+								<img class="rtr-doc" src="img/doc4.png">
+								<div class="rtr-doc-desc">
+									<p>#4 D017</p>
+									<p>Score: 0.60</p>
+								</div>
+							</div>
+							<div class="rtr-doc-container">
+								<img class="rtr-doc" src="img/doc5.png">
+								<div class="rtr-doc-desc">
+									<p>#5 D101</p>
+									<p>Score: 0.45</p>
+								</div>
+							</div>
+						</div>
+						<p class="column-label">Final ranking</p>
+					</div>
+				</section>
+				<!-- end: re-ranking -->
+			</section>
+			<!-- end: retrieve-then-rank -->
+
+			<!-- dense retrieval -->
+			<section>
+				<section id="dr-title-slide" data-auto-animate data-auto-animate-id="dr">
+					<h3>Dense Retrieval</h3>
+					<h4>An Alternative to the Retrieve-then-Rank Approach</p>
+				</section>
+
+				<!-- dense retrieval 1 -->
+				<section id="dr-1-slide" data-auto-animate data-auto-animate-id="dr">
+					<h3>Dense Retrieval</h3>
+					<h4>Semantic Matching</h4>
+
+					<div class="r-stretch column-layout">
+						<div class="column-item">
+							<p>
+								<span class="fragment highlight-current-red" data-fragment-index="1">Documents</span>
+								and
+								<span class="fragment highlight-current-red" data-fragment-index="2">query</span>
+								are embedded in a common vector space.
+							</p>
+							<p class="fragment" data-fragment-index="3">
+								Retrieval is performed as an (approximate) <b>nearest neighbor search</b> operation.
+							</p>
+						</div>
+						<div class="column-item">
+							<div id="dr-vector-space">
+								<div class="fragment" data-fragment-index="1">
+									<span id="dr-doc-embedded-1">📄</span>
+									<span id="dr-doc-embedded-2">📄</span>
+									<span id="dr-doc-embedded-3">📄</span>
+									<span id="dr-doc-embedded-4">📄</span>
+									<span id="dr-doc-embedded-5">📄</span>
+									<span id="dr-doc-embedded-6">📄</span>
+									<span id="dr-doc-embedded-7">📄</span>
+									<span id="dr-doc-embedded-8">📄</span>
+									<span id="dr-doc-embedded-9">📄</span>
+									<span id="dr-doc-embedded-10">📄</span>
+								</div>
+								<div id="dr-query-radius" class="fragment" data-fragment-index="3"></div>
+								<span id="dr-query-embedded" class="fragment" data-fragment-index="2">🤔</span>
+							</div>
+							<p style="font-size: large;">The vector space is typically 768-dimensional.</p>
+						</div>
+					</div>
+				</section>
+				<!-- end: dense retrieval 1 -->
+
+				<!-- dense retrieval 2 -->
+				<section id="dr-2-slide" data-auto-animate data-auto-animate-id="dr">
+					<h3>Dense Retrieval</h3>
+					<h4>Dual Encoders</h4>
+
+					<p style="font-size: x-large;">
+						The
+						<span class="fragment highlight-red" data-fragment-index="1">
+							dense (semantic) relevance score
+						</span>
+						of a document $d$ w.r.t. a query $q$ is computed as
+					</p>
+					<p>
+						<span class="fragment highlight-red" data-fragment-index="1">$\phi_D (q, d)$</span>
+						$ = $
+						<span class="fragment highlight-green" data-fragment-index="2">$\zeta (q)$</span>
+						$ \cdot $
+						<span class="fragment highlight-blue" data-fragment-index="3">$\eta (d)$</span>,
+					</p>
+					<p style="font-size: x-large;">
+						where
+						<span class="fragment highlight-green" data-fragment-index="2">
+							$\zeta$ is the query encoder
+						</span>
+						and
+						<span class="fragment highlight-blue" data-fragment-index="3">
+							$\eta$ is the document encoder</span>.
+					</p>
+
+					<hr class="hide">
+
+					<p class="fragment" style="font-size: x-large;">
+						The dot product of two vectors encodes their proximity in the vector space.
+					</p>
+					<p class="fragment" style="font-size: x-large;">
+						A <b>dense index</b> contains $\eta (d)$ pre-computed for all documents in the corpus.
+					</p>
+				</section>
+				<!-- end: dense retrieval 2 -->
+			</section>
+			<!-- end: dense retrieval -->
+
+			<!-- hybrid retrieval -->
+			<section id="hr-slide">
+				<h3>Hybrid Retrieval</h3>
+
+				<p class="fragment" style="font-size: x-large;">
+					For a query $q$, retrieve $K^q_S$ using a <b>sparse retriever</b> and $K^q_D$ using a <b>dense
+						retriever</b>.
+				</p>
+				<p class="fragment" style="font-size: x-large;">
+					Rank the documents by combining the scores.
+				</p>
+			</section>
+			<!-- end: hybrid retrieval -->
+
+			<!-- motivation -->
+			<section id="motivation-slide">
+				<h3>Motivation</h3>
+				<div class="column-layout r-stretch">
+					<div class="column-item">
+						<ol style="font-size: x-large;">
+							<li>
+								<span class="fragment highlight-red" data-fragment-index="1">Sparse retrieval</span>
+								alone is fast, but not competitive.
+							</li>
+							<li>
+								Dense retrieval shows good nDCG, but recall suffers and <b>it is slow</b>.
+							</li>
+							<li><span class="fragment highlight-green" data-fragment-index="2">
+									Re-ranking using dense retrieval models
+								</span>
+								works well.</li>
+							<li>
+								<span class="fragment highlight-blue" data-fragment-index="3">
+									Score interpolation
+								</span>
+								further helps.
+							</li>
+						</ol>
+						<p style="font-size: x-large;" class="fragment" data-fragment-index="3">
+							<span class="fragment highlight-blue" data-fragment-index="3">$\phi (q, d)$</span>
+							$ = \alpha \ \cdot $
+							<span class="fragment highlight-red" data-fragment-index="3">$ \phi_S (q, d)$</span>
+							$+\ (1 - \alpha) \ \cdot $
+							<span class="fragment highlight-green" data-fragment-index="3">$\phi_D(q, d)$</span>
+						</p>
+					</div>
+					<div class="column-item">
+						<table class="result-tab">
+							<thead>
+								<tr>
+									<th></th>
+									<th>AP@1k</th>
+									<th>R@1k</th>
+									<th>nDCG@10</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="result-tab-section">
+									<td colspan="4">Sparse retrieval</td>
+								</tr>
+								<tr class="fragment highlight-red" data-fragment-index="1">
+									<td>BM25</td>
+									<td>0.331</td>
+									<td>0.697</td>
+									<td>0.519</td>
+								</tr>
+
+								<tr class="result-tab-section">
+									<td colspan="4">Dense retrieval</td>
+								</tr>
+								<tr>
+									<td>TCT-ColBERT</td>
+									<td>0.279</td>
+									<td>0.576</td>
+									<td>0.612</td>
+								</tr>
+								<tr>
+									<td>ANCE</td>
+									<td>0.254</td>
+									<td>0.510</td>
+									<td>0.633</td>
+								</tr>
+
+								<tr class="result-tab-section">
+									<td colspan="4">Re-ranking (BM25 retrieval)</td>
+								</tr>
+								<tr class="fragment highlight-green" data-fragment-index="2">
+									<td>TCT-ColBERT</td>
+									<td>0.370</td>
+									<td>0.697</td>
+									<td>0.685</td>
+								</tr>
+								<tr class="fragment highlight-green" data-fragment-index="2">
+									<td>ANCE</td>
+									<td>0.336</td>
+									<td>0.697</td>
+									<td>0.654</td>
+								</tr>
+								<tr>
+									<td>BERT</td>
+									<td>0.283</td>
+									<td>0.697</td>
+									<td>0.520</td>
+								</tr>
+
+								<tr class="result-tab-section">
+									<td colspan="4">Interpolation (with BM25)</td>
+								</tr>
+								<tr class="fragment highlight-blue" data-fragment-index="3">
+									<td>TCT-ColBERT</td>
+									<td>0.406</td>
+									<td>0.697</td>
+									<td>0.696</td>
+								</tr>
+								<tr class="fragment highlight-blue" data-fragment-index="3">
+									<td>ANCE</td>
+									<td>0.387</td>
+									<td>0.697</td>
+									<td>0.673</td>
+								</tr>
+								<tr>
+									<td>BERT</td>
+									<td>0.365</td>
+									<td>0.697</td>
+									<td>0.612</td>
+								</tr>
+								<tr class="result-tab-section"></tr>
+							</tbody>
+						</table>
+						<p style="font-size: large">
+							<b>Table</b>: TREC-DL 2019 document ranking results.
+						</p>
+					</div>
+				</div>
+			</section>
+			<!-- end: motivation -->
+
+			<!-- fast-forward indexes -->
+			<section>
+				<section id="ff-index-title-slide" data-auto-animate data-auto-animate-id="ff-index">
+					<h3>Fast-Forward Indexes</h3>
+					<h4>Efficient Interpolation-based Re-Ranking on CPUs</h4>
+				</section>
+
+				<!-- idea -->
+				<section id="ff-index-idea-slide" data-auto-animate data-auto-animate-id="ff-index">
+					<h3>Fast-Forward Indexes</h3>
+
+					<p style="font-size: x-large;">
+						$\phi (q, d) = \alpha \cdot \phi_S (q, d) + (1 - \alpha) \ \cdot $
+						<span class="fragment highlight-green" data-fragment-index="1">$\phi_D(q, d)$</span>
+					</p>
+					<p style="font-size: x-large;" class="fragment" data-fragment-index="1">
+						Our approach:
+						<b class="fragment highlight-green" data-fragment-index="1">
+							Fast re-ranking with dual encoders</b>.
+					</p>
+					<hr class="hide">
+					<p style="font-size: x-large;" class="fragment" data-fragment-index="2">
+						A <b>Fast-Forward index</b> is a look-up table for pre-computed document representations:
+					</p>
+					<p style="font-size: x-large;" class="fragment" data-fragment-index="2">
+						<span class="fragment highlight-green" data-fragment-index="2">
+							$\phi_D^{FF} (q, d)$
+						</span>
+						$= \zeta (q) \cdot \eta^{FF} (d) $
+					</p>
+				</section>
+				<!-- end: idea -->
+
+				<!-- efficiency -->
+				<section id="ff-index-efficiency-slide" data-auto-animate data-auto-animate-id="ff-index">
+					<h3>Fast-Forward Indexes</h3>
+
+					<p style="font-size: x-large;">
+						The <b>look-up</b> operation is much more <b>efficient</b> than actual re-ranking:
+					</p>
+
+					<hr class="hide">
+
+					<div id="ff-efficiency-chart">
+						<table class="charts-css column show-labels multiple data-spacing-20">
+							<tbody>
+								<tr>
+									<th scope="row">nDCG@20</th>
+									<td style="--size:0.632;"><span class="data vertical">0.632</span></td>
+									<td style="--size:0.655;"><span class="data vertical">0.655</span></td>
+									<td style="--size:0.655;"><span class="data vertical">0.655</span></td>
+								</tr>
+								<tr>
+									<th scope="row">Query latency [ms]</th>
+									<td style="--size:0.99;"><span class="data vertical">1191</span></td>
+									<td style="--size:1.00;"><span class="data vertical">1203</span></td>
+									<td style="--size:0.21;"><span class="data">253</span></td>
+								</tr>
+							</tbody>
+						</table>
+						<ul class="charts-css legend legend-rectangle">
+							<li>Re-ranking</li>
+							<li>Interpolation</li>
+							<li>Interpolation (Fast-Forward)</li>
+						</ul>
+					</div>
+					<p style="font-size: medium;">
+						<b>Figure</b>: TCT-ColBERT on the TREC-DL 2019 document ranking task.
+					</p>
+
+					<hr class="hide">
+
+					<p style="font-size: x-large;">
+						In the following, we introduce techniques to improve efficiency even further.
+					</p>
+				</section>
+				<!-- end: efficiency -->
+
+				<!-- maxp -->
+				<section id="ff-index-maxp-slide">
+					<h3>MaxP Indexes</h3>
+					<p style="font-size: x-large;" data-fragment-index="1">
+						Long documents are often chunked into passages and scored using a $\max$ operation:
+					</p>
+
+					<p class="fragment" data-fragment-index="1">
+						$\phi_D^{FF} (q, d) = \max_{p_i \in d} (\zeta (q) \cdot \eta^{FF} (p_i))$
+					</p>
+
+					<hr class="hide">
+
+					<p class="fragment" style="font-size: x-large;" data-fragment-index="2">
+						We propose <b>sequential coalescing</b> to compress maxP indexes.
+					</p>
+				</section>
+				<!-- end: maxp -->
+
+				<!-- seq. coalescing -->
+				<section id="ff-index-sc-slide" data-auto-animate data-auto-animate-id="sc">
+					<h3>Sequential Coalescing</h3>
+					<h4>Compressing a MaxP Index</h4>
+
+					<div class="r-stretch column-layout">
+						<div class="column-item">
+							<div id="sc-vector-space">
+								<div class="sc-psg-container fragment fade-out" id="sc-psg-0" data-fragment-index="3">
+									<p class="sc-psg before fragment highlight-red" data-fragment-index="1"></p>
+									<p class="sc-psg-label">$p_0$</p>
+								</div>
+
+								<div class="sc-psg-container fragment fade-out" id="sc-psg-1" data-fragment-index="3">
+									<p class="sc-psg before fragment highlight-red" data-fragment-index="2"></p>
+									<p class="sc-psg-label">$p_1$</p>
+								</div>
+
+								<div class="fragment fade-out" data-fragment-index="5">
+									<div class="sc-psg-container fragment fade-in" id="sc-avg-01"
+										data-fragment-index="3">
+										<p class="sc-psg after fragment highlight-red" data-fragment-index="3"></p>
+										<p class="sc-psg-label">$\mathcal{A}$</p>
+									</div>
+								</div>
+
+								<div class="sc-psg-container fragment fade-out" id="sc-psg-2" data-fragment-index="5">
+									<p class="sc-psg before fragment highlight-red" data-fragment-index="4"></p>
+									<p class="sc-psg-label">$p_2$</p>
+								</div>
+
+								<div class="fragment fade-out" data-fragment-index="7">
+									<div class="sc-psg-container fragment fade-in" id="sc-avg-012"
+										data-fragment-index="5">
+										<p class="sc-psg after fragment highlight-red" data-fragment-index="5"></p>
+										<p class="sc-psg-label">$\mathcal{A}$</p>
+									</div>
+								</div>
+
+								<div class="sc-psg-container fragment fade-in" id="sc-avg-012" data-fragment-index="7">
+									<p class="sc-psg after"></p>
+									<p class="sc-psg-label">$\hat{p}_1$</p>
+								</div>
+
+								<div class="sc-psg-container fragment fade-out" id="sc-psg-3" data-fragment-index="9">
+									<p class="sc-psg before fragment highlight-red" data-fragment-index="6"></p>
+									<p class="sc-psg-label">$p_3$</p>
+								</div>
+								<div class="sc-psg-container fragment fade-in" id="sc-psg-3" data-fragment-index="9">
+									<p class="sc-psg after"></p>
+									<p class="sc-psg-label">$\hat{p}_2$</p>
+								</div>
+
+								<div class="sc-psg-container fragment fade-out" id="sc-psg-4" data-fragment-index="11">
+									<p class="sc-psg before fragment highlight-red" data-fragment-index="8"></p>
+									<p class="sc-psg-label">$p_4$</p>
+								</div>
+								<div class="sc-psg-container fragment fade-in" id="sc-psg-4" data-fragment-index="11">
+									<p class="sc-psg after" data-fragment-index="8"></p>
+									<p class="sc-psg-label">$\hat{p}_3$</p>
+								</div>
+
+								<div class="sc-psg-container fragment fade-out" id="sc-psg-5" data-fragment-index="13">
+									<p class="sc-psg before fragment highlight-red" data-fragment-index="10"></p>
+									<p class="sc-psg-label">$p_5$</p>
+								</div>
+
+								<div class="sc-psg-container fragment fade-out" id="sc-psg-6" data-fragment-index="13">
+									<p class="sc-psg before fragment highlight-red" data-fragment-index="12"></p>
+									<p class="sc-psg-label">$p_6$</p>
+								</div>
+
+								<div class="fragment fade-out" data-fragment-index="14">
+									<div class="sc-psg-container fragment fade-in" id="sc-avg-56"
+										data-fragment-index="13">
+										<p class="sc-psg after fragment highlight-red" data-fragment-index="13"></p>
+										<p class="sc-psg-label">$\mathcal{A}$</p>
+									</div>
+								</div>
+
+								<div class="sc-psg-container fragment fade-in" id="sc-avg-56" data-fragment-index="14">
+									<p class="sc-psg after"></p>
+									<p class="sc-psg-label">$\hat{p}_4$</p>
+								</div>
+							</div>
+
+							<p style="font-size: medium; max-width: 20em;">
+								All passage representations of a document in the embedding space.
+							</p>
+						</div>
+
+						<div class="column-item">
+							<pre class="python" style="font-size: large; line-height: 1.5em;">
+								<code data-trim data-noescape
+									data-line-numbers="|6|9|12,13|9|12,13|9|10,11|9|10,11|9|10,11|9|12,13|14"
+									data-fragment-index="1">
+									def coalesce(P):
+										P_new = []
+										A = []
+										A_avg = None
+										first_iteration = True
+										for p in P:
+											if first_iteration:
+												first_iteration = False
+											elif distance(p, A_avg) >= delta:
+												P_new.append(A_avg)
+												A = []
+											A.append(p)
+											A_avg = np.mean(A, axis=0)
+										P_new.append(A_avg)
+										return P_new
+								</code>
+							</pre>
+						</div>
+					</div>
+				</section>
+				<!-- end: seq. coalescing -->
+
+				<!-- seq. coalescing effects -->
+				<section id="ff-index-sc-effects-slide" data-auto-animate data-auto-animate-id="sc">
+					<h3>Sequential Coalescing</h3>
+					<h4>Effects on Index Size</h4>
+
+					<div id="sc-effects-chart">
+						<ul class="charts-css legend legend-rectangle" style="margin: 0; padding: 0;">
+							<li>Size reduction</li>
+							<li>nDCG</li>
+						</ul>
+						<table class="charts-css column show-labels multiple data-spacing-5">
+							<tbody>
+								<tr>
+									<th scope="row">0</th>
+									<td style="--size:0.00;"><span class="data"></span></td>
+									<td style="--size:0.676;"><span class="data">0.676</span></td>
+								</tr>
+								<tr>
+									<th scope="row">0.01</th>
+									<td style="--size:0.10;"><span class="data"></span></td>
+									<td style="--size:0.673;"><span class="data">0.673</span></td>
+								</tr>
+								<tr>
+									<th scope="row">0.015</th>
+									<td style="--size:0.27;"><span class="data">27%</span></td>
+									<td style="--size:0.672;"><span class="data">0.672</span></td>
+								</tr>
+								<tr>
+									<th scope="row">0.02</th>
+									<td style="--size:0.46;"><span class="data">46%</span></td>
+									<td style="--size:0.667;"><span class="data">0.667</span></td>
+								</tr>
+								<tr>
+									<th scope="row">0.025</th>
+									<td style="--size:0.60;"><span class="data">60%</span></td>
+									<td style="--size:0.661;"><span class="data">0.661</span></td>
+								</tr>
+								<tr>
+									<th scope="row">0.03</th>
+									<td style="--size:0.70;"><span class="data">70%</span></td>
+									<td style="--size:0.659;"><span class="data">0.659</span></td>
+								</tr>
+								<tr>
+									<th scope="row">0.035</th>
+									<td style="--size:0.77;"><span class="data">77%</span></td>
+									<td style="--size:0.657;"><span class="data">0.657</span></td>
+								</tr>
+								<tr>
+									<th scope="row">0.04</th>
+									<td style="--size:0.80;"><span class="data">80%</span></td>
+									<td style="--size:0.653;"><span class="data">0.653</span></td>
+								</tr>
+								<tr>
+									<th scope="row">0.045</th>
+									<td style="--size:0.82;"><span class="data">82%</span></td>
+									<td style="--size:0.657;"><span class="data">0.657</span></td>
+								</tr>
+								<tr>
+									<th scope="row">0.05</th>
+									<td style="--size:0.83;"><span class="data">83%</span></td>
+									<td style="--size:0.658;"><span class="data">0.658</span></td>
+								</tr>
+								<tr>
+									<th scope="row">0.1</th>
+									<td style="--size:0.84;"><span class="data">84%</span></td>
+									<td style="--size:0.659;"><span class="data">0.659</span></td>
+								</tr>
+							</tbody>
+						</table>
+						<p>Distance threshold $\delta$</p>
+					</div>
+					<p style="font-size: medium;">
+						<b>Figure</b>: TCT-ColBERT on TREC-DL 2019 document ranking with sequential coalescing.
+					</p>
+				</section>
+				<!-- end: seq. coalescing effects -->
+
+				<!-- early stopping idea -->
+				<section id="ff-index-es-idea-slide" data-auto-animate data-auto-animate-id="es">
+					<h3>Early Stopping</h3>
+					<p style="font-size: x-large;">
+						Many tasks require only a <b>small number of documents</b> (e.g. top-10).
+					</p>
+
+					<hr class="hide">
+
+					<p class="fragment" style="font-size: x-large;" data-fragment-index="1">
+						<b>Lexical</b> (sparse) and <b>semantic</b> (dense) scores are <b>usually correlated</b>.
+					</p>
+					<p class="fragment" style="font-size: x-large;" data-fragment-index="1">
+						In many cases, it is <b>not necessary to compute all semantic scores</b>.
+					</p>
+
+					<hr class="hide">
+
+					<p class="fragment" style="font-size: x-large;" data-fragment-index="2">
+						We propose an approach for <b>early stopping</b>.
+					</p>
+				</section>
+				<!-- end: early stopping idea -->
+
+				<!-- early stopping example -->
+				<section id="ff-index-es-example-slide" data-auto-animate data-auto-animate-id="es">
+					<h3>Early Stopping</h3>
+					<h4>Retrieving the Top-3 Documents</h4>
+					<div class="column-layout r-stretch">
+						<div class="column-item" id="es-example-left-col">
+							<p style="font-size: large; width: 100%;">
+								We set $\alpha = 0.5$:
+							</p>
+							<p style="font-size: large; margin-top: 0;">
+								$\phi (q, d) = 0.5 \cdot \phi_S (q, d) + 0.5 \cdot \phi_D (q, d)$
+							</p>
+							<p class="hide" style="font-size: large; width: 100%;">
+								<i>
+									Stop the computation once the <b>highest possible score</b>
+									$\phi_{\text{max}} (q, d)$ is <b>too low to make a difference</b>.
+								</i>
+							</p>
+							<p class="hide" style="font-size: large; width: 100%;">
+								$\phi_D$ is <b>not normalized</b>. We <b>approximate its maximum</b> as the
+								<b>highest observed score</b>:
+							</p>
+							<p class="hide" style="font-size: large; margin-top: 0;">
+								$\phi_{\text{max}} (q, \text{D224}) = 0.5 \cdot 0.73 + 0.5 \cdot 0.67 = 0.70$
+							</p>
+						</div>
+						<div class="column-item" id="es-example-right-col">
+							<table id="es-tab">
+								<thead data-id="es-tab-head">
+									<tr>
+										<th></th>
+										<th>$\phi_S (q, d)$</th>
+										<th>$\phi_D (q, d)$</th>
+										<th>$\phi (q, d)$ ↓</th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>
+											<ul>
+												<li>D123</li>
+												<li>D215</li>
+												<li>D300</li>
+											</ul>
+										</td>
+										<td>
+											<ul>
+												<li>0.89</li>
+												<li>0.85</li>
+												<li>0.81</li>
+											</ul>
+										</td>
+										<td>
+											<ul class="fragment">
+												<li>0.61</li>
+												<li>0.51</li>
+												<li>0.67</li>
+											</ul>
+										</td>
+										<td>
+											<ul class="fragment">
+												<li>0.75</li>
+												<li>0.68</li>
+												<li>0.74</li>
+											</ul>
+										</td>
+										<td id="es-tab-top" data-id="es-tab-top">Top-3</td>
+									</tr>
+									<tr class="hide">
+										<td>
+											<ul>
+												<li>x</li>
+												<li>x</li>
+												<li>x</li>
+											</ul>
+										</td>
+										<td>
+											<ul>
+												<li>x</li>
+												<li>x</li>
+												<li>x</li>
+											</ul>
+										</td>
+										<td>
+											<ul>
+												<li>x</li>
+												<li>x</li>
+												<li>x</li>
+											</ul>
+										</td>
+										<td>
+											<ul>
+												<li>x</li>
+												<li>x</li>
+												<li>x</li>
+											</ul>
+										</td>
+										<td></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</section>
+
+				<section id="ff-index-es-example-slide" data-auto-animate data-auto-animate-id="es">
+					<h3>Early Stopping</h3>
+					<h4>Retrieving the Top-3 Documents</h4>
+					<div class="column-layout r-stretch">
+						<div class="column-item" id="es-example-left-col">
+							<p style="font-size: large; width: 100%;">
+								We set $\alpha = 0.5$:
+							</p>
+							<p style="font-size: large; margin-top: 0;">
+								$\phi (q, d) = 0.5 \cdot \phi_S (q, d) + 0.5 \cdot \phi_D (q, d)$
+							</p>
+							<p class="fragment" style="font-size: large; width: 100%;" data-fragment-index="2">
+								<i>
+									Stop the computation once the <b>highest possible score</b>
+									$\phi_{\text{max}} (q, d)$ is <b>too low to make a difference</b>.
+								</i>
+							</p>
+							<p class="fragment" style="font-size: large; width: 100%;" data-fragment-index="3">
+								$\phi_D$ is <b>not normalized</b>. We <b>approximate its maximum</b> as the
+								<span class="fragment highlight-green" data-fragment-index="3">
+									<b>highest observed score</b></span>:
+							</p>
+							<p class="fragment" style="font-size: large; margin-top: 0;" data-fragment-index="4">
+								$\phi_{\text{max}} (q, \text{D224}) = 0.5\ \cdot$
+								<span class="fragment highlight-red" data-fragment-index="4">$0.73$</span>
+								$ +\ 0.5\ \cdot$
+								<span class="fragment highlight-green" data-fragment-index="4">$0.67$</span>
+								$ \gt $
+								<span class="fragment highlight-blue" data-fragment-index="4">$0.68$</span>
+							</p>
+						</div>
+						<div class="column-item" id="es-example-right-col">
+							<table id="es-tab">
+								<thead data-id="es-tab-head">
+									<tr>
+										<th></th>
+										<th>$\phi_S (q, d)$</th>
+										<th>$\phi_D (q, d)$</th>
+										<th>$\phi (q, d)$ ↓</th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>
+											<ul>
+												<li>D123</li>
+												<li>D300</li>
+												<li>D215</li>
+											</ul>
+										</td>
+										<td>
+											<ul>
+												<li>0.89</li>
+												<li>0.81</li>
+												<li>0.85</li>
+											</ul>
+										</td>
+										<td>
+											<ul>
+												<li>0.61</li>
+												<li>
+													<span class="fragment highlight-green" data-fragment-index="3">
+														0.67
+													</span>
+												</li>
+												<li>0.51</li>
+											</ul>
+										</td>
+										<td>
+											<ul>
+												<li>0.75</li>
+												<li>0.74</li>
+												<li>
+													<span class="fragment highlight-blue" data-fragment-index="4">
+														0.68
+													</span>
+												</li>
+											</ul>
+										</td>
+										<td id="es-tab-top" data-id="es-tab-top">Top-3</td>
+									</tr>
+									<tr class="fragment" data-fragment-index="1">
+										<td>
+											<ul>
+												<li>D224</li>
+												<li>D105</li>
+												<li>D900</li>
+											</ul>
+										</td>
+										<td>
+											<ul>
+												<li>
+													<span class="fragment highlight-red" data-fragment-index="4">
+														0.73
+													</span>
+												</li>
+												<li>0.49</li>
+												<li>0.42</li>
+											</ul>
+										</td>
+										<td>
+											<ul>
+												<li class="fragment" data-fragment-index="5">0.71</li>
+												<li class="hide">x</li>
+												<li class="hide">x</li>
+											</ul>
+										</td>
+										<td>
+											<ul>
+												<li class="fragment" data-fragment-index="5">0.72</li>
+												<li class="hide">x</li>
+												<li class="hide">x</li>
+											</ul>
+										</td>
+										<td></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</section>
+
+				<section id="ff-index-es-example-slide" data-auto-animate data-auto-animate-id="es">
+					<h3>Early Stopping</h3>
+					<h4>Retrieving the Top-3 Documents</h4>
+					<div class="column-layout r-stretch">
+						<div class="column-item" id="es-example-left-col">
+							<p style="font-size: large; width: 100%;">
+								We set $\alpha = 0.5$:
+							</p>
+							<p style="font-size: large; margin-top: 0;">
+								$\phi (q, d) = 0.5 \cdot \phi_S (q, d) + 0.5 \cdot \phi_D (q, d)$
+							</p>
+							<p style="font-size: large; width: 100%;">
+								<i>
+									Stop the computation once the <b>highest possible score</b>
+									$\phi_{\text{max}} (q, d)$ is <b>too low to make a difference</b>.
+								</i>
+							</p>
+							<p style="font-size: large; width: 100%;">
+								$\phi_D$ is <b>not normalized</b>. We <b>approximate its maximum</b> as the
+								<span class="fragment highlight-green" data-fragment-index="1">
+									<b>highest observed score</b></span>:
+							</p>
+							<p class="fragment" style="font-size: large; margin-top: 0;" data-fragment-index="1">
+								$\phi_{\text{max}} (q, \text{D105}) = 0.5\ \cdot$
+								<span class="fragment highlight-red" data-fragment-index="1">$0.49$</span>
+								$ +\ 0.5\ \cdot$
+								<span class="fragment highlight-green" data-fragment-index="1">$0.71$</span>
+								$ \lt $
+								<span class="fragment highlight-blue" data-fragment-index="1">$0.72$</span>
+							</p>
+						</div>
+						<div class="column-item" id="es-example-right-col">
+							<table id="es-tab">
+								<thead data-id="es-tab-head">
+									<tr>
+										<th></th>
+										<th>$\phi_S (q, d)$</th>
+										<th>$\phi_D (q, d)$</th>
+										<th>$\phi (q, d)$ ↓</th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>
+											<ul>
+												<li>D123</li>
+												<li>D300</li>
+												<li>D224</li>
+											</ul>
+										</td>
+										<td>
+											<ul>
+												<li>0.89</li>
+												<li>0.81</li>
+												<li>0.73</li>
+											</ul>
+										</td>
+										<td>
+											<ul>
+												<li>0.61</li>
+												<li>0.67</li>
+												<li>
+													<span class="fragment highlight-green" data-fragment-index="1">
+														0.71
+													</span>
+												</li>
+											</ul>
+										</td>
+										<td>
+											<ul>
+												<li>0.75</li>
+												<li>0.74</li>
+												<li>
+													<span class="fragment highlight-blue" data-fragment-index="1">
+														0.72
+													</span>
+												</li>
+											</ul>
+										</td>
+										<td id="es-tab-top" data-id="es-tab-top">Top-3</td>
+									</tr>
+									<tr>
+										<td>
+											<ul>
+												<li>D215</li>
+												<li>D105</li>
+												<li>D900</li>
+											</ul>
+										</td>
+										<td>
+											<ul>
+												<li>0.85</li>
+												<li>
+													<span class="fragment highlight-red" data-fragment-index="1">
+														0.49
+													</span>
+												</li>
+												<li>0.42</li>
+											</ul>
+										</td>
+										<td>
+											<ul>
+												<li>0.51</li>
+												<li class="hide">x</li>
+												<li class="hide">x</li>
+											</ul>
+										</td>
+										<td>
+											<ul>
+												<li>0.68</li>
+												<li class="hide">x</li>
+												<li class="hide">x</li>
+											</ul>
+										</td>
+										<td></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</section>
+				<!-- end: early stopping example -->
+
+				<!-- early stopping effects -->
+				<section id="ff-index-es-effects-slide" data-auto-animate data-auto-animate-id="es">
+					<h3>Early Stopping</h3>
+					<h4>Effects on Index Look-ups</h4>
+
+					<div id="es-effects-chart">
+						<ul class="charts-css legend legend-rectangle" style="margin: 0; padding: 0;">
+							<li>Avg. number of index look-ups per query</li>
+						</ul>
+						<table class="charts-css column show-labels multiple data-spacing-2">
+							<tbody>
+								<tr>
+									<th scope="row">100</th>
+									<td style="--size:0.823;"><span class="data">4114</span></td>
+								</tr>
+								<tr>
+									<th scope="row">90</th>
+									<td style="--size:0.805;"><span class="data">4023</span></td>
+								</tr>
+								<tr>
+									<th scope="row">80</th>
+									<td style="--size:0.778;"><span class="data">3889</span></td>
+								</tr>
+								<tr>
+									<th scope="row">70</th>
+									<td style="--size:0.747;"><span class="data">3736</span></td>
+								</tr>
+								<tr>
+									<th scope="row">60</th>
+									<td style="--size:0.709;"><span class="data">3544</span></td>
+								</tr>
+								<tr>
+									<th scope="row">50</th>
+									<td style="--size:0.660;"><span class="data">3302</span></td>
+								</tr>
+								<tr>
+									<th scope="row">40</th>
+									<td style="--size:0.610;"><span class="data">3050</span></td>
+								</tr>
+								<tr>
+									<th scope="row">30</th>
+									<td style="--size:0.533;"><span class="data">2665</span></td>
+								</tr>
+								<tr>
+									<th scope="row">20</th>
+									<td style="--size:0.436;"><span class="data">2179</span></td>
+								</tr>
+								<tr>
+									<th scope="row">10</th>
+									<td style="--size:0.264;"><span class="data">1319</span></td>
+								</tr>
+							</tbody>
+						</table>
+						<p>Cut-off depth $k$</p>
+					</div>
+					<p style="font-size: medium;">
+						<b>Figure</b>: ANCE on TREC-DL 2019 passage ranking with early stopping.
+					</p>
+				</section>
+				<!-- end: early stopping effects -->
+			</section>
+			<!-- end: fast-forward indexes -->
+
+			<!-- results -->
+			<section>
+				<!-- results title -->
+				<section id="results-title-slide" data-auto-animate data-auto-animate-id="results">
+					<h3>Results</h3>
+				</section>
+				<!-- end: results title -->
+
+				<!-- results document ranking -->
+				<section id="results-document-slide" data-auto-animate data-auto-animate-id="results">
+					<h3>Results</h3>
+					<h4>TREC-DL Document Ranking Task</h4>
+
+					<div class="column-layout r-stretch">
+						<div class="column-item">
+							<table class="result-tab">
+								<thead>
+									<tr>
+										<th></th>
+										<th></th>
+										<th></th>
+										<th colspan="3" class="result-tab-head-section">
+											$k_S = 1000$
+										</th>
+										<th></th>
+										<th colspan="3" class="result-tab-head-section">
+											$k_S = 5000$
+										</th>
+									</tr>
+									<tr>
+										<th></th>
+										<th>Latency [ms]</th>
+										<th></th>
+										<th>AP@1k</th>
+										<th>R@1k</th>
+										<th>nDCG@20</th>
+										<th></th>
+										<th>AP@1k</th>
+										<th>R@1k</th>
+										<th>nDCG@20</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr class="result-tab-section">
+										<td colspan="10">Hybrid retrieval</td>
+									</tr>
+									<tr>
+										<td>BM25, TCT-ColBERT</td>
+										<td><span class="latency-cpu">582</span></td>
+										<td></td>
+										<td class="fragment highlight-red" data-fragment-index="1">0.463</td>
+										<td>0.809</td>
+										<td class="fragment highlight-red" data-fragment-index="1">0.615</td>
+										<td></td>
+										<td>0.469</td>
+										<td>0.852</td>
+										<td>0.621</td>
+									</tr>
+									<tr>
+										<td>BM25, ANCE</td>
+										<td><span class="latency-cpu">582</span></td>
+										<td></td>
+										<td class="fragment highlight-red" data-fragment-index="1">0.479</td>
+										<td>0.809</td>
+										<td class="fragment highlight-red" data-fragment-index="1">0.621</td>
+										<td></td>
+										<td>0.488</td>
+										<td>0.846</td>
+										<td>0.632</td>
+									</tr>
+
+									<tr class="result-tab-section">
+										<td colspan="10">Re-ranking (BM25 retrieval)</td>
+									</tr>
+									<tr>
+										<td>TCT-ColBERT</td>
+										<td>
+											<span class="latency-gpu">1189</span> + <span class="latency-cpu">2</span>
+										</td>
+										<td></td>
+										<td class="fragment highlight-red" data-fragment-index="1">0.414</td>
+										<td>0.809</td>
+										<td class="fragment highlight-red" data-fragment-index="1">0.587</td>
+										<td></td>
+										<td>0.405</td>
+										<td>0.794</td>
+										<td>0.585</td>
+									</tr>
+									<tr>
+										<td>ANCE</td>
+										<td>
+											<span class="latency-gpu">1189</span> + <span class="latency-cpu">2</span>
+										</td>
+										<td></td>
+										<td class="fragment highlight-red" data-fragment-index="1">0.426</td>
+										<td>0.809</td>
+										<td class="fragment highlight-red" data-fragment-index="1">0.593</td>
+										<td></td>
+										<td>0.422</td>
+										<td>0.761</td>
+										<td>0.604</td>
+									</tr>
+									<tr>
+										<td>BERT</td>
+										<td>
+											<span class="latency-gpu">185</span> + <span class="latency-cpu">2</span>
+										</td>
+										<td></td>
+										<td>0.329</td>
+										<td>0.809</td>
+										<td>0.512</td>
+										<td></td>
+										<td>0.221</td>
+										<td>0.727</td>
+										<td>0.375</td>
+									</tr>
+
+									<tr class="result-tab-section">
+										<td colspan="10">Interpolation (with BM25)</td>
+									</tr>
+									<tr>
+										<td>TCT-ColBERT</td>
+										<td>
+											<span class="latency-gpu">1189</span> + <span class="latency-cpu">14</span>
+										</td>
+										<td></td>
+										<td class="hide-cell">0.469</td>
+										<td class="hide-cell">0.809</td>
+										<td class="hide-cell">0.621</td>
+										<td></td>
+										<td class="hide-cell">0.478</td>
+										<td class="hide-cell">0.838</td>
+										<td class="hide-cell">0.626</td>
+									</tr>
+									<tr>
+										<td><span class="hide">---</span>Fast-Forward</td>
+										<td><span class="latency-cpu">253</span></td>
+										<td></td>
+										<td class="fragment highlight-red" data-fragment-index="1">0.469</td>
+										<td>0.809</td>
+										<td class="fragment highlight-red" data-fragment-index="1">0.621</td>
+										<td></td>
+										<td class="fragment highlight-red" data-fragment-index="2">0.478</td>
+										<td>0.838</td>
+										<td class="fragment highlight-red" data-fragment-index="2">0.626</td>
+									</tr>
+									<tr>
+										<td><span class="hide">------</span>coalesced</td>
+										<td><span class="latency-cpu">109</span></td>
+										<td></td>
+										<td class="fragment highlight-red" data-fragment-index="3">0.440</td>
+										<td>0.809</td>
+										<td class="fragment highlight-red" data-fragment-index="3">0.594</td>
+										<td></td>
+										<td class="fragment highlight-red" data-fragment-index="3">0.447</td>
+										<td>0.837</td>
+										<td class="fragment highlight-red" data-fragment-index="3">0.607</td>
+									</tr>
+									<tr>
+										<td>ANCE</td>
+										<td>
+											<span class="latency-gpu">1189</span> + <span class="latency-cpu">14</span>
+										</td>
+										<td></td>
+										<td class="hide-cell">0.490</td>
+										<td class="hide-cell">0.809</td>
+										<td class="hide-cell">0.630</td>
+										<td></td>
+										<td class="hide-cell">0.502</td>
+										<td class="hide-cell">0.828</td>
+										<td class="hide-cell">0.640</td>
+									</tr>
+									<tr>
+										<td><span class="hide">---</span>Fast-Forward</td>
+										<td><span class="latency-cpu">253</span></td>
+										<td></td>
+										<td class="fragment highlight-red" data-fragment-index="1">0.490</td>
+										<td>0.809</td>
+										<td class="fragment highlight-red" data-fragment-index="1">0.630</td>
+										<td></td>
+										<td class="fragment highlight-red" data-fragment-index="2">0.502</td>
+										<td>0.828</td>
+										<td class="fragment highlight-red" data-fragment-index="2">0.640</td>
+									</tr>
+									<tr>
+										<td><span class="hide">------</span>coalesced</td>
+										<td><span class="latency-cpu">121</span></td>
+										<td></td>
+										<td class="fragment highlight-red" data-fragment-index="3">0.471</td>
+										<td>0.809</td>
+										<td class="fragment highlight-red" data-fragment-index="3">0.622</td>
+										<td></td>
+										<td class="fragment highlight-red" data-fragment-index="3">0.479</td>
+										<td>0.823</td>
+										<td class="fragment highlight-red" data-fragment-index="3">0.629</td>
+									</tr>
+									<tr>
+										<td>BERT</td>
+										<td>
+											<span class="latency-gpu">185</span> + <span class="latency-cpu">14</span>
+										</td>
+										<td></td>
+										<td>0.460</td>
+										<td>0.809</td>
+										<td>0.602</td>
+										<td></td>
+										<td>0.459</td>
+										<td>0.839</td>
+										<td>0.601</td>
+									</tr>
+									<tr class="result-tab-section"></tr>
+								</tbody>
+							</table>
+							<p style="font-size: large">
+								<b>Table</b>: TREC-DL 2020 document ranking results. Latency is reported for $k_S =
+								5000$ on
+								<span class="latency-gpu">GPU</span>
+								and
+								<span class="latency-cpu">CPU</span>.
+							</p>
+						</div>
+					</div>
+				</section>
+				<!-- end: results document ranking -->
+
+				<!-- results passage ranking -->
+				<section id="results-passage-slide" data-auto-animate data-auto-animate-id="results">
+					<h3>Results</h3>
+					<h4>TREC-DL Passage Ranking Task</h4>
+
+					<div class="column-layout r-stretch">
+						<div class="column-item">
+							<table class="result-tab">
+								<thead>
+									<tr>
+										<th></th>
+										<th></th>
+										<th></th>
+										<th colspan="2" class="result-tab-head-section">
+											$k_S = 1000$
+										</th>
+										<th></th>
+										<th colspan="2" class="result-tab-head-section">
+											$k_S = 5000$
+										</th>
+									</tr>
+									<tr>
+										<th></th>
+										<th>Latency [ms]</th>
+										<th></th>
+										<th>AP@1k</th>
+										<th>RR@10</th>
+										<th></th>
+										<th>AP@1k</th>
+										<th>RR@10</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr class="result-tab-section">
+										<td colspan="8">Hybrid retrieval</td>
+									</tr>
+									<tr>
+										<td>BM25, TCT-ColBERT</td>
+										<td><span class="latency-cpu">307</span></td>
+										<td></td>
+										<td class="fragment highlight-red" data-fragment-index="1">0.434</td>
+										<td class="fragment highlight-red" data-fragment-index="1">0.894</td>
+										<td></td>
+										<td>0.454</td>
+										<td>0.902</td>
+									</tr>
+									<tr>
+										<td>BM25, ANCE</td>
+										<td><span class="latency-cpu">307</span></td>
+										<td></td>
+										<td class="fragment highlight-red" data-fragment-index="1">0.410</td>
+										<td class="fragment highlight-red" data-fragment-index="1">0.856</td>
+										<td></td>
+										<td>0.422</td>
+										<td>0.864</td>
+									</tr>
+
+									<tr class="result-tab-section">
+										<td colspan="8">Re-ranking (BM25 retrieval)</td>
+									</tr>
+									<tr>
+										<td>TCT-ColBERT</td>
+										<td>
+											<span class="latency-gpu">186</span> + <span class="latency-cpu">2</span>
+										</td>
+										<td></td>
+										<td class="fragment highlight-red" data-fragment-index="1">0.426</td>
+										<td class="fragment highlight-red" data-fragment-index="1">0.827</td>
+										<td></td>
+										<td>0.439</td>
+										<td>0.842</td>
+									</tr>
+									<tr>
+										<td>ANCE</td>
+										<td>
+											<span class="latency-gpu">186</span> + <span class="latency-cpu">14</span>
+										</td>
+										<td></td>
+										<td class="fragment highlight-red" data-fragment-index="1">0.389</td>
+										<td class="fragment highlight-red" data-fragment-index="1">0.836</td>
+										<td></td>
+										<td>0.392</td>
+										<td>0.857</td>
+									</tr>
+									<tr>
+										<td>BERT</td>
+										<td>
+											<span class="latency-gpu">185</span> + <span class="latency-cpu">14</span>
+										</td>
+										<td></td>
+										<td>0.353</td>
+										<td>0.715</td>
+										<td></td>
+										<td>0.275</td>
+										<td>0.576</td>
+									</tr>
+
+									<tr class="result-tab-section">
+										<td colspan="8">Interpolation (with BM25)</td>
+									</tr>
+									<tr>
+										<td>TCT-ColBERT</td>
+										<td>
+											<span class="latency-gpu">186</span> + <span class="latency-cpu">14</span>
+										</td>
+										<td></td>
+										<td class="hide-cell">0.438</td>
+										<td class="hide-cell">0.894</td>
+										<td></td>
+										<td class="hide-cell">0.460</td>
+										<td class="hide-cell">0.902</td>
+									</tr>
+									<tr>
+										<td><span class="hide">---</span>Fast-Forward</td>
+										<td><span class="latency-cpu">114</span></td>
+										<td></td>
+										<td class="fragment highlight-red" data-fragment-index="1">0.438</td>
+										<td class="fragment highlight-red" data-fragment-index="1">0.894</td>
+										<td></td>
+										<td class="fragment highlight-red" data-fragment-index="1">0.460</td>
+										<td class="fragment highlight-red" data-fragment-index="1">0.902</td>
+									</tr>
+									<tr>
+										<td><span class="hide">------</span>early stopping</td>
+										<td><span class="latency-cpu">72</span></td>
+										<td></td>
+										<td>-</td>
+										<td class="fragment highlight-red" data-fragment-index="1">0.894</td>
+										<td></td>
+										<td>-</td>
+										<td class="fragment highlight-red" data-fragment-index="1">0.902</td>
+									</tr>
+									<tr>
+										<td>ANCE</td>
+										<td>
+											<span class="latency-gpu">186</span> + <span class="latency-cpu">14</span>
+										</td>
+										<td></td>
+										<td class="hide-cell">0.417</td>
+										<td class="hide-cell">0.856</td>
+										<td></td>
+										<td class="hide-cell">0.435</td>
+										<td class="hide-cell">0.864</td>
+									</tr>
+									<tr>
+										<td><span class="hide">---</span>Fast-Forward</td>
+										<td><span class="latency-cpu">114</span></td>
+										<td></td>
+										<td class="fragment highlight-red" data-fragment-index="1">0.417</td>
+										<td class="fragment highlight-red" data-fragment-index="1">0.856</td>
+										<td></td>
+										<td class="fragment highlight-red" data-fragment-index="1">0.435</td>
+										<td class="fragment highlight-red" data-fragment-index="1">0.864</td>
+									</tr>
+									<tr>
+										<td><span class="hide">------</span>early stopping</td>
+										<td><span class="latency-cpu">52</span></td>
+										<td></td>
+										<td>-</td>
+										<td class="fragment highlight-red" data-fragment-index="1">0.856</td>
+										<td></td>
+										<td>-</td>
+										<td class="fragment highlight-red" data-fragment-index="1">0.864</td>
+									</tr>
+									<tr>
+										<td>BERT</td>
+										<td>
+											<span class="latency-gpu">185</span> + <span class="latency-cpu">2</span>
+										</td>
+										<td></td>
+										<td>0.378</td>
+										<td>0.809</td>
+										<td></td>
+										<td>0.392</td>
+										<td>0.532</td>
+									</tr>
+								</tbody>
+								<tr class="result-tab-section"></tr>
+							</table>
+							<p style="font-size: large">
+								<b>Table</b>: TREC-DL 2019 passage ranking results. Latency is reported for $k_S =
+								5000$ on
+								<span class="latency-gpu">GPU</span>
+								and
+								<span class="latency-cpu">CPU</span>.
+							</p>
+						</div>
+					</div>
+				</section>
+				<!-- end: results passage ranking -->
+			</section>
+			<!-- end: results -->
+
+			<!-- final -->
+			<section id="final-slide"
+				data-background-iframe="https://mrjleo.github.io/fast-forward-indexes/latest/fast_forward.html"
+				data-background-interactive>
+				<div style="position: absolute;
+							width: 50%;
+							right: 0;
+							box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2);
+							background-color: rgba(0, 0, 0, 0.9);
+							color: white;
+							padding: 1em;
+							font-size: x-large;
+							text-align: center;">
+					<h3 style="color: white;">Questions?</h3>
+					<p style="color: white;">leonhardt@l3s.de</p>
+					<hr>
+					<p style="font-family: monospace; color: white;">
+						<b>pip install fast-forward-indexes</b>
+					</p>
+					<hr>
+					<p style="font-size: x-small; color: white;">
+						Icons created by juicy_fish (Flaticon).
+					</p>
+				</div>
+			</section>
+			<!-- end: final -->
+		</div>
+	</div>
+
+	<script src="../node_modules/reveal.js/dist/reveal.js"></script>
+	<script src="../node_modules/reveal.js/plugin/highlight/highlight.js"></script>
+	<script src="../node_modules/reveal.js/plugin/math/math.js"></script>
+	<script src="../node_modules/reveal.js/plugin/zoom/zoom.js"></script>
+	<script src="../node_modules/reveal.js/plugin/notes/notes.js"></script>
+	<script>
+		Reveal.initialize({
+			hash: true,
+			slideNumber: true,
+			katex: {
+				local: '../node_modules/katex',
+			},
+			plugins: [RevealHighlight, RevealMath.KaTeX, RevealZoom, RevealNotes]
+		});
+	</script>
+</body>
+
+</html>

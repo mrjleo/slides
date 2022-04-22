@@ -1,0 +1,501 @@
+/* slide layouts */
+
+.column-desc-layout {
+  display: grid;
+  gap: 0.75em;
+  grid-auto-flow: column;
+  grid-template-rows: auto 2em;
+}
+
+.column-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.column-label {
+  font-size: x-large;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.column-layout {
+  display: grid;
+  gap: 0.75em;
+  grid-auto-flow: column;
+  grid-template-rows: auto;
+}
+
+/* result table */
+
+table.result-tab {
+  font-size: medium;
+  margin: 0;
+}
+
+table.result-tab thead tr th,
+table.result-tab tbody tr td {
+  border: none;
+}
+
+table.result-tab th.result-tab-head-section {
+  text-align: center;
+  border-bottom: solid;
+}
+
+table.result-tab tr.result-tab-section {
+  font-size: 0.75rem;
+  border-top: solid;
+  font-weight: bold;
+}
+
+table.result-tab tr td:nth-child(n + 2),
+table.result-tab tr th:nth-child(n + 2) {
+  text-align: center;
+}
+
+/* misc */
+
+.hide {
+  opacity: 0;
+}
+
+/* retrieve-then-rank */
+
+img.rtr-icon {
+  height: 2em;
+  margin: 0;
+}
+
+#rtr-candidate-docs {
+  display: grid;
+  gap: 0.05em;
+  grid-template-columns: repeat(5, auto);
+}
+
+img.rtr-candidate-doc {
+  width: 0.75em;
+  margin: 0;
+}
+
+img.rtr-doc {
+  height: 1.25em;
+  margin: 0;
+}
+
+.rtr-doc-container {
+  display: flex;
+  margin: 0.2em;
+}
+
+.rtr-doc-desc {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.rtr-doc-desc p {
+  text-align: left;
+  margin: 0.1em;
+  font-size: small;
+  font-family: monospace;
+}
+
+#rtr-rerank-slide div.column-desc-layout {
+  grid-auto-columns: 30%;
+}
+
+#rtr-reranker {
+  width: 2em;
+  grid-column: 1;
+  grid-row: 1;
+}
+
+img.rtr-rerank-griditem {
+  width: 0.5em;
+  grid-column: 1;
+  grid-row: 1;
+  margin: auto;
+}
+
+/* dense retrieval */
+
+#dr-vector-space {
+  position: relative;
+  height: 7em;
+  width: 7em;
+  border: 0.05em solid;
+  border-radius: 100%;
+  background-color: #808080bf;
+}
+
+#dr-doc-embedded-1 {
+  position: absolute;
+  font-size: large;
+  top: 15rem;
+  left: 4rem;
+}
+
+#dr-doc-embedded-2 {
+  position: absolute;
+  font-size: large;
+  top: 3rem;
+  left: 5rem;
+}
+
+#dr-doc-embedded-3 {
+  position: absolute;
+  font-size: large;
+  top: 4rem;
+  left: 7rem;
+}
+
+#dr-doc-embedded-4 {
+  position: absolute;
+  font-size: large;
+  top: 3rem;
+  left: 8rem;
+}
+
+#dr-doc-embedded-5 {
+  position: absolute;
+  font-size: large;
+  top: 2rem;
+  left: 6rem;
+}
+
+#dr-doc-embedded-6 {
+  position: absolute;
+  font-size: large;
+  top: 8rem;
+  left: 7rem;
+}
+
+#dr-doc-embedded-7 {
+  position: absolute;
+  font-size: large;
+  top: 10rem;
+  left: 9rem;
+}
+
+#dr-doc-embedded-8 {
+  position: absolute;
+  font-size: large;
+  top: 7rem;
+  left: 8rem;
+}
+
+#dr-doc-embedded-9 {
+  position: absolute;
+  font-size: large;
+  top: 9rem;
+  left: 11rem;
+}
+
+#dr-doc-embedded-10 {
+  position: absolute;
+  font-size: large;
+  top: 10rem;
+  left: 1rem;
+}
+
+#dr-query-embedded {
+  position: absolute;
+  font-size: large;
+  top: 5rem;
+  left: 10rem;
+}
+
+#dr-query-radius {
+  position: absolute;
+
+  top: 2rem;
+  left: 7rem;
+
+  height: 7rem;
+  width: 7rem;
+  border: 0.05em solid;
+  border-radius: 100%;
+  background-color: #ff000040;
+}
+
+/* motivation */
+
+#motivation-slide li {
+  padding: 0.5em;
+}
+
+/* efficiency */
+
+#ff-efficiency-chart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: medium;
+}
+
+#ff-efficiency-chart ul {
+  border: none;
+  width: auto;
+}
+
+#ff-efficiency-chart table {
+  margin: 0;
+  height: 10em;
+  width: 20em;
+}
+
+#ff-efficiency-chart table tbody td {
+  margin: 0.2em;
+}
+
+#ff-efficiency-chart table tbody td span.vertical {
+  writing-mode: vertical-lr;
+  padding-top: 0.5em;
+}
+
+/* sequential coalescing */
+
+#sc-vector-space {
+  position: relative;
+  height: 7em;
+  width: 7em;
+  border: 0.05em solid;
+  border-radius: 100%;
+  background-color: rgba(128, 128, 128, 0.75);
+}
+
+div.sc-psg-container {
+  position: relative;
+  width: 1.5em;
+  height: 1.5em;
+}
+
+p.sc-psg {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  height: 0.2em;
+  width: 0.2em;
+  border: 0.05em solid;
+  border-radius: 100%;
+}
+
+p.sc-psg.before {
+  background-color: rgba(0, 0, 255, 0.5);
+}
+
+p.sc-psg.after {
+  background-color: rgba(0, 255, 0, 0.5);
+}
+
+p.sc-psg-label {
+  font-size: medium;
+  margin-top: 0;
+  margin-bottom: 0.2em;
+}
+
+#sc-psg-0 {
+  position: absolute;
+  top: 14rem;
+  left: 8rem;
+}
+
+#sc-psg-1 {
+  position: absolute;
+  top: 13rem;
+  left: 12rem;
+}
+
+#sc-psg-2 {
+  position: absolute;
+  top: 10rem;
+  left: 9.5rem;
+}
+
+#sc-psg-3 {
+  position: absolute;
+  top: 8rem;
+  left: 2rem;
+}
+
+#sc-psg-4 {
+  position: absolute;
+  top: 4rem;
+  left: 13rem;
+}
+
+#sc-psg-5 {
+  position: absolute;
+  top: 5rem;
+  left: 0rem;
+}
+
+#sc-psg-6 {
+  position: absolute;
+  top: 4rem;
+  left: 3rem;
+}
+
+#sc-avg-01 {
+  position: absolute;
+  top: 13.5rem;
+  left: 10rem;
+}
+
+#sc-avg-012 {
+  position: absolute;
+  top: 12.333rem;
+  left: 9.8333rem;
+}
+
+#sc-avg-56 {
+  position: absolute;
+  top: 4.5rem;
+  left: 1.5rem;
+}
+
+/* sequential coalescing effects */
+
+#sc-effects-chart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: medium;
+}
+
+#sc-effects-chart ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border: none;
+}
+
+#sc-effects-chart ul li {
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+#sc-effects-chart table {
+  margin: 0;
+  height: 15em;
+  width: 40em;
+}
+
+#sc-effects-chart table tbody td {
+  margin: 0.1em;
+  writing-mode: vertical-lr;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#sc-effects-chart table tbody td span.data {
+  padding-top: 0.5em;
+}
+
+/* early stopping */
+
+#es-tab {
+  font-size: x-large;
+  border-collapse: collapse;
+}
+
+#es-tab-top {
+  writing-mode: vertical-lr;
+  font-size: large;
+  font-weight: bold;
+  text-align: center;
+}
+
+#es-tab li {
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+}
+
+#es-tab tr td:nth-child(2),
+#es-tab tr td:nth-child(3),
+#es-tab tr td:nth-child(4) {
+  text-align: center;
+}
+
+#es-tab tr td:nth-child(1) {
+  font-weight: bold;
+}
+
+#es-tab ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#es-example-left-col {
+  text-align: left;
+}
+
+/* early stopping effects */
+
+#es-effects-chart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: medium;
+}
+
+#es-effects-chart ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border: none;
+}
+
+#es-effects-chart ul li {
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+#es-effects-chart table {
+  margin: 0;
+  height: 20em;
+  width: 30em;
+}
+
+#es-effects-chart table tbody td {
+  margin: 0.1em;
+  writing-mode: vertical-lr;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#es-effects-chart table tbody td span.data {
+  padding-top: 0.5em;
+}
+
+/* results */
+
+span.latency-cpu {
+  background-color: blueviolet;
+  padding-left: 0.1em;
+  padding-right: 0.1em;
+  border-radius: 0.25em;
+}
+
+span.latency-gpu {
+  background-color: green;
+  padding-left: 0.1em;
+  padding-right: 0.1em;
+  border-radius: 0.25em;
+}
+
+.result-tab td.hide-cell {
+  color: gray;
+}
