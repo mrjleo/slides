@@ -408,13 +408,6 @@ p.sc-psg-label {
   border-collapse: collapse;
 }
 
-#es-tab-top {
-  writing-mode: vertical-lr;
-  font-size: large;
-  font-weight: bold;
-  text-align: center;
-}
-
 #es-tab li {
   margin-top: 0.2em;
   margin-bottom: 0.2em;
