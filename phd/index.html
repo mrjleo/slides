@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>Efficient and Explainable Neural Ranking</title>
+	<link rel="stylesheet" href="../node_modules/reveal.js/dist/reveal.css">
+	<link rel="stylesheet" href="../node_modules/reveal.js/dist/theme/serif.css">
+	<link rel="stylesheet" href="../node_modules/reveal.js/plugin/highlight/monokai.css">
+	<link rel="stylesheet" href="../common.css">
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<!-- title -->
+			<section id="title-slide">
+				<div style="display: flex; justify-content: center; align-items: center; height: 2em">
+					<img src="img/logos/l3s.webp">
+					<p style="margin: auto"></p>
+					<img src="img/logos/luh.png">
+				</div>
+				<hr class="hide" style="height: 1em;">
+				<h3>Efficient and Explainable<br>Neural Ranking</h3>
+				<hr class="hide" style="height: 0.5em;">
+				<p style="font-size: x-large;">
+					<b><u>Jurek Leonhardt</u></b>
+				</p>
+				<p style="font-size: large;">
+					L3S Research Center, Hannover, Germany
+				</p>
+			</section>
+			<!-- end: title -->
+		</div>
+	</div>
+
+	<script src="../node_modules/reveal.js/dist/reveal.js"></script>
+	<script src="../node_modules/reveal.js/plugin/highlight/highlight.js"></script>
+	<script src="../node_modules/reveal.js/plugin/math/math.js"></script>
+	<script src="../node_modules/reveal.js/plugin/zoom/zoom.js"></script>
+	<script src="../node_modules/reveal.js/plugin/notes/notes.js"></script>
+	<script>
+		Reveal.initialize({
+			hash: true,
+			slideNumber: true,
+			katex: {
+				local: '../node_modules/katex',
+			},
+			plugins: [RevealHighlight, RevealMath.KaTeX, RevealZoom, RevealNotes]
+		});
+	</script>
+</body>
+
+</html>
