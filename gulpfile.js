@@ -25,6 +25,7 @@ gulp.task("compile_tikz", () => {
   return gulp.src("*/img/**/*.tex")
     .pipe(exec(file => `latexmk -cd -bibtex- -pdf ${file.path}`, options))
     .pipe(exec(file => `latexmk -cd -c ${file.path}`, options))
+    .pipe(exec(file => `pdf2svg ${file.path.slice(0, -4) + ".pdf"} ${file.path.slice(0, -4) + ".svg"}`, options))
     .pipe(exec.reporter(reportOptions));
 });
 
