@@ -38,10 +38,10 @@
             <!-- ranking -->
             <section>
                 <section id="ranking-slide" data-auto-animate data-auto-animate-id="ranking">
-                    <h3>What is ranking?</h3>
+                    <h4>What is ranking?</h4>
                 </section>
                 <section id="ranking-query-slide" data-auto-animate data-auto-animate-id="ranking">
-                    <h3>What is ranking?</h3>
+                    <h4>What is ranking?</h4>
 
                     <div class="column-layout r-stretch">
                         <div class="column-item">
@@ -52,8 +52,9 @@
                                     class="r-red">c</span><span class="r-yellow">h</span>
                             </div>
                             <div style="border: 0.05em solid gray;
-                                border-radius: 0.75em;
+                                border-radius: 1em;
                                 width: 75%;
+                                height: 1.5em;
                                 font-size: x-large;
                                 text-align: left;
                                 padding-top: 0.25em;
@@ -66,7 +67,9 @@
                                 <img src="img/search.svg" style="height: 1em;
                                 margin: 0;
                                 padding-right: 1em;">
-                                <span id="query-anim"></span>
+                                <div class="fragment" id="query-anim-fragment">
+                                    <span id="query-anim"></span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -94,15 +97,21 @@
 
         // query typing animation
         var query_typed = null;
-        Reveal.on('slidechanged', event => {
-            console.log("slide changed: " + event.currentSlide.id);
-            if (event.currentSlide.id == "ranking-query-slide") {
+        Reveal.on('fragmentshown', event => {
+            console.log("fragment shown: " + event.fragment.id);
+            if (event.fragment.id == "query-anim-fragment") {
                 query_typed = new Typed("#query-anim", {
                     strings: ["L3S Research Center"],
                     typeSpeed: 100,
                 });
-            } else if (query_typed != null) {
-                query_typed.destroy();
+            }
+        });
+        Reveal.on('fragmenthidden', event => {
+            console.log("fragment hidden: " + event.fragment.id);
+            if (event.fragment.id == "query-anim-fragment") {
+                if (query_typed != null) {
+                    query_typed.destroy();
+                }
             }
         });
     </script>
