@@ -24,9 +24,9 @@
 
 div.search-bar {
     border: 0.05em solid gray;
-    border-radius: 1em;
+    border-radius: 2em;
     width: 50%;
-    height: 1.5em;
+    height: 2em;
     font-size: large;
     text-align: left;
     padding-top: 0.25em;
@@ -37,6 +37,10 @@ div.search-bar {
     flex-direction: row;
     align-items: center;
     font-family: sans-serif;
+}
+
+div.search-bar span.typed-cursor {
+    font-weight: lighter;
 }
 
 div.search-results {
