@@ -20,3 +20,19 @@
 .r-green {
     color: #0F9D58;
 }
+
+.search-bar {
+    border: 0.05em solid gray;
+    border-radius: 1em;
+    width: 75%;
+    height: 1.5em;
+    font-size: x-large;
+    text-align: left;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+    padding-left: 0.75em;
+    padding-right: 0.75em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
