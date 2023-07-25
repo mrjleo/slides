@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../node_modules/reveal.js/plugin/highlight/monokai.css">
     <link rel="stylesheet" href="../common.css">
     <link rel="stylesheet" href="style.css">
+    <script src="../node_modules/typed.js/dist/typed.umd.js"></script>
 </head>
 
 <body>
@@ -33,6 +34,45 @@
                 </p>
             </section>
             <!-- end: title -->
+
+            <!-- ranking -->
+            <section>
+                <section id="ranking-slide" data-auto-animate data-auto-animate-id="ranking">
+                    <h3>What is ranking?</h3>
+                </section>
+                <section id="ranking-query-slide" data-auto-animate data-auto-animate-id="ranking">
+                    <h3>What is ranking?</h3>
+
+                    <div class="column-layout r-stretch">
+                        <div class="column-item">
+                            <div class="se-logo">
+                                <span class="r-blue">W</span><span class="r-red">e</span><span class="r-yellow">b</span>
+                                <span class="r-blue">S</span><span class="r-red">e</span><span
+                                    class="r-yellow">a</span><span class="r-green">r</span><span
+                                    class="r-red">c</span><span class="r-yellow">h</span>
+                            </div>
+                            <div style="border: 0.05em solid gray;
+                                border-radius: 0.75em;
+                                width: 75%;
+                                font-size: x-large;
+                                text-align: left;
+                                padding-top: 0.25em;
+                                padding-bottom: 0.25em;
+                                padding-left: 0.75em;
+                                padding-right: 0.75em;
+                                display: flex;
+                                flex-direction: row;
+                                align-items: center;">
+                                <img src="img/search.svg" style="height: 1em;
+                                margin: 0;
+                                padding-right: 1em;">
+                                <span id="query-anim"></span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </section>
+            <!-- end: ranking -->
         </div>
     </div>
 
@@ -50,6 +90,20 @@
                 local: '../node_modules/katex',
             },
             plugins: [RevealMarkdown, RevealHighlight, RevealMath.KaTeX, RevealZoom, RevealNotes]
+        });
+
+        // query typing animation
+        var query_typed = null;
+        Reveal.on('slidechanged', event => {
+            console.log("slide changed: " + event.currentSlide.id);
+            if (event.currentSlide.id == "ranking-query-slide") {
+                query_typed = new Typed("#query-anim", {
+                    strings: ["L3S Research Center"],
+                    typeSpeed: 100,
+                });
+            } else if (query_typed != null) {
+                query_typed.destroy();
+            }
         });
     </script>
 </body>
