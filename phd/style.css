@@ -58,24 +58,40 @@ div.search-result p {
     margin: 0.1em;
 }
 
+div.search-result-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 0.25em;
+}
+
+div.search-result-icon {
+    height: 1em;
+    width: 1em;
+    padding: 0.3em;
+    margin-right: 0.5em;
+    margin-left: 0.25em;
+    background-color: lightgray;
+    border-radius: 100%;
+}
+
+div.search-result-icon>img {
+    padding: 0;
+    margin: 0;
+}
+
+p.search-url,
 p.search-title {
     margin: 0.05em;
     color: gray;
-    font-size: medium;
-}
-
-p.search-url {
-    margin: 0.05em;
-    color: gray;
-    font-size: small;
+    font-size: x-small;
 }
 
 p.search-link {
-    font-size: large;
-    text-decoration: underline;
+    font-size: medium;
     color: blue;
 }
 
 p.search-desc {
-    font-size: medium;
+    font-size: small;
 }
