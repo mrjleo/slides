@@ -137,13 +137,21 @@
             if (event.fragment.id == "query-anim-fragment") {
                 query_typed = new Typed("#query-anim", {
                     strings: ["L3S ^50 Research ^50 Center"],
-                    typeSpeed: 100,
+                    typeSpeed: 50,
                 });
             }
         });
         Reveal.on('fragmenthidden', event => {
             console.log("fragment hidden: " + event.fragment.id);
             if (event.fragment.id == "query-anim-fragment") {
+                if (query_typed != null) {
+                    query_typed.destroy();
+                }
+            }
+        });
+        Reveal.on('slidechanged', event => {
+            console.log("slide changed: " + event.currentSlide.id);
+            if (event.currentSlide.id != "ranking-slide") {
                 if (query_typed != null) {
                     query_typed.destroy();
                 }
