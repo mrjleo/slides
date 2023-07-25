@@ -51,7 +51,7 @@
                                     class="r-red">c</span><span class="r-yellow">h</span>
                             </div>
                             <div class="search-bar">
-                                <img src="img/search/search.svg" style="height: 1em; margin: 0; padding-right: 1em;">
+                                <img src="img/search/search.svg" style="height: 0.9em; margin: 0; padding-right: 1em;">
                                 <div class="fragment" id="query-anim-fragment">
                                     <span id="query-anim" style="margin-right: 0.1em;"></span>
                                 </div>
@@ -136,7 +136,7 @@
             console.log("fragment shown: " + event.fragment.id);
             if (event.fragment.id == "query-anim-fragment") {
                 query_typed = new Typed("#query-anim", {
-                    strings: ["L3S Research Center"],
+                    strings: ["L3S ^50 Research ^50 Center"],
                     typeSpeed: 100,
                 });
             }
