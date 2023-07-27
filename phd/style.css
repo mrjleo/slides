@@ -1,4 +1,4 @@
-/* ranking */
+/* ranking: search */
 
 .se-logo {
     font-weight: bold;
@@ -23,23 +23,27 @@
 }
 
 div.search-bar {
-    border: 0.05em solid gray;
+    border: 0.025em solid gray;
     border-radius: 2em;
     width: 50%;
-    height: 2em;
-    font-size: medium;
-    text-align: left;
     padding-top: 0.25em;
     padding-bottom: 0.25em;
-    padding-left: 0.75em;
-    padding-right: 0.75em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
     display: flex;
     flex-direction: row;
     align-items: center;
-    font-family: sans-serif;
 }
 
-div.search-bar span.typed-cursor {
+div.search-query {
+    font-family: sans-serif;
+    font-size: medium;
+    text-align: left;
+    display: flex;
+    flex-direction: row;
+}
+
+div.search-query span.typed-cursor {
     font-weight: lighter;
 }
 
@@ -57,10 +61,10 @@ div.search-results {
 }
 
 div.search-result {
+    text-align: left;
     width: 100%;
     display: flex;
     flex-direction: column;
-    text-align: left;
     font-size: medium;
 }
 
@@ -69,10 +73,11 @@ div.search-result p {
 }
 
 div.search-result-header {
+    font-family: sans-serif;
+    text-align: left;
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-bottom: 0.25em;
 }
 
 div.search-result-icon {
@@ -92,7 +97,7 @@ div.search-result-icon>img {
 
 p.search-url,
 p.search-title {
-    margin: 0.05em;
+    margin: 0.25em;
     color: gray;
     font-size: x-small;
 }
@@ -100,9 +105,32 @@ p.search-title {
 p.search-link {
     font-size: medium;
     color: blue;
+    margin-top: 0.25em !important;
 }
 
 p.search-desc {
     font-size: small;
     text-align: justify;
+}
+
+/* ranking qd */
+
+.rqd-grid {
+    display: grid;
+    grid-template-columns: min-content min-content min-content;
+    grid-column-gap: 0.5em;
+    width: min-content;
+}
+
+.rqd-grid>*:nth-child(1) {
+    text-align: right;
+}
+
+.rqd-grid>*:nth-child(2) {
+    text-align: center;
+}
+
+.rqd-grid-item {
+    font-size: large;
+    white-space: nowrap;
 }

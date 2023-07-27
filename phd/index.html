@@ -40,6 +40,7 @@
                 <section id="ranking-slide" data-auto-animate data-auto-animate-id="ranking">
                     <h4>But what <i>is</i> ranking?</h4>
                 </section>
+
                 <section id="ranking-websearch-slide" data-auto-animate data-auto-animate-id="ranking">
                     <h4>But what <i>is</i> ranking?</h4>
                     <div class="column-layout r-stretch">
@@ -51,12 +52,12 @@
                                     class="r-red">c</span><span class="r-yellow">h</span>
                             </div>
                             <div class="search-bar">
-                                <img src="img/search/search.svg" style="height: 0.9em; margin: 0; padding-right: 1em;">
-                                <div class="fragment" id="query-anim-fragment">
-                                    <span id="query-anim" style="margin-right: 0.1em;"></span>
+                                <img src="img/search/search.svg"
+                                    style="height: 0.5em; margin: 0; padding-right: 0.5em;">
+                                <div class="search-query fragment" id="query-anim-fragment">
+                                    <p data-id="query" id="query-anim" style="margin: 0; margin-right: 0.1em;"></p>
                                 </div>
                             </div>
-
                             <div class="fragment search-results" id="search-results-fragment">
                                 <div class="search-result">
                                     <div class="search-result-header">
@@ -109,6 +110,56 @@
                             </div>
                         </div>
                 </section>
+
+                <section id="ranking-qd-slide" data-auto-animate data-auto-animate-id="ranking">
+                    <h4>But what <i>is</i> ranking?</h4>
+                    <div class="rqd-grid">
+                        <p class="rqd-grid-item">Query</p>
+                        <p class="rqd-grid-item">$q$</p>
+                        <div class="rqd-grid-item search-query">
+                            <p data-id="query" style="font-size: large;">L3S Research Center</p>
+                        </div>
+
+                        <p class="rqd-grid-item"
+                            style="grid-row: span 3; writing-mode: vertical-lr;transform: rotate(-180deg);">
+                            Documents
+                        </p>
+                        <p class="rqd-grid-item">$d_1$</p>
+
+                        <div class="rqd-grid-item search-result-header">
+                            <div class="search-result-icon">
+                                <img src="img/search/l3s.webp">
+                            </div>
+                            <div>
+                                <p class="search-title">L3S Research Center</p>
+                                <p class="search-url">www.l3s.de</p>
+                            </div>
+                        </div>
+
+                        <p class="rqd-grid-item">$d_2$</p>
+                        <div class="rqd-grid-item search-result-header">
+                            <div class="search-result-icon">
+                                <img src="img/search/wikipedia.ico">
+                            </div>
+                            <div>
+                                <p class="search-title">Wikipedia</p>
+                                <p class="search-url">de.wikipedia.org › wiki › L3S</p>
+                            </div>
+                        </div>
+
+                        <p class="rqd-grid-item">$d_3$</p>
+                        <div class="rqd-grid-item search-result-header">
+                            <div class="search-result-icon">
+                                <img src="img/search/linkedin.ico">
+                            </div>
+                            <div>
+                                <p class="search-title">LinkedIn</p>
+                                <p class="search-url">de.linkedin.com › company
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </section>
             <!-- end: ranking -->
         </div>
@@ -135,6 +186,9 @@
         Reveal.on('fragmentshown', event => {
             console.log("fragment shown: " + event.fragment.id);
             if (event.fragment.id == "query-anim-fragment") {
+                if (query_typed != null) {
+                    query_typed.destroy();
+                }
                 query_typed = new Typed("#query-anim", {
                     strings: ["L3S ^75 Research ^50 Center"],
                     typeSpeed: 50,
@@ -142,22 +196,6 @@
             } else if (event.fragment.id == "search-results-fragment") {
                 // remove distracting cursor once the search results are visible
                 query_typed.cursor.remove();
-            }
-        });
-        Reveal.on('fragmenthidden', event => {
-            console.log("fragment hidden: " + event.fragment.id);
-            if (event.fragment.id == "query-anim-fragment") {
-                if (query_typed != null) {
-                    query_typed.destroy();
-                }
-            }
-        });
-        Reveal.on('slidechanged', event => {
-            console.log("slide changed: " + event.currentSlide.id);
-            if (event.currentSlide.id != "ranking-slide") {
-                if (query_typed != null) {
-                    query_typed.destroy();
-                }
             }
         });
     </script>

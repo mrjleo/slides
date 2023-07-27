@@ -59,6 +59,7 @@ table.result-tab tr th:nth-child(n + 2) {
 }
 
 /* fragments */
+
 .fragment.blur {
   filter: none;
 }
