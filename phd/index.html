@@ -114,8 +114,8 @@
                 <section id="ranking-qd-slide" data-auto-animate data-auto-animate-id="ranking">
                     <h4>But what <i>is</i> ranking?</h4>
 
-                    <div style="display: flex; flex-direction: column; align-items: center;">
-                        <div class="rqd-grid">
+                    <div class="column-layout">
+                        <div class="column-item rqd-grid">
                             <p class="rqd-grid-item">Query</p>
                             <p class="rqd-grid-item">$q$</p>
                             <div class="rqd-grid-item search-query">
@@ -160,6 +160,12 @@
                                     </p>
                                 </div>
                             </div>
+                        </div>
+                        <div class="column-item">
+                            <p class="fragment" style="font-size: x-large; margin: 3em;">Given an input query $q$,
+                                return a
+                                list of $k$
+                                documents $d_i$ from a corpus, ordered by their relevance with respect to $q$.</p>
                         </div>
                     </div>
                 </section>
