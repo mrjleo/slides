@@ -57,7 +57,7 @@
                                 </div>
                             </div>
 
-                            <div class="fragment search-results">
+                            <div class="fragment search-results" id="search-results-fragment">
                                 <div class="search-result">
                                     <div class="search-result-header">
                                         <div class="search-result-icon">
@@ -139,6 +139,9 @@
                     strings: ["L3S ^50 Research ^50 Center"],
                     typeSpeed: 50,
                 });
+            } else if (event.fragment.id == "search-results-fragment") {
+                // remove distracting cursor once the search results are visible
+                query_typed.cursor.remove();
             }
         });
         Reveal.on('fragmenthidden', event => {
