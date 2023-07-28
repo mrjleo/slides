@@ -33,6 +33,8 @@ div.search-bar {
     display: flex;
     flex-direction: row;
     align-items: center;
+    background-color: white;
+    height: 0.5em;
 }
 
 div.search-query {
