@@ -83,11 +83,21 @@ div.search-result-header {
 }
 
 div.search-result-icon {
-    height: 1em;
-    width: 1em;
-    padding: 0.3em;
     margin-right: 0.5em;
     margin-left: 0.25em;
+}
+
+div.search-result-icon-background {
+    height: 1.5em;
+    width: 1.5em;
+}
+
+div.search-result-icon>img {
+    height: 1em;
+    width: 1em;
+}
+
+div.search-result-icon-background {
     background-color: lightgray;
     border-radius: 100%;
 }
