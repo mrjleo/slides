@@ -117,68 +117,73 @@
                 <section id="ranking-qd-slide" data-auto-animate data-auto-animate-id="ranking">
                     <h4>But what <i>is</i> ranking?</h4>
 
-                    <div class="column-layout" style="margin: 1em">
-                        <div class="column-item rqd-grid">
-                            <p class="rqd-grid-item"
-                                style="writing-mode: vertical-lr;transform: rotate(-180deg); font-size: small;">
-                                Query
-                            </p>
-                            <p class="rqd-grid-item">$q$</p>
-                            <div class="rqd-grid-item search-query">
-                                <p style="font-style: italic;">"</p>
-                                <p data-id="query" style="font-style: italic;">L3S Research Center</p>
-                                <p style="font-style: italic;">"</p>
-                            </div>
-
-                            <div class="rqd-grid-item"
-                                style="grid-column: span 3; height: 0.05em; background-color: gray;"></div>
-
-                            <p class="rqd-grid-item"
-                                style="grid-row: span 3; writing-mode: vertical-lr;transform: rotate(-180deg); font-size: small;">
-                                Documents
-                            </p>
-
-                            <p class="rqd-grid-item">$d_1$</p>
-
-                            <div class="rqd-grid-item search-result-header">
-                                <div class="search-result-icon r-stack">
-                                    <div data-id="res-icon-bg" class="search-result-icon-background"></div>
-                                    <img src="img/search/l3s.webp">
+                    <div class="column-layout r-stretch">
+                        <div class="column-item">
+                            <div class="rqd-grid">
+                                <p class="rqd-grid-item"
+                                    style="writing-mode: vertical-lr;transform: rotate(-180deg); font-size: small;">
+                                    Query
+                                </p>
+                                <p class="rqd-grid-item">$q$</p>
+                                <div class="rqd-grid-item search-query">
+                                    <p style="font-style: italic;">"</p>
+                                    <p data-id="query" style="font-style: italic;">L3S Research Center</p>
+                                    <p style="font-style: italic;">"</p>
                                 </div>
-                                <div>
-                                    <p class="search-title">L3S Research Center</p>
-                                    <p class="search-url">www.l3s.de</p>
-                                </div>
-                            </div>
 
-                            <p class="rqd-grid-item">$d_2$</p>
-                            <div class="rqd-grid-item search-result-header">
-                                <div class="search-result-icon r-stack">
-                                    <div data-id="res-icon-bg" class="search-result-icon-background"></div>
-                                    <img src="img/search/wikipedia.ico">
-                                </div>
-                                <div>
-                                    <p class="search-title">Wikipedia</p>
-                                    <p class="search-url">de.wikipedia.org › wiki › L3S</p>
-                                </div>
-                            </div>
+                                <div class="rqd-grid-item"
+                                    style="grid-column: span 3; height: 0.05em; background-color: gray;"></div>
 
-                            <p class="rqd-grid-item">$d_3$</p>
-                            <div class="rqd-grid-item search-result-header">
-                                <div class="search-result-icon r-stack">
-                                    <div data-id="res-icon-bg" class="search-result-icon-background"></div>
-                                    <img src="img/search/linkedin.ico">
+                                <p class="rqd-grid-item"
+                                    style="grid-row: span 4; writing-mode: vertical-lr; transform: rotate(-180deg); font-size: small;">
+                                    Documents
+                                </p>
+
+                                <p class="rqd-grid-item">$d_1$</p>
+
+                                <div class="rqd-grid-item search-result-header">
+                                    <div class="search-result-icon r-stack">
+                                        <div data-id="res-icon-bg" class="search-result-icon-background"></div>
+                                        <img src="img/search/l3s.webp">
+                                    </div>
+                                    <div>
+                                        <p class="search-title">L3S Research Center</p>
+                                        <p class="search-url">www.l3s.de</p>
+                                    </div>
                                 </div>
-                                <div>
-                                    <p class="search-title">LinkedIn</p>
-                                    <p class="search-url">de.linkedin.com › company
-                                    </p>
+
+                                <p class="rqd-grid-item">$d_2$</p>
+                                <div class="rqd-grid-item search-result-header">
+                                    <div class="search-result-icon r-stack">
+                                        <div data-id="res-icon-bg" class="search-result-icon-background"></div>
+                                        <img src="img/search/wikipedia.ico">
+                                    </div>
+                                    <div>
+                                        <p class="search-title">Wikipedia</p>
+                                        <p class="search-url">de.wikipedia.org › wiki › L3S</p>
+                                    </div>
+                                </div>
+
+                                <p class="rqd-grid-item">$\vdots$</p>
+                                <p class="rqd-grid-item"></p>
+
+                                <p class="rqd-grid-item">$d_k$</p>
+                                <div class="rqd-grid-item search-result-header">
+                                    <div class="search-result-icon r-stack">
+                                        <div data-id="res-icon-bg" class="search-result-icon-background"></div>
+                                        <img src="img/search/linkedin.ico">
+                                    </div>
+                                    <div>
+                                        <p class="search-title">LinkedIn</p>
+                                        <p class="search-url">de.linkedin.com › company
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="column-item">
-                            <p class="fragment" style="font-size: x-large; margin: 2em;">Given an input query $q$,
+                            <p class="fragment" style="font-size: x-large; margin: 3em;">Given an input query $q$,
                                 return a list of
                                 $k$ documents $d_i$ from a corpus, ordered by their relevance with respect to $q$.</p>
                         </div>

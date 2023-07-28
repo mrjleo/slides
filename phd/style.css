@@ -130,7 +130,6 @@ p.search-desc {
     display: grid;
     grid-template-columns: min-content min-content min-content;
     grid-column-gap: 0.5em;
-    width: min-content;
 }
 
 .rqd-grid>*:nth-child(1) {
