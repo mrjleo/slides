@@ -131,7 +131,7 @@ p.search-desc {
     grid-template-columns: min-content min-content;
     column-gap: 0.5em;
     border: 0.025em solid gray;
-    border-radius: 0.5em;
+    border-radius: 0.25em;
     padding-left: 0.75em;
     padding-right: 0.75em;
     background-color: white;
