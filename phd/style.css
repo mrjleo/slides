@@ -129,7 +129,7 @@ p.search-desc {
 .rqd-grid {
     display: grid;
     grid-template-columns: min-content min-content min-content;
-    grid-column-gap: 0.5em;
+    column-gap: 0.5em;
 }
 
 .rqd-grid>*:nth-child(1) {
@@ -143,4 +143,22 @@ p.search-desc {
 .rqd-grid-item {
     font-size: medium;
     white-space: nowrap;
+}
+
+/* motivation ranking */
+
+.mr-grid {
+    display: grid;
+    grid-template-columns: 45% 45%;
+    column-gap: 5%;
+    justify-content: space-evenly;
+    font-size: xx-large;
+}
+
+.mr-grid>*:nth-child(odd) {
+    text-align: right;
+}
+
+.mr-grid>*:nth-child(even) {
+    text-align: left;
 }
