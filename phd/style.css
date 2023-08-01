@@ -182,5 +182,7 @@ p.search-desc {
 }
 
 .mr-grid>*:nth-child(even) {
+    display: flex;
+    align-items: center;
     text-align: left;
 }
