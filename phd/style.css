@@ -128,21 +128,25 @@ p.search-desc {
 
 .rqd-grid {
     display: grid;
-    grid-template-columns: min-content min-content min-content;
+    grid-template-columns: min-content min-content;
     column-gap: 0.5em;
-}
-
-.rqd-grid>*:nth-child(1) {
-    text-align: right;
-}
-
-.rqd-grid>*:nth-child(2) {
-    text-align: center;
+    border: 0.025em solid gray;
+    border-radius: 0.5em;
+    padding-left: 0.75em;
+    padding-right: 0.75em;
+    background-color: white;
 }
 
 .rqd-grid-item {
     font-size: medium;
     white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rqd-grid-result {
+    justify-content: left !important;
 }
 
 /* motivation ranking */
