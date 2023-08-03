@@ -1,0 +1,169 @@
+% includes
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{xcolor}
+\usepackage{siunitx}
+
+% fonts
+\usepackage{libertine}
+\usepackage{inconsolata}
+
+% pgf, tikz
+\pgfplotsset{compat=1.15}
+\usepgfplotslibrary{
+    statistics,
+    colorbrewer,
+    groupplots,
+}
+\usetikzlibrary{
+    patterns,
+    shapes.geometric,
+    decorations.text,
+    matrix,
+    fit,
+    backgrounds,
+    positioning,
+}
+\colorlet{plotColorNeutral}{gray}
+\definecolor{plotColor1}{HTML}{e41a1c}
+\definecolor{plotColor2}{HTML}{377eb8}
+\definecolor{plotColor3}{HTML}{4daf4a}
+\definecolor{plotColor4}{HTML}{984ea3}
+\colorlet{plotColorNeutral*}{plotColorNeutral!40}
+\colorlet{plotColor1*}{plotColor1!40}
+\colorlet{plotColor2*}{plotColor2!40}
+\colorlet{plotColor3*}{plotColor3!40}
+\colorlet{plotColor4*}{plotColor4!40}
+
+% LLM
+\newcommand{\bert}{\textsc{BERT}}
+\newcommand{\bertbase}{$\text{BERT}_\text{base}$}
+\newcommand{\wordpiece}{\textsc{WordPiece}}
+\newcommand{\adam}{\textsc{Adam}}
+\newcommand{\adamw}{\textsc{AdamW}}
+
+% embeddings
+\newcommand{\wordtovec}{\textsc{Word2Vec}}
+\newcommand{\glove}{\textsc{GloVe}}
+\newcommand{\sbert}{\textsc{Sentence-BERT}}
+
+% ranking
+\newcommand{\ql}{\textsc{QL}}
+\newcommand{\dssm}{\textsc{DSSM}}
+\newcommand{\desm}{\textsc{DESM}}
+\newcommand{\doctquery}{\textsc{docT5query}}
+\newcommand{\monobert}{\textsc{monoBERT}}
+\newcommand{\dpr}{\textsc{DPR}}
+\newcommand{\ance}{\textsc{ANCE}}
+\newcommand{\colbert}{\textsc{ColBERT}}
+\newcommand{\colberter}{\textsc{ColBERTer}}
+\newcommand{\tct}{\textsc{TCT-ColBERT}}
+\newcommand{\tildemodel}{\textsc{TILDE}}
+\newcommand{\tildeone}{\textsc{TILDEv1}}
+\newcommand{\tildetwo}{\textsc{TILDEv2}}
+\newcommand{\splade}{\textsc{SPLADE}}
+\newcommand{\led}{\textsc{LED}}
+\newcommand{\deepimpact}{\textsc{DeepImpact}}
+\newcommand{\clear}{\textsc{CLEAR}}
+\newcommand{\coil}{\textsc{COIL}}
+\newcommand{\unicoil}{\textsc{uniCOIL}}
+\newcommand{\coilcr}{\textsc{COILcr}}
+\newcommand{\bm}{\textsc{BM25}}
+\newcommand{\bmp}{\textsc{BM25P}}
+\newcommand{\rmprf}{\textsc{RM3}}
+\newcommand{\deepct}{\textsc{DEEP-CT}}
+\newcommand{\bertcls}{\textsc{BERT-CLS}}
+\newcommand{\berts}{\textsc{BERT-3S}}
+\newcommand{\doclabeled}{\textsc{Doc-Labeled}}
+\newcommand{\matchpyramid}{\textsc{MatchPyramid}}
+\newcommand{\pacrr}{\textsc{PACRR}}
+\newcommand{\copacrr}{\textsc{Co-PACRR}}
+\newcommand{\convknrm}{\textsc{Conv-KNRM}}
+\newcommand{\duet}{\textsc{DUET}}
+\newcommand{\tkl}{\textsc{TKL}}
+\newcommand{\tklsmall}{\textsc{TKL-2k}}
+\newcommand{\ranknet}{\textsc{RankNet}}
+\newcommand{\knrm}{\textsc{K-NRM}}
+\newcommand{\dmn}{\textsc{DMN}}
+\newcommand{\qalstm}{\textsc{QA-LSTM}}
+
+% metrics
+\newcommand{\ap}{AP}
+\newcommand{\rr}{RR}
+\newcommand{\recall}{R}
+\newcommand{\precision}{P}
+\newcommand{\dcg}{DCG}
+\newcommand{\idcg}{IDCG}
+\newcommand{\ndcg}{nDCG}
+
+% efficient BERT
+\newcommand{\powerbert}{\textsc{PoWER-BERT}}
+\newcommand{\skipbert}{\textsc{SkipBERT}}
+\newcommand{\deebert}{\textsc{DeeBERT}}
+
+% datasets
+\newcommand{\msmarco}{\textsc{MS MARCO}}
+\newcommand{\msmpsgdev}{\textsc{MSM-Psg-Dev}}
+\newcommand{\trecdlpsgn}{\textsc{TREC-DL-Psg'19}}
+\newcommand{\trecdlpsgt}{\textsc{TREC-DL-Psg'20}}
+\newcommand{\msmdocdev}{\textsc{MSM-Doc-Dev}}
+\newcommand{\trecdldocn}{\textsc{TREC-DL-Doc'19}}
+\newcommand{\trecdldoct}{\textsc{TREC-DL-Doc'20}}
+\newcommand{\beir}{\textsc{BEIR}}
+\newcommand{\beirmsm}{\textsc{MS MARCO}}
+\newcommand{\beirfever}{\textsc{Fever}}
+\newcommand{\beircfever}{\textsc{Climate-Fever}}
+\newcommand{\beirfiqa}{\textsc{FiQA}}
+\newcommand{\beirquora}{\textsc{Quora}}
+\newcommand{\beirnq}{\textsc{NQ}}
+\newcommand{\beirhpqa}{\textsc{HotpotQA}}
+\newcommand{\beirdbp}{\textsc{DBpedia-Entity}}
+\newcommand{\beirscifact}{\textsc{SciFact}}
+\newcommand{\beirscidocs}{\textsc{SciDocs}}
+\newcommand{\beirtc}{\textsc{TREC-Covid}}
+\newcommand{\beirtouche}{\textsc{Webis-Touché-2020}}
+\newcommand{\beirnfc}{\textsc{NFCorpus}}
+\newcommand{\core}{\textsc{Core17}}
+\newcommand{\clueweb}{\textsc{ClueWeb09}}
+\newcommand{\antique}{\textsc{ANTIQUE}}
+\newcommand{\insrqa}{\textsc{InsuranceQA}}
+
+% Fast-Forward
+\newcommand{\fastforward}{\textsc{Fast-Forward}}
+\newcommand{\sparseretrieval}{\textsc{Sparse Retrieval}}
+\newcommand{\denseretrieval}{\textsc{Dense Retrieval}}
+\newcommand{\hybrid}{\textsc{Hybrid Retrieval}}
+\newcommand{\reranking}{\textsc{Re-Ranking}}
+\newcommand{\interpolatedreranking}{\textsc{Interpolation}}
+\newcommand{\pyserini}{\textsc{Pyserini}}
+\newcommand{\faiss}{\textsc{FAISS}}
+\newcommand{\selbert}{\textsc{Selective-BERT}}
+
+% BERT-DMN
+\newcommand{\blite}{$\text{BERT}_\text{lite}$}
+\newcommand{\bdmn}{$\text{BERT-DMN}$}
+\newcommand{\bdlite}{$\text{BERT-DMN}_\text{lite}$}
+
+% S&R
+\newcommand{\sr}{\textsc{Select-And-Rank}}
+\newcommand{\sratt}{\textsc{S\&R-ATT}}
+\newcommand{\srlin}{\textsc{S\&R-LIN}}
+\newcommand{\plrnd}{\textsc{PL-RND}}
+\newcommand{\plbert}{\textsc{PL-BERT}}
+\newcommand{\pllstm}{\textsc{PL-LSTM}}
+\newcommand{\plbm}{\textsc{PL-BM25}}
+\newcommand{\plsem}{\textsc{PL-SEM}}
+
+\newcommand{\otree}{\textsc{oTree}}
+
+% BoilerNet
+\newcommand{\boilernet}{\textsc{BoilerNet}}
+\newcommand{\wtt}{\textsc{Web2Text}}
+\newcommand{\bp}{\textsc{BoilerPipe}}
+\newcommand{\moz}{\textsc{Readability.js}}
+\newcommand{\bte}{\textsc{BTE}}
+\newcommand{\cetd}{\textsc{CETD}}
+
+\newcommand{\cleaneval}{\textsc{CleanEval}}
+\newcommand{\gtrends}{\textsc{GoogleTrends-2017}}
