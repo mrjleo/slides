@@ -16,7 +16,8 @@ h4 {
     font-size: 0.75em !important;
 }
 
-p {
+p,
+span.katex {
     font-size: xx-large;
 }
 
