@@ -236,9 +236,11 @@
                 <section id="motivation-explainability-slide">
                     <h2>Ranking should be <i>explainable</i></h2>
 
-                    <p style="margin-bottom: 0;"><b>Neural ranking</b> in a nutshell:</p>
-                    <p style="font-size: x-small; margin-top: 0;">(of course, the following is vastly simplified)</p>
-                    <p>
+                    <p class="fragment" data-fragment-index="1" style="margin-bottom: 0;"><b>Neural ranking</b> in a
+                        nutshell:</p>
+                    <p class="fragment" data-fragment-index="1" style="font-size: x-small; margin-top: 0;">(of course,
+                        the following is vastly simplified)</p>
+                    <p class="fragment" data-fragment-index="1">
                         $
                         \underbrace{\phi(q, d)}_{\text{relevance}} =
                         \operatorname{BERT}
@@ -247,7 +249,13 @@
                         }_{\text{LLM inputs}}
                         $
                     </p>
-
+                    <p class="fragment">
+                        LLMs (i.e., Transformers or BERT) are <b>complex</b> and <b>hard to interpret/explain</b>.
+                    </p>
+                    <p class="fragment">
+                        What if the trained model is biased?&nbsp;<span class="fragment">Racist?</span>&nbsp;<span
+                            class="fragment">Sexist?</span>
+                    </p>
                 </section>
             </section>
             <!-- end: motivation -->
