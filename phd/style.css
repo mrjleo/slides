@@ -18,7 +18,7 @@ h4 {
 
 p,
 span.katex {
-    font-size: xx-large;
+    font-size: x-large;
 }
 
 /* ranking: search */
@@ -169,6 +169,10 @@ p.search-desc {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+p.rqd-grid-item .katex {
+    font-size: large;
 }
 
 .rqd-grid-result {
