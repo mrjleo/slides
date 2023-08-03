@@ -12,7 +12,7 @@ gulp.task(
   () => gulp.src(["*/*.html"]).pipe(connect.reload())
 );
 
-gulp.task("compile_tikz", () => {
+gulp.task("compile_latex", () => {
   var options = {
     continueOnError: false,
     pipeStdout: false,
@@ -22,7 +22,7 @@ gulp.task("compile_tikz", () => {
     stderr: true,
     stdout: true,
   };
-  return gulp.src("*/img/**/*.tex")
+  return gulp.src("*/img/**/fig_*.tex")
     .pipe(exec(file => `latexmk -cd -bibtex- -pdf ${file.path}`, options))
     .pipe(exec(file => `latexmk -cd -c ${file.path}`, options))
     .pipe(exec(file => `pdf2svg ${file.path.slice(0, -4) + ".pdf"} ${file.path.slice(0, -4) + ".svg"}`, options))
@@ -39,7 +39,7 @@ gulp.task(
       livereload: true,
     });
 
-    gulp.watch("*/img/**/*.tex", gulp.series("compile_tikz", "reload"));
+    gulp.watch("*/img/**/*.tex", gulp.series("compile_latex", "reload"));
     gulp.watch(["*/*.html", "*/*.md", "*/*.css"], gulp.series("reload"));
   }
 );
