@@ -223,7 +223,31 @@
                     <p class="fragment">thus...</p>
                 </section>
 
+                <section id="motivation-efficiency-slide">
+                    <h2>Ranking should be <i>efficient</i></h2>
+                    <img class="fragment" data-fragment-index="1" style="margin-bottom: 0;"
+                        src="img/__latex_emissions.svg">
+                    <p class="fragment" data-fragment-index="1" style="font-size: x-small; margin-top: 0;">Data from:
+                        Scells, Zhuang, and Zuccon. “Reduce, Reuse, Recycle: Green Information Retrieval Research”.
+                        SIGIR 2022.</p>
+                    <p class="fragment">But <b>neural state-of-the-art models</b> <span
+                            style="font-size: medium;">(often)</span> aren't</p>
+                </section>
+                <section id="motivation-explainability-slide">
+                    <h2>Ranking should be <i>explainable</i></h2>
 
+                    <p style="margin-bottom: 0;"><b>Neural ranking</b> in a nutshell:</p>
+                    <p style="font-size: x-small; margin-top: 0;">(of course, the following is vastly simplified)</p>
+                    <p>
+                        $
+                        \underbrace{\phi(q, d)}_{\text{relevance}} =
+                        \operatorname{BERT}
+                        \underbrace{
+                        (\texttt{[CLS]}, q, \texttt{[SEP]}, d, \texttt{[SEP]})
+                        }_{\text{LLM inputs}}
+                        $
+                    </p>
+                </section>
             </section>
             <!-- end: motivation -->
         </div>
