@@ -175,8 +175,8 @@
                         </div>
 
                         <div class="column-item fragment"
-                            style="font-size: x-large; margin-left: 3em; margin-right: 3em; text-align: left;">
-                            <p>
+                            style="margin-left: 3em; margin-right: 3em; text-align: left;">
+                            <p style="font-size: x-large;">
                                 <b><i><u>Ad-hoc retrieval</u></i></b>:
                                 <br>
                                 Given an input query $q$, return a list of $k$ documents $d_i$ from a corpus, ordered by
@@ -190,7 +190,7 @@
 
             <!-- motivation -->
             <section>
-                <section id="motivation-examples-slide">
+                <section id=" motivation-examples-slide">
                     <h2>Ranking is everywhere</h2>
                     <div class="mr-grid">
                         <p class="fragment" data-fragment-index="1">
@@ -204,17 +204,20 @@
                                 thesis)</span>
                         </p>
                         <p class="fragment" data-fragment-index="2">
-                            <span class="fragment custom blur" data-fragment-index="4">Personal assistants</span>
+                            <span class="fragment custom blur" data-fragment-index="4">Personal
+                                assistants</span>
                         </p>
                         <p class="fragment" data-fragment-index="2">
-                            <span class="fragment custom blur" data-fragment-index="4"><i>Question answering</i></span>
+                            <span class="fragment custom blur" data-fragment-index="4"><i>Question
+                                    answering</i></span>
                         </p>
                         <p class="fragment" data-fragment-index="3">
                             <span class="fragment custom blur" data-fragment-index="4">Online shopping,<br>video
                                 streaming</span>
                         </p>
                         <p class="fragment" data-fragment-index="3">
-                            <span class="fragment custom blur" data-fragment-index="4"><i>Recommender systems</i></span>
+                            <span class="fragment custom blur" data-fragment-index="4"><i>Recommender
+                                    systems</i></span>
                         </p>
                     </div>
                     <p class="fragment">thus...</p>
@@ -222,6 +225,12 @@
 
                 <section id="motivation-efficiency-slide">
                     <h2>Ranking should be <i>efficient</i></h2>
+                    <img class="fragment" data-fragment-index="1" style="margin-bottom: 0;"
+                        src="img/__latex_emissions.svg">
+                    <p class="fragment" data-fragment-index="1" style="font-size: x-small; margin-top: 0;">Data from:
+                        Scells, Zhuang, and Zuccon. “Reduce, Reuse, Recycle: Green Information Retrieval Research”.
+                        SIGIR 2022.</p>
+                    <p class="fragment">But <b>neural state-of-the-art models</b> often aren't</p>
                 </section>
                 <section id="motivation-explainability-slide">
                     <h2>Ranking should be <i>explainable</i></h2>
