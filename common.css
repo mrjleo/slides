@@ -30,6 +30,11 @@
   grid-template-rows: auto;
 }
 
+hr.divider {
+  margin: 0.5em;
+  border: none;
+}
+
 /* result table */
 
 table.result-tab {
