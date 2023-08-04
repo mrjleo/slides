@@ -30,6 +30,11 @@
   grid-template-rows: auto;
 }
 
+.c-wide>* {
+  width: 100%;
+  text-align: left;
+}
+
 hr.divider {
   margin: 0.5em;
   border: none;

@@ -7,6 +7,11 @@
 \usepackage{marvosym}
 \usepackage{amsmath}
 \usepackage{mathtools}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage[
+    most,
+]{tcolorbox}
 
 % fonts
 \usepackage{libertine}
@@ -17,6 +22,25 @@
 
 % layout
 \newcommand{\hide}[1]{\textcolor{gray}{#1}}
+
+\newtcbox{\hldashed}[1][]{
+    size=fbox,
+    boxsep=2pt,
+    boxrule=0pt,
+    enhanced,
+    borderline={0.5pt}{0pt}{dashed},
+    on line,
+    #1
+}
+\newtcbox{\hldotted}[1][]{
+    size=fbox,
+    boxsep=2pt,
+    boxrule=0pt,
+    enhanced,
+    borderline={0.5pt}{0pt}{dotted},
+    on line,
+    #1
+}
 
 % pgf, tikz
 \pgfplotsset{compat=1.15}
