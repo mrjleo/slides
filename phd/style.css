@@ -198,3 +198,10 @@ p.rqd-grid-item .katex {
     align-items: center;
     text-align: left;
 }
+
+/* contributions */
+
+.c-list>* {
+    width: 100%;
+    text-align: left;
+}
