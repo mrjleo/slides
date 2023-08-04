@@ -1,0 +1,129 @@
+\documentclass{standalone}
+\input{common.tex}
+
+\begin{document}
+\tikzset{
+    tradeoff/.style={
+            draw,
+            fill=yellow,
+            inner sep=0.15em,
+            isosceles triangle,
+            isosceles triangle apex angle=60,
+            shape border rotate=90,
+            rounded corners,
+        }
+}
+
+\tdplotsetmaincoords{60}{115}
+% drawing in axis planes:
+% https://tex.stackexchange.com/a/49851
+% https://tug.org/TUGboat/tb33-1/tb103wolcott.pdf
+\def\angPhi{30}
+\def\angTheta{-25}
+\begin{tikzpicture}[
+        tdplot_main_coords,
+        ffplane/.estyle={
+                cm={
+                        cos(\angTheta), sin(\angTheta)*sin(\angPhi),
+                        0, cos(\angPhi),
+                        (0,0)
+                    }
+            },
+        fxplane/.estyle={
+                cm={
+                        cos(\angTheta), sin(\angTheta)*sin(\angPhi),
+                        -sin(\angTheta), cos(\angTheta)*sin(\angPhi),
+                        (0,0)
+                    },
+            },
+        xfplane/.estyle={
+                cm={
+                        0, cos(\angPhi),
+                        -sin(\angTheta), cos(\angTheta)*sin(\angPhi),
+                        (0,0)
+                    },
+            },
+    ]
+    \coordinate (O) at (0,0,0);
+    \draw[thick,->] (O) -- (7,0,0) node[anchor=north east]{\textbf{Explainability}};
+    \draw[thick,->] (O) -- (0,7,0) node[anchor=north west]{\textbf{Effectiveness}};
+    \draw[thick,->] (O) -- (0,0,7) node[anchor=south]{\textbf{Efficiency}};
+
+    \tdplotdrawarc[tdplot_main_coords,dashed,<->]{(O)}{8}{15}{75}{}{}
+
+    \tdplotsetrotatedcoords{0}{90}{90}
+    \tdplotdrawarc[tdplot_rotated_coords,dashed,<->]{(O)}{8}{15}{75}{}{}
+
+    \tdplotsetrotatedcoords{-90}{-90}{0}
+    \tdplotdrawarc[tdplot_rotated_coords,dashed,<->]{(O)}{8}{15}{75}{}{}
+
+    % drawing the nodes in \tdplotdrawarc draws them under the path
+    \node[tradeoff] at (5.65,5.65,0) {\large\Lightning};
+    \node[tradeoff] at (0,5.65,5.65) {\large\Lightning};
+    \node[tradeoff] at (5.65,0,5.65) {\large\Lightning};
+
+    \begin{scope}
+        \clip (0,0,0) -- (6.5,0,0) -- (6.5,1,0) -- (1,6.5,0) -- (0,6.5,0) -- cycle;
+        \draw[
+            fxplane,
+            gray,
+            thin,
+        ] (0,0,0) grid (20,20,0);
+    \end{scope}
+    \begin{scope}
+        \clip (0,0,0) -- (0,6.5,0) -- (0,6.5,1) -- (0,1,6.5) -- (0,0,6.5) -- cycle;
+        \draw[
+            ffplane,
+            gray,
+            thin,
+        ] (0,0,0) grid (0,20,20);
+    \end{scope}
+    \begin{scope}
+        \clip (0,0,0) -- (6.5,0,0) -- (6.5,0,1) -- (1,0,6.5) -- (0,0,6.5) -- cycle;
+        \draw[
+            xfplane,
+            gray,
+            thin,
+        ] (0,0,0) grid (-20,0,-20);
+    \end{scope}
+
+    \coordinate (SR) at (4.3,1.8,0);
+    \draw[
+        fxplane,
+        very thick,
+        draw=red,
+        outer sep=1em,
+    ] (SR) circle (0.2em) node[
+            align=left,
+            right,
+            fill=white,
+            draw=gray,
+        ] {\sr{}};
+
+    \coordinate (FF) at (0,1.8,4.8);
+    \draw[
+        ffplane,
+        very thick,
+        draw=red,
+        outer sep=0.5em,
+    ] (FF) circle (0.2em) node[
+            align=center,
+            below,
+            fill=white,
+            draw=gray,
+        ] {\fastforward{} indexes};
+
+    \coordinate (BD) at (0,2.5,2.5);
+    \draw[
+        ffplane,
+        very thick,
+        draw=red,
+        outer sep=0.5em,
+    ] (BD) circle (0.2em) node[
+            align=center,
+            below,
+            fill=white,
+            draw=gray,
+        ] {\bdmn{}};
+\end{tikzpicture}
+\end{document}
