@@ -1,0 +1,77 @@
+\documentclass{standalone}
+\input{common.tex}
+
+\begin{document}
+\begin{tikzpicture}
+    \node[fignode] (Q) at (0,0) {$q$};
+    \node[
+        fignode,
+        right=1 of Q,
+    ] (Qrep) {$
+            \begin{bmatrix}
+                \vdots     \\
+                0          \\
+                \mathbf{1} \\
+                \mathbf{1} \\
+                0          \\
+                \vdots     \\
+            \end{bmatrix}
+        $};
+    \node[
+        fignode,
+        right=0.2 of Qrep.center,
+    ] (Qdesc) {$
+            \begin{matrix*}[l]
+                \vdots               \\
+                \hide{\text{lake}}   \\
+                \textbf{life}        \\
+                \textbf{meaning}     \\
+                \hide{\text{member}} \\
+                \vdots               \\
+            \end{matrix*}
+        $};
+
+    \node[
+        framedfignode,
+        right=1 of Qdesc,
+    ] (Op) {\bm{}};
+
+    \node[
+        fignode,
+        right=1 of Op,
+    ] (Ddesc) {$
+            \begin{matrix*}[r]
+                \vdots               \\
+                \hide{\text{lake}}   \\
+                \textbf{life}        \\
+                \textbf{meaning}     \\
+                \hide{\text{member}} \\
+                \vdots               \\
+            \end{matrix*}
+        $};
+    \node[
+        fignode,
+        right=0.2 of Ddesc,
+        anchor=center,
+    ] (Drep) {$
+            \begin{bmatrix}
+                \vdots     \\
+                1          \\
+                \mathbf{3} \\
+                \mathbf{2} \\
+                11         \\
+                \vdots     \\
+            \end{bmatrix}
+        $};
+    \node[
+        fignode,
+        right=2 of Drep.center,
+        anchor=center,
+    ] (D) {$d$};
+
+    \draw[->] (Q) -- (Qrep) node[midway,above] {$\operatorname{tf}$};
+    \draw[->] (D) -- (Drep) node[midway,above] {$\operatorname{tf}$};
+    \draw[->] (Qdesc) -- (Op);
+    \draw[->] (Ddesc) -- (Op);
+\end{tikzpicture}
+\end{document}
