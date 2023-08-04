@@ -5,10 +5,18 @@
 \usepackage{xcolor}
 \usepackage{siunitx}
 \usepackage{marvosym}
+\usepackage{amsmath}
+\usepackage{mathtools}
 
 % fonts
 \usepackage{libertine}
 \usepackage{inconsolata}
+\usepackage{fontsize}
+
+\changefontsize{12pt}
+
+% layout
+\newcommand{\hide}[1]{\textcolor{gray}{#1}}
 
 % pgf, tikz
 \pgfplotsset{compat=1.15}
@@ -36,6 +44,22 @@
 \colorlet{plotColor2*}{plotColor2!40}
 \colorlet{plotColor3*}{plotColor3!40}
 \colorlet{plotColor4*}{plotColor4!40}
+
+% tikz styles
+\tikzset{
+    fignode/.style={
+            outer sep=0.25em,
+        }
+}
+
+\tikzset{
+    framedfignode/.style={
+            outer sep=0.25em,
+            inner sep=0.5em,
+            rounded corners,
+            draw,
+        }
+}
 
 % LLM
 \newcommand{\bert}{\textsc{BERT}}
