@@ -1,7 +1,7 @@
 const yargs = require("yargs");
 const gulp = require("gulp");
 const connect = require("gulp-connect");
-var exec = require('gulp-exec');
+const exec = require("gulp-exec");
 
 const root = yargs.argv.root || ".";
 const port = yargs.argv.port || 8000;
