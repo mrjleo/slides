@@ -363,19 +363,44 @@
                     <hr class="divider">
                     <p><i>Retrieve-and-re-rank</i> is a <b>telescoping</b> setting that has two stages:</p>
                     <hr class="divider">
-                    <div class="column-desc-layout" style="gap: 0;">
+
+                    <div class="column-desc-layout" style="grid-gap: 0.5em 0">
                         <div class="column-item">
                             <p style="font-size: 2em;">📚</p>
                         </div>
                         <p class="caption">Corpus</p>
-                        <div class="column-item">→</div>
-                        <p class="caption"></p>
+
+                        <p class="column-item rr-arrow">→</p>
+                        <p></p>
+
+                        <div class="column-item">
+                            <div class="rr-operation" style="align-self: center;">
+                                Lexical retriever
+                            </div>
+                        </div>
+                        <p></p>
+
+                        <p class="column-item rr-arrow">→</p>
+                        <p></p>
+
                         <div class="column-item" id="rr-candidate-docs">
                             📄📄📄📄<br>📄📄📄📄<br>📄📄📄📄<br>📄📄📄📄
                         </div>
-                        <p class="caption">Candidate documents</p>
-                        <div class="column-item">→</div>
-                        <p class="caption"></p>
+                        <p class="caption">Candidates</p>
+
+                        <p class="column-item rr-arrow">→</p>
+                        <p></p>
+
+                        <div class="column-item">
+                            <div class="rr-operation">
+                                Semantic re-ranker
+                            </div>
+                        </div>
+                        <p></p>
+
+                        <p class="column-item rr-arrow">→</p>
+                        <p></p>
+
                         <div class="column-item">
                             <p class="rr-ranking-doc">
                                 #1 <span class="rr-ranking-doc-icon">📄</span> D371 (0.95)
@@ -385,12 +410,6 @@
                             </p>
                             <p class="rr-ranking-doc">
                                 #3 <span class="rr-ranking-doc-icon">📄</span> D984 (0.71)
-                            </p>
-                            <p class="rr-ranking-doc">
-                                #4 <span class="rr-ranking-doc-icon">📄</span> D984 (0.60)
-                            </p>
-                            <p class="rr-ranking-doc">
-                                #5 <span class="rr-ranking-doc-icon">📄</span> D101 (0.45)
                             </p>
                         </div>
                         <p class="caption">Final ranking</p>

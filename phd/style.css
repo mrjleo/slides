@@ -230,6 +230,19 @@ p.rqd-grid-item .katex {
 
 /* retrieve-and-re-rank */
 
+p.rr-arrow {
+    margin: 0;
+}
+
+div.rr-operation {
+    font-size: medium;
+    background-color: white;
+    border: 0.01em solid gray;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    max-width: 5em;
+}
+
 div#rr-candidate-docs {
     font-size: 0.5em;
     text-shadow: 0.1px 0.1px 0 black;
@@ -237,7 +250,7 @@ div#rr-candidate-docs {
 
 p.rr-ranking-doc {
     font-family: monospace;
-    font-size: small;
+    font-size: x-small;
     display: flex;
     flex-direction: row;
     align-items: center;
