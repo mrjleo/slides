@@ -361,47 +361,45 @@
                 <section id="reranking-slide">
                     <h2>Retrieve-and-re-rank</h2>
                     <hr class="divider">
-                    <p><i>Retrieve-and-re-rank</i> is a <b>telescoping</b> setting that has two stages:</p>
+                    <p><i>Retrieve-and-re-rank</i> is a <b>telescoping</b> setting that has two stages.</p>
                     <hr class="divider">
 
-                    <div class="column-desc-layout" style="grid-gap: 0.5em 0">
-                        <div class="column-item">
-                            <p style="font-size: 2em;">📚</p>
+                    <div class="column-desc-layout" id="rr-layout" style="grid-gap: 0.5em 0">
+                        <div class="column-item fragment" data-fragment-index="1">
+                            <p style="font-size: 2em; margin: 0;">📚</p>
                         </div>
-                        <p class="caption">Corpus</p>
+                        <p class="column-label fragment" data-fragment-index="1">Corpus</p>
 
-                        <p class="column-item rr-arrow">→</p>
-                        <p></p>
+                        <p class="column-item rr-arrow fragment" data-fragment-index="2">→</p>
+                        <p class="column-label fragment" data-fragment-index="2"></p>
 
-                        <div class="column-item">
-                            <div class="rr-operation" style="align-self: center;">
-                                Lexical retriever
-                            </div>
+                        <div class="column-item rr-stage fragment" data-fragment-index="2">
+                            <p class="rr-stage-num">1</p>
+                            <p class="rr-operation">Lexical retriever</p>
                         </div>
-                        <p></p>
+                        <p class="column-label fragment" data-fragment-index="2"></p>
 
-                        <p class="column-item rr-arrow">→</p>
-                        <p></p>
+                        <p class="column-item rr-arrow fragment" data-fragment-index="3">→</p>
+                        <p class="column-label fragment" data-fragment-index="3"></p>
 
-                        <div class="column-item" id="rr-candidate-docs">
-                            📄📄📄📄<br>📄📄📄📄<br>📄📄📄📄<br>📄📄📄📄
+                        <div class="column-item fragment" data-fragment-index="3" id="rr-candidate-docs">
+                            📄📄📄📄📄<br>📄📄📄📄📄<br>📄📄📄📄📄<br>📄📄📄📄📄<br>📄📄📄📄📄
                         </div>
-                        <p class="caption">Candidates</p>
+                        <p class="column-label fragment" data-fragment-index="3">Candidates</p>
 
-                        <p class="column-item rr-arrow">→</p>
-                        <p></p>
+                        <p class="column-item rr-arrow fragment" data-fragment-index="4">→</p>
+                        <p class="column-label fragment" data-fragment-index="4"></p>
 
-                        <div class="column-item">
-                            <div class="rr-operation">
-                                Semantic re-ranker
-                            </div>
+                        <div class="column-item rr-stage fragment" data-fragment-index="4">
+                            <p class="rr-stage-num">2</p>
+                            <p class="rr-operation">Semantic re-ranker</p>
                         </div>
-                        <p></p>
+                        <p class="column-label fragment" data-fragment-index="4"></p>
 
-                        <p class="column-item rr-arrow">→</p>
-                        <p></p>
+                        <p class="column-item rr-arrow fragment" data-fragment-index="5">→</p>
+                        <p class="column-label fragment" data-fragment-index="5"></p>
 
-                        <div class="column-item">
+                        <div class="column-item fragment" data-fragment-index="5">
                             <p class="rr-ranking-doc">
                                 #1 <span class="rr-ranking-doc-icon">📄</span> D371 (0.95)
                             </p>
@@ -412,7 +410,7 @@
                                 #3 <span class="rr-ranking-doc-icon">📄</span> D984 (0.71)
                             </p>
                         </div>
-                        <p class="caption">Final ranking</p>
+                        <p class="column-label fragment" data-fragment-index="5">Final ranking</p>
                     </div>
                 </section>
 
