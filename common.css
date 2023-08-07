@@ -40,6 +40,11 @@ hr.divider {
   border: none;
 }
 
+p.caption {
+  font-size: medium;
+  margin-top: 0;
+}
+
 /* result table */
 
 table.result-tab {
