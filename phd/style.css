@@ -213,10 +213,8 @@ p.rqd-grid-item .katex {
 
 #dr-query-radius {
     position: absolute;
-
     top: 2rem;
     left: 7rem;
-
     height: 7rem;
     width: 7rem;
     border: 0.01em solid gray;
@@ -227,5 +225,5 @@ p.rqd-grid-item .katex {
 .dr-icon {
     position: absolute;
     font-size: large;
-    text-shadow: 0 0 0 black;
+    text-shadow: 0.1px 0.1px 0 black;
 }
