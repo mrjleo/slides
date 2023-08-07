@@ -4,7 +4,7 @@
   display: grid;
   gap: 0.75em;
   grid-auto-flow: column;
-  grid-template-rows: auto 2em;
+  grid-template-rows: auto min-content;
 }
 
 .column-item {
@@ -15,12 +15,9 @@
   height: 100%;
 }
 
-.column-label {
+p.column-label {
   font-size: x-large;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  margin: 0.5em 0;
 }
 
 .column-layout {
