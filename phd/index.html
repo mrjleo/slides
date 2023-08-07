@@ -360,10 +360,47 @@
 
                 <section id="reranking-slide">
                     <h2>Retrieve-and-re-rank</h2>
+                    <hr class="divider">
+                    <p>A <i>telescoping</i> setting that works in two stages:</p>
+                    <p>todo...</p>
                 </section>
 
                 <section id="dense-retrieval-slide">
                     <h2>Dense retrieval</h2>
+                    <hr class="divider">
+                    <div class="column-layout">
+                        <div class="column-item" style="margin: 0 1em;">
+                            <p>
+                                <span class="fragment highlight-current-red" data-fragment-index="1">Documents</span>
+                                and
+                                <span class="fragment highlight-current-red" data-fragment-index="2">query</span>
+                                are embedded in a common vector space.
+                            </p>
+                            <p class="fragment" data-fragment-index="3">
+                                Retrieval is performed as an (approximate) <b>nearest neighbor search</b> operation.
+                            </p>
+                        </div>
+                        <div class="column-item">
+                            <div id="dr-vector-space">
+                                <div class="fragment" data-fragment-index="1">
+                                    <span class="dr-icon" style="top: 15rem; left: 4rem;">📄</span>
+                                    <span class="dr-icon" style="top: 3rem; left: 5rem;">📄</span>
+                                    <span class="dr-icon" style="top: 4rem; left: 7rem;">📄</span>
+                                    <span class="dr-icon" style="top: 3rem; left: 8rem;">📄</span>
+                                    <span class="dr-icon" style="top: 2rem; left: 6rem;">📄</span>
+                                    <span class="dr-icon" style="top: 8rem; left: 7rem;">📄</span>
+                                    <span class="dr-icon" style="top: 10rem; left: 9rem;">📄</span>
+                                    <span class="dr-icon" style="top: 7rem; left: 8rem;">📄</span>
+                                    <span class="dr-icon" style="top: 9rem; left: 11rem;">📄</span>
+                                    <span class="dr-icon" style="top: 10rem; left: 1rem;">📄</span>
+                                </div>
+                                <div id="dr-query-radius" class="fragment" data-fragment-index="3"></div>
+                                <span class="dr-icon fragment" style="top: 5rem; left: 10rem;"
+                                    data-fragment-index="2">🤔</span>
+                            </div>
+                            <p class="caption">The vector space is typically 768-dimensional.</p>
+                        </div>
+                    </div>
                 </section>
             </section>
             <!-- end: background -->

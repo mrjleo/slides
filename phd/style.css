@@ -198,3 +198,34 @@ p.rqd-grid-item .katex {
     align-items: center;
     text-align: left;
 }
+
+/* dense retrieval */
+
+#dr-vector-space {
+    position: relative;
+    height: 7em;
+    width: 7em;
+    margin: 0.5em;
+    border: 0.01em solid black;
+    border-radius: 100%;
+    background-color: lightgray
+}
+
+#dr-query-radius {
+    position: absolute;
+
+    top: 2rem;
+    left: 7rem;
+
+    height: 7rem;
+    width: 7rem;
+    border: 0.01em solid gray;
+    border-radius: 100%;
+    background-color: #ff000040;
+}
+
+.dr-icon {
+    position: absolute;
+    font-size: large;
+    text-shadow: 0 0 0 black;
+}
