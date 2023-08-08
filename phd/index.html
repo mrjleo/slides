@@ -477,7 +477,133 @@
                     </h2>
                 </section>
 
+                <section id="fast-forward-motivation-slide">
+                    <h2>Motivation</h2>
+                    <div class="column-layout">
+                        <div class="column-item">
+                            <ol style="display: grid; gap: 0.5em;">
+                                <li>
+                                    <span class="fragment highlight-red" data-fragment-index="1">Sparse retrieval</span>
+                                    alone is fast, but not competitive.
+                                </li>
+                                <li>
+                                    Dense retrieval shows good nDCG, but recall suffers and <b>it is slow</b>.
+                                </li>
+                                <li>
+                                    <span class="fragment highlight-green" data-fragment-index="2">
+                                        Re-ranking using dense retrieval models
+                                    </span>
+                                    works well.
+                                </li>
+                                <li>
+                                    <span class="fragment highlight-blue" data-fragment-index="3">
+                                        Score interpolation
+                                    </span>
+                                    further helps.<br>
+                                    <p class="fragment" data-fragment-index="3">
+                                        <span class="fragment highlight-blue" data-fragment-index="3">$\phi (q,
+                                            d)$</span>
+                                        $ = \alpha \ \cdot $
+                                        <span class="fragment highlight-red" data-fragment-index="3">$ \phi_S (q,
+                                            d)$</span>
+                                        $+\ (1 - \alpha) \ \cdot $
+                                        <span class="fragment highlight-green" data-fragment-index="3">$\phi_D(q,
+                                            d)$</span>
+                                    </p>
+                                </li>
+                            </ol>
+                        </div>
+                        <div class="column-item">
+                            <table class="result-tab" style="margin-bottom: 0.5em;">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>AP@1k</th>
+                                        <th>R@1k</th>
+                                        <th>nDCG@10</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="result-tab-section">
+                                        <td colspan="4">Sparse retrieval</td>
+                                    </tr>
+                                    <tr class="fragment highlight-red" data-fragment-index="1">
+                                        <td>BM25</td>
+                                        <td>0.331</td>
+                                        <td>0.697</td>
+                                        <td>0.519</td>
+                                    </tr>
 
+                                    <tr class="result-tab-section">
+                                        <td colspan="4">Dense retrieval</td>
+                                    </tr>
+                                    <tr>
+                                        <td>TCT-ColBERT</td>
+                                        <td>0.279</td>
+                                        <td>0.576</td>
+                                        <td>0.612</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ANCE</td>
+                                        <td>0.254</td>
+                                        <td>0.510</td>
+                                        <td>0.633</td>
+                                    </tr>
+
+                                    <tr class="result-tab-section">
+                                        <td colspan="4">Re-ranking (BM25 retrieval)</td>
+                                    </tr>
+                                    <tr class="fragment highlight-green" data-fragment-index="2">
+                                        <td>TCT-ColBERT</td>
+                                        <td>0.370</td>
+                                        <td>0.697</td>
+                                        <td>0.685</td>
+                                    </tr>
+                                    <tr class="fragment highlight-green" data-fragment-index="2">
+                                        <td>ANCE</td>
+                                        <td>0.336</td>
+                                        <td>0.697</td>
+                                        <td>0.654</td>
+                                    </tr>
+                                    <tr>
+                                        <td>BERT</td>
+                                        <td>0.283</td>
+                                        <td>0.697</td>
+                                        <td>0.520</td>
+                                    </tr>
+
+                                    <tr class="result-tab-section">
+                                        <td colspan="4">Interpolation (with BM25)</td>
+                                    </tr>
+                                    <tr class="fragment highlight-blue" data-fragment-index="3">
+                                        <td>TCT-ColBERT</td>
+                                        <td>0.406</td>
+                                        <td>0.697</td>
+                                        <td>0.696</td>
+                                    </tr>
+                                    <tr class="fragment highlight-blue" data-fragment-index="3">
+                                        <td>ANCE</td>
+                                        <td>0.387</td>
+                                        <td>0.697</td>
+                                        <td>0.673</td>
+                                    </tr>
+                                    <tr>
+                                        <td>BERT</td>
+                                        <td>0.365</td>
+                                        <td>0.697</td>
+                                        <td>0.612</td>
+                                    </tr>
+                                    <tr class="result-tab-section">
+                                        <td colspan="4"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="caption">
+                                TREC-DL 2019 document ranking results.
+                            </p>
+                        </div>
+                    </div>
+                </section>
             </section>
             <!-- end: fast-forward -->
         </div>
