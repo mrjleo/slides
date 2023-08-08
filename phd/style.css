@@ -22,6 +22,13 @@ span.katex {
     font-size: x-large;
 }
 
+/* layout */
+
+.column-desc-layout,
+.column-layout {
+    column-gap: 2em;
+}
+
 /* misc */
 
 .fragment.highlight-green.visible {
