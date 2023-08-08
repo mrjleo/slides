@@ -22,6 +22,12 @@ span.katex {
     font-size: x-large;
 }
 
+/* misc */
+
+.fragment.highlight-green.visible {
+    color: green !important;
+}
+
 /* ranking: search */
 
 .se-logo {
