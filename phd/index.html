@@ -604,6 +604,32 @@
                         </div>
                     </div>
                 </section>
+
+                <section id="fast-forward-idea-slide">
+                    <h2><span class="textsc">Fast-Forward</span> Indexes</h2>
+                    <hr class="divider">
+                    <p>
+                        $\phi (q, d) = \alpha \cdot \phi_S (q, d) + (1 - \alpha) \ \cdot $
+                        <span class="fragment highlight-green" data-fragment-index="1">$\phi_D(q, d)$</span>
+                    </p>
+                    <p class="fragment" data-fragment-index="1">
+                        Our approach:
+                        <b class="fragment highlight-green" data-fragment-index="1">
+                            Fast re-ranking with dual encoders</b>.
+                    </p>
+                    <hr class="divider">
+                    <p class="fragment" data-fragment-index="2">
+                        A <b><span class="textsc">Fast-Forward</span> index</b> is a look-up table for pre-computed
+                        document
+                        representations:
+                    </p>
+                    <p class="fragment" data-fragment-index="2">
+                        <span class="fragment highlight-green" data-fragment-index="2">
+                            $\phi_D^{FF} (q, d)$
+                        </span>
+                        $= \zeta (q) \cdot \eta^{FF} (d) $
+                    </p>
+                </section>
             </section>
             <!-- end: fast-forward -->
         </div>
