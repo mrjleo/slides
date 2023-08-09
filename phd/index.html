@@ -480,9 +480,10 @@
 
                 <section id="fast-forward-motivation-slide">
                     <h2>Motivation</h2>
+                    <hr class="divider">
                     <div class="column-layout">
                         <div class="column-item">
-                            <ol style="display: grid; gap: 0.5em;">
+                            <ol style="display: grid; gap: 1em; font-size: large;">
                                 <li>
                                     <span class="fragment highlight-red" data-fragment-index="1">Sparse retrieval</span>
                                     is fast, but not competitive on its own.
@@ -515,7 +516,16 @@
                             </ol>
                         </div>
                         <div class="column-item">
-                            <img src="img/fast_forward/__latex_motivation_tab.svg">
+                            <div class="r-stack">
+                                <img class="fragment fade-out" data-fragment-index="1"
+                                    src="img/fast_forward/__latex_motivation_tab.svg">
+                                <img class="fragment fade-in-then-out" data-fragment-index="1"
+                                    src="img/fast_forward/__latex_motivation_tab_1.svg">
+                                <img class="fragment fade-in-then-out" data-fragment-index="2"
+                                    src="img/fast_forward/__latex_motivation_tab_2.svg">
+                                <img class="fragment fade-in-then-out" data-fragment-index="3"
+                                    src="img/fast_forward/__latex_motivation_tab_3.svg">
+                            </div>
                             <p class="caption">
                                 Ranking results on the TREC Deep Learning document ranking task.
                             </p>
