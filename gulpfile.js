@@ -23,7 +23,7 @@ gulp.task("compile_latex", () => {
     stdout: true,
   };
   return gulp.src("*/img/**/__latex_*.tex")
-    .pipe(exec(file => `latexmk -cd -bibtex- -pdf ${file.path}`, options))
+    .pipe(exec(file => `latexmk -xelatex -interaction=nonstopmode -cd -bibtex- -pdf ${file.path}`, options))
     .pipe(exec(file => `latexmk -cd -c ${file.path}`, options))
     .pipe(exec(file => `pdf2svg ${file.path.slice(0, -4)}.pdf ${file.path.slice(0, -4)}.svg`, options))
     .pipe(exec.reporter(reportOptions));
