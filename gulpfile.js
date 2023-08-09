@@ -15,7 +15,7 @@ function _compile_latex(glob) {
   var reportOptions = {
     err: true,
     stderr: true,
-    stdout: true,
+    stdout: false,
   };
   return gulp.src(glob)
     .pipe(exec(file => `latexmk -xelatex -interaction=nonstopmode -cd -bibtex- -pdf ${file.path}`, options))
