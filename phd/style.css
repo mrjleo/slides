@@ -31,8 +31,16 @@ span.katex {
 
 /* misc */
 
+.fragment.highlight-red.visible {
+    color: #DB4437 !important;
+}
+
 .fragment.highlight-green.visible {
-    color: green !important;
+    color: #0F9D58 !important;
+}
+
+.fragment.highlight-blue.visible {
+    color: #4285F4 !important;
 }
 
 /* ranking: search */
