@@ -14,7 +14,7 @@ gulp.task(
 
 gulp.task("compile_latex", () => {
   var options = {
-    continueOnError: false,
+    continueOnError: true,
     pipeStdout: false,
   };
   var reportOptions = {
