@@ -299,3 +299,43 @@ span.rr-ranking-doc-icon {
     margin: 0 0.25em;
     text-shadow: 0.1px 0.1px 0 black;
 }
+
+/* ff indexes */
+
+#ff-efficiency-chart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: medium;
+    margin-bottom: 1em;
+}
+
+#ff-efficiency-chart ul {
+    border: none;
+    width: auto;
+}
+
+#ff-efficiency-chart ul.legend li {
+    font-size: medium;
+}
+
+#ff-efficiency-chart table {
+    margin: 0;
+    height: 10em;
+    width: 20em;
+}
+
+#ff-efficiency-chart table tbody td {
+    margin: 0.2em;
+}
+
+#ff-efficiency-chart table tbody td span.vertical {
+    writing-mode: vertical-lr;
+    padding-top: 0.5em;
+}
+
+#ff-efficiency-chart .charts-css {
+    --color-1: #DB4437;
+    --color-2: #4285F4;
+    --color-3: #F4B400;
+}

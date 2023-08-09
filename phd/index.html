@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../node_modules/reveal.js/dist/reveal.css">
     <link rel="stylesheet" href="../node_modules/reveal.js/dist/theme/serif.css">
     <link rel="stylesheet" href="../node_modules/reveal.js/plugin/highlight/monokai.css">
+    <link rel="stylesheet" href="../node_modules/charts.css/dist/charts.min.css">
     <link rel="stylesheet" href="../common.css">
     <link rel="stylesheet" href="style.css">
     <script src="../node_modules/typed.js/dist/typed.umd.js"></script>
@@ -531,7 +532,7 @@
                     </div>
                 </section>
 
-                <section id="fast-forward-idea-slide">
+                <section id="fast-forward-idea-slide" data-auto-animate data-auto-animate-id="fast-forward">
                     <h2><span class="textsc">Fast-Forward</span> indexes</h2>
                     <hr class="divider">
                     <p>
@@ -553,6 +554,45 @@
                             $\phi_D^{FF} (q, d)$
                         </span>
                         $= \zeta (q) \cdot \eta^{FF} (d) $
+                    </p>
+                </section>
+
+                <section id="fast-forward-efficiency-slide" data-auto-animate data-auto-animate-id="fast-forward">
+                    <h2><span class="textsc">Fast-Forward</span> indexes</h2>
+                    <hr class="divider">
+                    <p>
+                        The <b>look-up</b> operation is much more <b>efficient</b> than actual re-ranking:
+                    </p>
+                    <hr class="divider">
+                    <div id="ff-efficiency-chart">
+                        <table class="charts-css column show-labels multiple data-spacing-20">
+                            <tbody>
+                                <tr>
+                                    <th scope="row">nDCG@20</th>
+                                    <td style="--size:0.632;"><span class="data vertical">0.632</span></td>
+                                    <td style="--size:0.655;"><span class="data vertical">0.655</span></td>
+                                    <td style="--size:0.655;"><span class="data vertical">0.655</span></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Query latency [ms]</th>
+                                    <td style="--size:0.99;"><span class="data vertical">1191</span></td>
+                                    <td style="--size:1.00;"><span class="data vertical">1203</span></td>
+                                    <td style="--size:0.21;"><span class="data">253</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <ul class="charts-css legend legend-rectangle">
+                            <li>Re-ranking</li>
+                            <li>Interpolation</li>
+                            <li>Interpolation (<span class="textsc">Fast-Forward</span>)</li>
+                        </ul>
+                    </div>
+                    <p class="caption">
+                        TCT-ColBERT on the TREC-DL 2019 document ranking task.
+                    </p>
+                    <hr class="divider">
+                    <p>
+                        In the following, we introduce techniques to improve efficiency even further.
                     </p>
                 </section>
             </section>
