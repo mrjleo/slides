@@ -480,53 +480,56 @@
                 <section id="fast-forward-motivation-slide">
                     <h2>Motivation</h2>
                     <hr class="divider">
-                    <div class="column-layout">
-                        <div class="column-item">
-                            <ol style="display: grid; gap: 1em; font-size: large;">
-                                <li>
-                                    <span class="fragment highlight-red" data-fragment-index="1">Sparse retrieval</span>
-                                    is fast, but not competitive on its own.
-                                </li>
-                                <li>
-                                    Dense retrieval shows good nDCG, but recall suffers and <b>it is slow</b>.
-                                </li>
-                                <li>
-                                    <span class="fragment highlight-green" data-fragment-index="2">
-                                        Re-ranking using dense retrieval models
-                                    </span>
-                                    works well.
-                                </li>
-                                <li>
-                                    <span class="fragment highlight-blue" data-fragment-index="3">
-                                        Score interpolation
-                                    </span>
-                                    further helps.<br>
-                                    <p class="fragment" data-fragment-index="3" style="text-align: center;">
-                                        <span class="fragment highlight-blue" data-fragment-index="3">$\phi (q,
-                                            d)$</span>
-                                        $ = \alpha \ \cdot $
-                                        <span class="fragment highlight-red" data-fragment-index="3">$ \phi_S (q,
-                                            d)$</span>
-                                        $+\ (1 - \alpha) \ \cdot $
-                                        <span class="fragment highlight-green" data-fragment-index="3">$\phi_D(q,
-                                            d)$</span>
-                                    </p>
-                                </li>
-                            </ol>
+                    <div class="column-layout" style="grid-template-columns: auto 50%;">
+                        <div class="column-item" id="ff-motivation-findings">
+                            <p class="fragment" data-fragment-index="1">
+                                <span class="fragment highlight-red" data-fragment-index="1">Sparse retrieval</span>
+                                is fast, but not competitive on its own.
+                            </p>
+                            <p class="fragment" data-fragment-index="2">
+                                Dense retrieval shows good nDCG, but recall suffers and <b>it is slow</b>.
+                            </p>
+                            <p class="fragment" data-fragment-index="3">
+                                <span class="fragment highlight-green" data-fragment-index="3">
+                                    Re-ranking using dense retrieval models
+                                </span>
+                                works well.
+                            </p>
+                            <p class="fragment" data-fragment-index="4">
+                                <span class="fragment highlight-blue" data-fragment-index="4">
+                                    Score interpolation
+                                </span>
+                                further helps:
+                            </p>
+                            <p class="fragment" data-fragment-index="4" style="text-align: center; margin-top: 0;">
+                                <span class="fragment highlight-blue" data-fragment-index="4">
+                                    $\phi (q, d)$
+                                </span>
+                                $= \alpha$
+                                <span class="fragment highlight-red" data-fragment-index="4">
+                                    $\phi_S (q, d)$
+                                </span>
+                                $+\ (1 - \alpha) $
+                                <span class="fragment highlight-green" data-fragment-index="4">
+                                    $\phi_D(q, d)$
+                                </span>
+                            </p>
                         </div>
                         <div class="column-item">
                             <div class="r-stack">
                                 <img class="fragment fade-out" data-fragment-index="1"
-                                    src="img/fast_forward/motivation_tab_out.svg">
+                                    src=" img/fast_forward/motivation_tab_out.svg">
                                 <img class="fragment fade-in-then-out" data-fragment-index="1"
                                     src="img/fast_forward/motivation_tab_1_out.svg">
                                 <img class="fragment fade-in-then-out" data-fragment-index="2"
-                                    src="img/fast_forward/motivation_tab_2_out.svg">
+                                    src="img/fast_forward/motivation_tab_1_out.svg">
                                 <img class="fragment fade-in-then-out" data-fragment-index="3"
+                                    src="img/fast_forward/motivation_tab_2_out.svg">
+                                <img class="fragment fade-in-then-out" data-fragment-index="4"
                                     src="img/fast_forward/motivation_tab_3_out.svg">
                             </div>
                             <p class="caption">
-                                Ranking results on the TREC Deep Learning document ranking task.
+                                Results on the TREC Deep Learning document ranking task.
                             </p>
                         </div>
                     </div>
