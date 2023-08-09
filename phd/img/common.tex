@@ -18,7 +18,7 @@
 \usepackage{inconsolata}
 \usepackage{fontsize}
 
-\changefontsize{12pt}
+\changefontsize{14pt}
 
 % layout
 \newcommand{\hide}[1]{\textcolor{gray}{#1}}
@@ -41,6 +41,20 @@
     on line,
     #1
 }
+\newcommand{\midrulesep}{
+    \arrayrulecolor{gray}
+    \midrule[0.25pt]
+    \arrayrulecolor{black}
+}
+\newcommand{\tablearrow}{{} \rotatebox[origin=c]{180}{$\Lsh$} {}}
+\newcommand{\texthighlight}[1]{%
+    \begingroup%
+    \sethlcolor{plotColorNeutral*}%
+    \hl{#1}%
+    \endgroup%
+}
+\newcommand{\sigdef}[1]{{\footnotesize \texttt{[#1]}}}
+\newcommand{\sigimpr}[1]{\footnotesize \textsuperscript{\texttt{[#1]}}}
 
 % pgf, tikz
 \pgfplotsset{compat=1.15}
