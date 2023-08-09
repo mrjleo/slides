@@ -19,13 +19,13 @@ function _compile_latex(glob) {
   };
   return gulp.src(glob)
     .pipe(exec(file => `latexmk -xelatex -interaction=nonstopmode -cd -bibtex- -pdf ${file.path}`, options))
-    .pipe(exec(file => `latexmk -cd -c ${file.path}`, options))
-    .pipe(exec(file => `pdf2svg ${file.path.slice(0, -4)}.pdf ${file.path.slice(0, -4)}.svg`, options))
-    .pipe(exec.reporter(reportOptions));
+    .pipe(exec(file => `pdf2svg ${file.path.slice(0, -4)}.pdf ${file.path.slice(0, -4)}_out.svg`, options))
+    .pipe(exec(file => `latexmk -cd -C ${file.path}`, options))
+    .pipe(exec.reporter(reportOptions))
 }
 
 gulp.task("compile_latex", () => {
-  return _compile_latex("*/img/**/__latex_*.tex");
+  return _compile_latex(["*/img/**/*.tex", "!*/img/**/_*.tex"]);
 });
 
 gulp.task(
@@ -38,7 +38,7 @@ gulp.task(
       livereload: true,
     });
 
-    gulp.watch("*/img/**/*.tex").on("change", path => _compile_latex(path).pipe(connect.reload()));
+    gulp.watch(["*/img/**/*.tex", "!*/img/**/_*.tex"]).on("change", path => _compile_latex(path).pipe(connect.reload()));
     gulp.watch(["*/*.html", "*/*.md", "*/*.css"]).on("change", path => gulp.src(path).pipe(connect.reload()));
   }
 );

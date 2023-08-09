@@ -13,9 +13,8 @@ node_modules/
 package-lock.json
 dist/
 
-# latex output and temporary files
-__latex_*.pdf 
-__latex_*.svg 
+# latex output
+*_out.svg 
 
 ## Core latex/pdflatex auxiliary files:
 *.aux

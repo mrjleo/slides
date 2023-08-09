@@ -11,6 +11,7 @@
     "gulp-connect": "^5.7.0"
   },
   "scripts": {
-    "start": "gulp serve"
+    "start": "gulp serve",
+    "compile_latex": "gulp compile_latex"
   }
 }
