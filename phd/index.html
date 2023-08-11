@@ -409,7 +409,7 @@
                             </p>
                         </div>
                         <div class="column-item">
-                            <div id="dr-vector-space">
+                            <div class="vector-space">
                                 <div class="fragment" data-fragment-index="1">
                                     <span class="dr-icon" style="top: 15rem; left: 4rem;">📄</span>
                                     <span class="dr-icon" style="top: 3rem; left: 5rem;">📄</span>
@@ -604,6 +604,140 @@
                     <p class="fragment">
                         We propose <b>sequential coalescing</b> to compress maxP indexes.
                     </p>
+                </section>
+
+                <section id="fast-forward-sc-slide">
+                    <h2>Sequential coalescing</h2>
+
+                    <hr class="divider">
+                    <div class="column-layout" style="grid-template-columns: 40% auto;">
+                        <div class="column-item">
+                            <!-- the blank character &zwnj; is necessary for Safari to render animations correctly -->
+                            <div class="vector-space">
+                                <div class="sc-psg-container fragment fade-out" style="top: 14rem; left: 8rem;"
+                                    data-fragment-index="3">
+                                    <p class="sc-psg before fragment highlight-red" data-fragment-index="1">&zwnj;</p>
+                                    <p class="sc-psg-label">$p_0$</p>
+                                </div>
+
+                                <div class="sc-psg-container fragment fade-out" style="top: 13rem; left: 12rem;"
+                                    data-fragment-index="3">
+                                    <p class="sc-psg before fragment highlight-red" data-fragment-index="2">&zwnj;</p>
+                                    <p class="sc-psg-label">$p_1$</p>
+                                </div>
+
+                                <div class="fragment fade-out" data-fragment-index="5">
+                                    <div class="sc-psg-container fragment fade-in" style="top: 13.5rem; left: 10rem;"
+                                        data-fragment-index="3">
+                                        <p class="sc-psg after fragment highlight-red" data-fragment-index="3">
+                                            &zwnj;
+                                        </p>
+                                        <p class="sc-psg-label">$\mathcal{A}$</p>
+                                    </div>
+                                </div>
+
+                                <div class="sc-psg-container fragment fade-out" style="top: 10rem; left: 9.5rem;"
+                                    data-fragment-index="5">
+                                    <p class="sc-psg before fragment highlight-red" data-fragment-index="4">&zwnj;</p>
+                                    <p class="sc-psg-label">$p_2$</p>
+                                </div>
+
+                                <div class="fragment fade-out" data-fragment-index="7">
+                                    <div class="sc-psg-container fragment fade-in"
+                                        style="top: 12.333rem; left: 9.8333rem;" data-fragment-index="5">
+                                        <p class="sc-psg after fragment highlight-red" data-fragment-index="5">
+                                            &zwnj;
+                                        </p>
+                                        <p class="sc-psg-label">$\mathcal{A}$</p>
+                                    </div>
+                                </div>
+
+                                <div class="sc-psg-container fragment fade-in " style="top: 12.333rem; left: 9.8333rem;"
+                                    data-fragment-index="7">
+                                    <p class="sc-psg after">&zwnj;</p>
+                                    <p class="sc-psg-label">$\hat{p}_1$</p>
+                                </div>
+
+                                <div class="sc-psg-container fragment fade-out" style="top: 8rem; left: 2rem;"
+                                    data-fragment-index="9">
+                                    <p class="sc-psg before fragment highlight-red" data-fragment-index="6">&zwnj;</p>
+                                    <p class="sc-psg-label">$p_3$</p>
+                                </div>
+                                <div class="sc-psg-container fragment fade-in" style="top: 8rem; left: 2rem;"
+                                    data-fragment-index="9">
+                                    <p class="sc-psg after">&zwnj;</p>
+                                    <p class="sc-psg-label">$\hat{p}_2$</p>
+                                </div>
+
+                                <div class="sc-psg-container fragment fade-out" style="top: 4rem; left: 13rem;"
+                                    data-fragment-index="11">
+                                    <p class="sc-psg before fragment highlight-red" data-fragment-index="8">&zwnj;</p>
+                                    <p class="sc-psg-label">$p_4$</p>
+                                </div>
+                                <div class="sc-psg-container fragment fade-in" style="top: 4rem; left: 13rem;"
+                                    data-fragment-index="11">
+                                    <p class="sc-psg after" data-fragment-index="8">&zwnj;</p>
+                                    <p class="sc-psg-label">$\hat{p}_3$</p>
+                                </div>
+
+                                <div class="sc-psg-container fragment fade-out" style="top: 5rem; left: 0rem;"
+                                    data-fragment-index="13">
+                                    <p class="sc-psg before fragment highlight-red" data-fragment-index="10">&zwnj;</p>
+                                    <p class="sc-psg-label">$p_5$</p>
+                                </div>
+
+                                <div class="sc-psg-container fragment fade-out" style="top: 4rem; left: 3rem;"
+                                    data-fragment-index="13">
+                                    <p class="sc-psg before fragment highlight-red" data-fragment-index="12">&zwnj;</p>
+                                    <p class="sc-psg-label">$p_6$</p>
+                                </div>
+
+                                <div class="fragment fade-out" data-fragment-index="14">
+                                    <div class="sc-psg-container fragment fade-in" style="top: 4.5rem; left: 1.5rem;"
+                                        data-fragment-index="13">
+                                        <p class="sc-psg after fragment highlight-red" data-fragment-index="13">
+                                            &zwnj;
+                                        </p>
+                                        <p class="sc-psg-label">$\mathcal{A}$</p>
+                                    </div>
+                                </div>
+
+                                <div class="sc-psg-container fragment fade-in" style="top: 4.5rem; left: 1.5rem;"
+                                    data-fragment-index="14">
+                                    <p class="sc-psg after">&zwnj;</p>
+                                    <p class="sc-psg-label">$\hat{p}_4$</p>
+                                </div>
+                            </div>
+
+                            <p class="caption">
+                                All passage representations of a document in the embedding space.
+                            </p>
+                        </div>
+
+                        <div class="column-item">
+                            <pre class="python" style="font-size: large; line-height: 1.5em;">
+								<code data-trim data-noescape
+									data-line-numbers="|6,7,8,12,13|9|12,13|9|12,13|9|10,11,12,13|9|10,11,12,13|9|10,11,12,13|9|12,13|14,15"
+									data-fragment-index="1">
+									def coalesce(P):
+										P_new = []
+										A = []
+										A_avg = None
+										first_iteration = True
+										for p in P:
+											if first_iteration:
+												first_iteration = False
+											elif distance(p, A_avg) >= delta:
+												P_new.append(A_avg)
+												A = []
+											A.append(p)
+											A_avg = np.mean(A, axis=0)
+										P_new.append(A_avg)
+										return P_new
+								</code>
+							</pre>
+                        </div>
+                    </div>
                 </section>
             </section>
             <!-- end: fast-forward -->

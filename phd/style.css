@@ -31,6 +31,16 @@ span.katex {
 
 /* misc */
 
+div.vector-space {
+    position: relative;
+    height: 7em;
+    width: 7em;
+    margin: 0.5em;
+    border: 0.01em solid black;
+    border-radius: 100%;
+    background-color: lightgray
+}
+
 .fragment.highlight-red.visible {
     color: #DB4437 !important;
 }
@@ -222,16 +232,6 @@ p.rqd-grid-item .katex {
 
 /* dense retrieval */
 
-#dr-vector-space {
-    position: relative;
-    height: 7em;
-    width: 7em;
-    margin: 0.5em;
-    border: 0.01em solid black;
-    border-radius: 100%;
-    background-color: lightgray
-}
-
 #dr-query-radius {
     position: absolute;
     top: 2rem;
@@ -344,4 +344,41 @@ span.rr-ranking-doc-icon {
     --color-1: #DB4437;
     --color-2: #4285F4;
     --color-3: #F4B400;
+}
+
+/* sequential coalescing */
+
+div.sc-psg-container {
+    position: absolute;
+    width: 1.5em;
+    height: 1.5em;
+}
+
+p.sc-psg {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    height: 0.2em;
+    width: 0.2em;
+    border: 0.075em solid;
+    border-radius: 100%;
+    font-size: xx-large;
+}
+
+p.sc-psg.before {
+    background-color: rgba(0, 0, 255, 0.5);
+}
+
+p.sc-psg.after {
+    background-color: rgba(0, 255, 0, 0.5);
+}
+
+p.sc-psg-label {
+    margin-top: -0.25em;
+}
+
+p.sc-psg-label span.katex {
+    font-size: large;
 }
