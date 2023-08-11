@@ -590,6 +590,21 @@
                         In the following, we introduce techniques to improve efficiency even further.
                     </p>
                 </section>
+
+                <section id="fast-forward-maxp-slide">
+                    <h2>MaxP indexes</h2>
+                    <hr class="divider">
+                    <p>
+                        Long documents are often chunked into passages and scored using a $\max$ operation:
+                    </p>
+                    <p>
+                        $\phi_D^{FF} (q, d) = \max_{p_i \in d} (\zeta (q) \cdot \eta^{FF} (p_i))$
+                    </p>
+                    <hr class="divider">
+                    <p class="fragment">
+                        We propose <b>sequential coalescing</b> to compress maxP indexes.
+                    </p>
+                </section>
             </section>
             <!-- end: fast-forward -->
         </div>
