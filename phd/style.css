@@ -53,6 +53,16 @@ div.vector-space {
     color: #4285F4 !important;
 }
 
+ul.legend li {
+    font-size: medium;
+}
+
+p.axislabel {
+    font-size: medium;
+    margin-top: 0;
+    font-weight: bold;
+}
+
 /* ranking: search */
 
 .se-logo {
@@ -321,10 +331,6 @@ span.rr-ranking-doc-icon {
     width: auto;
 }
 
-#ff-efficiency-chart ul.legend li {
-    font-size: medium;
-}
-
 #ff-efficiency-chart table {
     margin: 0;
     height: 10em;
@@ -338,12 +344,6 @@ span.rr-ranking-doc-icon {
 #ff-efficiency-chart table tbody td span.vertical {
     writing-mode: vertical-lr;
     padding-top: 0.5em;
-}
-
-#ff-efficiency-chart .charts-css {
-    --color-1: #DB4437;
-    --color-2: #4285F4;
-    --color-3: #F4B400;
 }
 
 /* sequential coalescing */
@@ -381,4 +381,41 @@ p.sc-psg-label {
 
 p.sc-psg-label span.katex {
     font-size: large;
+}
+
+#sc-effects-chart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: medium;
+}
+
+#sc-effects-chart ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border: none;
+}
+
+#sc-effects-chart ul li {
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+#sc-effects-chart table {
+    height: 15em;
+    width: 40em;
+}
+
+#sc-effects-chart table tbody td {
+    margin: 0.05em;
+    writing-mode: vertical-lr;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#sc-effects-chart table tbody td span.data {
+    padding-top: 0.5em;
 }
