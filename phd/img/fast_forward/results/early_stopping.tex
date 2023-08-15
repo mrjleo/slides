@@ -1,0 +1,36 @@
+\documentclass{standalone}
+\input{../../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}
+    \pgfplotstableread[col sep=comma]{early_stopping.csv}\data
+    \begin{axis}[
+            width=18cm,
+            height=7cm,
+            xlabel={Cut-off depth $k$},
+            grid=major,
+            x dir=reverse,
+            legend entries={
+                    Sparse depth,
+                    Average number of index look-ups
+                },
+            legend cell align={left},
+            legend pos=south west,
+        ]
+        \addplot[
+            domain=10:100,
+            samples=2,
+            dashed,
+            mark=none,
+            very thick,
+            plotColor1,
+        ] {5000};
+        \addplot+[
+            const plot mark mid,
+            thick,
+            mark=o,
+            plotColor2,
+        ] table[y index=1] {\data};
+    \end{axis}
+\end{tikzpicture}
+\end{document}
