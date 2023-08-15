@@ -681,8 +681,10 @@
                 <section id="fast-forward-query-encoders-slide">
                     <h2>Efficient query encoders</h2>
                     <hr class="divider">
-                    <p>Queries are <b>short</b> and <b>concise</b>, but query encoders are usually based on <b> complex
-                            self-attention-based Transformer</b> models.</p>
+                    <p>
+                        Queries are <b>short</b> and <b>concise</b>, but query encoders are usually based on <b>complex
+                            self-attention-based Transformer</b> models.
+                    </p>
                     <hr class="divider">
                     <div class="column-layout fragment">
                         <div class="column-item">
@@ -699,7 +701,81 @@
                         </div>
                     </div>
                     <hr class="divider">
-                    <p class="fragment">$\text{BERT}_\text{base}$: $L=12$, $A=12$, $H=768$. Can we go lower?</p>
+                    <p class="fragment">
+                        $\text{BERT}_\text{base}$: $L=12$, $A=12$, $H=768$.
+                        <span class="fragment"><b>Can we go lower?</b></span>
+                    </p>
+                </section>
+
+                <section id="fast-forward-document-encoders-slide" data-auto-animate data-auto-animate-id="selbert">
+                    <h2>Selective document encoders</h2>
+                    <hr class="divider" data-fragment-index="1">
+                    <div class="column-layout" style="grid-template-columns: 60% auto;">
+                        <div class="column-item">
+                            <p>Documents are often long; <b>encoding</b> (indexing) is expensive.</p>
+                            <p class="fragment" data-fragment-index="1">
+                                <b>Complex encoders</b> are required to capture the semantics of the documents.
+                            </p>
+                            <p class="fragment" data-fragment-index="2">Can we <b>shorten documents</b> instead?</p>
+                        </div>
+
+                        <div class="column-item">
+                            <p
+                                style="font-family: monospace; text-align: left; border: 0.1em solid gray; border-radius: 0.5em; padding: 1em;">
+                                [...]
+                                <br>
+                                <br>
+                                <span class="fragment fade-out" data-fragment-index="4">
+                                    <span class="fragment highlight-red" data-fragment-index="3">
+                                        This is a
+                                    </span>
+                                </span>
+                                web article
+                                <span class="fragment fade-out" data-fragment-index="4">
+                                    <span class="fragment highlight-red" data-fragment-index="3">
+                                        which is
+                                    </span>
+                                </span>
+                                unnecessarily long
+                                <span class="fragment fade-out" data-fragment-index="4">
+                                    <span class="fragment highlight-red" data-fragment-index="3">
+                                        and
+                                    </span>
+                                </span>
+                                contains
+                                <span class="fragment fade-out" data-fragment-index="4">
+                                    <span class="fragment highlight-red" data-fragment-index="3">
+                                        ads, repetitions, and, finally, some
+                                    </span>
+                                </span>
+                                useful content.
+                                <br>
+                                <br>
+                                [...]
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="fast-forward-selective-document-encoders-slide" data-auto-animate
+                    data-auto-animate-id="selbert">
+                    <h2>Selective document encoders</h2>
+                    <hr class="divider">
+                    <div class="column-layout" style="grid-template-columns: 50% auto;">
+                        <div class="column-item">
+                            <img src="img/fast_forward/selbert_out.svg">
+                            <p class="caption">Selective document encoder.</p>
+                        </div>
+                        <div class="column-item">
+                            <p>
+                                <i>Selective document encoders</i> <b>dynamically shorten</b> batches of input documents
+                                during inference.
+                            </p>
+                            <p>
+                                The degree to which documents are shortened is controlled by a hyperparameter $p$.
+                            </p>
+                        </div>
+                    </div>
                 </section>
             </section>
             <!-- end: fast-forward -->
