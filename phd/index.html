@@ -680,7 +680,7 @@
                     </p>
                 </section>
 
-                <section id="fast-forward-query-encoders-slide">
+                <section id="fast-forward-query-encoders-slide" data-auto-animate data-auto-animate-id="qenc">
                     <h2>Efficient query encoders</h2>
                     <hr class="divider">
                     <p>
@@ -709,7 +709,31 @@
                     </p>
                 </section>
 
-                <section id="fast-forward-document-encoders-slide" data-auto-animate data-auto-animate-id="selbert">
+                <section id="fast-forward-query-encoders-results-slide" data-auto-animate data-auto-animate-id="qenc">
+                    <h2>Efficient query encoders</h2>
+                    <hr class="divider">
+
+                    <div class="qe-grid">
+                        <div>
+                            <img src="img/fast_forward/results/query_encoders/latency_out.svg">
+                            <p class="caption">Query encoding latency in seconds.</p>
+                        </div>
+                        <div class="fragment">
+                            <img src="img/fast_forward/results/query_encoders/msmpsgdev_out.svg">
+                            <p class="caption">nDCG@10 on MSM-Psg-Dev.</p>
+                        </div>
+                        <div class="fragment">
+                            <img src="img/fast_forward/results/query_encoders/trecdspsg19_out.svg">
+                            <p class="caption">nDCG@10 on TREC-DL-Psg’19.</p>
+                        </div>
+                        <div class="fragment">
+                            <img src="img/fast_forward/results/query_encoders/trecdlpsg20_out.svg">
+                            <p class="caption">nDCG@10 on TREC-DL-Psg’20.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="fast-forward-document-encoders-slide" data-auto-animate data-auto-animate-id="denc">
                     <h2>Selective document encoders</h2>
                     <hr class="divider" data-fragment-index="1">
                     <div class="column-layout" style="grid-template-columns: 60% auto;">
@@ -760,7 +784,7 @@
                 </section>
 
                 <section id="fast-forward-selective-document-encoders-slide" data-auto-animate
-                    data-auto-animate-id="selbert">
+                    data-auto-animate-id="denc">
                     <h2>Selective document encoders</h2>
                     <hr class="divider">
                     <div class="column-layout" style="grid-template-columns: 50% auto;">

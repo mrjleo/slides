@@ -1,0 +1,47 @@
+\documentclass{standalone}
+\input{../../../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}[font=\scriptsize]
+    \begin{axis}[
+            width=6cm,
+            enlargelimits=false,
+            colormap name={greenred},
+            xlabel={Hidden dimensions $H$},
+            xtick={0,1,2,3},
+            xticklabels={128,256,512,768},
+            ylabel={Encoder layers $L$},
+            ytick={0,1,2,3,4,5,6},
+            yticklabels={0,2,4,6,8,10,12},
+        ]
+        \addplot [
+            matrix plot,
+            nodes near coords style={
+                    anchor=mid,
+                    text=white,
+                },
+            nodes near coords={
+                    \ifthenelse{
+                        \equal{\pgfplotspointmetatransformed}{0}}
+                    {}
+                    {\pgfmathprintnumber[precision=4]{\pgfplotspointmeta}}
+                },
+            point meta=explicit,
+        ] coordinates {
+                (0,0) [nan] (1,0) [nan] (2,0) [nan] (3,0) [0.04]
+
+                (0,1) [0.21] (1,1) [0.32] (2,1) [0.83] (3,1) [1.2]
+
+                (0,2) [0.27] (1,2) [0.53] (2,2) [1.3] (3,2) [2.3]
+
+                (0,3) [0.38] (1,3) [0.84] (2,3) [1.9] (3,3) [3.1]
+
+                (0,4) [0.54] (1,4) [1] (2,4) [2.5] (3,4) [4.3]
+
+                (0,5) [0.69] (1,5) [1.4] (2,5) [3.2] (3,5) [5.4]
+
+                (0,6) [0.74] (1,6) [1.9] (2,6) [3.7] (3,6) [6.8]
+            };
+    \end{axis}
+\end{tikzpicture}
+\end{document}

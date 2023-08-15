@@ -451,3 +451,15 @@ p.sc-psg-label span.katex {
 #es-example-left-col {
     text-align: left;
 }
+
+/* query encoders */
+
+div.qe-grid {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 1em 0;
+}
+
+div.qe-grid img {
+    margin: 0;
+}
