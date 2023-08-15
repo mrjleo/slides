@@ -419,3 +419,35 @@ p.sc-psg-label span.katex {
 #sc-effects-chart table tbody td span.data {
     padding-top: 0.5em;
 }
+
+/* early stopping */
+
+#es-tab {
+    font-size: x-large;
+    border-collapse: collapse;
+}
+
+#es-tab li {
+    margin-top: 0.2em;
+    margin-bottom: 0.2em;
+}
+
+#es-tab tr td:nth-child(2),
+#es-tab tr td:nth-child(3),
+#es-tab tr td:nth-child(4) {
+    text-align: center;
+}
+
+#es-tab tr td:nth-child(1) {
+    font-weight: bold;
+}
+
+#es-tab ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#es-example-left-col {
+    text-align: left;
+}
