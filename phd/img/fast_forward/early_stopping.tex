@@ -32,7 +32,10 @@
         draw,
         outer sep=2,
     ] (M) {\textcolor{red}{estimated maximum}};
-    \draw[->,dashed] (M) -- (T-5-5);
+    \draw[
+        -latex,
+        dashed
+    ] (M) -- (T-5-5);
 
     \node[right=0 of T-5-5] {$\leq$ current top-$k$};
 
@@ -57,7 +60,9 @@
         fill=background,
     ] at (F.north) {\textbf{\fastforward{} index}};
 
-    \draw[->,dashed] (T-3-5) -- (T-3-5 -| F.west) node[
+    \draw[
+        -latex,dashed
+    ] (T-3-5) -- (T-3-5 -| F.west) node[
         midway,
         fill=background,
         above,
