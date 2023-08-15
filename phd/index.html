@@ -771,8 +771,13 @@
                                 <i>Selective document encoders</i> <b>dynamically shorten</b> batches of input documents
                                 during inference.
                             </p>
-                            <p>
-                                The degree to which documents are shortened is controlled by a hyperparameter $p$.
+                            <p class="fragment">
+                                Each <b>document token</b> is assigned a score, and the <b>lowest scoring tokens are
+                                    removed</b>.
+                            </p>
+                            <p class="fragment">
+                                The degree to which documents are shortened is controlled by a hyperparameter
+                                $p \in [0,1]$.
                             </p>
                         </div>
                     </div>
