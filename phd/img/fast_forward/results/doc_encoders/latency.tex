@@ -1,0 +1,29 @@
+\documentclass{standalone}
+\input{../../../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}
+    \pgfplotstableread[col sep=comma]{selbert.csv}\data
+    \begin{axis}[
+            width=7cm,
+            grid=major,
+            ytick={1,2,3},
+            xlabel={$p$},
+        ]
+        \addplot[
+            domain=0.1:0.9,
+            samples=2,
+            dashed,
+            mark=none,
+            very thick,
+            plotColor1,
+        ] {3.5400506};
+        \addplot+[
+            const plot mark mid,
+            very thick,
+            mark=square,
+            plotColor2,
+        ] table[y index=1] {\data};
+    \end{axis}
+\end{tikzpicture}
+\end{document}
