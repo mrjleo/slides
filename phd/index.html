@@ -712,24 +712,31 @@
                 <section id="fast-forward-query-encoders-results" data-auto-animate data-auto-animate-id="qenc">
                     <h2>Efficient query encoders</h2>
                     <hr class="divider">
-                    <div style="display: flex; justify-content: center;">
-                        <div class="qe-grid" style="width: 75%;">
-                            <div>
-                                <img src="img/fast_forward/results/query_encoders/latency_out.svg">
-                                <p class="caption">Query encoding latency in seconds.</p>
-                            </div>
-                            <div class="fragment">
-                                <img src="img/fast_forward/results/query_encoders/msmpsgdev_out.svg">
-                                <p class="caption">nDCG@10 on <span class="textsc">MSM-Psg-Dev</span>.</p>
-                            </div>
-                            <div class="fragment">
-                                <img src="img/fast_forward/results/query_encoders/trecdspsg19_out.svg">
-                                <p class="caption">nDCG@10 on <span class="textsc">TREC-DL-Psg’19</span>.</p>
-                            </div>
-                            <div class="fragment">
-                                <img src="img/fast_forward/results/query_encoders/trecdlpsg20_out.svg">
-                                <p class="caption">nDCG@10 on <span class="textsc">TREC-DL-Psg’20</span>.</p>
-                            </div>
+                    <p>Lightweight query encoders can achieve similar performance, but it depends on the dataset:</p>
+                    <div class="column-layout">
+                        <div class="column-item fragment custom grow-active">
+                            <img src="img/fast_forward/results/query_encoders/latency_out.svg">
+                            <p class="caption">
+                                Query encoding latency<br>in seconds.
+                            </p>
+                        </div>
+                        <div class="column-item fragment custom grow-active">
+                            <img src="img/fast_forward/results/query_encoders/msmpsgdev_out.svg">
+                            <p class="caption">
+                                nDCG@10<br>on <span class="textsc">MSM-Psg-Dev</span>.
+                            </p>
+                        </div>
+                        <div class="column-item fragment custom grow-active">
+                            <img src="img/fast_forward/results/query_encoders/trecdspsg19_out.svg">
+                            <p class="caption">
+                                nDCG@10<br>on <span class="textsc">TREC-DL-Psg’19</span>.
+                            </p>
+                        </div>
+                        <div class="column-item fragment custom grow-active">
+                            <img src="img/fast_forward/results/query_encoders/trecdlpsg20_out.svg">
+                            <p class="caption">
+                                nDCG@10<br>on <span class="textsc">TREC-DL-Psg’20</span>.
+                            </p>
                         </div>
                     </div>
                 </section>
@@ -814,8 +821,8 @@
                     <h2>Selective document encoders</h2>
                     <hr class="divider">
                     <p>
-                        Selective document encoders incur a small performance hit, but decrease the indexing latency
-                        notably:
+                        Selective document encoders incur a <b>small performance hit</b>, but <b>decrease the indexing
+                            latency</b> notably:
                     </p>
                     <div class="column-layout">
                         <div class="column-item">
