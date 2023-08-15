@@ -13,7 +13,7 @@
     {
          &        & \node[align=center] {Matching \\ score}; &   & \node[align=center] {Semantic \\ similarity}; & \\
          & $d_8$  & \num{0.34}                               & + & \num{0.48}                                    & \\
-         & $d_3$  & \num{0.32}                               & + & \textcolor{red}{\num{0.61}}        & \\
+         & $d_2$  & \num{0.32}                               & + & \textcolor{red}{\num{0.61}}        & \\
          &        &                                          &   &                                               & \\
          & $d_1$  & \num{0.08}                               & + & \textcolor{gray}{\num{0.61}}       & \\
          & \vdots & \vdots                                   &   &                                               & \\
@@ -49,9 +49,9 @@
     (F)
     {
         $d_1$ & $\mapsto$ & \tiny \repr{0.09}{0.91}                                     \\
-        $d_3$ & $\mapsto$ & \tiny \repr{0.58}{0.37} \repr{0.44}{0.19} \repr{0.71}{0.60} \\
+        $d_2$ & $\mapsto$ & \tiny \repr{0.58}{0.37} \repr{0.44}{0.19} \repr{0.71}{0.60} \\
               & \vdots    &                                                             \\
-        $d_8$ & $\mapsto$ & \tiny \repr{0.12}{0.89} \repr{0.33}{0.10}                   \\
+        $d_n$ & $\mapsto$ & \tiny \repr{0.12}{0.89} \repr{0.33}{0.10}                   \\
     };
     \node[
         fill=background,
@@ -61,7 +61,7 @@
         midway,
         fill=background,
         above,
-    ] {$\max_{p_i \in d_3} \left( \zeta(q) \cdot \eta(p_i) \right)$};
+    ] {$\max_{p_i \in d_2} \left( \zeta(q) \cdot \eta(p_i) \right)$};
 
 \end{tikzpicture}
 \end{document}
