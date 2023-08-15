@@ -81,6 +81,14 @@ table.result-tab tr th:nth-child(n + 2) {
   filter: blur(5px);
 }
 
+.fragment.grow-active {
+  transform: scale(1);
+}
+
+.fragment.grow-active.visible.current-fragment {
+  transform: scale(1.5);
+}
+
 /* misc */
 
 .hide {
