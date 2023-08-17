@@ -842,6 +842,51 @@
             </section>
             <!-- end: fast-forward -->
 
+            <!-- bert-dmn -->
+            <section>
+                <section id="bert-dmn">
+                    <h2>
+                        <b>Sentence-level representations</b><br>for passage ranking
+                    </h2>
+                </section>
+
+                <section id="bert-dmn-motivation">
+                    <h2>Cross-attention re-rankers</h2>
+                    <hr class="divider">
+
+                    <div class="column-layout">
+                        <div class="column-item">
+                            <img src="img/background/cross_encoder_out.svg">
+                            <p class="caption">LLM-based cross-attention ranker.</p>
+                        </div>
+                        <div class="column-item c-wide">
+                            <p>
+                                Cross-attention re-rankers (e.g., BERT) allow for <b>query-document attention</b>, which
+                                can be helpful when <b>queries are more complex</b> (e.g., in question answering).
+                            </p>
+                            <p class="fragment" style="text-align: center;" data-fragment-index="1">
+                                $\phi(q, d) =$
+                                <span class="fragment highlight-red" data-fragment-index="2">
+                                    $\operatorname{BERT}_\texttt{[CLS]}$
+                                </span>
+                                $(\texttt{[CLS]}\ q\ \texttt{[SEP]}\ d\ \texttt{[SEP]})$
+                            </p>
+                            <p class="fragment" data-fragment-index="2">
+                                Often times, only the
+                                <span class="fragment highlight-red" data-fragment-index="2">
+                                    $\texttt{[CLS]}$ output
+                                </span>
+                                is used, and other outputs are discarded.
+                            </p>
+                            <p class="fragment" data-fragment-index="3">
+                                <b>Can we utilize the contextualized sentence representations that BERT outputs?</b>
+                            </p>
+                        </div>
+                    </div>
+                </section>
+            </section>
+            <!-- end: bert-dmn -->
+
             <!-- backup -->
             <section>
                 <section id="backup">
