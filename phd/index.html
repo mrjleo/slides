@@ -893,18 +893,22 @@
                         <i>Dynamic memory networks</i><sup>1</sup> (DMNs) were proposed to enable <b>cross-sentence
                             reasoning</b> for question answering.
                     </p>
+                    <hr class="divider">
 
                     <p class="fragment" data-fragment-index="1">
                         DMNs operate on <b>all query and document tokens</b>:
                     </p>
                     <p class="fragment" data-fragment-index="1">
                         $\phi_{\operatorname{DMN}}(q, d) = \operatorname{DMN}\left(q_1, \dots, q_{|q|}, d_1, \dots,
-                        d_{|d|}\right)$
+                        d_{|d|}\right)$,
+                    </p>
+                    <p class="fragment" data-fragment-index="1">
+                        where $q_i$ and $d_i$ are <b>word embeddings</b>.
                     </p>
                     <hr class="divider">
 
                     <p class="fragment">
-                        <b>What if we use contextual BERT representations for DMNs?</b>
+                        <b>What if we use contextual BERT representations instead?</b>
                     </p>
                     <hr class="divider">
 
