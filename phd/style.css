@@ -451,3 +451,10 @@ p.sc-psg-label span.katex {
 #es-example-left-col {
     text-align: left;
 }
+
+/* BERT-DMN */
+
+div#bdmn-result-table>img {
+    /* fix for Safari */
+    width: 100%;
+}
