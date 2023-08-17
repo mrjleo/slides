@@ -862,10 +862,10 @@
                         <div class="column-item c-wide">
                             <p>
                                 Cross-attention re-rankers (e.g., BERT) allow for <b>query-document attention</b>, which
-                                can be helpful when <b>queries are more complex</b> (e.g., in question answering).
+                                can be helpful for <b>complex queries</b> (e.g., question answering).
                             </p>
                             <p class="fragment" style="text-align: center;" data-fragment-index="1">
-                                $\phi(q, d) =$
+                                $\phi_{\operatorname{BERT}}(q, d) =$
                                 <span class="fragment highlight-red" data-fragment-index="2">
                                     $\operatorname{BERT}_\texttt{[CLS]}$
                                 </span>
@@ -883,6 +883,35 @@
                             </p>
                         </div>
                     </div>
+                </section>
+
+                <section id="dynamic-memory-networks">
+                    <h2>Dynamic memory networks</h2>
+                    <hr class="divider">
+
+                    <p>
+                        <i>Dynamic memory networks</i><sup>1</sup> (DMNs) were proposed to enable <b>cross-sentence
+                            reasoning</b> for question answering.
+                    </p>
+
+                    <p class="fragment" data-fragment-index="1">
+                        DMNs operate on <b>all query and document tokens</b>:
+                    </p>
+                    <p class="fragment" data-fragment-index="1">
+                        $\phi_{\operatorname{DMN}}(q, d) = \operatorname{DMN}\left(q_1, \dots, q_{|q|}, d_1, \dots,
+                        d_{|d|}\right)$
+                    </p>
+                    <hr class="divider">
+
+                    <p class="fragment">
+                        <b>What if we use contextual BERT representations for DMNs?</b>
+                    </p>
+                    <hr class="divider">
+
+                    <p style="font-size: small; text-align: right;">
+                        <sup>1</sup>Ankit Kumar et al. “Ask Me Anything: Dynamic Memory Networks for Natural Language
+                        Processing”. PMLR 2016.
+                    </p>
                 </section>
             </section>
             <!-- end: bert-dmn -->
