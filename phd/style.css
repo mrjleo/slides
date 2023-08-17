@@ -456,5 +456,5 @@ p.sc-psg-label span.katex {
 
 div#bdmn-result-table>img {
     /* fix for Safari */
-    width: 100%;
+    width: max-content;
 }
