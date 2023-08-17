@@ -457,6 +457,10 @@ p.sc-psg-label span.katex {
     text-align: left;
 }
 
+#es-example-right-col * {
+    font-size: x-large;
+}
+
 /* BERT-DMN */
 
 div#bdmn-result-table>img {
