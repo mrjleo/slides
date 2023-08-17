@@ -103,6 +103,11 @@
     colormap={redgreen}{HTML=(e41a1c) HTML=(4daf4a)}
 }
 
+% required for patterns in boxplots
+\makeatletter
+\tikzset{nomorepostaction/.code=\let\tikz@postactions\pgfutil@empty}
+\makeatother
+
 % tikz styles
 \tikzset{
     fignode/.style={
