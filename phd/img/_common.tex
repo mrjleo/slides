@@ -23,6 +23,12 @@
 % layout
 \newcommand{\hide}[1]{\textcolor{gray}{#1}}
 
+% allow bolding numbers in \num{}
+\sisetup{
+    text-series-to-math=true,
+    propagate-math-font=true,
+}
+
 % reveal theme background (for transparency hack)
 \definecolor{background}{HTML}{F0F1EB}
 
