@@ -22,9 +22,8 @@ p span.katex {
     font-size: x-large;
 }
 
-ul>li,
-ol>li {
-    margin: 1em 0;
+li:not(:last-child) {
+    margin-bottom: 1em;
 }
 
 /* layout */
