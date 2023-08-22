@@ -543,29 +543,7 @@
                         The <b>look-up</b> operation is much more <b>efficient</b> than actual re-ranking:
                     </p>
                     <hr class="divider">
-                    <div id="ff-efficiency-chart">
-                        <table class="charts-css column show-labels multiple data-spacing-20">
-                            <tbody>
-                                <tr>
-                                    <th scope="row">nDCG@20</th>
-                                    <td style="--size:0.632;"><span class="data vertical">0.632</span></td>
-                                    <td style="--size:0.655;"><span class="data vertical">0.655</span></td>
-                                    <td style="--size:0.655;"><span class="data vertical">0.655</span></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Query latency [ms]</th>
-                                    <td style="--size:0.99;"><span class="data vertical">1191</span></td>
-                                    <td style="--size:1.00;"><span class="data vertical">1203</span></td>
-                                    <td style="--size:0.21;"><span class="data">253</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <ul class="charts-css legend legend-rectangle">
-                            <li>Re-ranking</li>
-                            <li>Interpolation</li>
-                            <li>Interpolation (<span class="textsc">Fast-Forward</span>)</li>
-                        </ul>
-                    </div>
+                    <img src="img/fast_forward/results/comparison_out.svg" style="margin: 0;">
                     <p class="caption">
                         TCT-ColBERT on the TREC-DL 2019 document ranking task.
                     </p>

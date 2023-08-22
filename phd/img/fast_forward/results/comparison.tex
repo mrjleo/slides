@@ -1,0 +1,100 @@
+\documentclass{standalone}
+\input{../../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}
+    \begin{axis}[
+            ybar,
+            axis y line*=left,
+            width=12cm,
+            height=8cm,
+            bar width=0.75cm,
+            every axis plot/.append style={fill},
+            grid=major,
+            xtick={1,2},
+            xticklabels={},
+            xmin=0.5,
+            xmax=2.5,
+            ymin=0.5,
+            ylabel={\ndcg@\num{10}},
+            area legend,
+            legend entries={Re-ranking, Interpolation, \fastforward{}},
+            legend cell align={left},
+            legend pos=south west,
+        ]
+        \addplot+[
+            ybar,
+            plotColor1*,
+            draw=black,
+            postaction={
+                    pattern=north east lines
+                },
+        ] plot coordinates {
+                (1,0.632)
+            };
+
+        \addplot+[
+            ybar,
+            plotColor2*,
+            draw=black,
+            postaction={
+                    pattern=north west lines
+                },
+        ] plot coordinates {
+                (1,0.655)
+            };
+
+        \addplot+[
+            ybar,
+            plotColor3*,
+            draw=black,
+        ] plot coordinates {
+                (1,0.655)
+            };
+    \end{axis}
+
+    \begin{axis}[
+            ybar,
+            axis y line*=right,
+            width=12cm,
+            height=8cm,
+            bar width=0.75cm,
+            every axis plot/.append style={fill},
+            xtick={1,2},
+            xticklabels={},
+            xmin=0.5,
+            xmax=2.5,
+            ylabel={Query latency [ms]},
+        ]
+        \addplot+[
+            ybar,
+            plotColor1*,
+            draw=black,
+            postaction={
+                    pattern=north east lines
+                },
+        ] plot coordinates {
+                (2,1191)
+            };
+
+        \addplot+[
+            ybar,
+            plotColor2*,
+            draw=black,
+            postaction={
+                    pattern=north west lines
+                },
+        ] plot coordinates {
+                (2,1203)
+            };
+
+        \addplot+[
+            ybar,
+            plotColor3*,
+            draw=black,
+        ] plot coordinates {
+                (2,253)
+            };
+    \end{axis}
+\end{tikzpicture}
+\end{document}
