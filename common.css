@@ -32,6 +32,13 @@ p.column-label {
   text-align: left;
 }
 
+.h-center {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 hr.divider {
   margin: 0.5em;
   border: none;

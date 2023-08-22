@@ -217,31 +217,29 @@ p.search-desc {
 
 /* ranking qd */
 
-.rqd-grid {
-    display: grid;
-    grid-template-columns: min-content min-content;
-    column-gap: 0.5em;
+div.rqd-ranking {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    gap: 1.5em;
     border: 0.025em solid gray;
     border-radius: 0.25em;
-    padding-left: 0.75em;
-    padding-right: 0.75em;
+    padding: 0 0.5em;
     background-color: white;
+    width: max-content;
+    margin-bottom: 0.25em;
 }
 
-.rqd-grid-item {
+.rqd-ranking * {
     font-size: medium;
-    white-space: nowrap;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
-p.rqd-grid-item .katex {
-    font-size: large;
+.rqd-ranking .katex {
+    font-size: small;
 }
 
-.rqd-grid-result {
-    justify-content: left !important;
+p.rqd-docid {
+    margin-right: 0.5em;
 }
 
 /* motivation ranking */
