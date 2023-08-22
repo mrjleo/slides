@@ -39,7 +39,7 @@ div.github-container {
     width: 100%;
     align-items: center;
     justify-content: center;
-    gap: 1em;
+    gap: 0.5em;
 }
 
 a.github-url {
