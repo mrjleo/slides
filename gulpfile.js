@@ -5,7 +5,8 @@ const exec = require("gulp-exec");
 
 const root = yargs.argv.root || ".";
 const port = yargs.argv.port || 8000;
-const host = yargs.argv.host || "localhost";
+const lrport = yargs.argv.port || 35729;
+const host = yargs.argv.host || "0.0.0.0";
 
 function _compile_latex(glob) {
   var options = {
@@ -36,9 +37,11 @@ gulp.task(
       port: port,
       host: host,
       livereload: true,
+      livereload: { port: lrport },
     });
 
-    gulp.watch(["*/img/**/*.tex", "!*/img/**/_*.tex"]).on("change", path => _compile_latex(path).pipe(connect.reload()));
-    gulp.watch(["*/*.html", "*/*.md", "*/*.css"]).on("change", path => gulp.src(path).pipe(connect.reload()));
+    // we need to use polling when running inside docker
+    gulp.watch(["*/img/**/*.tex", "!*/img/**/_*.tex"], { usePolling: true }).on("change", path => _compile_latex(path).pipe(connect.reload()));
+    gulp.watch(["*/*.html", "*/*.md", "*/*.css"], { usePolling: true }).on("change", path => gulp.src(path).pipe(connect.reload()));
   }
 );
