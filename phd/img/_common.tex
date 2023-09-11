@@ -3,6 +3,7 @@
 \usepackage{tikz}
 \usepackage{tikz-3dplot}
 \usepackage{xcolor}
+\usepackage{soul}
 \usepackage{siunitx}
 \usepackage{marvosym}
 \usepackage{amsmath}
@@ -33,13 +34,34 @@
 % reveal theme background (for transparency hack)
 \definecolor{background}{HTML}{F0F1EB}
 
+% colors
+\colorlet{plotColorNeutral}{gray}
+\definecolor{plotColor1}{HTML}{e41a1c}
+\definecolor{plotColor2}{HTML}{377eb8}
+\definecolor{plotColor3}{HTML}{4daf4a}
+\definecolor{plotColor4}{HTML}{984ea3}
+\colorlet{plotColorNeutral*}{plotColorNeutral!40}
+\colorlet{plotColor1*}{plotColor1!40}
+\colorlet{plotColor2*}{plotColor2!40}
+\colorlet{plotColor3*}{plotColor3!40}
+\colorlet{plotColor4*}{plotColor4!40}
+\pgfplotsset{
+    colormap={greenred}{HTML=(4daf4a) HTML=(e41a1c)},
+    colormap={redgreen}{HTML=(e41a1c) HTML=(4daf4a)}
+}
+
 \definecolor{hlColorRed}{HTML}{DB4437}
 \definecolor{hlColorGreen}{HTML}{0F9D58}
 \definecolor{hlColorBlue}{HTML}{4285F4}
 \newcommand{\textRed}[1]{\textcolor{hlColorRed}{#1}}
 \newcommand{\textGreen}[1]{\textcolor{hlColorGreen}{#1}}
 \newcommand{\textBlue}[1]{\textcolor{hlColorBlue}{#1}}
-
+\newcommand{\texthighlight}[1]{%
+    \begingroup%
+    \sethlcolor{plotColor3*}%
+    \hl{#1}%
+    \endgroup%
+}
 \newtcbox{\hldashed}[1][]{
     size=fbox,
     boxsep=2pt,
@@ -64,12 +86,6 @@
     \arrayrulecolor{black}
 }
 \newcommand{\tablearrow}{{} \rotatebox[origin=c]{180}{$\Lsh$} {}}
-\newcommand{\texthighlight}[1]{%
-    \begingroup%
-    \sethlcolor{plotColorNeutral*}%
-    \hl{#1}%
-    \endgroup%
-}
 \newcommand{\sigdef}[1]{{\footnotesize \texttt{[#1]}}}
 \newcommand{\sigimpr}[1]{\footnotesize \textsuperscript{\texttt{[#1]}}}
 
@@ -88,20 +104,6 @@
     fit,
     backgrounds,
     positioning,
-}
-\colorlet{plotColorNeutral}{gray}
-\definecolor{plotColor1}{HTML}{e41a1c}
-\definecolor{plotColor2}{HTML}{377eb8}
-\definecolor{plotColor3}{HTML}{4daf4a}
-\definecolor{plotColor4}{HTML}{984ea3}
-\colorlet{plotColorNeutral*}{plotColorNeutral!40}
-\colorlet{plotColor1*}{plotColor1!40}
-\colorlet{plotColor2*}{plotColor2!40}
-\colorlet{plotColor3*}{plotColor3!40}
-\colorlet{plotColor4*}{plotColor4!40}
-\pgfplotsset{
-    colormap={greenred}{HTML=(4daf4a) HTML=(e41a1c)},
-    colormap={redgreen}{HTML=(e41a1c) HTML=(4daf4a)}
 }
 
 % required for patterns in boxplots
