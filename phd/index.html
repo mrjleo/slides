@@ -1101,7 +1101,7 @@
                     </div>
                 </section>
 
-                <section id="select-and-rank-paradigm-training" data-auto-animate>
+                <section id="select-and-rank-training" data-auto-animate>
                     <h2 class="textsc">Select-and-Rank</h2>
                     <hr class="divider">
                     <div class="column-layout">
@@ -1135,7 +1135,8 @@
                                     $\phi(q, d) = \Phi \left(q, \hat{d} \right)$
                                 </p>
                                 <p class="fragment" data-fragment-index="3">
-                                    Each token in $\hat{d}$ is multiplied by the corresponding $\hat{w_i}$.
+                                    Each token in $\hat{d}$ is multiplied by its corresponding $\hat{w_i}$ in order to
+                                    preserve the gradients.
                                 </p>
                             </div>
                         </div>
