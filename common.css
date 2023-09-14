@@ -50,6 +50,15 @@ p.caption * {
   margin-top: 0;
 }
 
+p.eq {
+  text-align: center;
+}
+
+p.footnote {
+  font-size: small;
+  text-align: right;
+}
+
 /* result table */
 
 table.result-tab {
