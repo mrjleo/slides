@@ -437,11 +437,13 @@
                 <hr class="divider">
                 <div class="column-layout" style="grid-template-columns: max-content auto; column-gap: 0;">
                     <img class="column-item" src="img/contributions_out.svg">
-                    <div class="column-item c-wide" style="align-content: flex-start;">
-                        <p><b><i>The big picture</i></b></p>
-                        <ul>
-                            <li><span class="textsc">BoilerNet</span><br>(web content extraction)</li>
-                        </ul>
+                    <div class="column-item">
+                        <div class="c-wide">
+                            <p><b><i>The big picture</i></b></p>
+                            <ul>
+                                <li><span class="textsc">BoilerNet</span><br>(web content extraction)</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -459,39 +461,44 @@
                     <h2>Motivation</h2>
                     <hr class="divider">
                     <div class="column-layout" style="grid-template-columns: auto 50%;">
-                        <div class="column-item" id="ff-motivation-findings">
-                            <p class="fragment" data-fragment-index="1">
-                                <span class="fragment highlight-red" data-fragment-index="1">Sparse retrieval</span>
-                                is fast, but not competitive on its own.
-                            </p>
-                            <p class="fragment" data-fragment-index="2">
-                                Dense retrieval shows good nDCG, but recall suffers and <b>it is slow</b>.
-                            </p>
-                            <p class="fragment" data-fragment-index="3">
-                                <span class="fragment highlight-green" data-fragment-index="3">
-                                    Re-ranking using dense retrieval models
-                                </span>
-                                works well.
-                            </p>
-                            <p class="fragment" data-fragment-index="4">
-                                <span class="fragment highlight-blue" data-fragment-index="4">
-                                    Score interpolation
-                                </span>
-                                further helps:
-                            </p>
-                            <p class="fragment" data-fragment-index="4" style="text-align: center; margin-top: 0;">
-                                <span class="fragment highlight-blue" data-fragment-index="4">
-                                    $\phi (q, d)$
-                                </span>
-                                $= \alpha$
-                                <span class="fragment highlight-red" data-fragment-index="4">
-                                    $\phi_S (q, d)$
-                                </span>
-                                $+\ (1 - \alpha) $
-                                <span class="fragment highlight-green" data-fragment-index="4">
-                                    $\phi_D(q, d)$
-                                </span>
-                            </p>
+                        <div class="column-item">
+                            <div class="c-wide">
+                                <p class="fragment" data-fragment-index="1">
+                                    <span class="fragment highlight-red" data-fragment-index="1">Sparse retrieval</span>
+                                    is fast, but not competitive on its own.
+                                </p>
+                                <hr class="divider">
+                                <p class="fragment" data-fragment-index="2">
+                                    Dense retrieval shows good nDCG, but recall suffers and <b>it is slow</b>.
+                                </p>
+                                <hr class="divider">
+                                <p class="fragment" data-fragment-index="3">
+                                    <span class="fragment highlight-green" data-fragment-index="3">
+                                        Re-ranking using dense retrieval models
+                                    </span>
+                                    works well.
+                                </p>
+                                <hr class="divider">
+                                <p class="fragment" data-fragment-index="4">
+                                    <span class="fragment highlight-blue" data-fragment-index="4">
+                                        Score interpolation
+                                    </span>
+                                    further helps:
+                                </p>
+                                <p class="eq fragment" data-fragment-index="4">
+                                    <span class="fragment highlight-blue" data-fragment-index="4">
+                                        $\phi (q, d)$
+                                    </span>
+                                    $= \alpha$
+                                    <span class="fragment highlight-red" data-fragment-index="4">
+                                        $\phi_S (q, d)$
+                                    </span>
+                                    $+\ (1 - \alpha) $
+                                    <span class="fragment highlight-green" data-fragment-index="4">
+                                        $\phi_D(q, d)$
+                                    </span>
+                                </p>
+                            </div>
                         </div>
 
                         <!-- styling here is required by Safari -->
@@ -581,10 +588,12 @@
                             <p class="caption">Look-up operation in a coalesced index.</p>
                         </div>
                         <div class="column-item">
-                            <p>
-                                <i>Sequential coalescing</i> <b>merges similar representations</b> of subsequent
-                                passages within a document.
-                            </p>
+                            <div class="c-wide">
+                                <p>
+                                    <i>Sequential coalescing</i> <b>merges similar representations</b> of subsequent
+                                    passages within a document.
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -657,13 +666,15 @@
                             <img src="img/fast_forward/query_encoder_out.svg">
                             <p class="caption">Self-attention-based query encoder.</p>
                         </div>
-                        <div class="column-item c-wide">
-                            <p>Hyperparameters:</p>
-                            <ul>
-                                <li>Number of layers $L$</li>
-                                <li>Number of attention heads $A$</li>
-                                <li>Representation size $H$</li>
-                            </ul>
+                        <div class="column-item">
+                            <div class="c-wide">
+                                <p>Hyperparameters:</p>
+                                <ul>
+                                    <li>Number of layers $L$</li>
+                                    <li>Number of attention heads $A$</li>
+                                    <li>Representation size $H$</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                     <hr class="divider">
@@ -710,16 +721,22 @@
                     <hr class="divider" data-fragment-index="1">
                     <div class="column-layout" style="grid-template-columns: 60% auto;">
                         <div class="column-item">
-                            <p>Documents are often long; <b>encoding</b> (indexing) is expensive.</p>
-                            <p class="fragment" data-fragment-index="1">
-                                <b>Complex encoders</b> are required to capture the semantics of the documents.
-                            </p>
-                            <p class="fragment" data-fragment-index="2">Can we <b>shorten documents</b> instead?</p>
+                            <div class="c-wide">
+                                <p>Documents are often long; <b>encoding</b> (indexing) is expensive.</p>
+                                <hr class="divider">
+                                <p class="fragment" data-fragment-index="1">
+                                    <b>Complex encoders</b> are required to capture the semantics of the documents.
+                                </p>
+                                <hr class="divider">
+                                <p class="fragment" data-fragment-index="2">
+                                    Can we <b>shorten documents</b> instead?
+                                </p>
+                            </div>
                         </div>
 
                         <div class="column-item">
                             <p
-                                style="font-family: monospace; text-align: left; border: 0.1em solid gray; border-radius: 0.5em; padding: 1em;">
+                                style="font-family: monospace; text-align: left; border: 0.1em solid gray; border-radius: 0.5em; padding: 1em; background-color: white;">
                                 [...]
                                 <br>
                                 <br>
@@ -764,18 +781,23 @@
                             <p class="caption">Selective document encoder.</p>
                         </div>
                         <div class="column-item">
-                            <p>
-                                <i>Selective document encoders</i> <b>dynamically shorten</b> batches of input documents
-                                during inference.
-                            </p>
-                            <p class="fragment">
-                                Each <b>document token</b> is assigned a score, and the <b>lowest scoring tokens are
-                                    removed</b>.
-                            </p>
-                            <p class="fragment">
-                                The degree to which documents are shortened is controlled by a hyperparameter
-                                $p \in [0,1]$.
-                            </p>
+                            <div class="c-wide">
+                                <p>
+                                    <i>Selective document encoders</i> <b>dynamically shorten</b> batches of input
+                                    documents
+                                    during inference.
+                                </p>
+                                <hr class="divider">
+                                <p class="fragment">
+                                    Each <b>document token</b> is assigned a score, and the <b>lowest scoring tokens are
+                                        removed</b>.
+                                </p>
+                                <hr class="divider">
+                                <p class="fragment">
+                                    The degree to which documents are shortened is controlled by a hyperparameter
+                                    $p \in [0,1]$.
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -847,28 +869,32 @@
                             <img src="img/background/cross_encoder_out.svg">
                             <p class="caption">LLM-based cross-attention ranker.</p>
                         </div>
-                        <div class="column-item c-wide">
-                            <p>
-                                Cross-attention re-rankers (e.g., BERT) allow for <b>query-document attention</b>, which
-                                can be helpful for <b>complex queries</b> (e.g., question answering).
-                            </p>
-                            <p class="fragment" style="text-align: center;" data-fragment-index="1">
-                                $\phi_{\operatorname{BERT}}(q, d) =$
-                                <span class="fragment highlight-red" data-fragment-index="2">
-                                    $\operatorname{BERT}_\texttt{[CLS]}$
-                                </span>
-                                $(\texttt{[CLS]}\ q\ \texttt{[SEP]}\ d\ \texttt{[SEP]})$
-                            </p>
-                            <p class="fragment" data-fragment-index="2">
-                                Often times, only the
-                                <span class="fragment highlight-red" data-fragment-index="2">
-                                    $\texttt{[CLS]}$ output
-                                </span>
-                                is used, and other outputs are discarded.
-                            </p>
-                            <p class="fragment" data-fragment-index="3">
-                                <b>Can we utilize the contextualized sentence representations that BERT outputs?</b>
-                            </p>
+                        <div class="column-item">
+                            <div class="c-wide">
+                                <p>
+                                    Cross-attention re-rankers (e.g., BERT) allow for <b>query-document attention</b>,
+                                    which can be helpful for <b>complex queries</b> (e.g., question answering):
+                                </p>
+                                <p class="fragment" style="text-align: center;" data-fragment-index="1">
+                                    $\phi_{\operatorname{BERT}}(q, d) =$
+                                    <span class="fragment highlight-red" data-fragment-index="2">
+                                        $\operatorname{BERT}_\texttt{[CLS]}$
+                                    </span>
+                                    $(\texttt{[CLS]}\ q\ \texttt{[SEP]}\ d\ \texttt{[SEP]})$
+                                </p>
+                                <hr class="divider">
+                                <p class="fragment" data-fragment-index="2">
+                                    Often times, only the
+                                    <span class="fragment highlight-red" data-fragment-index="2">
+                                        $\texttt{[CLS]}$ output
+                                    </span>
+                                    is used, and other outputs are discarded.
+                                </p>
+                                <hr class="divider">
+                                <p class="fragment" data-fragment-index="3">
+                                    <b>Can we utilize the contextualized sentence representations that BERT outputs?</b>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -925,13 +951,16 @@
                     <hr class="divider">
 
                     <div class="column-layout" style="grid-template-columns: auto 60%;">
-                        <div class="column-item c-wide">
-                            <p class="fragment" data-fragment-index="1">
-                                BERT-DMN shows improvements over BERT.
-                            </p>
-                            <p class="fragment" data-fragment-index="2">
-                                $\text{BERT-DMN}_{\text{lite}}$ performance is comparable to BERT.
-                            </p>
+                        <div class="column-item">
+                            <div class="c-wide">
+                                <p class="fragment" data-fragment-index="1">
+                                    BERT-DMN shows improvements over BERT.
+                                </p>
+                                <hr class="divider">
+                                <p class="fragment" data-fragment-index="2">
+                                    $\text{BERT-DMN}_{\text{lite}}$ performance is comparable to BERT.
+                                </p>
+                            </div>
                         </div>
 
                         <!-- styling here is required by Safari -->
@@ -953,16 +982,20 @@
                     <h2>The effect of fine-tuning</h2>
                     <hr class="divider">
                     <div class="column-layout" style="grid-template-columns: auto 60%;">
-                        <div class="column-item c-wide">
-                            <p class="fragment">
-                                The plot shows the <b>average cosine similarity</b> of BERT representations.
-                            </p>
-                            <p class="fragment">
-                                BERT-DMN shows much lower diffusion.
-                            </p>
-                            <p class="fragment">
-                                This suggests that fine-tuning vanilla BERT merely “aggregates” results.
-                            </p>
+                        <div class="column-item">
+                            <div class="c-wide">
+                                <p class="fragment">
+                                    The plot shows the <b>average cosine similarity</b> of BERT representations.
+                                </p>
+                                <hr class="divider">
+                                <p class="fragment">
+                                    BERT-DMN shows much lower diffusion.
+                                </p>
+                                <hr class="divider">
+                                <p class="fragment">
+                                    This suggests that fine-tuning vanilla BERT merely “aggregates” results.
+                                </p>
+                            </div>
                         </div>
                         <div class="column-item">
                             <img src="img/bert_dmn/results/diffusion_out.svg">
@@ -980,15 +1013,18 @@
                             <img src="img/bert_dmn/results/training_efficiency_out.svg">
                             <p class="caption">Training batches per second.</p>
                         </div>
-                        <div class="column-item c-wide">
-                            <p class="fragment">
-                                $\text{BERT-DMN}_{\text{lite}}$ reduces the <b>number of trainable parameters</b>
-                                roughly <b> from 110M to 3M</b>.
-                            </p>
-                            <p class="fragment">
-                                For each query-document pair, <b>BERT outputs</b> can be <b>cached</b> after the first
-                                epoch.
-                            </p>
+                        <div class="column-item">
+                            <div class="c-wide">
+                                <p class="fragment">
+                                    $\text{BERT-DMN}_{\text{lite}}$ reduces the <b>number of trainable parameters</b>
+                                    roughly <b> from 110M to 3M</b>.
+                                </p>
+                                <hr class="divider">
+                                <p class="fragment">
+                                    For each query-document pair, <b>BERT outputs</b> can be <b>cached</b> after the
+                                    first epoch.
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </section>
