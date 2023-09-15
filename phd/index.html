@@ -289,7 +289,11 @@
                     <p>
                         <i>Sparse retrieval</i> uses <b>lexical matching</b> for <b>ad-hoc retrieval</b>.
                     </p>
-                    <img class="fragment" data-fragment-index="1" src="img/background/sparse_retrieval_example_out.svg">
+                    <hr class="divider">
+                    <img class="fig fragment" data-fragment-index="1"
+                        src="img/background/sparse_retrieval_example_out.svg">
+                    <p class="caption fragment" data-fragment-index="1">Sparse retrieval example.</p>
+                    <hr class="divider">
                     <p class="fragment" data-fragment-index="2">
                         Sparse retrieval is
                         <span class="fragment" data-fragment-index="2" style="color: green;">fast and efficient,</span>
@@ -308,11 +312,11 @@
                     <hr class="divider">
                     <div class="column-layout">
                         <div class="column-item fragment">
-                            <img src="img/background/cross_encoder_out.svg">
+                            <img class="fig" src="img/background/cross_encoder_out.svg">
                             <p class="caption">Cross-encoder</p>
                         </div>
                         <div class="column-item fragment">
-                            <img src="img/background/dual_encoders_out.svg">
+                            <img class="fig" src="img/background/dual_encoders_out.svg">
                             <p class="caption">Dual-encoders</p>
                         </div>
                     </div>
@@ -503,9 +507,9 @@
 
                         <!-- styling here is required by Safari -->
                         <div class="column-item" style="display: grid; height: 100%;">
-                            <div class="r-stack">
+                            <div class="tab r-stack">
                                 <img class="fragment fade-out" data-fragment-index="1"
-                                    src=" img/fast_forward/motivation/motivation_tab_out.svg">
+                                    src="img/fast_forward/motivation/motivation_tab_out.svg">
                                 <img class="fragment fade-in-then-out" data-fragment-index="1"
                                     src="img/fast_forward/motivation/motivation_tab_1_out.svg">
                                 <img class="fragment fade-in-then-out" data-fragment-index="2"
@@ -554,7 +558,7 @@
                         The <b>look-up</b> operation is much more <b>efficient</b> than actual re-ranking:
                     </p>
                     <hr class="divider">
-                    <img src="img/fast_forward/results/comparison_out.svg" style="margin: 0;">
+                    <img class="fig" src="img/fast_forward/results/comparison_out.svg" style="margin: 0;">
                     <p class="caption">
                         TCT-ColBERT on the TREC-DL 2019 document ranking task.
                     </p>
@@ -584,7 +588,7 @@
                     <hr class="divider">
                     <div class="column-layout" style="grid-template-columns: 45% auto;">
                         <div class="column-item">
-                            <img src="img/fast_forward/coalescing_out.svg">
+                            <img class="fig" src="img/fast_forward/coalescing_out.svg">
                             <p class="caption">Look-up operation in a coalesced index.</p>
                         </div>
                         <div class="column-item">
@@ -601,7 +605,7 @@
                 <section id="fast-forward-sc-effects" data-auto-animate data-auto-animate-id="sc">
                     <h2>Sequential coalescing</h2>
                     <hr class="divider">
-                    <img src="img/fast_forward/results/coalescing_out.svg">
+                    <img class="fig" src="img/fast_forward/results/coalescing_out.svg">
                     <p class="caption">
                         TCT-ColBERT on TREC-DL 2019 document ranking with sequential coalescing.
                     </p>
@@ -629,14 +633,14 @@
                 <section id="fast-forward-es" data-auto-animate data-auto-animate-id="es">
                     <h2>Early Stopping</h2>
                     <hr class="divider">
-                    <img src="img/fast_forward/early_stopping_out.svg">
+                    <img class="fig" src="img/fast_forward/early_stopping_out.svg">
                     <p class="caption">The <i>early stopping</i> approach illustrated.</p>
                 </section>
 
                 <section id="fast-forward-es-effects" data-auto-animate data-auto-animate-id="es">
                     <h2>Early Stopping</h2>
                     <hr class="divider">
-                    <img src="img/fast_forward/results/early_stopping_out.svg">
+                    <img class="fig" src="img/fast_forward/results/early_stopping_out.svg">
                     <p class="caption">ANCE on TREC-DL 2019 passage ranking with early stopping.</p>
                 </section>
 
@@ -645,7 +649,7 @@
                     <hr class="divider">
                     <p>Queries and documents have <b>different characteristics</b> in terms of length and complexity.
                     </p>
-                    <img class="fragment" data-fragment-index="1" src="img/fast_forward/length_stats_out.svg">
+                    <img class="fig fragment" data-fragment-index="1" src="img/fast_forward/length_stats_out.svg">
                     <p class="caption fragment" data-fragment-index="1">The distribution of query and passage lengths in
                         the MS MARCO corpus.</p>
                     <hr class="divider">
@@ -663,7 +667,7 @@
                     <hr class="divider">
                     <div class="column-layout fragment">
                         <div class="column-item">
-                            <img src="img/fast_forward/query_encoder_out.svg">
+                            <img class="fig" src="img/fast_forward/query_encoder_out.svg">
                             <p class="caption">Self-attention-based query encoder.</p>
                         </div>
                         <div class="column-item">
@@ -735,7 +739,7 @@
                         </div>
 
                         <div class="column-item">
-                            <p
+                            <p class="fig"
                                 style="font-family: monospace; text-align: left; border: 0.1em solid gray; border-radius: 0.5em; padding: 1em; background-color: white;">
                                 [...]
                                 <br>
@@ -768,6 +772,7 @@
                                 <br>
                                 [...]
                             </p>
+                            <p class="caption">Example document.</p>
                         </div>
                     </div>
                 </section>
@@ -777,7 +782,7 @@
                     <hr class="divider">
                     <div class="column-layout" style="grid-template-columns: 50% auto;">
                         <div class="column-item">
-                            <img src="img/fast_forward/selbert_out.svg">
+                            <img class="fig" src="img/fast_forward/selbert_out.svg">
                             <p class="caption">Selective document encoder.</p>
                         </div>
                         <div class="column-item">
@@ -812,13 +817,13 @@
                     </p>
                     <div class="column-layout">
                         <div class="column-item">
-                            <img src="img/fast_forward/results/doc_encoders/latency_out.svg">
+                            <img class="fig" src="img/fast_forward/results/doc_encoders/latency_out.svg">
                             <p class="caption">
                                 Encoding latency, batch size: 256.
                             </p>
                         </div>
                         <div class="column-item">
-                            <img src="img/fast_forward/results/doc_encoders/attn_out.svg">
+                            <img class="fig" src="img/fast_forward/results/doc_encoders/attn_out.svg">
                             <p class="caption">
                                 Performance on <span class="textsc">MSM-Psg-Dev</span>.
                             </p>
@@ -866,7 +871,7 @@
 
                     <div class="column-layout">
                         <div class="column-item">
-                            <img src="img/background/cross_encoder_out.svg">
+                            <img class="fig" src="img/background/cross_encoder_out.svg">
                             <p class="caption">LLM-based cross-attention ranker.</p>
                         </div>
                         <div class="column-item">
@@ -933,16 +938,14 @@
                 <section id="bert-dmn-architecture">
                     <h2>BERT-DMN</h2>
                     <hr class="divider">
-
-                    <img src="img/bert_dmn/architecture_out.svg">
+                    <img class="fig" src="img/bert_dmn/architecture_out.svg">
                     <p class="caption">BERT-DMN architechture.</p>
                 </section>
 
                 <section id="bert-dmn-lite-architecture">
                     <h2>$\text{BERT-DMN}_{\text{lite}}$</h2>
                     <hr class="divider">
-
-                    <img src="img/bert_dmn/lite_architecture_out.svg">
+                    <img class="fig" src="img/bert_dmn/lite_architecture_out.svg">
                     <p class="caption">$\text{BERT-DMN}_{\text{lite}}$ architechture.</p>
                 </section>
 
@@ -965,7 +968,7 @@
 
                         <!-- styling here is required by Safari -->
                         <div class="column-item" style="display: grid; height: 100%;">
-                            <div class="r-stack" id="bdmn-result-table">
+                            <div class="tab r-stack" id="bdmn-result-table">
                                 <img class="fragment fade-out" data-fragment-index="1"
                                     src="img/bert_dmn/results/ranking_out.svg">
                                 <img class="fragment fade-in-then-out" data-fragment-index="1"
@@ -998,7 +1001,7 @@
                             </div>
                         </div>
                         <div class="column-item">
-                            <img src="img/bert_dmn/results/diffusion_out.svg">
+                            <img class="fig" src="img/bert_dmn/results/diffusion_out.svg">
                             <p class="caption">The <i>diffusion of information</i>.</p>
                         </div>
                     </div>
@@ -1010,7 +1013,7 @@
 
                     <div class="column-layout">
                         <div class="column-item">
-                            <img src="img/bert_dmn/results/training_efficiency_out.svg">
+                            <img class="tab" src="img/bert_dmn/results/training_efficiency_out.svg">
                             <p class="caption">Training batches per second.</p>
                         </div>
                         <div class="column-item">
@@ -1065,13 +1068,13 @@
                     <h2>Extractive explanations</h2>
                     <hr class="divider">
 
-                    <div class="r-stack">
+                    <div class="fig r-stack">
                         <img src="img/select_and_rank/extractive_explanation/example_nohl_out.svg"
                             class="fragment fade-out" data-fragment-index="2">
                         <img src="img/select_and_rank/extractive_explanation/example_hl_out.svg"
                             class="fragment fade-in" data-fragment-index="2">
                     </div>
-                    <p class="caption">Query: "how long to hold bow in yoga" 🤔</p>
+                    <p class="caption">Example document for query: "how long to hold bow in yoga" 🤔</p>
                     <hr class="divider">
                     <p class="fragment" data-fragment-index="1">Why is this document relevant w.r.t. the query?</p>
                 </section>
@@ -1081,7 +1084,7 @@
                     <hr class="divider">
                     <div class="column-layout">
                         <div class="column-item">
-                            <img src="img/select_and_rank/sr_paradigm_out.svg">
+                            <img class="fig" src="img/select_and_rank/sr_paradigm_out.svg">
                             <p class="caption">The <span class="textsc">Select-and-Rank</span> paradigm.</p>
                         </div>
                         <div class="column-item">
@@ -1106,7 +1109,7 @@
                     <hr class="divider">
                     <div class="column-layout">
                         <div class="column-item">
-                            <img src="img/select_and_rank/sr_paradigm_out.svg">
+                            <img class="fig" src="img/select_and_rank/sr_paradigm_out.svg">
                             <p class="caption">The <span class="textsc">Select-and-Rank</span> paradigm.</p>
                         </div>
                         <div class="column-item">
@@ -1160,25 +1163,25 @@
                 <section id="select-and-rank-beir-k" data-auto-animate>
                     <h2>BEIR benchmark</h2>
                     <hr class="divider">
-                    <p>There is a trade-off between selected sentences and effectiveness:</p>
+                    <p>There is a trade-off between the number of sentences $k$ and the effectiveness:</p>
                     <hr class="divider">
                     <div class="column-layout">
                         <div class="column-item">
                             <img class="fig" src="img/select_and_rank/results/beir_k_fever_out.svg">
                             <p class="caption">
-                                <span class="textsc">Fever</span>
+                                Performance on <span class="textsc">Fever</span>.
                             </p>
                         </div>
                         <div class="column-item">
                             <img class="fig" src="img/select_and_rank/results/beir_k_hotpotqa_out.svg">
                             <p class="caption">
-                                <span class="textsc">HotpotQA</span>
+                                Performance on <span class="textsc">HotpotQA</span>.
                             </p>
                         </div>
                         <div class="column-item">
                             <img class="fig" src="img/select_and_rank/results/beir_k_scifact_out.svg">
                             <p class="caption">
-                                <span class="textsc">SciFact</span>
+                                Performance on <span class="textsc">SciFact</span>.
                             </p>
                         </div>
                     </div>
@@ -1269,7 +1272,7 @@
                     <hr class="divider">
                     <div class="column-layout" style="grid-template-columns: 55% auto;">
                         <div class="column-item">
-                            <img src="img/boilernet/locality_out.svg">
+                            <img class="fig" src="img/boilernet/locality_out.svg">
                             <p class="caption">An example web page and its elements.</p>
                         </div>
                         <div class="column-item c-wide">
@@ -1292,7 +1295,7 @@
                         A web page is represented as a <b>sequence of its leaf nodes</b> ($\texttt{\#text}$) in the DOM
                         tree.
                     </p>
-                    <img class="fragment" data-fragment-index="1" src="img/boilernet/page_rep_out.svg">
+                    <img class="fig fragment" data-fragment-index="1" src="img/boilernet/page_rep_out.svg">
                     <p class="caption fragment" data-fragment-index="1">Example web page and its representations.</p>
                 </section>
 
@@ -1301,7 +1304,7 @@
                     <hr class="divider">
                     <div class="column-layout">
                         <div class="column-item">
-                            <img src="img/boilernet/architecture_out.svg">
+                            <img class="fig" src="img/boilernet/architecture_out.svg">
                             <p class="caption">The <span class="textsc">BoilerNet</span> architecture.</p>
                         </div>
                         <div class="column-item">
@@ -1327,8 +1330,8 @@
                             </p>
                         </div>
                         <div class="column-item">
-                            <img src="img/boilernet/results/cleaneval_out.svg">
-                            <p class="caption">Results on <span class="textsc">CleanEval</span>.</p>
+                            <img class="tab" src="img/boilernet/results/cleaneval_out.svg">
+                            <p class="caption">Performance on <span class="textsc">CleanEval</span>.</p>
                         </div>
                     </div>
                     <hr class="divider">
@@ -1340,8 +1343,8 @@
                             </p>
                         </div>
                         <div class="column-item">
-                            <img src="img/boilernet/results/googletrends_out.svg">
-                            <p class="caption">Results on <span class="textsc">GoogleTrends-2017</span>.</p>
+                            <img class="tab" src="img/boilernet/results/googletrends_out.svg">
+                            <p class="caption">Performance on <span class="textsc">GoogleTrends-2017</span>.</p>
                         </div>
                     </div>
                 </section>

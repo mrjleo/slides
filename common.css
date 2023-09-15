@@ -54,13 +54,19 @@ p.eq {
   text-align: center;
 }
 
-img.fig {
+.fig,
+.tab {
   margin-top: 0;
-  margin-bottom: 0.5em;
+  margin-bottom: 0.25em;
 }
 
-img.fig+p.caption::before {
+.fig+p.caption::before {
   content: "Figure: ";
+  font-weight: bold;
+}
+
+.tab+p.caption::before {
+  content: "Table: ";
   font-weight: bold;
 }
 
