@@ -55,7 +55,13 @@ p.eq {
 }
 
 img.fig {
-  margin: 0;
+  margin-top: 0;
+  margin-bottom: 0.5em;
+}
+
+img.fig+p.caption::before {
+  content: "Figure: ";
+  font-weight: bold;
 }
 
 p.footnote {
