@@ -30,10 +30,10 @@
             legend pos=north west,
             legend columns=-1,
             cycle list={
-                    {draw=black, fill=plotColor1*, solid},
-                    {draw=black, fill=plotColor2*, solid},
-                    {draw=black, fill=plotColor3*, solid},
-                    {draw=black, fill=plotColor4*, solid}
+                    {draw=black, fill=plotColor1*, solid, thick},
+                    {draw=black, fill=plotColor2*, solid, thick},
+                    {draw=black, fill=plotColor3*, solid, thick},
+                    {draw=black, fill=plotColor4*, solid, thick}
                 },
         ]
         \addplot+[
@@ -69,8 +69,8 @@
             cycle list={{plotColor3}, {plotColor4}},
         ]
         \pgfplotsset{cycle list shift=2}
-        \addplot+[mark=o] table[y index=5] {\data};
-        \addplot+[mark=square] table[y index=6] {\data};
+        \addplot+[mark=o,very thick] table[y index=5] {\data};
+        \addplot+[mark=square,very thick] table[y index=6] {\data};
     \end{groupplot}
 \end{tikzpicture}
 \end{document}
