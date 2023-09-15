@@ -54,6 +54,10 @@ p.eq {
   text-align: center;
 }
 
+img.fig {
+  margin: 0;
+}
+
 p.footnote {
   font-size: small;
   text-align: right;
