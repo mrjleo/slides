@@ -437,14 +437,17 @@ p.sc-psg-label span.katex {
 
 /* early stopping */
 
+
 #es-tab {
     font-size: x-large;
-    border-collapse: collapse;
 }
 
 #es-tab li {
-    margin-top: 0.2em;
-    margin-bottom: 0.2em;
+    margin: 0.25em 0.5em;
+}
+
+#es-tab th {
+    text-align: center;
 }
 
 #es-tab tr td:nth-child(2),
@@ -465,10 +468,6 @@ p.sc-psg-label span.katex {
 
 #es-example-left-col {
     text-align: left;
-}
-
-#es-example-right-col * {
-    font-size: x-large;
 }
 
 /* BERT-DMN */
