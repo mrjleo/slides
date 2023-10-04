@@ -75,6 +75,45 @@ p.footnote {
   text-align: right;
 }
 
+/* section titles with publications */
+
+.sec-title {
+  display: grid !important;
+  grid-auto-flow: column;
+  grid-template-rows: 1fr auto 1fr;
+  height: 100%;
+}
+
+.sec-title>*:nth-child(1) {
+  grid-row-start: 2;
+}
+
+.sec-title>*:nth-child(2) {
+  margin-top: auto;
+}
+
+div.pub {
+  text-align: right;
+  margin: 0.75em 0;
+}
+
+div.pub p {
+  font-size: small;
+  margin: 0.5em;
+}
+
+.pub-title {
+  font-weight: bold;
+}
+
+.pub-title::before {
+  content: "“";
+}
+
+.pub-title::after {
+  content: "”";
+}
+
 /* result table */
 
 table.result-tab {
