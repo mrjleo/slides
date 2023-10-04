@@ -1437,6 +1437,55 @@
             </section>
             <!-- end: boilernet -->
 
+            <!-- conclusion -->
+            <section>
+                <section id="conclusion">
+                    <h2>Conclusion</h2>
+                    <hr class="divider">
+                    <div class="c-wide">
+                        <p>In this thesis, we focused on:</p>
+                        <ul>
+                            <li class="fragment">
+                                <b>Efficient neural ranking</b> using <span class="textsc">Fast-Forward</span> indexes.
+                            </li>
+                            <li class="fragment">
+                                <b>Efficient training</b> for re-ranking using <span class="textsc">BERT-DMN</span>.
+                            </li>
+                            <li class="fragment">
+                                <b>Explainable neural ranking</b> using <span class="textsc">Select-and-Rank</span>.
+                            </li>
+                            <li class="fragment">
+                                <b>Web content extraction</b> using <span class="textsc">BoilerNet</span>.
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="future-work">
+                    <h2>Future work and outlook</h2>
+                    <hr class="divider">
+                    <div class="column-layout" style="grid-template-columns: max-content auto">
+                        <img class="column-item fragment" src="img/contributions_out.svg" data-fragment-index="1">
+                        <div class="column-item">
+                            <div class="c-wide">
+                                <p class="fragment" data-fragment-index="1">
+                                    Recall the <b>trade-off</b> between <b>efficiency</b>, <b>explainability</b>, and
+                                    <b>effectiveness</b>.
+                                </p>
+                                <p class="fragment" data-fragment-index="2">
+                                    Can we achieve efficiency <b>and</b> explainability?
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="final-slide">
+                    <h2><b>The end</b></h2>
+                </section>
+            </section>
+            <!-- end: conclusion -->
+
             <!-- backup -->
             <section>
                 <section id="backup">
@@ -1956,7 +2005,7 @@
             hash: true,
             slideNumber: true,
             katex: {
-                local: '../node_modules/katex',
+                local: "../node_modules/katex",
             },
             plugins: [RevealMarkdown, RevealHighlight, RevealMath.KaTeX, RevealZoom, RevealNotes]
         });
