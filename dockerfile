@@ -1,5 +1,4 @@
 FROM node:lts-bookworm
 WORKDIR /slides
-RUN apt update
-RUN apt install -y texlive-full pdf2svg fonts-inconsolata
+RUN apt update && apt install -y texlive-full pdf2svg fonts-inconsolata
 CMD npm install && npm run start
