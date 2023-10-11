@@ -107,7 +107,7 @@
     % representations
     \node[
         right=3 of T1,
-    ] (A);
+    ] (A) {};
     \foreach \t in {1,...,4}
         {
             % tags
@@ -116,14 +116,14 @@
                 fill=tagColor!50,
                 minimum width=17,
                 minimum height=17,
-            ] (R\t-T1) at (T\t -| A);
+            ] (R\t-T1) at (T\t -| A) {};
             \node[
                 draw,
                 fill=tagColor!50,
                 minimum width=17,
                 minimum height=17,
                 right=0.1 of R\t-T1,
-            ] (R\t-T2);
+            ] (R\t-T2) {};
             \node[
                 minimum width=17,
                 minimum height=17,
@@ -135,7 +135,7 @@
                 minimum width=17,
                 minimum height=17,
                 right=0.1 of R\t-Td,
-            ] (R\t-Tn);
+            ] (R\t-Tn) {};
 
             % words
             \node[
@@ -144,14 +144,14 @@
                 minimum width=17,
                 minimum height=17,
                 right=0.1 of R\t-Tn,
-            ] (R\t-W1);
+            ] (R\t-W1) {};
             \node[
                 draw,
                 fill=wordColor!50,
                 minimum width=17,
                 minimum height=17,
                 right=0.1 of R\t-W1,
-            ] (R\t-W2);
+            ] (R\t-W2) {};
             \node[
                 minimum width=17,
                 minimum height=17,
@@ -163,7 +163,7 @@
                 minimum width=17,
                 minimum height=17,
                 right=0.1 of R\t-Wd,
-            ] (R\t-Wn);
+            ] (R\t-Wn) {};
 
             % border
             \node[
