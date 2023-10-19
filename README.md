@@ -3,7 +3,13 @@ This repository contains slides for my presentations.
 
 - **Efficient Neural Ranking using Forward Indexes**\
   Jurek Leonhardt, Koustav Rudra, Megha Khosla, Abhijit Anand, Avishek Anand\
-  Full paper at TheWebConf 2022 | [arXiv](https://arxiv.org/abs/2110.06051) | [Slides](https://mrjleo.github.io/slides/www22_fast-forward-indexes) | [Code](https://github.com/mrjleo/fast-forward-indexes)
+  Full paper at TheWebConf 2022\
+  [arXiv](https://arxiv.org/abs/2110.06051) | [slides](https://mrjleo.github.io/slides/www22_fast-forward-indexes) | [code](https://github.com/mrjleo/fast-forward-indexes)
+
+- **Efficient and Explainable Neural Ranking**\
+  Jurek Leonhardt\
+  PhD thesis\
+  [slides](https://mrjleo.github.io/slides/phd)
 
 ## Local Development
 Clone the repository and run the commands below.
@@ -37,7 +43,6 @@ Install the dependencies:
 * [Inconsolata (font)](https://fonts.google.com/specimen/Inconsolata)
 * [Libertine (font)](https://libertine-fonts.org/)
 * A LaTeX distribution, e.g., [TeX Live](https://tug.org/texlive/)
-  * [latexmk](https://ctan.org/pkg/latexmk?lang=en)
 
 Install the node modules:
 ```
@@ -60,6 +65,8 @@ Navigate your browser to http://localhost:8000/.
 - [reveal.js](https://revealjs.com/)
 - [charts.css](https://chartscss.org/)
 - [KaTeX](https://katex.org/)
+- [PGF/TikZ](https://ctan.org/pkg/pgf)
+- [PGFPlots](https://ctan.org/pkg/pgfplots)
 
 ## Attribution
 Some slides contain icons created by [juicy_fish](https://www.flaticon.com/authors/juicy-fish/) ([Flaticon](https://www.flaticon.com/)).
