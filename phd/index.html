@@ -421,18 +421,6 @@
                         </div>
                     </div>
                 </section>
-
-                <section id="hybrid-retrival">
-                    <h2>Hybrid retrieval</h2>
-                    <hr class="divider">
-                    <p>
-                        <i>Hybrid retrieval</i> uses a <b>sparse retriever</b> to retrieve $K^q_S$ and a <b>dense
-                            retriever</b> to retrieve $K^q_D$ for a query $q$.
-                    </p>
-                    <p>
-                        The documents are ranked using a <b>combination of the scores</b>.
-                    </p>
-                </section>
             </section>
             <!-- end: background -->
 
@@ -590,21 +578,6 @@
                     </p>
                 </section>
 
-                <section id="fast-forward-maxp">
-                    <h2>MaxP indexes</h2>
-                    <hr class="divider">
-                    <p>
-                        Long documents are often chunked into passages and scored using a $\max$ operation:
-                    </p>
-                    <p>
-                        $\phi_D^{FF} (q, d) = \max_{p_i \in d} (\zeta (q) \cdot \eta^{FF} (p_i))$
-                    </p>
-                    <hr class="divider">
-                    <p class="fragment">
-                        We propose <b>sequential coalescing</b> to compress maxP indexes.
-                    </p>
-                </section>
-
                 <section id="fast-forward-sc" data-auto-animate data-auto-animate-id="sc">
                     <h2>Sequential coalescing</h2>
                     <hr class="divider">
@@ -616,6 +589,10 @@
                         <div class="column-item">
                             <div class="c-wide">
                                 <p>
+                                    Long documents are often chunked into passages, so they have <b>multiple
+                                        representations</b>.
+                                </p>
+                                <p class="fragment">
                                     <i>Sequential coalescing</i> <b>merges similar representations</b> of subsequent
                                     passages within a document.
                                 </p>
@@ -650,13 +627,6 @@
                     <p class="fragment" data-fragment-index="2">
                         We propose an approach for <b>early stopping</b>.
                     </p>
-                </section>
-
-                <section id="fast-forward-es" data-auto-animate data-auto-animate-id="es">
-                    <h2>Early stopping</h2>
-                    <hr class="divider">
-                    <img class="fig" src="img/fast_forward/early_stopping_out.svg">
-                    <p class="caption">The <i>early stopping</i> approach illustrated.</p>
                 </section>
 
                 <section id="fast-forward-es-effects" data-auto-animate data-auto-animate-id="es">
@@ -1548,6 +1518,33 @@
                     </h2>
                 </section>
 
+                <section id="hybrid-retrival">
+                    <h2>Hybrid retrieval</h2>
+                    <hr class="divider">
+                    <p>
+                        <i>Hybrid retrieval</i> uses a <b>sparse retriever</b> to retrieve $K^q_S$ and a <b>dense
+                            retriever</b> to retrieve $K^q_D$ for a query $q$.
+                    </p>
+                    <p>
+                        The documents are ranked using a <b>combination of the scores</b>.
+                    </p>
+                </section>
+
+                <section id="maxp">
+                    <h2>MaxP indexes</h2>
+                    <hr class="divider">
+                    <p>
+                        Long documents are often chunked into passages and scored using a $\max$ operation:
+                    </p>
+                    <p>
+                        $\phi_D^{FF} (q, d) = \max_{p_i \in d} (\zeta (q) \cdot \eta^{FF} (p_i))$
+                    </p>
+                    <hr class="divider">
+                    <p class="fragment">
+                        We propose <b>sequential coalescing</b> to compress maxP indexes.
+                    </p>
+                </section>
+
                 <section id="fast-forward-sc-demo">
                     <h2>Sequential coalescing</h2>
 
@@ -1685,6 +1682,13 @@
 							</pre>
                         </div>
                     </div>
+                </section>
+
+                <section id="fast-forward-es">
+                    <h2>Early stopping</h2>
+                    <hr class="divider">
+                    <img class="fig" src="img/fast_forward/early_stopping_out.svg">
+                    <p class="caption">The <i>early stopping</i> approach illustrated.</p>
                 </section>
 
                 <section id="fast-forward-es-demo" data-auto-animate data-auto-animate-id="es">
