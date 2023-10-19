@@ -54,12 +54,6 @@ p.eq {
   text-align: center;
 }
 
-.fig,
-.tab {
-  margin-top: 0;
-  margin-bottom: 0.25em;
-}
-
 .fig+p.caption::before {
   content: "Figure: ";
   font-weight: bold;
