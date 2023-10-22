@@ -1,0 +1,21 @@
+\documentclass{standalone}
+\input{../../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}
+    \pgfplotstableread[col sep=comma]{beir_k.csv}\data
+    \begin{axis}[
+            width=7cm,
+            xlabel={$k$},
+            ylabel={\ndcg{}@\num{10}},
+            grid=major,
+        ]
+        \addplot+[
+            const plot mark mid,
+            very thick,
+            mark=none,
+            plotColor3,
+        ] table[y index=3] {\data};
+    \end{axis}
+\end{tikzpicture}
+\end{document}
