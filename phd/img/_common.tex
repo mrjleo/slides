@@ -64,6 +64,26 @@
     \hl{#1}%
     \endgroup%
 }
+\newtcbox{\gpu}[1][]{
+    size=fbox,
+    boxsep=1.5pt,
+    on line,
+    colframe=plotColor1*,
+    colback=plotColor1*,
+    enhanced,
+    borderline={0.25pt}{0pt}{dashed},
+    #1
+}
+\newtcbox{\cpu}[1][]{
+    size=fbox,
+    boxsep=1.5pt,
+    on line,
+    colframe=plotColor3*,
+    colback=plotColor3*,
+    enhanced,
+    borderline={0.25pt}{0pt}{dotted},
+    #1
+}
 \newtcbox{\hldashed}[1][]{
     size=fbox,
     boxsep=2pt,
