@@ -44,10 +44,13 @@ hr.divider {
   border: none;
 }
 
-p.caption,
-p.caption * {
+p.caption {
   font-size: medium;
   margin-top: 0;
+}
+
+p.caption .katex {
+  font-size: 100%;
 }
 
 p.eq {
