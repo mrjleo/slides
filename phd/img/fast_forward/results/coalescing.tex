@@ -49,14 +49,14 @@
             plotColor1,
             mark=square,
         ] table[x index=0, y index=4] {\data};
-        \addlegendentry{\ndcg{}}
+        \addlegendentry{\ap{}}
         \addplot+[
             const plot mark mid,
             very thick,
             plotColor2,
             mark=o,
         ] table[x index=0, y index=5] {\data};
-        \addlegendentry{\ap{}}
+        \addlegendentry{\ndcg{}}
     \end{axis}
 \end{tikzpicture}
 \end{document}
