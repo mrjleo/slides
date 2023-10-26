@@ -3,7 +3,7 @@ This repository contains slides for my presentations.
 
 - **Efficient Neural Ranking using Forward Indexes**\
   Jurek Leonhardt, Koustav Rudra, Megha Khosla, Abhijit Anand, Avishek Anand\
-  Full paper at TheWebConf 2022\
+  Full paper (TheWebConf 2022)\
   [arXiv](https://arxiv.org/abs/2110.06051) | [slides](https://mrjleo.github.io/slides/www22_fast-forward-indexes) | [code](https://github.com/mrjleo/fast-forward-indexes)
 
 - **Efficient and Explainable Neural Ranking**\
@@ -13,7 +13,7 @@ This repository contains slides for my presentations.
 
 - **Efficient Neural Ranking using Forward Indexes and Lightweight Encoders**\
   Jurek Leonhardt, Henrik Müller, Koustav Rudra, Megha Khosla, Abhijit Anand, Avishek Anand\
-  Journal paper in TOIS (to appear)
+  Journal paper (TOIS, to appear)\
   [slides](https://mrjleo.github.io/slides/tois24_fast-forward-indexes)
 
 ## Local Development
