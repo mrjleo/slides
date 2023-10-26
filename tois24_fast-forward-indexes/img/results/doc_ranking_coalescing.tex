@@ -1,0 +1,77 @@
+\documentclass{standalone}
+\input{../../../phd/img/_common.tex}
+
+\begin{document}
+\begin{tabular}{lr@{\hspace{\tabcolsep}}c@{\hspace{\tabcolsep}}llllllll}
+    \toprule
+     & \gpu{GPU}                        & +                    & \cpu{CPU}
+     & \multicolumn{3}{c}{$k_S = 1000$}
+     & \multicolumn{3}{c}{$k_S = 5000$}
+    \\
+    \cmidrule(lr){2-4}
+    \cmidrule(lr){5-7}
+    \cmidrule(lr){8-10}
+     & \multicolumn{3}{c}{ms}
+     & \ap{}@\num{1000}                 & \recall{}@\num{1000} & \ndcg{}@\num{20}
+     & \ap{}@\num{1000}                 & \recall{}@\num{1000} & \ndcg{}@\num{20}
+    \\
+    \midrule
+    \multicolumn{10}{l}{\bfseries \hybrid}                                                                                                                     \\
+    \bm, \tct
+     & \gpu{\num{0}}                    & +                    & \cpu{\num{582}}
+     & \num{0.394}                      & \num{0.697}          & \num{0.655}                & \num{0.385}        & \num{0.729}        & \num{0.645}
+    \\
+    \bm, \ance
+     & \gpu{\num{0}}                    & +                    & \cpu{\num{582}}
+     & \num{0.379}                      & \num{0.697}          & \num{0.633}                & \num{0.373}        & \num{0.727}        & \num{0.628}
+    \\
+    \midrule
+    \multicolumn{10}{l}{\bfseries \reranking}                                                                                                                  \\
+    \tct
+     & \gpu{\num{1189}}                 & +                    & \cpu{2}
+     & \num{0.370}                      & \num{0.697}          & \num{0.632}                & \num{0.334}        & \num{0.703}        & \num{0.609}\sigimpr{a}
+    \\
+    \ance
+     & \gpu{\num{1189}}                 & +                    & \cpu{\num{2}}
+     & \num{0.336}                      & \num{0.697}          & \num{0.614}                & \num{0.304}        & \num{0.647}        & \num{0.607}
+    \\
+    \bertcls
+     & \gpu{\num{185}}                  & +                    & \cpu{\num{2}}
+     & \num{0.283}                      & \num{0.697}          & \num{0.494}\sigimpr{abcde} & \num{0.159}        & \num{0.559}        & \num{0.289}
+    \\
+    \midrule
+    \multicolumn{10}{l}{\bfseries \interpolatedreranking}                                                                                                      \\
+    \midrulesep
+    \hide{\sigdef{a}} \tct
+     & \gpu{\num{1189}}                 & +                    & \cpu{\num{14}}
+     & \hide{\num{0.406}}               & \hide{\num{0.697}}   & \hide{\num{0.655}}         & \hide{\num{0.411}} & \hide{\num{0.745}} & \hide{\num{0.653}}
+    \\
+    \rowcolor{lightgray} \sigdef{a} \tablearrow \fastforward
+     & \gpu{\num{0}}                    & +                    & \cpu{\num{253}}
+     & \num{0.406}                      & \num{0.697}          & \num{0.655}                & \num{0.411}        & \num{0.745}        & \num{0.653}
+    \\
+    \rowcolor{lightgray} \sigdef{b} \quad \tablearrow coalesced
+     & \gpu{\num{0}}                    & +                    & \cpu{\num{109}}
+     & \num{0.379}                      & \num{0.697}          & \num{0.630}                & \num{0.379}        & \num{0.732}        & \num{0.625}
+    \\
+    \midrulesep
+    \hide{\sigdef{c}} \ance
+     & \gpu{\num{1189}}                 & +                    & \cpu{\num{14}}
+     & \hide{\num{0.387}}               & \hide{\num{0.697}}   & \hide{\num{0.638}}         & \hide{\num{0.393}} & \hide{\num{0.732}} & \hide{\num{0.639}}
+    \\
+    \rowcolor{lightgray} \sigdef{c} \tablearrow \fastforward
+     & \gpu{\num{0}}                    & +                    & \cpu{\num{253}}
+     & \num{0.387}                      & \num{0.697}          & \num{0.638}                & \num{0.393}        & \num{0.732}        & \num{0.639}
+    \\
+    \rowcolor{lightgray} \sigdef{d} \quad \tablearrow coalesced
+     & \gpu{\num{0}}                    & +                    & \cpu{\num{121}}
+     & \num{0.372}                      & \num{0.697}          & \num{0.625}                & \num{0.375}        & \num{0.723}        & \num{0.628}
+    \\
+    \midrulesep
+    \sigdef{e} \bertcls
+     & \gpu{\num{185}}                  & +                    & \cpu{\num{14}}
+     & \num{0.365}                      & \num{0.697}          & \num{0.585}                & \num{0.357}        & \num{0.708}        & \num{0.562}
+    \\
+    \bottomrule
+\end{tabular}
+\end{document}
