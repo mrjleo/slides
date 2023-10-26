@@ -11,6 +11,11 @@ This repository contains slides for my presentations.
   PhD thesis\
   [slides](https://mrjleo.github.io/slides/phd)
 
+- **Efficient Neural Ranking using Forward Indexes and Lightweight Encoders**\
+  Jurek Leonhardt, Henrik Müller, Koustav Rudra, Megha Khosla, Abhijit Anand, Avishek Anand\
+  Journal paper in TOIS (to appear)
+  [slides](https://mrjleo.github.io/slides/tois24_fast-forward-indexes)
+
 ## Local Development
 Clone the repository and run the commands below.
 
