@@ -42,11 +42,11 @@
 \definecolor{plotColor2}{HTML}{377eb8}
 \definecolor{plotColor3}{HTML}{4daf4a}
 \definecolor{plotColor4}{HTML}{984ea3}
-\colorlet{plotColorNeutral*}{plotColorNeutral!40}
-\colorlet{plotColor1*}{plotColor1!40}
-\colorlet{plotColor2*}{plotColor2!40}
-\colorlet{plotColor3*}{plotColor3!40}
-\colorlet{plotColor4*}{plotColor4!40}
+\colorlet{plotColorNeutral*}{plotColorNeutral!60}
+\colorlet{plotColor1*}{plotColor1!60}
+\colorlet{plotColor2*}{plotColor2!60}
+\colorlet{plotColor3*}{plotColor3!60}
+\colorlet{plotColor4*}{plotColor4!60}
 \pgfplotsset{
     colormap={greenred}{HTML=(4daf4a) HTML=(e41a1c)},
     colormap={redgreen}{HTML=(e41a1c) HTML=(4daf4a)}
@@ -68,8 +68,8 @@
     size=fbox,
     boxsep=1.5pt,
     on line,
-    colframe=plotColor1*,
-    colback=plotColor1*,
+    colframe=plotColor1!50,
+    colback=plotColor1!50,
     enhanced,
     borderline={0.25pt}{0pt}{dashed},
     #1
@@ -78,8 +78,8 @@
     size=fbox,
     boxsep=1.5pt,
     on line,
-    colframe=plotColor3*,
-    colback=plotColor3*,
+    colframe=plotColor3!50,
+    colback=plotColor3!50,
     enhanced,
     borderline={0.25pt}{0pt}{dotted},
     #1
