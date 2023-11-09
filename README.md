@@ -3,8 +3,8 @@ This repository contains slides for my presentations.
 
 - **Efficient Neural Ranking using Forward Indexes and Lightweight Encoders**\
   Jurek Leonhardt, Henrik Müller, Koustav Rudra, Megha Khosla, Abhijit Anand, Avishek Anand\
-  Journal paper (TOIS, to appear)\
-  [arXiv](https://arxiv.org/abs/2311.01263) | [slides](https://mrjleo.github.io/slides/tois24_fast-forward-indexes) | [code](https://github.com/mrjleo/fast-forward-indexes)
+  Journal paper (TOIS, just accepted)\
+    [ACM](https://dl.acm.org/doi/10.1145/3631939) | [arXiv](https://arxiv.org/abs/2311.01263) | [slides](https://mrjleo.github.io/slides/tois24_fast-forward-indexes) | [code](https://github.com/mrjleo/fast-forward-indexes)
 
 - **Efficient and Explainable Neural Ranking**\
   Jurek Leonhardt\
