@@ -689,33 +689,11 @@
                 <section id="fast-forward-query-encoders-results" data-auto-animate data-auto-animate-id="qenc">
                     <h2>Efficient query encoders</h2>
                     <hr class="divider">
-                    <p>Lightweight query encoders can achieve similar performance, but it depends on the dataset:</p>
-                    <div class="column-layout">
-                        <div class="column-item fragment custom grow-active">
-                            <img class="fig" src="img/fast_forward/results/query_encoders/latency_out.svg">
-                            <p class="caption">
-                                Query encoding latency in seconds.
-                            </p>
-                        </div>
-                        <div class="column-item fragment custom grow-active">
-                            <img class="fig" src="img/fast_forward/results/query_encoders/msmpsgdev_out.svg">
-                            <p class="caption">
-                                nDCG@10 on <span class="textsc">MSM-Psg-Dev</span>.
-                            </p>
-                        </div>
-                        <div class="column-item fragment custom grow-active">
-                            <img class="fig" src="img/fast_forward/results/query_encoders/trecdspsg19_out.svg">
-                            <p class="caption">
-                                nDCG@10 on <span class="textsc">TREC-DL-Psg’19</span>.
-                            </p>
-                        </div>
-                        <div class="column-item fragment custom grow-active">
-                            <img class="fig" src="img/fast_forward/results/query_encoders/trecdlpsg20_out.svg">
-                            <p class="caption">
-                                nDCG@10 on <span class="textsc">TREC-DL-Psg’20</span>.
-                            </p>
-                        </div>
-                    </div>
+                    <p>Lightweight query encoders can achieve good performance, but it depends on the dataset:</p>
+                    <img src="img/fast_forward/results/query_encoders/comparison_out.svg" class="fig">
+                    <p class="caption">
+                        Performance of lightweight query encoders. Latency measured on CPU with batch size $256$.
+                    </p>
                 </section>
 
                 <section id="fast-forward-document-encoders" data-auto-animate data-auto-animate-id="denc">
@@ -2076,6 +2054,37 @@
                     <p class="caption">
                         Passage ranking results at retrieval depth $k_S = 5000$.
                     </p>
+                </section>
+
+                <section id="fast-forward-results-query-encoders">
+                    <h2><span class="textsc">Fast-Forward</span> results: Query encoders</h2>
+                    <hr class="divider">
+                    <div class="column-layout">
+                        <div class="column-item fragment custom grow-active">
+                            <img class="fig" src="img/fast_forward/results/query_encoders/latency_out.svg">
+                            <p class="caption">
+                                Query encoding latency in seconds.
+                            </p>
+                        </div>
+                        <div class="column-item fragment custom grow-active">
+                            <img class="fig" src="img/fast_forward/results/query_encoders/msmpsgdev_out.svg">
+                            <p class="caption">
+                                nDCG@10 on <span class="textsc">MSM-Psg-Dev</span>.
+                            </p>
+                        </div>
+                        <div class="column-item fragment custom grow-active">
+                            <img class="fig" src="img/fast_forward/results/query_encoders/trecdspsg19_out.svg">
+                            <p class="caption">
+                                nDCG@10 on <span class="textsc">TREC-DL-Psg’19</span>.
+                            </p>
+                        </div>
+                        <div class="column-item fragment custom grow-active">
+                            <img class="fig" src="img/fast_forward/results/query_encoders/trecdlpsg20_out.svg">
+                            <p class="caption">
+                                nDCG@10 on <span class="textsc">TREC-DL-Psg’20</span>.
+                            </p>
+                        </div>
+                    </div>
                 </section>
 
                 <section id="select-and-rank-results-1" data-auto-animate data-auto-animate-id="sr-res">
