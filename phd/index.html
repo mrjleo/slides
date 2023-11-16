@@ -320,6 +320,12 @@
                             <p class="caption">Dual-encoders</p>
                         </div>
                     </div>
+                    <hr class="divider">
+                    <p class="fragment">
+                        Neural semantic models are often
+                        <span style="color: red;">computationally expensive</span>
+                        (as seen earlier).
+                    </p>
                 </section>
 
                 <section id="reranking">
@@ -387,12 +393,13 @@
                                 <p>
                                     <i>Dense retrieval</i> uses <b>semantic models</b> directly for <b>retrieval</b>.
                                 </p>
-                                <hr class="divider">
                                 <p class="fragment" data-fragment-index="2">
                                     Documents and query are embedded in a common vector space using <b>dual-encoder</b>
                                     models.
                                 </p>
-                                <hr class="divider">
+                                <p class="fragment" data-fragment-index="2">
+                                    Document representations are <b>pre-computed</b> during the indexing stage.
+                                </p>
                                 <p class="fragment" data-fragment-index="3">
                                     Retrieval is performed as an (approximate) <b>nearest neighbor search</b> operation.
                                 </p>
