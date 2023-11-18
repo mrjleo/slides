@@ -791,20 +791,11 @@
                         Selective document encoders incur a <b>small performance hit</b>, but <b>decrease the indexing
                             latency</b> notably:
                     </p>
-                    <div class="column-layout">
-                        <div class="column-item">
-                            <img class="fig" src="img/fast_forward/results/doc_encoders/latency_out.svg">
-                            <p class="caption">
-                                Encoding latency, batch size: 256.
-                            </p>
-                        </div>
-                        <div class="column-item">
-                            <img class="fig" src="img/fast_forward/results/doc_encoders/attn_out.svg">
-                            <p class="caption">
-                                Performance on <span class="textsc">MSM-Psg-Dev</span>.
-                            </p>
-                        </div>
-                    </div>
+                    <img class="fig" src="img/fast_forward/results/doc_encoders/comparison_out.svg">
+                    <p class="caption">
+                        Indexing latency and ranking performance on <span class="textsc">MSM-Psg-Dev</span>. Latency
+                        measured with batch size $256$.
+                    </p>
                 </section>
 
                 <section id="fast-forward-summary">
@@ -2082,6 +2073,29 @@
                             <img class="fig" src="img/fast_forward/results/query_encoders/trecdlpsg20_out.svg">
                             <p class="caption">
                                 nDCG@10 on <span class="textsc">TREC-DL-Psg’20</span>.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="fast-forward-results-doc-encoders">
+                    <h2>Selective document encoders</h2>
+                    <hr class="divider">
+                    <p>
+                        Selective document encoders incur a <b>small performance hit</b>, but <b>decrease the indexing
+                            latency</b> notably:
+                    </p>
+                    <div class="column-layout">
+                        <div class="column-item">
+                            <img class="fig" src="img/fast_forward/results/doc_encoders/latency_out.svg">
+                            <p class="caption">
+                                Encoding latency, batch size: 256.
+                            </p>
+                        </div>
+                        <div class="column-item">
+                            <img class="fig" src="img/fast_forward/results/doc_encoders/attn_out.svg">
+                            <p class="caption">
+                                Performance on <span class="textsc">MSM-Psg-Dev</span>.
                             </p>
                         </div>
                     </div>
