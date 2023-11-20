@@ -186,23 +186,25 @@
                             </div>
                         </div>
 
-                        <!-- styling here is required by Safari -->
-                        <div class="column-item" style="display: grid; height: 100%;">
-                            <div class="tab r-stack">
-                                <img class="fragment fade-out" data-fragment-index="1"
-                                    src="../phd/img/fast_forward/motivation/motivation_tab_out.svg">
-                                <img class="fragment fade-in-then-out" data-fragment-index="1"
-                                    src="../phd/img/fast_forward/motivation/motivation_tab_1_out.svg">
-                                <img class="fragment fade-in-then-out" data-fragment-index="2"
-                                    src="../phd/img/fast_forward/motivation/motivation_tab_1_out.svg">
-                                <img class="fragment fade-in-then-out" data-fragment-index="3"
-                                    src="../phd/img/fast_forward/motivation/motivation_tab_2_out.svg">
-                                <img class="fragment fade-in-then-out" data-fragment-index="4"
-                                    src="../phd/img/fast_forward/motivation/motivation_tab_3_out.svg">
+                        <div class="column-item">
+                            <!-- required by Safari -->
+                            <div style="display: grid;">
+                                <div class="tab r-stack" style="height: 100%;">
+                                    <img class="fragment fade-out" data-fragment-index="1"
+                                        src="../phd/img/fast_forward/motivation/motivation_tab_out.svg">
+                                    <img class="fragment fade-in-then-out" data-fragment-index="1"
+                                        src="../phd/img/fast_forward/motivation/motivation_tab_1_out.svg">
+                                    <img class="fragment fade-in-then-out" data-fragment-index="2"
+                                        src="../phd/img/fast_forward/motivation/motivation_tab_1_out.svg">
+                                    <img class="fragment fade-in-then-out" data-fragment-index="3"
+                                        src="../phd/img/fast_forward/motivation/motivation_tab_2_out.svg">
+                                    <img class="fragment fade-in-then-out" data-fragment-index="4"
+                                        src="../phd/img/fast_forward/motivation/motivation_tab_3_out.svg">
+                                </div>
+                                <p class="caption">
+                                    Results on <span class="textsc">TREC-DL-Doc’19</span>.
+                                </p>
                             </div>
-                            <p class="caption">
-                                Results on the TREC Deep Learning document ranking task.
-                            </p>
                         </div>
                     </div>
                 </section>
@@ -228,7 +230,7 @@
                         <span class="fragment highlight-green" data-fragment-index="2">
                             $\phi_D^{FF} (q, d)$
                         </span>
-                        $= \zeta (q) \cdot \eta^{FF} (d) $
+                        $= \zeta (q) \cdot \eta^{FF} (d)$
                     </p>
                 </section>
 
@@ -241,7 +243,7 @@
                     <hr class="divider">
                     <img class="fig" src="../phd/img/fast_forward/results/comparison_out.svg" style="margin: 0;">
                     <p class="caption">
-                        TCT-ColBERT on the TREC-DL 2019 document ranking task.
+                        TCT-ColBERT on the <span class="textsc">TREC-DL-Doc’19</span>.
                     </p>
                 </section>
 
@@ -299,7 +301,7 @@
                     <hr class="divider">
                     <img class="fig" src="../phd/img/fast_forward/results/coalescing_out.svg">
                     <p class="caption">
-                        TCT-ColBERT on TREC-DL 2019 document ranking with sequential coalescing.
+                        TCT-ColBERT on <span class="textsc">TREC-DL-Doc’19</span> with sequential coalescing.
                     </p>
                 </section>
 
@@ -307,7 +309,7 @@
                     <h2>Sequential coalescing</h2>
                     <hr class="divider">
                     <img class="tab" style="margin: 0;" src="img/results/doc_ranking_coalescing_out.svg">
-                    <p class="caption">Results on the TREC-DL 2019 document ranking task.</p>
+                    <p class="caption">Results on <span class="textsc">TREC-DL-Doc’19</span>.</p>
                 </section>
 
                 <section id="fast-forward-es-idea" data-auto-animate data-auto-animate-id="es">
@@ -340,7 +342,7 @@
                     <h2>Early stopping</h2>
                     <hr class="divider">
                     <img class="fig" src="../phd/img/fast_forward/results/early_stopping_out.svg">
-                    <p class="caption">ANCE on TREC-DL 2019 passage ranking with early stopping.</p>
+                    <p class="caption">ANCE on <span class="textsc">TREC-DL-Psg’19</span> with early stopping.</p>
                 </section>
 
                 <section id="fast-forward-es-results" data-auto-animate data-auto-animate-id="es">
@@ -348,7 +350,7 @@
                     <hr class="divider">
                     <img class="tab" style="margin: 0;"
                         src="../phd/img/fast_forward/results/passage_ranking_early_stopping_out.svg">
-                    <p class="caption">Results on the TREC-DL 2019 passage ranking task.</p>
+                    <p class="caption">Results on <span class="textsc">TREC-DL-Psg’19</span>.</p>
                 </section>
 
                 <section id="fast-forward-encoders">
