@@ -477,82 +477,25 @@
                     </div>
                 </section>
 
-                <section id="fast-forward-motivation">
-                    <h2>Motivation</h2>
-                    <hr class="divider">
-                    <div class="column-layout" style="grid-template-columns: auto 50%;">
-                        <div class="column-item">
-                            <div class="c-wide">
-                                <p class="fragment" data-fragment-index="1">
-                                    <span class="fragment highlight-red" data-fragment-index="1">Sparse retrieval</span>
-                                    is fast, but not competitive on its own.
-                                </p>
-                                <hr class="divider">
-                                <p class="fragment" data-fragment-index="2">
-                                    Dense retrieval shows good nDCG, but recall suffers and <b>it is slow</b>.
-                                </p>
-                                <hr class="divider">
-                                <p class="fragment" data-fragment-index="3">
-                                    <span class="fragment highlight-green" data-fragment-index="3">
-                                        Re-ranking using dense retrieval models
-                                    </span>
-                                    works well.
-                                </p>
-                                <hr class="divider">
-                                <p class="fragment" data-fragment-index="4">
-                                    <span class="fragment highlight-blue" data-fragment-index="4">
-                                        Score interpolation
-                                    </span>
-                                    further helps:
-                                </p>
-                                <p class="eq fragment" data-fragment-index="4">
-                                    <span class="fragment highlight-blue" data-fragment-index="4">
-                                        $\phi (q, d)$
-                                    </span>
-                                    $= \alpha$
-                                    <span class="fragment highlight-red" data-fragment-index="4">
-                                        $\phi_S (q, d)$
-                                    </span>
-                                    $+\ (1 - \alpha) $
-                                    <span class="fragment highlight-green" data-fragment-index="4">
-                                        $\phi_D(q, d)$
-                                    </span>
-                                </p>
-                            </div>
-                        </div>
-
-                        <!-- styling here is required by Safari -->
-                        <div class="column-item" style="display: grid; height: 100%;">
-                            <div class="tab r-stack">
-                                <img class="fragment fade-out" data-fragment-index="1"
-                                    src="img/fast_forward/motivation/motivation_tab_out.svg">
-                                <img class="fragment fade-in-then-out" data-fragment-index="1"
-                                    src="img/fast_forward/motivation/motivation_tab_1_out.svg">
-                                <img class="fragment fade-in-then-out" data-fragment-index="2"
-                                    src="img/fast_forward/motivation/motivation_tab_1_out.svg">
-                                <img class="fragment fade-in-then-out" data-fragment-index="3"
-                                    src="img/fast_forward/motivation/motivation_tab_2_out.svg">
-                                <img class="fragment fade-in-then-out" data-fragment-index="4"
-                                    src="img/fast_forward/motivation/motivation_tab_3_out.svg">
-                            </div>
-                            <p class="caption">
-                                Results on the TREC Deep Learning document ranking task.
-                            </p>
-                        </div>
-                    </div>
-                </section>
-
                 <section id="fast-forward-idea" data-auto-animate data-auto-animate-id="fast-forward">
                     <h2><span class="textsc">Fast-Forward</span> indexes</h2>
                     <hr class="divider">
                     <p>
-                        $\phi (q, d) = \alpha \cdot \phi_S (q, d) + (1 - \alpha) \ \cdot $
-                        <span class="fragment highlight-green" data-fragment-index="1">$\phi_D(q, d)$</span>
+                        <b>Interpolating lexical</b> retrieval and <b>semantic</b> re-ranking scores improves the
+                        performance:
+                    </p>
+                    <p>
+                        $\phi (q, d) =
+                        \alpha \cdot \underbrace{\phi_S (q, d)}_{\text{Retrieval}} +
+                        (1 - \alpha) \ \cdot$
+                        <span class="fragment highlight-green" data-fragment-index="1">
+                            $\underbrace{\phi_D(q, d)}_{\text{Re-ranking}}$
+                        </span>
                     </p>
                     <p class="fragment" data-fragment-index="1">
                         Our approach:
                         <b class="fragment highlight-green" data-fragment-index="1">
-                            Efficient re-ranking with dual encoders</b>.
+                            Efficient re-ranking with dual-encoders</b>.
                     </p>
                     <hr class="divider">
                     <p class="fragment" data-fragment-index="2">
@@ -563,7 +506,7 @@
                         <span class="fragment highlight-green" data-fragment-index="2">
                             $\phi_D^{FF} (q, d)$
                         </span>
-                        $= \zeta (q) \cdot \eta^{FF} (d) $
+                        $= \zeta (q) \cdot \eta^{FF} (d)$
                     </p>
                 </section>
 
@@ -616,30 +559,24 @@
                     </p>
                 </section>
 
-                <section id="fast-forward-es-idea" data-auto-animate data-auto-animate-id="es">
+                <section id="fast-forward-es">
                     <h2>Early stopping</h2>
                     <hr class="divider">
-                    <p>
-                        Many tasks require only a <b>small number of documents</b> (e.g., the top-$10$).
-                    </p>
-                    <hr class="divider">
-                    <p class="fragment" data-fragment-index="1">
-                        <b>Lexical</b> (sparse) and <b>semantic</b> (dense) scores are <b>usually correlated</b>.
-                    </p>
-                    <p class="fragment" data-fragment-index="1">
-                        In many cases, it is <b>not necessary to compute all semantic scores</b>.
-                    </p>
-                    <hr class="divider">
-                    <p class="fragment" data-fragment-index="2">
-                        We propose an approach for <b>early stopping</b>.
-                    </p>
-                </section>
-
-                <section id="fast-forward-es-effects" data-auto-animate data-auto-animate-id="es">
-                    <h2>Early stopping</h2>
-                    <hr class="divider">
-                    <img class="fig" src="img/fast_forward/results/early_stopping_out.svg">
-                    <p class="caption">ANCE on TREC-DL 2019 passage ranking with early stopping.</p>
+                    <div class="column-layout" style="grid-template-columns: 40% auto;">
+                        <div class="column-item c-wide">
+                            <p>
+                                Many tasks require only a <b>small number of documents</b> (e.g., the top-$10$).
+                            </p>
+                            <p class="fragment">
+                                <b>Early stopping</b> exploits correlations of retriever and re-ranker to <b>limit the
+                                    number of documents to be re-ranked</b>.
+                            </p>
+                        </div>
+                        <div class="column-item fragment">
+                            <img class="fig" src="img/fast_forward/results/early_stopping_out.svg">
+                            <p class="caption">ANCE on TREC-DL 2019 passage ranking with early stopping.</p>
+                        </div>
+                    </div>
                 </section>
 
                 <section id="fast-forward-encoders">
@@ -1518,6 +1455,71 @@
                     <p class="fragment">
                         We propose <b>sequential coalescing</b> to compress maxP indexes.
                     </p>
+                </section>
+
+                <section id="fast-forward-motivation">
+                    <h2><span class="textsc">Fast-Forward</span> indexes: Motivation</h2>
+                    <hr class="divider">
+                    <div class="column-layout" style="grid-template-columns: auto 50%;">
+                        <div class="column-item">
+                            <div class="c-wide">
+                                <p class="fragment" data-fragment-index="1">
+                                    <span class="fragment highlight-red" data-fragment-index="1">Sparse retrieval</span>
+                                    is fast, but not competitive on its own.
+                                </p>
+                                <hr class="divider">
+                                <p class="fragment" data-fragment-index="2">
+                                    Dense retrieval shows good nDCG, but recall suffers and <b>it is slow</b>.
+                                </p>
+                                <hr class="divider">
+                                <p class="fragment" data-fragment-index="3">
+                                    <span class="fragment highlight-green" data-fragment-index="3">
+                                        Re-ranking using dense retrieval models
+                                    </span>
+                                    works well.
+                                </p>
+                                <hr class="divider">
+                                <p class="fragment" data-fragment-index="4">
+                                    <span class="fragment highlight-blue" data-fragment-index="4">
+                                        Score interpolation
+                                    </span>
+                                    further helps:
+                                </p>
+                                <p class="eq fragment" data-fragment-index="4">
+                                    <span class="fragment highlight-blue" data-fragment-index="4">
+                                        $\phi (q, d)$
+                                    </span>
+                                    $= \alpha$
+                                    <span class="fragment highlight-red" data-fragment-index="4">
+                                        $\phi_S (q, d)$
+                                    </span>
+                                    $+\ (1 - \alpha) $
+                                    <span class="fragment highlight-green" data-fragment-index="4">
+                                        $\phi_D(q, d)$
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- styling here is required by Safari -->
+                        <div class="column-item" style="display: grid; height: 100%;">
+                            <div class="tab r-stack">
+                                <img class="fragment fade-out" data-fragment-index="1"
+                                    src="img/fast_forward/motivation/motivation_tab_out.svg">
+                                <img class="fragment fade-in-then-out" data-fragment-index="1"
+                                    src="img/fast_forward/motivation/motivation_tab_1_out.svg">
+                                <img class="fragment fade-in-then-out" data-fragment-index="2"
+                                    src="img/fast_forward/motivation/motivation_tab_1_out.svg">
+                                <img class="fragment fade-in-then-out" data-fragment-index="3"
+                                    src="img/fast_forward/motivation/motivation_tab_2_out.svg">
+                                <img class="fragment fade-in-then-out" data-fragment-index="4"
+                                    src="img/fast_forward/motivation/motivation_tab_3_out.svg">
+                            </div>
+                            <p class="caption">
+                                Results on the TREC Deep Learning document ranking task.
+                            </p>
+                        </div>
+                    </div>
                 </section>
 
                 <section id="fast-forward-sc-demo">
