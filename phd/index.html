@@ -486,10 +486,10 @@
                     </p>
                     <p>
                         $\phi (q, d) =
-                        \alpha \cdot \underbrace{\phi_S (q, d)}_{\text{Retrieval}} +
+                        \alpha \cdot \underbrace{\phi_S (q, d)}_{\text{retrieval}} +
                         (1 - \alpha) \ \cdot$
                         <span class="fragment highlight-green" data-fragment-index="1">
-                            $\underbrace{\phi_D(q, d)}_{\text{Re-ranking}}$
+                            $\underbrace{\phi_D(q, d)}_{\text{re-ranking}}$
                         </span>
                     </p>
                     <p class="fragment" data-fragment-index="1">
@@ -519,7 +519,7 @@
                     <hr class="divider">
                     <img class="fig" src="img/fast_forward/results/comparison_out.svg" style="margin: 0;">
                     <p class="caption">
-                        TCT-ColBERT on the TREC-DL 2019 document ranking task.
+                        TCT-ColBERT on <span class="textsc">TREC-DL-Doc’19</span>.
                     </p>
                     <hr class="divider">
                     <p class="fragment">
@@ -555,7 +555,7 @@
                     <hr class="divider">
                     <img class="fig" src="img/fast_forward/results/coalescing_out.svg">
                     <p class="caption">
-                        TCT-ColBERT on TREC-DL 2019 document ranking with sequential coalescing.
+                        TCT-ColBERT on <span class="textsc">TREC-DL-Doc’19</span> with sequential coalescing.
                     </p>
                 </section>
 
@@ -574,7 +574,8 @@
                         </div>
                         <div class="column-item fragment">
                             <img class="fig" src="img/fast_forward/results/early_stopping_out.svg">
-                            <p class="caption">ANCE on TREC-DL 2019 passage ranking with early stopping.</p>
+                            <p class="caption">ANCE on <span class="textsc">TREC-DL-Psg’19</span> with early stopping.
+                            </p>
                         </div>
                     </div>
                 </section>
@@ -702,8 +703,7 @@
                             <div class="c-wide">
                                 <p>
                                     <i>Selective document encoders</i> <b>dynamically shorten</b> batches of input
-                                    documents
-                                    during inference.
+                                    documents during inference.
                                 </p>
                                 <hr class="divider">
                                 <p class="fragment">
@@ -1501,23 +1501,25 @@
                             </div>
                         </div>
 
-                        <!-- styling here is required by Safari -->
-                        <div class="column-item" style="display: grid; height: 100%;">
-                            <div class="tab r-stack">
-                                <img class="fragment fade-out" data-fragment-index="1"
-                                    src="img/fast_forward/motivation/motivation_tab_out.svg">
-                                <img class="fragment fade-in-then-out" data-fragment-index="1"
-                                    src="img/fast_forward/motivation/motivation_tab_1_out.svg">
-                                <img class="fragment fade-in-then-out" data-fragment-index="2"
-                                    src="img/fast_forward/motivation/motivation_tab_1_out.svg">
-                                <img class="fragment fade-in-then-out" data-fragment-index="3"
-                                    src="img/fast_forward/motivation/motivation_tab_2_out.svg">
-                                <img class="fragment fade-in-then-out" data-fragment-index="4"
-                                    src="img/fast_forward/motivation/motivation_tab_3_out.svg">
+                        <div class="column-item">
+                            <!-- required by Safari -->
+                            <div style="display: grid;">
+                                <div class="tab r-stack" style="height: 100%;">
+                                    <img class="fragment fade-out" data-fragment-index="1"
+                                        src="img/fast_forward/motivation/motivation_tab_out.svg">
+                                    <img class="fragment fade-in-then-out" data-fragment-index="1"
+                                        src="img/fast_forward/motivation/motivation_tab_1_out.svg">
+                                    <img class="fragment fade-in-then-out" data-fragment-index="2"
+                                        src="img/fast_forward/motivation/motivation_tab_1_out.svg">
+                                    <img class="fragment fade-in-then-out" data-fragment-index="3"
+                                        src="img/fast_forward/motivation/motivation_tab_2_out.svg">
+                                    <img class="fragment fade-in-then-out" data-fragment-index="4"
+                                        src="img/fast_forward/motivation/motivation_tab_3_out.svg">
+                                </div>
+                                <p class="caption">
+                                    Results on <span class="textsc">TREC-DL-Doc’19</span>.
+                                </p>
                             </div>
-                            <p class="caption">
-                                Results on the TREC Deep Learning document ranking task.
-                            </p>
                         </div>
                     </div>
                 </section>
@@ -2029,7 +2031,7 @@
                     <h2><span class="textsc">Fast-Forward</span> results</h2>
                     <hr class="divider">
                     <img class="tab" style="margin: 0;" src="img/fast_forward/results/doc_ranking_coalescing_out.svg">
-                    <p class="caption">Results on the TREC-DL document ranking task.</p>
+                    <p class="caption">Document ranking results.</p>
                 </section>
 
                 <section id="fast-forward-results-2" data-auto-animate data-auto-animate-id="ff-res">
@@ -2037,7 +2039,7 @@
                     <hr class="divider">
                     <img class="tab" style="margin: 0;"
                         src="img/fast_forward/results/passage_ranking_early_stopping_out.svg">
-                    <p class="caption">Results on the TREC-DL 2019 passage ranking task.</p>
+                    <p class="caption">Results on <span class="textsc">TREC-DL-Psg’19</span>.</p>
                 </section>
 
                 <section id="fast-forward-results-3" data-auto-animate data-auto-animate-id="ff-res">
