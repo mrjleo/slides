@@ -18,7 +18,7 @@
             ylabel={\%},
             grid=major,
         ]
-        \addplot+[
+        \addplot[
             ybar,
             area legend,
             plotColorNeutral*,
@@ -43,14 +43,14 @@
         ]
         \addlegendimage{/pgfplots/refstyle=plot1}
         \addlegendentry{Size reduction [\%]}
-        \addplot+[
+        \addplot[
             const plot mark mid,
             very thick,
             plotColor1,
             mark=square,
         ] table[x index=0, y index=4] {\data};
         \addlegendentry{\ap{}}
-        \addplot+[
+        \addplot[
             const plot mark mid,
             very thick,
             plotColor2,

@@ -3,7 +3,6 @@
 
 \begin{document}
 \begin{tikzpicture}
-    \pgfplotstableread[col sep=comma]{early_stopping.csv}\data
     \begin{axis}[
             width=12cm,
             height=7cm,
@@ -25,12 +24,16 @@
             very thick,
             plotColor1,
         ] {5000};
-        \addplot+[
+        \addplot[
             const plot mark mid,
             very thick,
             mark=o,
             plotColor2,
-        ] table[y index=1] {\data};
+        ] table[
+                col sep=comma,
+                x index=0,
+                y index=1,
+            ] {early_stopping.csv};
     \end{axis}
 \end{tikzpicture}
 \end{document}

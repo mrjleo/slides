@@ -3,7 +3,6 @@
 
 \begin{document}
 \begin{tikzpicture}
-    \pgfplotstableread[col sep=comma]{selbert.csv}\data
     \begin{axis}[
             width=7cm,
             grid=major,
@@ -29,7 +28,10 @@
             very thick,
             mark=square,
             plotColor2,
-        ] table[y index=2] {\data};
+        ] table[
+                col sep=comma,
+                y index=2,
+            ] {selbert.csv};
     \end{axis}
 \end{tikzpicture}
 \end{document}

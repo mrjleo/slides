@@ -3,19 +3,21 @@
 
 \begin{document}
 \begin{tikzpicture}
-    \pgfplotstableread[col sep=comma]{beir_k.csv}\data
     \begin{axis}[
             width=7cm,
             xlabel={$k$},
             ylabel={\ndcg{}@\num{10}},
             grid=major,
         ]
-        \addplot+[
+        \addplot[
             const plot mark mid,
             very thick,
             mark=none,
             plotColor3,
-        ] table[y index=3] {\data};
+        ] table[
+                col sep=comma,
+                y index=3,
+            ] {beir_k.csv};
     \end{axis}
 \end{tikzpicture}
 \end{document}
