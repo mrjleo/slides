@@ -3,12 +3,11 @@
 
 \begin{document}
 \begin{tikzpicture}
-    \pgfplotstableread[col sep=comma]{selbert.csv}\data
     \begin{axis}[
             width=7cm,
             grid=major,
             xlabel={$p$},
-            ylabel={Latency [sec]},
+            ylabel={Latency [ms]},
             legend entries={\bertbase{},\selbert{}},
             legend cell align={left},
             legend pos=south east,
@@ -21,13 +20,16 @@
             mark=none,
             very thick,
             plotColor1,
-        ] {0.8979388236};
+        ] {897.9388236};
         \addplot[
             const plot mark mid,
             very thick,
             mark=square,
             plotColor2,
-        ] table[y index=1] {\data};
+        ] table[
+                col sep=comma,
+                y expr=\thisrowno{1} * 1000, % convert seconds to milliseconds
+            ] {selbert.csv};
     \end{axis}
 \end{tikzpicture}
 \end{document}
