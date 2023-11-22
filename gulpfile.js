@@ -36,7 +36,6 @@ gulp.task(
       root: root,
       port: port,
       host: host,
-      livereload: true,
       livereload: { port: lrport },
     });
 
