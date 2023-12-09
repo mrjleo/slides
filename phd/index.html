@@ -993,26 +993,35 @@
 
                     <div class="fig r-stack">
                         <img src="img/select_and_rank/extractive_explanation/example_nohl_out.svg"
-                            class="fragment fade-out" data-fragment-index="2">
+                            class="fragment fade-out" data-fragment-index="1">
                         <img src="img/select_and_rank/extractive_explanation/example_hl_out.svg"
-                            class="fragment fade-in" data-fragment-index="2">
+                            class="fragment fade-in" data-fragment-index="1">
                     </div>
-                    <p class="caption">Example document for query: "how long to hold bow in yoga" 🤔</p>
+                    <p class="caption">Example document for query: "<b>how long to hold bow in yoga</b>" 🤔</p>
                     <hr class="divider">
-                    <p class="fragment" data-fragment-index="1">Why is this document relevant w.r.t. the query?</p>
+                    <p class="fragment" data-fragment-index="2">
+                        Why should we show the ranking model the whole document?
+                    </p>
                 </section>
 
                 <section id="select-and-rank-paradigm" data-auto-animate data-auto-animate-id="sr">
                     <h2 class="textsc">Select-and-Rank</h2>
                     <hr class="divider">
+                    <p>
+                        <b>Assumption</b>: $k$ sentences of a document are enough to estimate its relevance w.r.t. a
+                        query.
+                    </p>
+                    <hr class="divider">
                     <div class="column-layout">
-                        <div class="column-item">
+                        <div class="column-item fragment" data-fragment-index="2">
                             <img class="fig" src="img/select_and_rank/sr_paradigm_out.svg">
                             <p class="caption">The <span class="textsc">Select-and-Rank</span> paradigm.</p>
                         </div>
                         <div class="column-item">
                             <div class="c-wide">
-                                <p>A document $d$ is split into sentences $s_i$.</p>
+                                <p class="fragment" data-fragment-index="2">
+                                    A document $d$ is split into sentences $s_i$.
+                                </p>
                                 <hr class="divider">
                                 <p class="fragment">
                                     The <b><i>selector</i></b> assigns a <b>score</b> to each sentence $s_i$ w.r.t. the
@@ -2155,7 +2164,7 @@
                 <section id="select-and-rank-application-1" data-auto-animate data-auto-animate-id="sr-app">
                     <h2><span class="textsc">Select-and-Rank</span> application</h2>
                     <hr class="divider">
-                    <div class="column-layout">
+                    <div class="column-layout" style="margin: 0 2em;">
                         <div class="column-item">
                             <img class="fig" src="img/select_and_rank/leakage/doc_unaltered_out.svg">
                             <p class="caption">
