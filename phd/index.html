@@ -1007,14 +1007,21 @@
                 <section id="select-and-rank-paradigm" data-auto-animate data-auto-animate-id="sr">
                     <h2 class="textsc">Select-and-Rank</h2>
                     <hr class="divider">
+                    <p>
+                        <b>Assumption</b>: $k$ sentences of a document are enough to estimate its relevance w.r.t. a
+                        query.
+                    </p>
+                    <hr class="divider">
                     <div class="column-layout">
-                        <div class="column-item">
+                        <div class="column-item fragment" data-fragment-index="2">
                             <img class="fig" src="img/select_and_rank/sr_paradigm_out.svg">
                             <p class="caption">The <span class="textsc">Select-and-Rank</span> paradigm.</p>
                         </div>
                         <div class="column-item">
                             <div class="c-wide">
-                                <p>A document $d$ is split into sentences $s_i$.</p>
+                                <p class="fragment" data-fragment-index="2">
+                                    A document $d$ is split into sentences $s_i$.
+                                </p>
                                 <hr class="divider">
                                 <p class="fragment">
                                     The <b><i>selector</i></b> assigns a <b>score</b> to each sentence $s_i$ w.r.t. the
