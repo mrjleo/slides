@@ -575,7 +575,7 @@
                     <p class="caption fragment" data-fragment-index="1">The distribution of query and passage lengths in
                         the MS MARCO corpus.</p>
                     <hr class="divider">
-                    <p class="fragment">We propose encoders to deal with these charactertistics <b>more efficiently</b>.
+                    <p class="fragment"><b>Intuition</b>: Encoders should be adapted to these characteristics.
                     </p>
                 </section>
 
@@ -583,8 +583,8 @@
                     <h2>Efficient query encoders</h2>
                     <hr class="divider">
                     <p>
-                        Queries are <b>short</b> and <b>concise</b>, but query encoders are usually based on <b>complex
-                            self-attention-based Transformer</b> models.
+                        Queries are <b>short</b> and <b>concise</b>; a <b>simple model</b> should be able to represent
+                        them.
                     </p>
                     <hr class="divider">
                     <div class="column-layout fragment">
