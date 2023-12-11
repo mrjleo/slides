@@ -613,10 +613,13 @@
                 <section id="fast-forward-query-encoders-results" data-auto-animate data-auto-animate-id="qenc">
                     <h2>Efficient query encoders</h2>
                     <hr class="divider">
-                    <p>Lightweight query encoders can achieve good performance, but it depends on the dataset:</p>
                     <img src="img/fast_forward/results/query_encoders/comparison_out.svg" class="fig">
                     <p class="caption">
                         Latency and ranking performance. Latency measured with batch size $256$.
+                    </p>
+                    <hr class="divider">
+                    <p class="fragment">
+                        Lightweight query encoders are <b>much faster</b> and can achieve <b>good performance</b>.
                     </p>
                 </section>
 
@@ -710,14 +713,14 @@
                     data-auto-animate-id="denc">
                     <h2>Selective document encoders</h2>
                     <hr class="divider">
-                    <p>
-                        Selective document encoders incur a <b>small performance hit</b>, but <b>decrease the indexing
-                            latency</b> notably:
-                    </p>
                     <img class="fig" src="img/fast_forward/results/doc_encoders/comparison_out.svg">
                     <p class="caption">
                         Indexing latency and ranking performance on <span class="textsc">MSM-Psg-Dev</span>. Latency
                         measured with batch size $256$.
+                    </p>
+                    <hr class="divider">
+                    <p class="fragment">
+                        <b>Up to 50%</b> of the document tokens can be removed without difference in performance.
                     </p>
                 </section>
 
