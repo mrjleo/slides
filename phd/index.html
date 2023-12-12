@@ -908,32 +908,6 @@
                     </div>
                 </section>
 
-                <section id="bert-dmn-fine-tuning">
-                    <h2>The effect of fine-tuning</h2>
-                    <hr class="divider">
-                    <div class="column-layout" style="grid-template-columns: auto 60%;">
-                        <div class="column-item">
-                            <div class="c-wide">
-                                <p>
-                                    The plot shows the <b>average cosine similarity</b> of BERT representations.
-                                </p>
-                                <hr class="divider">
-                                <p class="fragment">
-                                    BERT-DMN shows much lower diffusion.
-                                </p>
-                                <hr class="divider">
-                                <p class="fragment">
-                                    This suggests that fine-tuning vanilla BERT merely “aggregates” results.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="column-item">
-                            <img class="fig" src="img/bert_dmn/results/diffusion_out.svg">
-                            <p class="caption">The <i>diffusion of information</i>.</p>
-                        </div>
-                    </div>
-                </section>
-
                 <section id="bert-dmn-summary">
                     <h2>Summary</h2>
                     <hr class="divider">
@@ -1099,27 +1073,6 @@
                             </p>
                         </div>
                     </div>
-                </section>
-
-                <section id="select-and-rank-comprehensiveness">
-                    <h2>Comprehensiveness</h2>
-                    <hr class="divider">
-                    <p>
-                        <i>Comprehensiveness</i> measures the <b>quality of rationales</b>:
-                    </p>
-                    <p>
-                        <i>
-                            How well does the ranking model perform using the document <b>without the selected
-                                sentences</b>?
-                        </i>
-                    </p>
-                    <hr class="divider">
-                    <img class="fig fragment" src="img/select_and_rank/results/comprehensiveness_out.svg"
-                        data-fragment-index="1">
-                    <p class="caption fragment" data-fragment-index="1">
-                        Ranking performance on TREC-DL-Doc’19 using $k = 20$, where $N$ sentences are removed (leaving
-                        $k-N$ sentences).
-                    </p>
                 </section>
 
                 <section id="select-and-rank-faithfulness" data-auto-animate data-auto-animate-id="faithfulness">
@@ -2121,6 +2074,32 @@
                     </div>
                 </section>
 
+                <section id="bert-dmn-fine-tuning">
+                    <h2>BERT-DMN: The effect of fine-tuning</h2>
+                    <hr class="divider">
+                    <div class="column-layout" style="grid-template-columns: auto 60%;">
+                        <div class="column-item">
+                            <div class="c-wide">
+                                <p>
+                                    The plot shows the <b>average cosine similarity</b> of BERT representations.
+                                </p>
+                                <hr class="divider">
+                                <p class="fragment">
+                                    BERT-DMN shows much lower diffusion.
+                                </p>
+                                <hr class="divider">
+                                <p class="fragment">
+                                    This suggests that fine-tuning vanilla BERT merely “aggregates” results.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="column-item">
+                            <img class="fig" src="img/bert_dmn/results/diffusion_out.svg">
+                            <p class="caption">The <i>diffusion of information</i>.</p>
+                        </div>
+                    </div>
+                </section>
+
                 <section id="select-and-rank-results-1" data-auto-animate data-auto-animate-id="sr-res">
                     <h2><span class="textsc">Select-and-Rank</span> results</h2>
                     <hr class="divider">
@@ -2136,6 +2115,27 @@
                     <img class="tab" style="margin: 0;" src="img/select_and_rank/results/ranking_2_out.svg">
                     <p class="caption">
                         Ranking performance with $k = 20$ selected sentences.
+                    </p>
+                </section>
+
+                <section id="select-and-rank-comprehensiveness">
+                    <h2><span class="textsc">Select-and-Rank</span>: Comprehensiveness</h2>
+                    <hr class="divider">
+                    <p>
+                        <i>Comprehensiveness</i> measures the <b>quality of rationales</b>:
+                    </p>
+                    <p>
+                        <i>
+                            How well does the ranking model perform using the document <b>without the selected
+                                sentences</b>?
+                        </i>
+                    </p>
+                    <hr class="divider">
+                    <img class="fig fragment" src="img/select_and_rank/results/comprehensiveness_out.svg"
+                        data-fragment-index="1">
+                    <p class="caption fragment" data-fragment-index="1">
+                        Ranking performance on TREC-DL-Doc’19 using $k = 20$, where $N$ sentences are removed (leaving
+                        $k-N$ sentences).
                     </p>
                 </section>
 
