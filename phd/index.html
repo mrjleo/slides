@@ -1015,23 +1015,22 @@
                                     $\left(w_1, \dots, w_{|d|} \right) = \Psi(q, d)$
                                 </p>
                                 <hr class="divider">
-                                <p class="fragment" data-fragment-index="2">
+                                <p class="fragment" data-fragment-index="1">
                                     <b>End-to-end training</b>: We draw a <b>relaxed $k$-hot sample</b>:<sup>1</sup>
                                 </p>
-                                <p class="eq fragment" data-fragment-index="2">
+                                <p class="eq fragment" data-fragment-index="1">
                                     $\left(\hat{w}_1, \dots, \hat{w}_{|d|} \right) = \operatorname{SubsetSample}(w, k,
                                     \tau)$
                                 </p>
                                 <hr class="divider">
-                                <p class="fragment" data-fragment-index="3">
+                                <p class="fragment" data-fragment-index="2">
                                     The <b>query-document relevance</b> is computed by the <b>ranker</b> $\Phi$ using
-                                    the
-                                    <b>selected sentences $\hat{d}$</b>:
+                                    the <b>selected sentences $\hat{d}$</b>:
                                 </p>
-                                <p class="eq fragment" data-fragment-index="3">
+                                <p class="eq fragment" data-fragment-index="2">
                                     $\phi(q, d) = \Phi \left(q, \hat{d} \right)$
                                 </p>
-                                <p class="fragment" data-fragment-index="3">
+                                <p class="fragment" data-fragment-index="2">
                                     Each token in $\hat{d}$ is multiplied by its corresponding $\hat{w_i}$ in order to
                                     preserve the gradients.
                                 </p>
@@ -1039,7 +1038,7 @@
                         </div>
                     </div>
                     <hr class="divider">
-                    <p class="footnote fragment" data-fragment-index="2">
+                    <p class="footnote fragment" data-fragment-index="1">
                         <sup>1</sup>Sang Michael Xie and Stefano Ermon. Reparameterizable Subset Sampling via
                         Continuous Relaxations. IJCAI 2019.
                     </p>
