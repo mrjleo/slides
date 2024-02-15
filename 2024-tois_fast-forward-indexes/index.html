@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../node_modules/reveal.js/dist/theme/serif.css">
     <link rel="stylesheet" href="../node_modules/reveal.js/plugin/highlight/monokai.css">
     <link rel="stylesheet" href="../common.css">
-    <link rel="stylesheet" href="../phd/style.css">
+    <link rel="stylesheet" href="../2023-phd/style.css">
 </head>
 
 <body>
@@ -191,15 +191,15 @@
                             <div style="display: grid;">
                                 <div class="tab r-stack" style="height: 100%;">
                                     <img class="fragment fade-out" data-fragment-index="1"
-                                        src="../phd/img/fast_forward/motivation/motivation_tab_out.svg">
+                                        src="../2023-phd/img/fast_forward/motivation/motivation_tab_out.svg">
                                     <img class="fragment fade-in-then-out" data-fragment-index="1"
-                                        src="../phd/img/fast_forward/motivation/motivation_tab_1_out.svg">
+                                        src="../2023-phd/img/fast_forward/motivation/motivation_tab_1_out.svg">
                                     <img class="fragment fade-in-then-out" data-fragment-index="2"
-                                        src="../phd/img/fast_forward/motivation/motivation_tab_1_out.svg">
+                                        src="../2023-phd/img/fast_forward/motivation/motivation_tab_1_out.svg">
                                     <img class="fragment fade-in-then-out" data-fragment-index="3"
-                                        src="../phd/img/fast_forward/motivation/motivation_tab_2_out.svg">
+                                        src="../2023-phd/img/fast_forward/motivation/motivation_tab_2_out.svg">
                                     <img class="fragment fade-in-then-out" data-fragment-index="4"
-                                        src="../phd/img/fast_forward/motivation/motivation_tab_3_out.svg">
+                                        src="../2023-phd/img/fast_forward/motivation/motivation_tab_3_out.svg">
                                 </div>
                                 <p class="caption">
                                     Results on <span class="textsc">TREC-DL-Doc’19</span>.
@@ -241,7 +241,7 @@
                         The <b>look-up</b> operation is much more <b>efficient</b> than actual re-ranking:
                     </p>
                     <hr class="divider">
-                    <img class="fig" src="../phd/img/fast_forward/results/comparison_out.svg" style="margin: 0;">
+                    <img class="fig" src="../2023-phd/img/fast_forward/results/comparison_out.svg" style="margin: 0;">
                     <p class="caption">
                         <span class="textsc">TCT-ColBERT</span> on the <span class="textsc">TREC-DL-Doc’19</span>.
                     </p>
@@ -250,7 +250,8 @@
                 <section id="fast-forward-results">
                     <h2>Passage ranking results</h2>
                     <hr class="divider">
-                    <img class="tab" style="margin: 0;" src="../phd/img/fast_forward/results/passage_ranking_out.svg">
+                    <img class="tab" style="margin: 0;"
+                        src="../2023-phd/img/fast_forward/results/passage_ranking_out.svg">
                     <p class="caption">Passage ranking results. Latency measured on CPU.</p>
                     <hr class="divider">
                     <p class="fragment">
@@ -278,7 +279,7 @@
                     <hr class="divider">
                     <div class="column-layout" style="grid-template-columns: 45% auto;">
                         <div class="column-item">
-                            <img class="fig" src="../phd/img/fast_forward/coalescing_out.svg">
+                            <img class="fig" src="../2023-phd/img/fast_forward/coalescing_out.svg">
                             <p class="caption">Look-up operation in a coalesced index.</p>
                         </div>
                         <div class="column-item">
@@ -299,7 +300,7 @@
                 <section id="fast-forward-sc-effects" data-auto-animate data-auto-animate-id="sc">
                     <h2>Sequential coalescing</h2>
                     <hr class="divider">
-                    <img class="fig" src="../phd/img/fast_forward/results/coalescing_out.svg">
+                    <img class="fig" src="../2023-phd/img/fast_forward/results/coalescing_out.svg">
                     <p class="caption">
                         <span class="textsc">TCT-ColBERT</span> on <span class="textsc">TREC-DL-Doc’19</span> with
                         sequential coalescing.
@@ -335,14 +336,14 @@
                 <section id="fast-forward-es" data-auto-animate data-auto-animate-id="es">
                     <h2>Early stopping</h2>
                     <hr class="divider">
-                    <img class="fig" src="../phd/img/fast_forward/early_stopping_out.svg">
+                    <img class="fig" src="../2023-phd/img/fast_forward/early_stopping_out.svg">
                     <p class="caption">The <i>early stopping</i> approach illustrated.</p>
                 </section>
 
                 <section id="fast-forward-es-effects" data-auto-animate data-auto-animate-id="es">
                     <h2>Early stopping</h2>
                     <hr class="divider">
-                    <img class="fig" src="../phd/img/fast_forward/results/early_stopping_out.svg">
+                    <img class="fig" src="../2023-phd/img/fast_forward/results/early_stopping_out.svg">
                     <p class="caption">ANCE on <span class="textsc">TREC-DL-Psg’19</span> with early stopping.</p>
                 </section>
 
@@ -350,7 +351,7 @@
                     <h2>Early stopping</h2>
                     <hr class="divider">
                     <img class="tab" style="margin: 0;"
-                        src="../phd/img/fast_forward/results/passage_ranking_early_stopping_out.svg">
+                        src="../2023-phd/img/fast_forward/results/passage_ranking_early_stopping_out.svg">
                     <p class="caption">Results on <span class="textsc">TREC-DL-Psg’19</span>.</p>
                 </section>
 
@@ -360,7 +361,7 @@
                     <p>Queries and documents have <b>different characteristics</b> in terms of length and complexity.
                     </p>
                     <img class="fig fragment" data-fragment-index="1"
-                        src="../phd/img/fast_forward/length_stats_out.svg">
+                        src="../2023-phd/img/fast_forward/length_stats_out.svg">
                     <p class="caption fragment" data-fragment-index="1">The distribution of query and passage lengths in
                         the MS MARCO corpus.</p>
                     <hr class="divider">
@@ -378,7 +379,7 @@
                     <hr class="divider">
                     <div class="column-layout fragment">
                         <div class="column-item">
-                            <img class="fig" src="../phd/img/fast_forward/query_encoder_out.svg">
+                            <img class="fig" src="../2023-phd/img/fast_forward/query_encoder_out.svg">
                             <p class="caption">Self-attention-based query encoder.</p>
                         </div>
                         <div class="column-item">
@@ -405,25 +406,28 @@
                     <p>Lightweight query encoders can achieve similar performance, but it depends on the dataset:</p>
                     <div class="column-layout">
                         <div class="column-item fragment custom grow-active">
-                            <img class="fig" src="../phd/img/fast_forward/results/query_encoders/latency_out.svg">
+                            <img class="fig" src="../2023-phd/img/fast_forward/results/query_encoders/latency_out.svg">
                             <p class="caption">
                                 Query encoding latency in seconds.
                             </p>
                         </div>
                         <div class="column-item fragment custom grow-active">
-                            <img class="fig" src="../phd/img/fast_forward/results/query_encoders/msmpsgdev_out.svg">
+                            <img class="fig"
+                                src="../2023-phd/img/fast_forward/results/query_encoders/msmpsgdev_out.svg">
                             <p class="caption">
                                 nDCG@10 on <span class="textsc">MSM-Psg-Dev</span>.
                             </p>
                         </div>
                         <div class="column-item fragment custom grow-active">
-                            <img class="fig" src="../phd/img/fast_forward/results/query_encoders/trecdspsg19_out.svg">
+                            <img class="fig"
+                                src="../2023-phd/img/fast_forward/results/query_encoders/trecdspsg19_out.svg">
                             <p class="caption">
                                 nDCG@10 on <span class="textsc">TREC-DL-Psg’19</span>.
                             </p>
                         </div>
                         <div class="column-item fragment custom grow-active">
-                            <img class="fig" src="../phd/img/fast_forward/results/query_encoders/trecdlpsg20_out.svg">
+                            <img class="fig"
+                                src="../2023-phd/img/fast_forward/results/query_encoders/trecdlpsg20_out.svg">
                             <p class="caption">
                                 nDCG@10 on <span class="textsc">TREC-DL-Psg’20</span>.
                             </p>
@@ -493,7 +497,7 @@
                     <hr class="divider">
                     <div class="column-layout" style="grid-template-columns: 50% auto;">
                         <div class="column-item">
-                            <img class="fig" src="../phd/img/fast_forward/selbert_out.svg">
+                            <img class="fig" src="../2023-phd/img/fast_forward/selbert_out.svg">
                             <p class="caption">Selective document encoder.</p>
                         </div>
                         <div class="column-item">
@@ -528,13 +532,13 @@
                     </p>
                     <div class="column-layout">
                         <div class="column-item">
-                            <img class="fig" src="../phd/img/fast_forward/results/doc_encoders/latency_out.svg">
+                            <img class="fig" src="../2023-phd/img/fast_forward/results/doc_encoders/latency_out.svg">
                             <p class="caption">
                                 Encoding latency, batch size: 256.
                             </p>
                         </div>
                         <div class="column-item">
-                            <img class="fig" src="../phd/img/fast_forward/results/doc_encoders/attn_out.svg">
+                            <img class="fig" src="../2023-phd/img/fast_forward/results/doc_encoders/attn_out.svg">
                             <p class="caption">
                                 Performance on <span class="textsc">MSM-Psg-Dev</span>.
                             </p>
@@ -560,7 +564,7 @@
                     </ul>
                     <hr class="divider">
                     <div class="github-container">
-                        <img class="github-qr" src="../phd/img/fast_forward/qr_github.svg">
+                        <img class="github-qr" src="../2023-phd/img/fast_forward/qr_github.svg">
                         <a class="github-url"
                             href="https://github.com/mrjleo/fast-forward-indexes">mrjleo/fast-forward-indexes</a>
                     </div>
