@@ -4,17 +4,17 @@ This repository contains slides for my presentations.
 - **Efficient Neural Ranking using Forward Indexes and Lightweight Encoders**\
   Jurek Leonhardt, Henrik Müller, Koustav Rudra, Megha Khosla, Abhijit Anand, Avishek Anand\
   Journal paper (TOIS, just accepted)\
-    [ACM](https://dl.acm.org/doi/10.1145/3631939) | [arXiv](https://arxiv.org/abs/2311.01263) | [slides](https://mrjleo.github.io/slides/tois24_fast-forward-indexes) | [code](https://github.com/mrjleo/fast-forward-indexes)
+  [ACM](https://dl.acm.org/doi/10.1145/3631939) | [arXiv](https://arxiv.org/abs/2311.01263) | [slides](https://mrjleo.github.io/slides/2024-tois_fast-forward-indexes) | [code](https://github.com/mrjleo/fast-forward-indexes)
 
 - **Efficient and Explainable Neural Ranking**\
   Jurek Leonhardt\
-  PhD thesis\
-  [slides](https://mrjleo.github.io/slides/phd)
+  PhD thesis (2023)\
+  [TIB](https://doi.org/10.15488/15769) | [slides](https://mrjleo.github.io/slides/2023-phd)
 
 - **Efficient Neural Ranking using Forward Indexes**\
   Jurek Leonhardt, Koustav Rudra, Megha Khosla, Abhijit Anand, Avishek Anand\
   Full paper (TheWebConf 2022)\
-  [ACM](https://dl.acm.org/doi/10.1145/3485447.3511955) | [arXiv](https://arxiv.org/abs/2110.06051) | [slides](https://mrjleo.github.io/slides/www22_fast-forward-indexes) | [code](https://github.com/mrjleo/fast-forward-indexes)
+  [ACM](https://dl.acm.org/doi/10.1145/3485447.3511955) | [arXiv](https://arxiv.org/abs/2110.06051) | [slides](https://mrjleo.github.io/slides/2022-www_fast-forward-indexes) | [code](https://github.com/mrjleo/fast-forward-indexes)
 
 ## Local Development
 Clone the repository and run the commands below.
