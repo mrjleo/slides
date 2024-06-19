@@ -1,0 +1,111 @@
+\documentclass{standalone}
+\input{../../2023-phd/img/_common.tex}
+
+\begin{document}
+\begin{tikzpicture}
+    % query
+    \node[
+        fignode,
+        align=center,
+    ] (Q) {Embedded \\ query};
+
+    % doc
+    \node[
+        fignode,
+        align=center,
+        right=1 of Q,
+    ] (D) {Embedded \\ document};
+
+    % split
+    \node[
+        framedfignode,
+        trapezium,
+        trapezium angle=120,
+        trapezium stretches=true,
+        below=0.5 of D,
+    ] (S) {Split};
+
+    % pool right
+    \node[
+        framedfignode,
+        below=0.5 of S,
+    ] (Pr) {Pool};
+
+    % pool left
+    \node[
+        framedfignode,
+    ] (Pl) at (Pr -| Q) {Pool};
+
+    % feed-forward
+    \node[
+        framedfignode,
+        minimum width=125,
+        below=0.5 of $(Pl.south)!0.5!(Pr.south)$,
+    ] (F) {Feed-forward};
+
+    % query representation
+    \node[
+        framedfignode,
+        below=0.5 of F.south -| Pl,
+    ] (Qr) {Q. rep.};
+
+    % sentence representations
+    \node[
+        framedfignode,
+        xshift=4,
+        yshift=-4,
+        fill=white,
+    ] (Srf) at (Qr -| Pr) {Sent. rep.};
+    \begin{scope}[on background layer]
+        \node[
+            framedfignode,
+            xshift=-4,
+            yshift=4,
+            fill=white,
+        ] (Srb) at (Qr -| Pr) {Sent. rep.};
+        \node[
+            framedfignode,
+            fill=white,
+        ] (Srm) at (Qr -| Pr) {Sent. rep.};
+    \end{scope}
+
+    % similarity
+    \node[
+        framedfignode,
+        circle,
+        below=0.5 of $(Qr.south)!0.5!(Srm.south)$,
+    ] (C) {Sim.};
+
+    % scores
+    \node[
+        framedfignode,
+        fill=white,
+        below=0.5 of C,
+    ] (Sm) {Scores};
+    \begin{scope}[on background layer]
+        \node[
+            framedfignode,
+            xshift=-4,
+            yshift=4,
+            fill=white,
+        ] (Sb) at (Sm) {Scores};
+    \end{scope}
+    \node[
+        framedfignode,
+        xshift=4,
+        yshift=-4,
+        fill=white,
+    ] (Sf) at (Sm) {Scores};
+
+    \draw[->] (Q) -- (Pl);
+    \draw[->] (D) -- (S);
+    \draw[->] (S) -- (Pr);
+    \draw[->] (Pl) -- (F.north -| Pl);
+    \draw[->] (Pr) -- (F.north -| Pr);
+    \draw[->] (F.south -| Qr) -- (Qr);
+    \draw[->] (F.south -| Srm) -- (Srm |- Srb.north);
+    \draw[->,rounded corners] (Qr) |- (C);
+    \draw[->,rounded corners] (Srm |- Srf.south) |- (C);
+    \draw[->] (C) -- (Sm |- Sb.north);
+\end{tikzpicture}
+\end{document}
