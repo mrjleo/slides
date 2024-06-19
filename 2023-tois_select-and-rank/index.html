@@ -50,6 +50,7 @@
         </section>
         <!-- end: title -->
 
+        <!-- motivation -->
         <section id="extractive-explanations">
           <h2>Extractive explanations</h2>
           <hr class="divider" />
@@ -74,7 +75,9 @@
             <b>Why should we even show the ranking model the whole document?</b>
           </p>
         </section>
+        <!-- end: motivation -->
 
+        <!-- method -->
         <section>
           <section id="paradigm" data-auto-animate data-auto-animate-id="sr">
             <h2 class="textsc">Select-and-Rank</h2>
@@ -168,7 +171,9 @@
             </p>
           </section>
         </section>
+        <!-- end: method -->
 
+        <!-- results -->
         <section>
           <section id="beir" data-auto-animate data-auto-animate-id="beir">
             <h2>BEIR benchmark</h2>
@@ -212,8 +217,34 @@
               </div>
             </div>
           </section>
-        </section>
 
+          <section id="comprehensiveness">
+            <h2>Comprehensiveness</h2>
+            <hr class="divider" />
+            <p>
+              <i>Comprehensiveness</i> measures the
+              <b>quality of rationales</b>:
+            </p>
+            <p>
+              <i>
+                How well does the ranking model perform using the document
+                <b>without the selected sentences</b>?
+              </i>
+            </p>
+            <hr class="divider" />
+            <img
+              class="fig"
+              src="../2023-phd/img/select_and_rank/results/comprehensiveness_out.svg"
+            />
+            <p class="caption">
+              Ranking performance on TREC-DL-Doc’19 using $k = 20$, where $N$
+              sentences are removed (leaving $k-N$ sentences).
+            </p>
+          </section>
+        </section>
+        <!-- end: results -->
+
+        <!-- study -->
         <section>
           <section
             id="faithfulness"
@@ -288,6 +319,7 @@
             </div>
           </section>
         </section>
+        <!-- end: study -->
 
         <section id="summary">
           <h2>Summary</h2>
