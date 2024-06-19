@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Extractive Explanations for Interpretable Text Ranking</title>
+    <link rel="stylesheet" href="../node_modules/reveal.js/dist/reveal.css" />
+    <link
+      rel="stylesheet"
+      href="../node_modules/reveal.js/dist/theme/serif.css"
+    />
+    <link
+      rel="stylesheet"
+      href="../node_modules/reveal.js/plugin/highlight/monokai.css"
+    />
+    <link rel="stylesheet" href="../common.css" />
+    <link rel="stylesheet" href="../2023-phd/style.css" />
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <!-- title -->
+        <section id="title-slide">
+          <div
+            style="
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              height: 2em;
+            "
+          >
+            <img style="height: 100%" src="../logos/luh.png" />
+            <p style="margin: 0.75em"></p>
+            <img style="height: 80%" src="../logos/l3s.webp" />
+            <p style="margin: auto"></p>
+            <img style="height: 80%" src="../logos/sobigdata++.png" />
+          </div>
+          <hr class="hide" style="height: 2em" />
+          <h2>Extractive Explanations</h2>
+          <h3>for Interpretable Text Ranking</h3>
+          <hr class="hide" style="height: 0.5em" />
+          <p style="font-size: large">
+            <b><u>Jurek Leonhardt</u></b
+            >, Koustav Rudra, Avishek Anand
+          </p>
+        </section>
+        <!-- end: title -->
+
+        <section id="extractive-explanations">
+          <h2>Extractive explanations</h2>
+          <hr class="divider" />
+
+          <div class="fig r-stack">
+            <img
+              src="../2023-phd/img/select_and_rank/extractive_explanation/example_nohl_out.svg"
+              class="fragment fade-out"
+              data-fragment-index="1"
+            />
+            <img
+              src="../2023-phd/img/select_and_rank/extractive_explanation/example_hl_out.svg"
+              class="fragment fade-in"
+              data-fragment-index="1"
+            />
+          </div>
+          <p class="caption">
+            Example document for query: "<b>how long to hold bow in yoga</b>" 🤔
+          </p>
+          <hr class="divider" />
+          <p class="fragment" data-fragment-index="2">
+            <b>Why should we even show the ranking model the whole document?</b>
+          </p>
+        </section>
+
+        <section>
+          <section id="paradigm" data-auto-animate data-auto-animate-id="sr">
+            <h2 class="textsc">Select-and-Rank</h2>
+            <hr class="divider" />
+            <p>
+              <b>Assumption</b>: $k$ sentences of a document are enough to
+              estimate its relevance w.r.t. a query.
+            </p>
+            <hr class="divider" />
+            <div class="column-layout">
+              <div class="column-item fragment" data-fragment-index="2">
+                <img
+                  class="fig"
+                  src="../2023-phd/img/select_and_rank/sr_paradigm_out.svg"
+                />
+                <p class="caption">
+                  The <span class="textsc">Select-and-Rank</span> paradigm.
+                </p>
+              </div>
+              <div class="column-item">
+                <div class="c-wide">
+                  <p class="fragment" data-fragment-index="2">
+                    A document $d$ is split into sentences $s_i$.
+                  </p>
+                  <hr class="divider" />
+                  <p class="fragment">
+                    The <b><i>selector</i></b> assigns a <b>score</b> to each
+                    sentence $s_i$ w.r.t. the query $q$.
+                  </p>
+                  <hr class="divider" />
+                  <p class="fragment">
+                    The <b><i>ranker</i></b> sees only the $k$
+                    <b>highest scoring sentences</b>.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="training" data-auto-animate data-auto-animate-id="sr">
+            <h2 class="textsc">Select-and-Rank</h2>
+            <hr class="divider" />
+            <div class="column-layout">
+              <div class="column-item">
+                <img
+                  class="fig"
+                  src="../2023-phd/img/select_and_rank/sr_paradigm_out.svg"
+                />
+                <p class="caption">
+                  The <span class="textsc">Select-and-Rank</span> paradigm.
+                </p>
+              </div>
+              <div class="column-item">
+                <div class="c-wide">
+                  <p>
+                    The <b>selector</b> $\Psi$ computes a <b>weight</b> $w_i$
+                    for each sentence:
+                  </p>
+                  <p class="eq">
+                    $\left(w_1, \dots, w_{|d|} \right) = \Psi(q, d)$
+                  </p>
+                  <hr class="divider" />
+                  <p class="fragment" data-fragment-index="1">
+                    <b>End-to-end training</b>: We draw a
+                    <b>relaxed $k$-hot sample</b>:<sup>1</sup>
+                  </p>
+                  <p class="eq fragment" data-fragment-index="1">
+                    $\left(\hat{w}_1, \dots, \hat{w}_{|d|} \right) =
+                    \operatorname{SubsetSample}(w, k, \tau)$
+                  </p>
+                  <hr class="divider" />
+                  <p class="fragment" data-fragment-index="2">
+                    The <b>query-document relevance</b> is computed by the
+                    <b>ranker</b> $\Phi$ using the
+                    <b>selected sentences $\hat{d}$</b>:
+                  </p>
+                  <p class="eq fragment" data-fragment-index="2">
+                    $\phi(q, d) = \Phi \left(q, \hat{d} \right)$
+                  </p>
+                  <p class="fragment" data-fragment-index="2">
+                    Each token in $\hat{d}$ is multiplied by its corresponding
+                    $\hat{w_i}$ in order to preserve the gradients.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <hr class="divider" />
+            <p class="footnote fragment" data-fragment-index="1">
+              <sup>1</sup>Sang Michael Xie and Stefano Ermon. Reparameterizable
+              Subset Sampling via Continuous Relaxations. IJCAI 2019.
+            </p>
+          </section>
+        </section>
+
+        <section>
+          <section id="beir" data-auto-animate data-auto-animate-id="beir">
+            <h2>BEIR benchmark</h2>
+            <hr class="divider" />
+            <img
+              class="fig"
+              src="../2023-phd/img/select_and_rank/results/beir_out.svg"
+            />
+            <p class="caption">
+              Results of <span class="textsc">Select-and-Rank</span> models on
+              the BEIR benchmark.
+            </p>
+          </section>
+
+          <section id="beir-k" data-auto-animate data-auto-animate-id="beir">
+            <h2>BEIR benchmark</h2>
+            <hr class="divider" />
+            <p>
+              There is a trade-off between the number of sentences $k$ and the
+              effectiveness:
+            </p>
+            <hr class="divider" />
+            <div class="column-layout" style="margin: 0 2em">
+              <div class="column-item">
+                <img
+                  class="fig"
+                  src="../2023-phd/img/select_and_rank/results/beir_k_fever_out.svg"
+                />
+                <p class="caption">
+                  Performance on <span class="textsc">Fever</span>.
+                </p>
+              </div>
+              <div class="column-item">
+                <img
+                  class="fig"
+                  src="../2023-phd/img/select_and_rank/results/beir_k_scifact_out.svg"
+                />
+                <p class="caption">
+                  Performance on <span class="textsc">SciFact</span>.
+                </p>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <section>
+          <section
+            id="faithfulness"
+            data-auto-animate
+            data-auto-animate-id="faithfulness"
+          >
+            <h2>Faithfulness</h2>
+            <hr class="divider" />
+            <div class="column-layout" style="grid-template-columns: auto 60%">
+              <div class="column-item">
+                <div class="c-wide">
+                  <p>
+                    <i>Faithfulness</i> measures the degree to which the
+                    explanations represent the <b>model's reasoning</b>:
+                  </p>
+                  <p>
+                    <i
+                      >How well do the selected sentences represent the document
+                      they originate from?</i
+                    >
+                  </p>
+                  <hr class="divider" />
+                  <p class="fragment" data-fragment-index="1">
+                    We perform a <b>user study</b> to determine the
+                    <b
+                      >utility of
+                      <span class="textsc">Select-and-Rank</span> for humans</b
+                    >.
+                  </p>
+                </div>
+              </div>
+              <div class="column-item fragment" data-fragment-index="1">
+                <img
+                  class="fig"
+                  src="../2023-phd/img/select_and_rank/study_task.png"
+                  style="border: 0.025em solid black"
+                />
+                <p class="caption">The user study interface.</p>
+              </div>
+            </div>
+          </section>
+
+          <section
+            id="faithfulness-results"
+            data-auto-animate
+            data-auto-animate-id="faithfulness"
+          >
+            <h2>Faithfulness</h2>
+            <hr class="divider" />
+            <p>
+              <b>240 query-document pairs</b> from <b>30 queries</b> judged by
+              <b>80 users</b> (4 judgments per instance).
+            </p>
+            <hr class="divider" />
+            <div class="column-layout">
+              <div class="column-item">
+                <img
+                  class="fig"
+                  src="../2023-phd/img/select_and_rank/results/study_acc_ctrlf_out.svg"
+                />
+                <p class="caption">Accuracy of relevance judgments.</p>
+              </div>
+              <div class="column-item">
+                <img
+                  class="fig"
+                  src="../2023-phd/img/select_and_rank/results/study_time_out.svg"
+                />
+                <p class="caption">
+                  Time taken to complete relevance judgments.
+                </p>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <section id="summary">
+          <h2>Summary</h2>
+          <hr class="divider" />
+          <ul>
+            <li>
+              We proposed <span class="textsc">Select-and-Rank</span>, a ranking
+              framework that is <b>interpretable by design</b>.
+            </li>
+            <li>
+              We showed how <span class="textsc">Select-and-Rank</span> can be
+              used to explain the decisions for a large number of ranking tasks.
+            </li>
+            <li>
+              We performed a user study to highlight the utility of our
+              extractive explanations to humans.
+            </li>
+          </ul>
+          <hr class="divider" />
+          <div class="github-container">
+            <img
+              class="github-qr"
+              src="../2023-phd/img/select_and_rank/qr_github.svg"
+            />
+            <a
+              class="github-url"
+              href="https://github.com/mrjleo/ranking-models"
+              >mrjleo/ranking-models</a
+            >
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script src="../node_modules/reveal.js/dist/reveal.js"></script>
+    <script src="../node_modules/reveal.js/plugin/markdown/markdown.js"></script>
+    <script src="../node_modules/reveal.js/plugin/highlight/highlight.js"></script>
+    <script src="../node_modules/reveal.js/plugin/math/math.js"></script>
+    <script src="../node_modules/reveal.js/plugin/zoom/zoom.js"></script>
+    <script src="../node_modules/reveal.js/plugin/notes/notes.js"></script>
+    <script>
+      Reveal.initialize({
+        hash: true,
+        slideNumber: true,
+        katex: {
+          local: "../node_modules/katex",
+        },
+        plugins: [
+          RevealMarkdown,
+          RevealHighlight,
+          RevealMath.KaTeX,
+          RevealZoom,
+          RevealNotes,
+        ],
+      });
+    </script>
+  </body>
+</html>
