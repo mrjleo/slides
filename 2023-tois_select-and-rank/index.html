@@ -51,29 +51,72 @@
         <!-- end: title -->
 
         <!-- motivation -->
-        <section id="extractive-explanations">
-          <h2>Extractive explanations</h2>
-          <hr class="divider" />
+        <section>
+          <section id="explainability">
+            <h2>Ranking should be explainable</h2>
 
-          <div class="fig r-stack">
-            <img
-              src="../2023-phd/img/select_and_rank/extractive_explanation/example_nohl_out.svg"
-              class="fragment fade-out"
+            <hr class="divider" />
+
+            <p
+              class="fragment"
               data-fragment-index="1"
-            />
-            <img
-              src="../2023-phd/img/select_and_rank/extractive_explanation/example_hl_out.svg"
-              class="fragment fade-in"
+              style="margin-bottom: 0"
+            >
+              <b>Neural ranking</b> in a nutshell:
+            </p>
+            <p
+              class="fragment"
               data-fragment-index="1"
-            />
-          </div>
-          <p class="caption">
-            Example document for query: "<b>how long to hold bow in yoga</b>" 🤔
-          </p>
-          <hr class="divider" />
-          <p class="fragment" data-fragment-index="2">
-            <b>Why should we even show the ranking model the whole document?</b>
-          </p>
+              style="font-size: x-small; margin-top: 0"
+            >
+              (of course, the following is vastly simplified)
+            </p>
+            <p class="fragment" data-fragment-index="1">
+              $ \underbrace{\phi(q, d)}_{\text{relevance}} = \operatorname{BERT}
+              \underbrace{ (\texttt{[CLS]}\ q\ \texttt{[SEP]}\ d\
+              \texttt{[SEP]}) }_{\text{LLM inputs}} $
+            </p>
+
+            <hr class="divider" />
+
+            <p class="fragment">
+              LLMs (i.e., Transformers or BERT) are <b>complex</b> and
+              <b>hard to interpret/explain</b>.
+            </p>
+            <p class="fragment">
+              What if the trained model is biased?&nbsp;<span class="fragment"
+                >Racist?</span
+              >&nbsp;<span class="fragment">Sexist?</span>
+            </p>
+          </section>
+          <section id="extractive-explanations">
+            <h2>Extractive explanations</h2>
+            <hr class="divider" />
+
+            <div class="fig r-stack">
+              <img
+                src="../2023-phd/img/select_and_rank/extractive_explanation/example_nohl_out.svg"
+                class="fragment fade-out"
+                data-fragment-index="1"
+              />
+              <img
+                src="../2023-phd/img/select_and_rank/extractive_explanation/example_hl_out.svg"
+                class="fragment fade-in"
+                data-fragment-index="1"
+              />
+            </div>
+            <p class="caption">
+              Example document for query: "<b>how long to hold bow in yoga</b>"
+              🤔
+            </p>
+            <hr class="divider" />
+            <p class="fragment" data-fragment-index="2">
+              <b
+                >Why should we even show the ranking model the whole
+                document?</b
+              >
+            </p>
+          </section>
         </section>
         <!-- end: motivation -->
 
@@ -354,7 +397,7 @@
             data-auto-animate
             data-auto-animate-id="sr-app"
           >
-            <h2>Application: Detecting Label Leakage</h2>
+            <h2>Application: Detecting label leakage</h2>
             <hr class="divider" />
             <div class="column-layout" style="margin: 0 2em">
               <div class="column-item">
@@ -379,7 +422,7 @@
             data-auto-animate
             data-auto-animate-id="sr-app"
           >
-            <h2>Application: Detecting Label Leakage</h2>
+            <h2>Application: Detecting label leakage</h2>
             <hr class="divider" />
             <div class="column-layout">
               <div class="column-item">
