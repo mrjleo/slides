@@ -72,9 +72,9 @@
               (of course, the following is vastly simplified)
             </p>
             <p class="fragment" data-fragment-index="1">
-              $ \underbrace{\phi(q, d)}_{\text{relevance}} = \operatorname{BERT}
-              \underbrace{ (\texttt{[CLS]}\ q\ \texttt{[SEP]}\ d\
-              \texttt{[SEP]}) }_{\text{LLM inputs}} $
+              $ \underbrace{\phi(q, d)}_{\textbf{relevance}} =
+              \operatorname{BERT} \underbrace{ (\texttt{[CLS]}\ q\
+              \texttt{[SEP]}\ d\ \texttt{[SEP]}) }_{\textbf{LLM inputs}} $
             </p>
 
             <hr class="divider" />
@@ -233,10 +233,11 @@
             <h2>Ranker</h2>
             <hr class="divider" />
             <p>
-              $ \underbrace{\phi(q, d)}_{\text{Relevance score}} =
+              $ \underbrace{\phi(q, d)}_{\textbf{relevance}} =
               \operatorname{BERT} (\texttt{[CLS]}, \underbrace{q_1, \dots,
-              q_n}_{\text{Query}}, \texttt{[SEP]}, \underbrace{\hat{d}_1, \dots,
-              \hat{d}_m}_{\text{Selected sentences}}, \texttt{[SEP]}) $
+              q_n}_{\textbf{input query}}, \texttt{[SEP]},
+              \underbrace{\hat{d}_1, \dots, \hat{d}_m}_{\textbf{selected
+              sentences}}, \texttt{[SEP]}) $
             </p>
           </section>
         </section>
