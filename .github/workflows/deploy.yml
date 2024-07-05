@@ -10,15 +10,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20.x
+        uses: actions/setup-node@v4
       - name: Install dependencies (apt)
         uses: awalsh128/cache-apt-pkgs-action@latest
         with:
           packages: pdf2svg fonts-inconsolata
       - name: Install TeX Live
-        uses: teatimeguest/setup-texlive-action@v2
+        uses: teatimeguest/setup-texlive-action@v3
         with:
           package-file: tl_packages.txt
       - name: Install dependencies (npm)
@@ -26,7 +24,7 @@ jobs:
       - name: Compile LaTeX
         run: npm run compile_latex
       - name: Publish
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           exclude_assets: "README.md,dockerfile,.github,.gitignore,.npmignore,gulpfile.js,package.json,package-lock.json,tl_packages.txt,**/*.tex"
