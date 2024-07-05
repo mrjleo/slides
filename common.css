@@ -27,7 +27,7 @@ p.column-label {
   grid-template-rows: auto;
 }
 
-.c-wide>* {
+.c-wide > * {
   width: 100%;
   text-align: left;
 }
@@ -57,12 +57,12 @@ p.eq {
   text-align: center;
 }
 
-.fig+p.caption::before {
+.fig + p.caption::before {
   content: "Figure: ";
   font-weight: bold;
 }
 
-.tab+p.caption::before {
+.tab + p.caption::before {
   content: "Table: ";
   font-weight: bold;
 }
@@ -81,11 +81,11 @@ p.footnote {
   height: 100%;
 }
 
-.sec-title>*:nth-child(1) {
+.sec-title > *:nth-child(1) {
   grid-row-start: 2;
 }
 
-.sec-title>*:nth-child(2) {
+.sec-title > *:nth-child(2) {
   margin-top: auto;
 }
 
