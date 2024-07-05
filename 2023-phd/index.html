@@ -2930,7 +2930,6 @@
       // query typing animation
       var query_typed = null;
       Reveal.on("fragmentshown", (event) => {
-        console.log("fragment shown: " + event.fragment.id);
         if (event.fragment.id == "query-anim-fragment") {
           if (query_typed != null) {
             query_typed.destroy();
