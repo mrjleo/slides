@@ -1195,24 +1195,24 @@
                   class="python"
                   style="font-size: large; line-height: 1.5em"
                 >
-				  <code data-trim data-noescape data-line-numbers="|6,7,8,12,13|9|12,13|9|12,13|9|10,11,12,13|9|10,11,12,13|9|10,11,12,13|9|12,13|14,15" data-fragment-index="1">
-					def coalesce(P):
-						P_new = []
-						A = []
-						A_avg = None
-						first_iteration = True
-						for p in P:
-							if first_iteration:
-								first_iteration = False
-							elif distance(p, A_avg) >= delta:
-								P_new.append(A_avg)
-								A = []
-							A.append(p)
-							A_avg = np.mean(A, axis=0)
-						P_new.append(A_avg)
-						return P_new
-				  </code>
-				</pre>
+                  <code data-trim data-noescape data-line-numbers="|6,7,8,12,13|9|12,13|9|12,13|9|10,11,12,13|9|10,11,12,13|9|10,11,12,13|9|12,13|14,15" data-fragment-index="1">
+                    def coalesce(P):
+                      P_new = []
+                      A = []
+                      A_avg = None
+                      first_iteration = True
+                      for p in P:
+                        if first_iteration:
+                          first_iteration = False
+                        elif distance(p, A_avg) >= delta:
+                          P_new.append(A_avg)
+                          A = []
+                        A.append(p)
+                        A_avg = np.mean(A, axis=0)
+                      P_new.append(A_avg)
+                      return P_new
+                  </code>
+                </pre>
               </div>
             </div>
           </section>
