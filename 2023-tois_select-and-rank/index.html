@@ -512,8 +512,8 @@
             <hr class="divider" />
 
             <div class="column-layout">
-              <div class="column-item fragment">
-                <h4>Efficiency</h4>
+              <div class="column-item fragment" style="text-align: right">
+                <h4 style="width: 100%">Efficiency</h4>
                 <p>
                   <span class="textsc">Select-and-Rank</span> requires a
                   <b>BERT forward pass for each document.</b>
@@ -523,8 +523,12 @@
                   <b>pre-computations</b>?
                 </p>
               </div>
-              <div class="column-item fragment">
-                <h4>Granularity</h4>
+              <div
+                class="column-item"
+                style="background-color: gray; width: 0.05em"
+              ></div>
+              <div class="column-item fragment" style="text-align: left">
+                <h4 style="width: 100%">Granularity</h4>
                 <p>
                   <span class="textsc">Select-and-Rank</span> operates strictly
                   on a <b>sentence level</b>.
