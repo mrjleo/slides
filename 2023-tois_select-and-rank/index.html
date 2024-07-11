@@ -465,35 +465,91 @@
         </section>
         <!-- end: application -->
 
-        <section id="summary">
-          <h2>Summary</h2>
-          <hr class="divider" />
-          <ul>
-            <li>
-              We proposed <span class="textsc">Select-and-Rank</span>, a ranking
-              framework that is <b>interpretable by design</b>.
-            </li>
-            <li>
-              We showed how <span class="textsc">Select-and-Rank</span> can be
-              used to explain the decisions for a large number of ranking tasks.
-            </li>
-            <li>
-              We performed a user study to highlight the utility of our
-              extractive explanations to humans.
-            </li>
-          </ul>
-          <hr class="divider" />
-          <div class="github-container">
-            <img
-              class="github-qr"
-              src="../2023-phd/img/select_and_rank/qr_github.svg"
-            />
-            <a
-              class="github-url"
-              href="https://github.com/mrjleo/ranking-models"
-              >mrjleo/ranking-models</a
-            >
-          </div>
+        <section>
+          <section
+            id="summary"
+            data-auto-animate
+            data-auto-animate-id="summary"
+          >
+            <h2>Summary</h2>
+            <hr class="divider" />
+            <ul>
+              <li>
+                We proposed <span class="textsc">Select-and-Rank</span>, a
+                ranking framework that is <b>interpretable by design</b>.
+              </li>
+              <li>
+                We showed how <span class="textsc">Select-and-Rank</span> can be
+                used to explain the decisions for a large number of ranking
+                tasks.
+              </li>
+              <li>
+                We performed a user study to highlight the utility of our
+                extractive explanations to humans.
+              </li>
+            </ul>
+            <hr class="divider" />
+            <div class="github-container">
+              <img
+                class="github-qr"
+                src="../2023-phd/img/select_and_rank/qr_github.svg"
+              />
+              <a
+                class="github-url"
+                data-id="gh-repo-link"
+                href="https://github.com/mrjleo/ranking-models"
+                >github.com/mrjleo/ranking-models</a
+              >
+            </div>
+          </section>
+
+          <section
+            id="next-steps"
+            data-auto-animate
+            data-auto-animate-id="summary"
+          >
+            <h2>What's next?</h2>
+            <hr class="divider" />
+
+            <div class="column-layout">
+              <div class="column-item fragment">
+                <h4>Efficiency</h4>
+                <p>
+                  <span class="textsc">Select-and-Rank</span> requires a
+                  <b>BERT forward pass for each document.</b>
+                </p>
+                <p>
+                  Can we change the architecture to allow for
+                  <b>pre-computations</b>?
+                </p>
+              </div>
+              <div class="column-item fragment">
+                <h4>Granularity</h4>
+                <p>
+                  <span class="textsc">Select-and-Rank</span> operates strictly
+                  on a <b>sentence level</b>.
+                </p>
+                <p>
+                  Can we make the extractive explanations
+                  <b>more fine-grained</b>?
+                </p>
+              </div>
+            </div>
+
+            <hr class="divider" />
+            <div class="github-container">
+              <img
+                class="github-qr"
+                src="../2023-phd/img/select_and_rank/qr_github.svg"
+              />
+              <a
+                class="github-url"
+                data-id="gh-repo-link"
+                href="https://github.com/mrjleo/ranking-models"
+                >github.com/mrjleo/ranking-models</a
+              >
+            </div>
+          </section>
         </section>
       </div>
     </div>
