@@ -1,0 +1,15 @@
+services:
+  slides:
+    build:
+      context: .
+    restart: always
+    develop:
+      watch:
+        - action: rebuild
+          path: package.json
+        - action: sync
+          path: .
+          target: /slides
+    ports:
+      - "8000:8000"
+      - "35729:35729"

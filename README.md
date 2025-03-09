@@ -8,26 +8,10 @@ Clone the repository and run the commands below.
 
 ### Using Docker
 
-First, build the image:
+Simply run:
 
 ```
-docker build -t slides-dev .
-```
-
-Next, run a container:
-
-```
-docker run -d \
-  --mount type=bind,src="$(pwd)",target=/slides \
-  -p 8000:8000 -p 35729:35729 \
-  --name slides-dev-container \
-  slides-dev
-```
-
-Finally, compile the LaTeX figues (this only needs to be done once):
-
-```
-docker exec -it slides-dev-container npm run compile_latex
+docker compose up --watch
 ```
 
 Navigate your browser to http://localhost:8000/.
