@@ -4,7 +4,7 @@ const connect = require("gulp-connect");
 const exec = require("gulp-exec");
 
 const root = yargs.argv.root || ".";
-const port = yargs.argv.port || 8000;
+const port = yargs.argv.port || 8101;
 const lrport = yargs.argv.port || 35729;
 const host = yargs.argv.host || "0.0.0.0";
 

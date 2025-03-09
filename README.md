@@ -14,7 +14,7 @@ Simply run:
 docker compose up --watch
 ```
 
-Navigate your browser to http://localhost:8000/.
+Navigate your browser to http://localhost:8101/.
 
 ### Without Docker
 
@@ -44,7 +44,7 @@ In order to work with live reloading, start a local server:
 npm start
 ```
 
-Navigate your browser to http://localhost:8000/.
+Navigate your browser to http://localhost:8101/.
 
 ## Libraries
 
