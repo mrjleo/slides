@@ -27,6 +27,6 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          exclude_assets: "README.md,dockerfile,.github,.gitignore,.npmignore,gulpfile.js,package.json,package-lock.json,tl_packages.txt,**/*.tex"
+          exclude_assets: "README.md,dockerfile,docker-compose.yml,.dockerignore,.github,.gitignore,.npmignore,gulpfile.js,package.json,package-lock.json,tl_packages.txt,**/*.tex"
           publish_dir: .
           destination_dir: .
