@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Fast-Forward Indexes</title>
+    <link rel="stylesheet" href="../node_modules/reveal.js/dist/reveal.css" />
+    <link
+      rel="stylesheet"
+      href="../node_modules/reveal.js/dist/theme/serif.css"
+    />
+    <link
+      rel="stylesheet"
+      href="../node_modules/reveal.js/plugin/highlight/monokai.css"
+    />
+    <link rel="stylesheet" href="../common.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <!-- title -->
+        <section id="title-slide">
+          <h1>Fast-Forward Indexes</h1>
+          <h4>Efficient Neural Text Ranking</h4>
+          <code style="font-size: large">pip install fast-forward-indexes</code>
+        </section>
+        <!-- end: title -->
+
+        <section id="text-ranking">
+          <h2>Text Ranking (<i>ad-hoc Retrieval</i>)</h2>
+
+          <hr class="divider" />
+
+          <p class="fragment" data-fragment-index="0">
+            Given an <b>input query</b>, return a
+            <b>list of documents</b> ordered by <b>relevance</b>:
+          </p>
+
+          <hr class="divider" />
+
+          <div
+            data-fragment-index="1"
+            class="fragment column-desc-layout"
+            style="
+              gap: 0;
+              border: 1px solid gray;
+              border-radius: 0.2em;
+              padding: 0.5em;
+              background-color: white;
+            "
+          >
+            <div class="column-item fragment" data-fragment-index="1">
+              <p style="font-size: xx-large; margin: 0.25em">🤔</p>
+              <p style="font-size: large; margin: 0">
+                <i><q>What is the meaning of life?</q></i>
+              </p>
+            </div>
+            <p class="column-label fragment" data-fragment-index="1">Query</p>
+
+            <p class="column-item fragment" data-fragment-index="2">→</p>
+            <p class="column-label fragment" data-fragment-index="2"></p>
+
+            <div class="column-item fragment" data-fragment-index="2">
+              <p style="font-size: 2em; margin: 0">🔍</p>
+            </div>
+            <p class="column-label fragment" data-fragment-index="2">
+              Retrieval engine
+            </p>
+
+            <p class="column-item fragment" data-fragment-index="3">→</p>
+            <p class="column-label fragment" data-fragment-index="3"></p>
+
+            <div class="column-item fragment" data-fragment-index="3">
+              <p class="tr-ranking-doc">
+                #1 <span class="tr-ranking-doc-icon">📄</span> D371 (0.95)
+              </p>
+              <p class="tr-ranking-doc">
+                #2 <span class="tr-ranking-doc-icon">📄</span> D222 (0.85)
+              </p>
+              <p class="tr-ranking-doc">
+                #3 <span class="tr-ranking-doc-icon">📄</span> D984 (0.71)
+              </p>
+              <p class="tr-ranking-doc">
+                #4 <span class="tr-ranking-doc-icon">📄</span> D105 (0.60)
+              </p>
+              <p class="tr-ranking-doc">
+                #5 <span class="tr-ranking-doc-icon">📄</span> D090 (0.51)
+              </p>
+            </div>
+            <p class="column-label fragment" data-fragment-index="3">
+              Ranked documents
+            </p>
+          </div>
+
+          <hr class="divider" />
+
+          <p class="fragment" data-fragment-index="4">
+            <b>Applications</b>: Web search, retrieval-augmented generation
+            (RAG).
+          </p>
+        </section>
+      </div>
+    </div>
+
+    <script src="../node_modules/reveal.js/dist/reveal.js"></script>
+    <script src="../node_modules/reveal.js/plugin/markdown/markdown.js"></script>
+    <script src="../node_modules/reveal.js/plugin/highlight/highlight.js"></script>
+    <script src="../node_modules/reveal.js/plugin/math/math.js"></script>
+    <script src="../node_modules/reveal.js/plugin/zoom/zoom.js"></script>
+    <script src="../node_modules/reveal.js/plugin/notes/notes.js"></script>
+    <script>
+      Reveal.initialize({
+        hash: true,
+        slideNumber: true,
+        katex: {
+          local: "../node_modules/katex",
+        },
+        plugins: [
+          RevealMarkdown,
+          RevealHighlight,
+          RevealMath.KaTeX,
+          RevealZoom,
+          RevealNotes,
+        ],
+      });
+    </script>
+  </body>
+</html>
