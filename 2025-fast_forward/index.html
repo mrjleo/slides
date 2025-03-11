@@ -31,122 +31,145 @@
         </section>
         <!-- end: title -->
 
-        <section id="text-ranking">
-          <h2>Text Ranking (<i>ad-hoc Retrieval</i>)</h2>
+        <!-- problem -->
+        <section>
+          <section id="text-ranking">
+            <h2>Text ranking (<i>ad-hoc retrieval</i>)</h2>
 
-          <hr class="divider" />
+            <hr class="divider" />
 
-          <p class="fragment" data-fragment-index="0">
-            Given an <b>input query</b>, return a
-            <b>list of documents</b> ordered by <b>relevance</b>:
-          </p>
-
-          <hr class="divider" />
-
-          <div
-            data-fragment-index="1"
-            class="fragment column-desc-layout"
-            style="
-              gap: 0;
-              border: 1px solid gray;
-              border-radius: 0.2em;
-              padding: 0.5em;
-              background-color: white;
-            "
-          >
-            <div class="column-item fragment" data-fragment-index="1">
-              <p style="font-size: xx-large; margin: 0.25em">🤔</p>
-              <p style="font-size: large; margin: 0">
-                <i><q>What is the meaning of life?</q></i>
-              </p>
-            </div>
-            <p class="column-label fragment" data-fragment-index="1">Query</p>
-
-            <p class="column-item fragment" data-fragment-index="2">→</p>
-            <p class="column-label fragment" data-fragment-index="2"></p>
-
-            <div class="column-item fragment" data-fragment-index="2">
-              <p style="font-size: 2em; margin: 0">🔍</p>
-            </div>
-            <p class="column-label fragment" data-fragment-index="2">
-              Retrieval engine
+            <p class="fragment" data-fragment-index="0">
+              Given an <b>input query</b>, return a
+              <b>list of documents</b> ordered by <b>relevance</b>:
             </p>
 
-            <p class="column-item fragment" data-fragment-index="3">→</p>
-            <p class="column-label fragment" data-fragment-index="3"></p>
+            <hr class="divider" />
 
-            <div class="column-item fragment" data-fragment-index="3">
-              <p class="tr-ranking-doc">
-                #1 <span class="tr-ranking-doc-icon">📄</span> D371 (0.95)
+            <div
+              data-fragment-index="1"
+              class="fragment column-desc-layout"
+              style="
+                gap: 0;
+                border: 1px solid gray;
+                border-radius: 0.2em;
+                padding: 0.5em;
+                background-color: white;
+              "
+            >
+              <div class="column-item fragment" data-fragment-index="1">
+                <p style="font-size: xx-large; margin: 0.25em">🤔</p>
+                <p style="font-size: large; margin: 0">
+                  <i><q>What is the meaning of life?</q></i>
+                </p>
+              </div>
+              <p class="column-label fragment" data-fragment-index="1">Query</p>
+
+              <p class="column-item fragment" data-fragment-index="2">→</p>
+              <p class="column-label fragment" data-fragment-index="2"></p>
+
+              <div class="column-item fragment" data-fragment-index="2">
+                <p style="font-size: 2em; margin: 0">🔍</p>
+              </div>
+              <p class="column-label fragment" data-fragment-index="2">
+                Retrieval engine
               </p>
-              <p class="tr-ranking-doc">
-                #2 <span class="tr-ranking-doc-icon">📄</span> D222 (0.85)
-              </p>
-              <p class="tr-ranking-doc">
-                #3 <span class="tr-ranking-doc-icon">📄</span> D984 (0.71)
-              </p>
-              <p class="tr-ranking-doc">
-                #4 <span class="tr-ranking-doc-icon">📄</span> D105 (0.60)
-              </p>
-              <p class="tr-ranking-doc">
-                #5 <span class="tr-ranking-doc-icon">📄</span> D090 (0.51)
+
+              <p class="column-item fragment" data-fragment-index="3">→</p>
+              <p class="column-label fragment" data-fragment-index="3"></p>
+
+              <div class="column-item fragment" data-fragment-index="3">
+                <p class="tr-ranking-doc">
+                  #1 <span class="tr-ranking-doc-icon">📄</span> D371 (0.95)
+                </p>
+                <p class="tr-ranking-doc">
+                  #2 <span class="tr-ranking-doc-icon">📄</span> D222 (0.85)
+                </p>
+                <p class="tr-ranking-doc">
+                  #3 <span class="tr-ranking-doc-icon">📄</span> D984 (0.71)
+                </p>
+                <p class="tr-ranking-doc">
+                  #4 <span class="tr-ranking-doc-icon">📄</span> D105 (0.60)
+                </p>
+                <p class="tr-ranking-doc">
+                  #5 <span class="tr-ranking-doc-icon">📄</span> D090 (0.51)
+                </p>
+              </div>
+              <p class="column-label fragment" data-fragment-index="3">
+                Ranked documents
               </p>
             </div>
-            <p class="column-label fragment" data-fragment-index="3">
-              Ranked documents
+
+            <hr class="divider" />
+
+            <p class="fragment" data-fragment-index="4">
+              <b>Applications</b>: Web search, retrieval-augmented generation
+              (RAG).
             </p>
-          </div>
+          </section>
 
-          <hr class="divider" />
+          <section id="fast-forward">
+            <h2>Fast-Forward indexes</h2>
 
-          <p class="fragment" data-fragment-index="4">
-            <b>Applications</b>: Web search, retrieval-augmented generation
-            (RAG).
-          </p>
+            <hr class="divider" />
+
+            <p>
+              Focus on <b>efficient text ranking</b> with neural Transformer
+              models:
+            </p>
+            <ol>
+              <li class="fragment" data-fragment-index="1">
+                Re-scoring a <b>candidate set</b> (e.g., from ElasticSearch)
+              </li>
+              <li class="fragment" data-fragment-index="2">
+                Utilizing <b>independent pre-computed</b> document
+                representations
+              </li>
+            </ol>
+
+            <hr class="divider" />
+
+            <p class="fragment" data-fragment-index="3">
+              From a <b>technical standpoint</b>:
+            </p>
+            <p class="fragment" data-fragment-index="3">
+              $ \underbrace{\operatorname{score}(q, d)}_{\text{query-document
+              score}} = \underbrace{ \zeta (q) }_{\text{query vector,} \atop
+              \text{computed online}} \cdot \underbrace{\eta^{FF}
+              (d)}_{\text{document vector,} \atop \text{pre-computed}}$
+            </p>
+
+            <hr class="divider" />
+
+            <p class="fragment" data-fragment-index="4">
+              For each query: one <b>encoder forward pass</b>,
+              <b>$n$ vector look-ups</b>, a <b>matrix multiplication</b>.
+            </p>
+          </section>
         </section>
+        <!-- end: problem -->
 
-        <section id="fast-forward">
-          <h2>Fast-Forward indexes</h2>
+        <section>
+          <section>
+            <h2>Design goals</h2>
 
-          <hr class="divider" />
-
-          <p>
-            Focus on <b>efficient text ranking</b> with neural Transformer
-            models:
-          </p>
-          <ol>
-            <li class="fragment" data-fragment-index="1">
-              Re-scoring a <b>candidate set</b> (e.g., from ElasticSearch)
-            </li>
-            <li class="fragment" data-fragment-index="2">
-              Utilizing <b>independent pre-computed</b> document representations
-            </li>
-          </ol>
-
-          <hr class="divider" />
-
-          <p class="fragment" data-fragment-index="3">
-            From a <b>technical standpoint</b>:
-          </p>
-          <p class="fragment" data-fragment-index="3">
-            $ \underbrace{\operatorname{score}(q, d)}_{\text{query-document
-            score}} = \underbrace{ \zeta (q) }_{\text{query vector,} \atop
-            \text{computed online}} \cdot \underbrace{\eta^{FF}
-            (d)}_{\text{document vector,} \atop \text{pre-computed}}$
-          </p>
-
-          <hr class="divider" />
-
-          <p class="fragment" data-fragment-index="4">
-            For each query: one <b>encoder forward pass</b>,
-            <b>$n$ vector look-ups</b>, a <b>matrix multiplication</b>.
-          </p>
+            <hr class="divider" />
+            <p>
+              Target audience: <b>reseachers</b>.
+              <span class="fragment">Consequently, we need:</span>
+            </p>
+            <ul>
+              <li class="fragment">Python API</li>
+              <li class="fragment">Ease of use, allow rapid prototying</li>
+              <li class="fragment">Extensibility</li>
+              <li class="fragment">Efficiency (after all)</li>
+            </ul>
+          </section>
         </section>
 
         <!-- documentation -->
         <section
           id="final-slide"
-          data-background-iframe="https://mrjleo.github.io/fast-forward-indexes/docs/v0.7.0/fast_forward.html"
+          data-background-iframe="https://mrjleo.github.io/fast-forward-indexes/docs/v0.7.1/fast_forward.html"
           data-background-interactive
         >
           <div
