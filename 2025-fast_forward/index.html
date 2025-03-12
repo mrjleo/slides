@@ -193,11 +193,8 @@
                 </ul>
               </div>
               <div class="column-item">
-                <pre
-                  class="python"
-                  style="font-size: medium; line-height: 1.5em"
-                >
-                  <code data-trim data-noescape style="border-radius: 0.5em;" data-fragment-index="1" data-line-numbers="|12-22|24-47|45,46,48,49|61|">
+                <pre class="python">
+                  <code data-trim data-noescape data-fragment-index="1" data-line-numbers="|12-22|24-47|45,46,48,49|61|">
                     class OnDiskIndex(Index):
                       """Fast-Forward index that is read on-demand from disk.
                   
@@ -321,11 +318,8 @@
                 </ul>
               </div>
               <div class="column-item">
-                <pre
-                  class="python"
-                  style="font-size: medium; line-height: 1.5em"
-                >
-                  <code data-trim data-noescape style="border-radius: 0.5em;" data-fragment-index="1" data-line-numbers="|1-14|1-6|17-31">
+                <pre class="python">
+                  <code data-trim data-noescape data-fragment-index="1" data-line-numbers="|1-14|1-6|17-31">
                     class Encoder(abc.ABC):
                       """Base class for encoders."""
                   
@@ -359,6 +353,60 @@
                         # [...]
                   </code>
                 </pre>
+              </div>
+            </div>
+          </section>
+
+          <section id="efficiency">
+            <h2>Efficiency</h2>
+
+            <hr class="divider" />
+
+            <div class="column-layout" style="grid-template-columns: 50% auto">
+              <div class="column-item">
+                <ul>
+                  <li class="fragment" data-fragment-index="1">
+                    Native Python is too slow.
+                  </li>
+                  <li class="fragment" data-fragment-index="2">
+                    Off-load as much as possible to efficient libraries:
+                    <ul>
+                      <li class="fragment" data-fragment-index="3">
+                        Rankings (queries, string IDs) using <b>pandas</b>
+                      </li>
+                      <li class="fragment" data-fragment-index="4">
+                        Computations using <b>NumPy</b>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+              <div class="column-item">
+                <pre class="python">
+                  <code data-trim data-noescape data-fragment-index="3" data-line-numbers="|3,10|20">
+                    # batch encode queries
+                    query_vectors = self.encode_queries(
+                      df["query"].to_list()
+                    )
+
+                    # [...]
+
+                    # get all required vectors from the FF index
+                    vectors = self._get_vectors(
+                      df["id"].to_list()
+                    )
+                    if self.quantizer is not None:
+                      vectors = self.quantizer.decode(vectors)
+                    
+                    # [...]
+
+                    # compute all dot products (scores)
+                    q_reps = query_vectors[select_query_vectors]
+                    d_reps = vectors[select_vectors]
+                    scores = np.sum(q_reps * d_reps, axis=1)
+                  </code>
+                </pre>
+                <p style="font-size: small; margin: 0">Code is simplified</p>
               </div>
             </div>
           </section>

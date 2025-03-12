@@ -27,6 +27,15 @@ ul ul {
   margin: 0 !important;
 }
 
+pre {
+  font-size: medium !important;
+  line-height: 1.5em !important;
+}
+
+pre code {
+  border-radius: 0.5em;
+}
+
 /* text ranking */
 
 p.tr-ranking-doc {
