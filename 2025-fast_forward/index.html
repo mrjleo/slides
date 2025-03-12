@@ -306,20 +306,20 @@
               <div class="column-item">
                 <ul>
                   <li class="fragment" data-fragment-index="1">
-                    Abstract classes for <code>Index</code>,
-                    <code>Encoder</code>, <code>Quantizer</code>
+                    Modular design
                   </li>
                   <li class="fragment" data-fragment-index="2">
-                    Modular design
+                    Abstract classes for <code>Index</code>,
+                    <code>Encoder</code>, <code>Quantizer</code>
                   </li>
                   <li class="fragment" data-fragment-index="3">
                     Enables reasearch on individual components
                   </li>
                 </ul>
               </div>
-              <div class="column-item">
+              <div class="column-item fragment" data-fragment-index="1">
                 <pre class="python">
-                  <code data-trim data-noescape data-fragment-index="1" data-line-numbers="|1-14|1-6|17-31">
+                  <code data-trim data-noescape data-fragment-index="2" data-line-numbers="|1-6|17-31">
                     class Encoder(abc.ABC):
                       """Base class for encoders."""
                   
@@ -381,19 +381,19 @@
                   </li>
                 </ul>
               </div>
-              <div class="column-item">
+              <div class="column-item fragment" data-fragment-index="2">
                 <pre class="python">
                   <code data-trim data-noescape data-fragment-index="3" data-line-numbers="|3,10|20">
                     # batch encode queries
                     query_vectors = self.encode_queries(
-                      df["query"].to_list()
+                      query_df["query"].to_list()
                     )
 
                     # [...]
 
                     # get all required vectors from the FF index
                     vectors = self._get_vectors(
-                      df["id"].to_list()
+                      ranking_df["id"].to_list()
                     )
                     if self.quantizer is not None:
                       vectors = self.quantizer.decode(vectors)
