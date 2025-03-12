@@ -174,7 +174,7 @@
               <div class="column-item">
                 <ul>
                   <li class="fragment" data-fragment-index="1">
-                    Fully typed (<code>pyright</code> standard mode)
+                    Typing (<code>pyright</code> standard mode)
                   </li>
                   <li class="fragment" data-fragment-index="2">
                     In-line documentation
@@ -183,6 +183,9 @@
                     Error handling
                   </li>
                   <li class="fragment" data-fragment-index="4">Logging</li>
+                  <li class="fragment" data-fragment-index="5">
+                    Formatting, linting, type checking (via GitHub actions)
+                  </li>
                 </ul>
               </div>
               <div class="column-item">
@@ -190,9 +193,9 @@
                   class="python"
                   style="font-size: medium; line-height: 1.5em"
                 >
-                  <code data-trim data-noescape style="border-radius: 0.5em;" data-fragment-index="1" data-line-numbers="|12-22|24-47|48,49|61">
+                  <code data-trim data-noescape style="border-radius: 0.5em;" data-fragment-index="1" data-line-numbers="|12-22|24-47|45,46,48,49|61|">
                     class OnDiskIndex(Index):
-                      """FF index that is read on-demand from disk.
+                      """Fast-Forward index that is read on-demand from disk.
                   
                       Uses HDF5 via h5py under the hood.
                       The `max_indexing_size` argument works around
@@ -290,7 +293,7 @@
               <h2 style="color: white">API documentation</h2>
               <hr />
               <p style="color: white">
-                Automatically generated (GitHub actions)
+                Automatically generated via GitHub actions
               </p>
             </div>
           </section>
