@@ -173,9 +173,7 @@
             <div class="column-layout" style="grid-template-columns: 45% auto">
               <div class="column-item">
                 <ul>
-                  <li class="fragment" data-fragment-index="1">
-                    Typing (<code>pyright</code> standard mode)
-                  </li>
+                  <li class="fragment" data-fragment-index="1">Typing</li>
                   <li class="fragment" data-fragment-index="2">
                     In-line documentation
                   </li>
@@ -184,7 +182,13 @@
                   </li>
                   <li class="fragment" data-fragment-index="4">Logging</li>
                   <li class="fragment" data-fragment-index="5">
-                    Formatting, linting, type checking (via GitHub actions)
+                    GitHub actions:
+                    <ul>
+                      <li>Testing: <code>pytest</code></li>
+                      <li>Type checking: <code>pyright</code></li>
+                      <li>Documentation: <code>pdoc</code></li>
+                      <li>Formatting, linting: <code>ruff</code></li>
+                    </ul>
                   </li>
                 </ul>
               </div>
@@ -279,7 +283,7 @@
             <div
               style="
                 position: absolute;
-                width: 35%;
+                width: 30%;
                 right: 0;
                 box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5),
                   0 5px 25px rgba(0, 0, 0, 0.2);
@@ -292,9 +296,7 @@
             >
               <h2 style="color: white">API documentation</h2>
               <hr />
-              <p style="color: white">
-                Automatically generated via GitHub actions
-              </p>
+              <p style="color: white">Automatically generated on release</p>
             </div>
           </section>
 

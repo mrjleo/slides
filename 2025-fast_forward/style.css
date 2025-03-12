@@ -23,6 +23,10 @@ p span.katex {
   font-size: x-large;
 }
 
+ul ul {
+  margin: 0 !important;
+}
+
 /* text ranking */
 
 p.tr-ranking-doc {
