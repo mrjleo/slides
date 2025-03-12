@@ -204,67 +204,67 @@
                       """
                   
                       def __init__(
-                          self,
-                          index_file: "Path",
-                          query_encoder: "Encoder | None" = None,
-                          quantizer: Quantizer | None = None,
-                          mode: Mode = Mode.MAXP,
-                          encoder_batch_size: int = 32,
-                          init_size: int = 2**14,
-                          resize_min_val: int = 2**10,
-                          hdf5_chunk_size: int | None = None,
-                          max_id_length: int = 8,
-                          overwrite: bool = False,
-                          max_indexing_size: int = 2**10,
+                        self,
+                        index_file: "Path",
+                        query_encoder: "Encoder | None" = None,
+                        quantizer: Quantizer | None = None,
+                        mode: Mode = Mode.MAXP,
+                        encoder_batch_size: int = 32,
+                        init_size: int = 2**14,
+                        resize_min_val: int = 2**10,
+                        hdf5_chunk_size: int | None = None,
+                        max_id_length: int = 8,
+                        overwrite: bool = False,
+                        max_indexing_size: int = 2**10,
                       ) -> None:
-                          """Create an index on disk.
-                  
-                          :param index_file: The index file to
-                            create (or overwrite).
-                          :param query_encoder: The query encoder.
-                          :param quantizer: The quantizer to use.
-                          :param mode: The ranking mode.
-                          :param encoder_batch_size: Batch size for
-                            the query encoder.
-                          :param init_size: Initial size to allocate
-                            (number of vectors).
-                          :param resize_min_val: Minimum number of
-                            vectors to increase index size by.
-                          :param hdf5_chunk_size: Specify a chunk
-                            size used by HDF5.
-                          :param max_id_length: Maximum length of
-                            document and passage IDs (number of characters).
-                          :param overwrite: Overwrite index file
-                            if it exists.
-                          :param max_indexing_size: Maximum number of
-                            vectors to retrieve from the HDF5 dataset at once.
-                          :raises ValueError: When the file exists
-                            and `overwrite=False`.
-                          """
-                          if index_file.exists() and not overwrite:
-                              raise ValueError(f"File {index_file} exists.")
-                  
-                          self._index_file = index_file.absolute()
-                          self._doc_id_to_idx = defaultdict(list)
-                          self._psg_id_to_idx = {}
-                  
-                          self._init_size = init_size
-                          self._resize_min_val = resize_min_val
-                          self._hdf5_chunk_size = hdf5_chunk_size
-                          self._max_id_length = max_id_length
-                          self._max_indexing_size = max_indexing_size
-                  
-                          LOGGER.debug("creating file %s", self._index_file)
-                          with h5py.File(self._index_file, "w") as fp:
-                              fp.attrs["num_vectors"] = 0
-                              fp.attrs["ff_version"] = fast_forward.__version__
-                  
-                          super().__init__(
-                              query_encoder=query_encoder,
-                              quantizer=quantizer,
-                              mode=mode,
-                              encoder_batch_size=encoder_batch_size,
-                          )
+                        """Create an index on disk.
+                
+                        :param index_file: The index file to
+                          create (or overwrite).
+                        :param query_encoder: The query encoder.
+                        :param quantizer: The quantizer to use.
+                        :param mode: The ranking mode.
+                        :param encoder_batch_size: Batch size for
+                          the query encoder.
+                        :param init_size: Initial size to allocate
+                          (number of vectors).
+                        :param resize_min_val: Minimum number of
+                          vectors to increase index size by.
+                        :param hdf5_chunk_size: Specify a chunk
+                          size used by HDF5.
+                        :param max_id_length: Maximum length of
+                          document and passage IDs (number of characters).
+                        :param overwrite: Overwrite index file
+                          if it exists.
+                        :param max_indexing_size: Maximum number of
+                          vectors to retrieve from the HDF5 dataset at once.
+                        :raises ValueError: When the file exists
+                          and `overwrite=False`.
+                        """
+                        if index_file.exists() and not overwrite:
+                          raise ValueError(f"File {index_file} exists.")
+                
+                        self._index_file = index_file.absolute()
+                        self._doc_id_to_idx = defaultdict(list)
+                        self._psg_id_to_idx = {}
+                
+                        self._init_size = init_size
+                        self._resize_min_val = resize_min_val
+                        self._hdf5_chunk_size = hdf5_chunk_size
+                        self._max_id_length = max_id_length
+                        self._max_indexing_size = max_indexing_size
+                
+                        LOGGER.debug("creating file %s", self._index_file)
+                        with h5py.File(self._index_file, "w") as fp:
+                          fp.attrs["num_vectors"] = 0
+                          fp.attrs["ff_version"] = fast_forward.__version__
+                
+                      super().__init__(
+                          query_encoder=query_encoder,
+                          quantizer=quantizer,
+                          mode=mode,
+                          encoder_batch_size=encoder_batch_size,
+                        )
                   </code>
                 </pre>
               </div>
@@ -295,6 +295,69 @@
               <p style="color: white">
                 Automatically generated via GitHub actions
               </p>
+            </div>
+          </section>
+
+          <section id="extensibility">
+            <h2>Extensibility</h2>
+
+            <hr class="divider" />
+
+            <div class="column-layout" style="grid-template-columns: 35% auto">
+              <div class="column-item">
+                <ul>
+                  <li class="fragment" data-fragment-index="1">
+                    Abstract classes for <code>Index</code>,
+                    <code>Encoder</code>, <code>Quantizer</code>
+                  </li>
+                  <li class="fragment" data-fragment-index="2">
+                    Modular design
+                  </li>
+                  <li class="fragment" data-fragment-index="3">
+                    Enables reasearch on individual components
+                  </li>
+                </ul>
+              </div>
+              <div class="column-item">
+                <pre
+                  class="python"
+                  style="font-size: medium; line-height: 1.5em"
+                >
+                  <code data-trim data-noescape style="border-radius: 0.5em;" data-fragment-index="1" data-line-numbers="|1-14|1-6|17-31">
+                    class Encoder(abc.ABC):
+                      """Base class for encoders."""
+                  
+                      @abc.abstractmethod
+                      def _encode(self, texts: "Sequence[str]") -> "np.ndarray":
+                        pass
+                  
+                      def __call__(self, texts: "Sequence[str]") -> "np.ndarray":
+                        """Encode a list of texts.
+                
+                        :param texts: The texts to encode.
+                        :return: The resulting vector representations.
+                        """
+                        return self._encode(texts)
+
+
+                    class TransformerEncoder(Encoder):
+                      """Uses a pre-trained Transformer model for encoding.
+                  
+                      The outputs corresponding to the CLS token from the
+                      last hidden layer are used.
+                      """
+                      # [...]
+
+                      def _encode(self, texts: "Sequence[str]") -> "np.ndarray":
+                        model_inputs = self._tokenizer(
+                          self._get_tokenizer_inputs(texts),
+                          return_tensors="pt",
+                          **self._tokenizer_call_args,
+                        ).to(self._device)
+                        # [...]
+                  </code>
+                </pre>
+              </div>
             </div>
           </section>
         </section>
