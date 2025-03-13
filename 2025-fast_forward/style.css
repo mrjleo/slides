@@ -23,10 +23,10 @@ p span.katex {
   font-size: x-large;
 }
 
-ul > ul,
-ol > ol,
-ul > ol,
-ol > ul {
+ul ul,
+ol ol,
+ul ol,
+ol ul {
   margin: 0 !important;
 }
 
