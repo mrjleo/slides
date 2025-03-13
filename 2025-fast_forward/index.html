@@ -148,6 +148,7 @@
         </section>
         <!-- end: problem -->
 
+        <!-- design -->
         <section>
           <section id="design-goals">
             <h2>Design goals</h2>
@@ -380,13 +381,16 @@
                     </ul>
                   </li>
                   <li class="fragment" data-fragment-index="5">
+                    <b>Vector quantization</b> for memory efficiency
+                  </li>
+                  <li class="fragment" data-fragment-index="6">
                     Process data in large batches
                   </li>
                 </ul>
               </div>
               <div class="column-item fragment" data-fragment-index="2">
                 <pre class="python">
-                  <code data-trim data-noescape data-fragment-index="3" data-line-numbers="|3,10|20|">
+                  <code data-trim data-noescape data-fragment-index="3" data-line-numbers="|3,10|20|12,13|">
                     # batch encode queries
                     query_vectors = self.encode_queries(
                       query_df["query"].to_list()
@@ -413,6 +417,29 @@
               </div>
             </div>
           </section>
+        </section>
+        <!-- end: design -->
+
+        <section id="next-steps">
+          <h2>Next steps</h2>
+
+          <hr class="divider" />
+
+          <ol>
+            <li>Exploring <code>h5py</code> alternatives</li>
+            <ul>
+              <li><code>h5py</code> is convenient</li>
+              <li>
+                Not optimal for specific use case (random access along a single
+                axis)
+              </li>
+              <li>Alternatives: NumPy <code>memmap</code>, Zarr, ...</li>
+            </ul>
+            <li>Identify other bottlenecks</li>
+            <ul>
+              <li>Remaining operations within Python</li>
+            </ul>
+          </ol>
         </section>
       </div>
     </div>
