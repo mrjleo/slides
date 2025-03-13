@@ -425,25 +425,39 @@
 
           <hr class="divider" />
 
-          <ol>
-            <li class="fragment" data-fragment-index="1">
-              Exploring <code>h5py</code> alternatives
-            </li>
-            <ul class="fragment" data-fragment-index="1">
-              <li><code>h5py</code> is convenient</li>
-              <li>
-                Not optimal for specific use case (random access along a single
-                axis)
-              </li>
-              <li>Alternatives: NumPy <code>memmap</code>, Zarr, ...</li>
-            </ul>
-            <li class="fragment" data-fragment-index="2">
-              Identify other bottlenecks
-            </li>
-            <ul class="fragment" data-fragment-index="2">
-              <li>Remaining operations within Python</li>
-            </ul>
-          </ol>
+          <div class="column-layout" style="grid-template-columns: 50% auto">
+            <div class="column-item">
+              <ol>
+                <li class="fragment" data-fragment-index="1">
+                  Exploring <code>h5py</code> alternatives
+                </li>
+                <ul>
+                  <li class="fragment" data-fragment-index="1">
+                    <code>h5py</code> is convenient, but not optimal for random
+                    reads along a single axis
+                  </li>
+                  <li class="fragment" data-fragment-index="2">
+                    Memory-mapped arrays are significantly faster
+                  </li>
+                  <li class="fragment" data-fragment-index="3">
+                    Potential alternatives: Zarr, tileDB
+                  </li>
+                </ul>
+                <li class="fragment" data-fragment-index="4">
+                  Identify other bottlenecks
+                </li>
+                <ul class="fragment" data-fragment-index="4">
+                  <li>Remaining operations implemente in Python</li>
+                </ul>
+              </ol>
+            </div>
+            <div class="column-item fragment" data-fragment-index="2">
+              <img src="img/benchmark.png" />
+              <p style="font-size: small; margin: 0">
+                Random reads along axis 0, array shape (1000000, 768).
+              </p>
+            </div>
+          </div>
         </section>
       </div>
     </div>
