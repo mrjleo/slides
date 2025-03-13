@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Fast-Forward Indexes</title>
+    <link rel="stylesheet" href="../node_modules/reveal.js/dist/reveal.css" />
+    <link
+      rel="stylesheet"
+      href="../node_modules/reveal.js/dist/theme/serif.css"
+    />
+    <link
+      rel="stylesheet"
+      href="../node_modules/reveal.js/plugin/highlight/monokai.css"
+    />
+    <link rel="stylesheet" href="../common.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <!-- title -->
+        <section id="title-slide">
+          <h1>Fast-Forward Indexes</h1>
+          <h4>Efficient Neural Text Ranking</h4>
+          <code style="font-size: large">pip install fast-forward-indexes</code>
+        </section>
+        <!-- end: title -->
+
+        <!-- problem -->
+        <section>
+          <section id="text-ranking">
+            <h2>Text ranking (<i>ad-hoc retrieval</i>)</h2>
+
+            <hr class="divider" />
+
+            <p class="fragment" data-fragment-index="0">
+              Given an <b>input query</b>, return a
+              <b>list of documents</b> ordered by <b>relevance</b>:
+            </p>
+
+            <hr class="divider" />
+
+            <div
+              data-fragment-index="1"
+              class="fragment column-desc-layout"
+              style="
+                gap: 0;
+                border: 1px solid gray;
+                border-radius: 0.2em;
+                padding: 0.5em;
+                background-color: white;
+              "
+            >
+              <div class="column-item fragment" data-fragment-index="1">
+                <p style="font-size: xx-large; margin: 0.25em">🤔</p>
+                <p style="font-size: large; margin: 0">
+                  <i><q>What is the meaning of life?</q></i>
+                </p>
+              </div>
+              <p class="column-label fragment" data-fragment-index="1">Query</p>
+
+              <p class="column-item fragment" data-fragment-index="2">→</p>
+              <p class="column-label fragment" data-fragment-index="2"></p>
+
+              <div class="column-item fragment" data-fragment-index="2">
+                <p style="font-size: 2em; margin: 0">🔍</p>
+              </div>
+              <p class="column-label fragment" data-fragment-index="2">
+                Retrieval engine
+              </p>
+
+              <p class="column-item fragment" data-fragment-index="3">→</p>
+              <p class="column-label fragment" data-fragment-index="3"></p>
+
+              <div class="column-item fragment" data-fragment-index="3">
+                <p class="tr-ranking-doc">
+                  #1 <span class="tr-ranking-doc-icon">📄</span> D371 (0.95)
+                </p>
+                <p class="tr-ranking-doc">
+                  #2 <span class="tr-ranking-doc-icon">📄</span> D222 (0.85)
+                </p>
+                <p class="tr-ranking-doc">
+                  #3 <span class="tr-ranking-doc-icon">📄</span> D984 (0.71)
+                </p>
+                <p class="tr-ranking-doc">
+                  #4 <span class="tr-ranking-doc-icon">📄</span> D105 (0.60)
+                </p>
+                <p class="tr-ranking-doc">
+                  #5 <span class="tr-ranking-doc-icon">📄</span> D090 (0.51)
+                </p>
+              </div>
+              <p class="column-label fragment" data-fragment-index="3">
+                Ranked documents
+              </p>
+            </div>
+
+            <hr class="divider" />
+
+            <p class="fragment" data-fragment-index="4">
+              <b>Applications</b>: Web search, retrieval-augmented generation
+              (RAG).
+            </p>
+          </section>
+
+          <section id="fast-forward">
+            <h2>Fast-Forward indexes</h2>
+
+            <hr class="divider" />
+
+            <p>
+              Focus on <b>efficient text ranking</b> with neural Transformer
+              models:
+            </p>
+            <ol>
+              <li class="fragment" data-fragment-index="1">
+                Re-scoring a <b>candidate set</b> (e.g., from ElasticSearch)
+              </li>
+              <li class="fragment" data-fragment-index="2">
+                Utilizing <b>independent pre-computed</b> document
+                representations
+              </li>
+            </ol>
+
+            <hr class="divider" />
+
+            <p class="fragment" data-fragment-index="3">
+              From a <b>technical standpoint</b>:
+            </p>
+            <p class="fragment" data-fragment-index="3">
+              $ \underbrace{\operatorname{score}(q, d)}_{\text{query-document
+              score}} = \underbrace{ \zeta (q) }_{\text{query vector,} \atop
+              \text{computed online}} \cdot \underbrace{\eta^{FF}
+              (d)}_{\text{document vector,} \atop \text{pre-computed}}$
+            </p>
+
+            <hr class="divider" />
+
+            <p class="fragment" data-fragment-index="4">
+              For each query: one <b>encoder forward pass</b>,
+              <b>$n$ vector look-ups</b>, a <b>matrix multiplication</b>.
+            </p>
+          </section>
+        </section>
+        <!-- end: problem -->
+
+        <!-- design -->
+        <section>
+          <section id="design-goals">
+            <h2>Design goals</h2>
+
+            <hr class="divider" />
+
+            <p>Target audience: <b>reseachers</b>. Consequently, we need:</p>
+            <ul>
+              <li class="fragment">A <b>Python</b> API</li>
+              <li class="fragment">
+                <b>Usability</b> (allow for rapid prototying)
+              </li>
+              <li class="fragment"><b>Extensibility</b></li>
+              <li class="fragment"><b>Efficiency</b> (after all)</li>
+            </ul>
+          </section>
+
+          <section id="usability">
+            <h2>Usability</h2>
+
+            <hr class="divider" />
+
+            <div class="column-layout" style="grid-template-columns: 45% auto">
+              <div class="column-item">
+                <ul>
+                  <li class="fragment" data-fragment-index="1">Typing</li>
+                  <li class="fragment" data-fragment-index="2">
+                    In-line documentation
+                  </li>
+                  <li class="fragment" data-fragment-index="3">
+                    Error handling
+                  </li>
+                  <li class="fragment" data-fragment-index="4">Logging</li>
+                  <li class="fragment" data-fragment-index="5">
+                    GitHub actions:
+                    <ul>
+                      <li>Testing: <code>pytest</code></li>
+                      <li>Type checking: <code>pyright</code></li>
+                      <li>Documentation: <code>pdoc</code></li>
+                      <li>Formatting, linting: <code>ruff</code></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+              <div class="column-item">
+                <pre class="python">
+                  <code data-trim data-noescape data-fragment-index="1" data-line-numbers="|12-22|24-47|45,46,48,49|61|">
+                    class OnDiskIndex(Index):
+                      """Fast-Forward index that is read on-demand from disk.
+                  
+                      Uses HDF5 via h5py under the hood.
+                      The `max_indexing_size` argument works around
+                      an [h5py limitation]
+                      (https://docs.h5py.org/en/latest/high/dataset.html#fancy-indexing).
+                      """
+                  
+                      def __init__(
+                        self,
+                        index_file: "Path",
+                        query_encoder: "Encoder | None" = None,
+                        quantizer: Quantizer | None = None,
+                        mode: Mode = Mode.MAXP,
+                        encoder_batch_size: int = 32,
+                        init_size: int = 2**14,
+                        resize_min_val: int = 2**10,
+                        hdf5_chunk_size: int | None = None,
+                        max_id_length: int = 8,
+                        overwrite: bool = False,
+                        max_indexing_size: int = 2**10,
+                      ) -> None:
+                        """Create an index on disk.
+                
+                        :param index_file: The index file to
+                          create (or overwrite).
+                        :param query_encoder: The query encoder.
+                        :param quantizer: The quantizer to use.
+                        :param mode: The ranking mode.
+                        :param encoder_batch_size: Batch size for
+                          the query encoder.
+                        :param init_size: Initial size to allocate
+                          (number of vectors).
+                        :param resize_min_val: Minimum number of
+                          vectors to increase index size by.
+                        :param hdf5_chunk_size: Specify a chunk
+                          size used by HDF5.
+                        :param max_id_length: Maximum length of
+                          document and passage IDs (number of characters).
+                        :param overwrite: Overwrite index file
+                          if it exists.
+                        :param max_indexing_size: Maximum number of
+                          vectors to retrieve from the HDF5 dataset at once.
+                        :raises ValueError: When the file exists
+                          and `overwrite=False`.
+                        """
+                        if index_file.exists() and not overwrite:
+                          raise ValueError(f"File {index_file} exists.")
+                
+                        self._index_file = index_file.absolute()
+                        self._doc_id_to_idx = defaultdict(list)
+                        self._psg_id_to_idx = {}
+                
+                        self._init_size = init_size
+                        self._resize_min_val = resize_min_val
+                        self._hdf5_chunk_size = hdf5_chunk_size
+                        self._max_id_length = max_id_length
+                        self._max_indexing_size = max_indexing_size
+                
+                        LOGGER.debug("creating file %s", self._index_file)
+                        with h5py.File(self._index_file, "w") as fp:
+                          fp.attrs["num_vectors"] = 0
+                          fp.attrs["ff_version"] = fast_forward.__version__
+                
+                      super().__init__(
+                          query_encoder=query_encoder,
+                          quantizer=quantizer,
+                          mode=mode,
+                          encoder_batch_size=encoder_batch_size,
+                        )
+                  </code>
+                </pre>
+              </div>
+            </div>
+          </section>
+
+          <section
+            id="documentation"
+            data-background-iframe="https://mrjleo.github.io/fast-forward-indexes/docs/v0.7.1/fast_forward/index.html#OnDiskIndex"
+            data-background-interactive
+          >
+            <div
+              style="
+                position: absolute;
+                width: 30%;
+                right: 0;
+                box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5),
+                  0 5px 25px rgba(0, 0, 0, 0.2);
+                background-color: rgba(0, 0, 0, 0.9);
+                color: white;
+                padding: 1em;
+                font-size: x-large;
+                text-align: center;
+              "
+            >
+              <h2 style="color: white">API documentation</h2>
+              <hr />
+              <p style="color: white">Automatically generated on release</p>
+            </div>
+          </section>
+
+          <section id="extensibility">
+            <h2>Extensibility</h2>
+
+            <hr class="divider" />
+
+            <div class="column-layout" style="grid-template-columns: 35% auto">
+              <div class="column-item">
+                <ul>
+                  <li class="fragment" data-fragment-index="1">
+                    Modular design
+                  </li>
+                  <li class="fragment" data-fragment-index="2">
+                    Abstract classes for <code>Index</code>,
+                    <code>Encoder</code>, <code>Quantizer</code>
+                  </li>
+                  <li class="fragment" data-fragment-index="3">
+                    Enables reasearch on individual components
+                  </li>
+                </ul>
+              </div>
+              <div class="column-item fragment" data-fragment-index="1">
+                <pre class="python">
+                  <code data-trim data-noescape data-fragment-index="2" data-line-numbers="|1-6|17-31">
+                    class Encoder(abc.ABC):
+                      """Base class for encoders."""
+                  
+                      @abc.abstractmethod
+                      def _encode(self, texts: "Sequence[str]") -> "np.ndarray":
+                        pass
+                  
+                      def __call__(self, texts: "Sequence[str]") -> "np.ndarray":
+                        """Encode a list of texts.
+                
+                        :param texts: The texts to encode.
+                        :return: The resulting vector representations.
+                        """
+                        return self._encode(texts)
+
+
+                    class TransformerEncoder(Encoder):
+                      """Uses a pre-trained Transformer model for encoding.
+                  
+                      The outputs corresponding to the CLS token from the
+                      last hidden layer are used.
+                      """
+                      # [...]
+
+                      def _encode(self, texts: "Sequence[str]") -> "np.ndarray":
+                        model_inputs = self._tokenizer(
+                          self._get_tokenizer_inputs(texts),
+                          return_tensors="pt",
+                          **self._tokenizer_call_args,
+                        ).to(self._device)
+                        # [...]
+                  </code>
+                </pre>
+              </div>
+            </div>
+          </section>
+
+          <section id="efficiency">
+            <h2>Efficiency</h2>
+
+            <hr class="divider" />
+
+            <div class="column-layout" style="grid-template-columns: 50% auto">
+              <div class="column-item">
+                <ul>
+                  <li class="fragment" data-fragment-index="1">
+                    Native Python is too slow.
+                  </li>
+                  <li class="fragment" data-fragment-index="2">
+                    Off-load as much as possible to efficient libraries:
+                    <ul>
+                      <li class="fragment" data-fragment-index="3">
+                        Rankings (queries, string IDs) using <b>pandas</b>
+                      </li>
+                      <li class="fragment" data-fragment-index="4">
+                        Computations using <b>NumPy</b>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="fragment" data-fragment-index="5">
+                    <b>Vector quantization</b> for memory efficiency
+                  </li>
+                  <li class="fragment" data-fragment-index="6">
+                    Process data in large batches
+                  </li>
+                </ul>
+              </div>
+              <div class="column-item fragment" data-fragment-index="2">
+                <pre class="python">
+                  <code data-trim data-noescape data-fragment-index="3" data-line-numbers="|3,10|20|12,13|">
+                    # batch encode queries
+                    query_vectors = self.encode_queries(
+                      query_df["query"].to_list()
+                    )
+
+                    # [...]
+
+                    # get all required vectors from the FF index
+                    vectors = self._get_vectors(
+                      ranking_df["id"].to_list()
+                    )
+                    if self.quantizer is not None:
+                      vectors = self.quantizer.decode(vectors)
+                    
+                    # [...]
+
+                    # compute all dot products (scores)
+                    q_reps = query_vectors[select_query_vectors]
+                    d_reps = vectors[select_vectors]
+                    scores = np.sum(q_reps * d_reps, axis=1)
+                  </code>
+                </pre>
+                <p style="font-size: small; margin: 0">Code is simplified</p>
+              </div>
+            </div>
+          </section>
+        </section>
+        <!-- end: design -->
+
+        <section id="next-steps">
+          <h2>Next steps</h2>
+
+          <hr class="divider" />
+
+          <div class="column-layout" style="grid-template-columns: 50% auto">
+            <div class="column-item">
+              <ol>
+                <li class="fragment" data-fragment-index="1">
+                  Exploring <code>h5py</code> alternatives
+                </li>
+                <ul>
+                  <li class="fragment" data-fragment-index="1">
+                    <code>h5py</code> is convenient, but not optimal for random
+                    reads along a single axis
+                  </li>
+                  <li class="fragment" data-fragment-index="2">
+                    Memory-mapped arrays are significantly faster
+                  </li>
+                  <li class="fragment" data-fragment-index="3">
+                    Potential alternatives: Zarr, tileDB
+                  </li>
+                </ul>
+                <li class="fragment" data-fragment-index="4">
+                  Identify other bottlenecks
+                </li>
+                <ul class="fragment" data-fragment-index="4">
+                  <li>Remaining operations implemente in Python</li>
+                </ul>
+              </ol>
+            </div>
+            <div class="column-item fragment" data-fragment-index="2">
+              <img src="img/benchmark.png" />
+              <p style="font-size: small; margin: 0">
+                50k random reads along axis 0, array shape (1M, 768).
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script src="../node_modules/reveal.js/dist/reveal.js"></script>
+    <script src="../node_modules/reveal.js/plugin/markdown/markdown.js"></script>
+    <script src="../node_modules/reveal.js/plugin/highlight/highlight.js"></script>
+    <script src="../node_modules/reveal.js/plugin/math/math.js"></script>
+    <script src="../node_modules/reveal.js/plugin/zoom/zoom.js"></script>
+    <script src="../node_modules/reveal.js/plugin/notes/notes.js"></script>
+    <script>
+      Reveal.initialize({
+        hash: true,
+        slideNumber: true,
+        katex: {
+          local: "../node_modules/katex",
+        },
+        plugins: [
+          RevealMarkdown,
+          RevealHighlight,
+          RevealMath.KaTeX,
+          RevealZoom,
+          RevealNotes,
+        ],
+      });
+    </script>
+  </body>
+</html>
