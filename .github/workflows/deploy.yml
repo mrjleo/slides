@@ -12,9 +12,11 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v4
       - name: Install dependencies (apt)
-        uses: awalsh128/cache-apt-pkgs-action@latest
+        run: apt install -y pdf2svg fonts-inconsolata
+      - name: Install TeX Live
+        uses: teatimeguest/setup-texlive-action@v3
         with:
-          packages: texlive-full pdf2svg fonts-inconsolata
+          packages: scheme-full
       - name: Install dependencies (npm)
         run: npm install --omit=dev
       - name: Compile LaTeX
