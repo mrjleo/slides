@@ -3,28 +3,53 @@ name: Deploy slides
 on:
   push:
     branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
-  build:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Check out ${{ github.ref_name }}
+        uses: actions/checkout@v4
+
       - name: Install Node.js
         uses: actions/setup-node@v4
+
       - name: Install dependencies (apt)
         run: apt install -y pdf2svg fonts-inconsolata
+
       - name: Install TeX Live
         uses: teatimeguest/setup-texlive-action@v3
         with:
           packages: scheme-full
+
       - name: Install dependencies (npm)
         run: npm install --omit=dev
+
       - name: Compile LaTeX
         run: npm run compile_latex
-      - name: Publish
-        uses: peaceiris/actions-gh-pages@v4
+
+      - name: Set up Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          exclude_assets: "README.md,dockerfile,docker-compose.yml,.dockerignore,.github,.gitignore,.npmignore,gulpfile.js,package.json,package-lock.json,**/*.tex"
-          publish_dir: .
-          destination_dir: .
+          path: "."
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
