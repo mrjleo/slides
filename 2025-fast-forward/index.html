@@ -1217,9 +1217,6 @@
                   <b>single axis</b>.
                 </p>
                 <p class="fragment" data-fragment-index="1">
-                  HDF5 and memory-mapped arrays perform well.
-                </p>
-                <p class="fragment">
                   Current implementation: HDF5 with optional memory mapping.
                 </p>
               </div>
@@ -1258,6 +1255,28 @@
 
           <section id="ff-rank-fusion">
             <h2>Rank fusion</h2>
+
+            <hr class="divider" />
+
+            <div>
+              <p>
+                Rank fusion via linear interpolation requires
+                <b>hyperparameter tuning</b> for $\alpha$:
+              </p>
+              <p>
+                $\phi(q, d) = \alpha \cdot \phi_S(q, d) + (1 - \alpha) \cdot
+                \phi_D(q, d)$
+              </p>
+              <hr class="divider" />
+              <p class="fragment" data-fragment-index="1">
+                We can directly optimize $\alpha$, e.g., using a max-margin
+                ranking loss:
+              </p>
+              <p class="fragment" data-fragment-index="1">
+                $\alpha^* = \argmin_\alpha \sum_{(q_i, d_i^+, d_i^-) \in T}
+                \max\{0, \gamma + \phi(q, d_i^-) - \phi(q, d_i^+) \}$
+              </p>
+            </div>
           </section>
 
           <section
