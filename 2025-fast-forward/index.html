@@ -1109,7 +1109,7 @@
           </section>
 
           <section id="fast-forward-encoders">
-            <h2>Efficient encoders</h2>
+            <h2>Encoders</h2>
             <hr class="divider" />
             <p>
               Queries and documents have <b>different characteristics</b> in
@@ -1207,7 +1207,34 @@
           </section>
 
           <section id="ff-implementation">
-            <h2>Index implementation</h2>
+            <h2>Implementation</h2>
+
+            <hr class="divider" />
+
+            <div class="column-layout">
+              <div class="column-item">
+                <ul>
+                  <li>
+                    <b>Core requirement</b>: Fast disk-based lookup of vectors.
+                  </li>
+                  <li>
+                    Specific use-case: Matrix selection along
+                    <b>single axis</b>.
+                  </li>
+                  <li class="fragment" data-fragment-index="1">
+                    Memory-mapped arrays perform very well.
+                  </li>
+                  <li class="fragment">
+                    Consequence: HDF5 implementation with optional memory
+                    mapping.
+                  </li>
+                </ul>
+              </div>
+              <div class="column-item fragment" data-fragment-index="1">
+                <img class="fig" src="img/implementation/benchmark_out.svg" />
+                <p class="caption">Randomly accessing 50k out of 1M vectors.</p>
+              </div>
+            </div>
           </section>
 
           <section id="ff-rank-fusion">
