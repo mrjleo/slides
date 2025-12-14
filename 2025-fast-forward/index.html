@@ -1141,13 +1141,10 @@
             </div>
           </section>
 
-          <section id="data-characteristics">
-            <h2>Data characteristics</h2>
+          <section id="query-characteristics">
+            <h2>Query characteristics</h2>
             <hr class="divider" />
-            <p>
-              Queries and documents have <b>different characteristics</b> in
-              terms of length and complexity.
-            </p>
+            <p>Web search queries are often <b>short and simple</b>:</p>
             <img
               class="fig"
               src="../2023-phd/img/fast_forward/length_stats_out.svg"
@@ -1164,7 +1161,7 @@
           </section>
 
           <section
-            id="query-encoders"
+            id="lightweight-query-encoders"
             data-auto-animate
             data-auto-animate-id="qenc"
           >
@@ -1201,6 +1198,29 @@
             </p>
           </section>
 
+          <section id="efficient-query-encoder-training">
+            <h2>Query encoder training</h2>
+
+            <hr class="divider" />
+
+            <p>
+              We train <b>asymmetric dual-encoder models</b> with a simple
+              contrastive loss:
+            </p>
+            <p>
+              $$ \mathcal{L} \left( q, d^+, D^- \right) = -\log \left( \frac
+              {\exp \left(\phi(q, d^+) / \tau \right)} {\sum_{d^- \in D^- \cup
+              \{d^+\}} \exp \left(\phi(q, d^-) / \tau \right)} \right) $$
+            </p>
+
+            <hr class="divider" />
+
+            <p class="fragment">
+              The resulting models
+              <b>do not achieve competitive performance in dense retrieval</b>.
+            </p>
+          </section>
+
           <section
             id="lightweight-query-encoders-results"
             data-auto-animate
@@ -1218,8 +1238,8 @@
             </p>
             <hr class="divider" />
             <p class="fragment">
-              Lightweight query encoders are <b>much faster</b> and can achieve
-              <b>good performance</b>.
+              Lightweight query encoders are can achieve
+              <b>good performance as re-rankers</b>.
             </p>
           </section>
         </section>
