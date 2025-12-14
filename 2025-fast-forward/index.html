@@ -1141,6 +1141,18 @@
             </div>
           </section>
 
+          <section id="query-encoding">
+            <h2>Query encoding</h2>
+
+            <hr class="divider" />
+
+            <p>For some settings, query encoding can become a bottleneck:</p>
+            <img class="fig" width="75%" src="img/profiler.png" />
+            <p class="caption">
+              Profile of re-ranking 1k documents each for 43 queries.
+            </p>
+          </section>
+
           <section id="query-characteristics">
             <h2>Query characteristics</h2>
             <hr class="divider" />
@@ -1238,7 +1250,7 @@
             </p>
             <hr class="divider" />
             <p class="fragment">
-              Lightweight query encoders are can achieve
+              Lightweight query encoders can achieve
               <b>good performance as re-rankers</b>.
             </p>
           </section>
@@ -1283,10 +1295,10 @@
             <div class="column-layout">
               <div class="column-item c-wide">
                 <p>
-                  <b>Core requirement</b>: Fast disk-based lookup of vectors.
+                  <b>Core requirement</b>: Fast disk-based look-up of vectors.
                 </p>
                 <p>
-                  Specific use-case: Matrix selection along
+                  Specific use-case: Array slicing along
                   <b>single axis</b>.
                 </p>
                 <p class="fragment" data-fragment-index="1">
