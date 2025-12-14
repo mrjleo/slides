@@ -1107,9 +1107,31 @@
               stopping.
             </p>
           </section>
+        </section>
+        <!-- end: fast-forward -->
 
-          <section id="fast-forward-encoders">
-            <h2>Encoders</h2>
+        <!-- encoders -->
+        <section>
+          <section class="sec-title" id="lightweigh-encoders">
+            <h2>
+              <b>Lightweight encoders</b>
+            </h2>
+            <div class="pub">
+              <p>
+                Jurek Leonhardt, Henrik Müller, Koustav Rudra, Megha Khosla,
+                Abhijit Anand, Avishek Anand
+              </p>
+              <p>
+                <span class="pub-title"
+                  >Efficient Neural Ranking using Forward Indexes and
+                  Lightweight Encoders</span
+                >, <span class="pub-venue">TOIS 2024</span>
+              </p>
+            </div>
+          </section>
+
+          <section id="data-characteristics">
+            <h2>Data characteristics</h2>
             <hr class="divider" />
             <p>
               Queries and documents have <b>different characteristics</b> in
@@ -1190,7 +1212,7 @@
             </p>
           </section>
         </section>
-        <!-- end: fast-forward -->
+        <!-- end: encoders -->
 
         <!-- practical aspects -->
         <section>
@@ -1200,6 +1222,26 @@
                 ><span class="textsc">Fast-Forward</span> indexes in practice</b
               >
             </h2>
+
+            <div>
+              <div class="pub">
+                <p>Catalin-Petru Lupau</p>
+                <p>
+                  <span class="pub-title"
+                    >Quantization for Compact Neural Passage Re-Ranking</span
+                  >, <span class="pub-venue">Master's thesis, 2024</span>
+                </p>
+              </div>
+              <div class="pub">
+                <p>Adrian Segura Lorente</p>
+                <p>
+                  <span class="pub-title"
+                    >Dynamic Hybrid Re-Ranking with Parameter-Efficient
+                    Adaptors</span
+                  >, <span class="pub-venue">Master's thesis, 2025</span>
+                </p>
+              </div>
+            </div>
           </section>
 
           <section id="ff-implementation">
@@ -1269,8 +1311,8 @@
               </p>
               <hr class="divider" />
               <p class="fragment" data-fragment-index="1">
-                We can directly optimize $\alpha$, e.g., using a max-margin
-                ranking loss:
+                We can <b>optimize $\alpha$ directly</b>, e.g., using a
+                max-margin ranking loss:
               </p>
               <p class="fragment" data-fragment-index="1">
                 $\alpha^* = \argmin_\alpha \sum_{(q_i, d_i^+, d_i^-) \in T}
