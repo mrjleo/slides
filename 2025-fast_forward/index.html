@@ -6,7 +6,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
-    <title>Fast-Forward Indexes</title>
+    <title>Efficient Neural Ranking using Forward Indexes</title>
     <link rel="stylesheet" href="../node_modules/reveal.js/dist/reveal.css" />
     <link
       rel="stylesheet"
@@ -17,448 +17,771 @@
       href="../node_modules/reveal.js/plugin/highlight/monokai.css"
     />
     <link rel="stylesheet" href="../common.css" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../2023-phd/style.css" />
+    <script src="../node_modules/typed.js/dist/typed.umd.js"></script>
   </head>
 
   <body>
     <div class="reveal">
       <div class="slides">
         <!-- title -->
-        <section id="title-slide">
-          <h1>Fast-Forward Indexes</h1>
-          <h4>Efficient Neural Text Ranking for Research</h4>
-          <code style="font-size: large">pip install fast-forward-indexes</code>
+        <section id="title">
+          <hr class="hide" style="height: 2em" />
+          <h2><b>Efficient Neural Ranking</b></h2>
+          <h3>using Forward Indexes</h3>
+          <hr class="hide" style="height: 0.5em" />
+          <p style="font-size: large">
+            <b><u>Jurek Leonhardt</u></b>
+          </p>
         </section>
         <!-- end: title -->
 
-        <!-- problem -->
+        <!-- ranking -->
         <section>
-          <section id="text-ranking">
-            <h2>Text ranking (<i>ad-hoc retrieval</i>)</h2>
+          <section
+            id="ranking"
+            data-auto-animate
+            data-auto-animate-id="ranking"
+          >
+            <h2>But what <i>is</i> ranking?</h2>
+          </section>
 
-            <hr class="divider" />
+          <section
+            id="ranking-websearch"
+            data-auto-animate
+            data-auto-animate-id="ranking"
+          >
+            <h2>But what <i>is</i> ranking?</h2>
+            <div class="column-layout r-stretch">
+              <div class="column-item">
+                <div class="se-logo">
+                  <span class="r-blue">W</span><span class="r-red">e</span
+                  ><span class="r-yellow">b</span> <span class="r-blue">S</span
+                  ><span class="r-red">e</span><span class="r-yellow">a</span
+                  ><span class="r-green">r</span><span class="r-red">c</span
+                  ><span class="r-yellow">h</span>
+                </div>
+                <div class="search-bar">
+                  <img
+                    src="img/search/search.svg"
+                    style="height: 0.4em; margin: 0; padding-right: 0.5em"
+                  />
+                  <div class="search-query fragment" id="query-anim-fragment">
+                    <p
+                      id="query-anim"
+                      style="margin: 0; margin-right: 0.1em"
+                    ></p>
+                  </div>
+                </div>
+                <div
+                  class="fragment search-results"
+                  id="search-results-fragment"
+                >
+                  <div class="search-result">
+                    <div class="search-result-header">
+                      <div class="search-result-icon r-stack">
+                        <div class="search-result-icon-background"></div>
+                        <img src="img/search/aleph_alpha.png" />
+                      </div>
+                      <div>
+                        <p class="search-title">Aleph Alpha</p>
+                        <p class="search-url">https://aleph-alpha.com</p>
+                      </div>
+                    </div>
+                    <p class="search-link">
+                      Sovereign AI Solutions for Enterprises and Governments by
+                      ...
+                    </p>
+                    <p class="search-desc">
+                      Our mission is to <b>secure your sovereignty</b>. We
+                      enable you to build and retain your own competencies,
+                      protect your data and IP, run, change and scale operations
+                      ...
+                    </p>
+                  </div>
 
-            <p class="fragment" data-fragment-index="0">
-              Given an <b>input query</b>, return a
-              <b>list of documents</b> ordered by <b>relevance</b>:
-            </p>
+                  <div class="search-result">
+                    <div class="search-result-header">
+                      <div class="search-result-icon r-stack">
+                        <div class="search-result-icon-background"></div>
+                        <img src="img/search/nvidia.png" />
+                      </div>
+                      <div>
+                        <p class="search-title">NVIDIA Blog</p>
+                        <p class="search-url">
+                          https://blogs.nvidia.com › blog › what-is-sovereign-ai
+                        </p>
+                      </div>
+                    </div>
+                    <p class="search-link">What is Sovereign AI?</p>
+                    <p class="search-desc">
+                      <b>Sovereign AI</b> refers to a nation's capabilities to
+                      produce artificial intelligence using its own
+                      infrastructure, data, workforce and business ...
+                    </p>
+                  </div>
 
-            <hr class="divider" />
-
-            <div
-              data-fragment-index="1"
-              class="fragment column-desc-layout"
-              style="
-                gap: 0;
-                border: 1px solid gray;
-                border-radius: 0.2em;
-                padding: 0.5em;
-                background-color: white;
-              "
-            >
-              <div class="column-item fragment" data-fragment-index="1">
-                <p style="font-size: xx-large; margin: 0.25em">🤔</p>
-                <p style="font-size: large; margin: 0">
-                  <i><q>What is the meaning of life?</q></i>
-                </p>
+                  <div class="search-result">
+                    <div class="search-result-header">
+                      <div class="search-result-icon r-stack">
+                        <div class="search-result-icon-background"></div>
+                        <img src="img/search/ecfr.png" />
+                      </div>
+                      <div>
+                        <p class="search-title">
+                          European Council on Foreign Relations (ECFR)
+                        </p>
+                        <p class="search-url">
+                          https://ecfr.eu › Publications › European Power
+                        </p>
+                      </div>
+                    </div>
+                    <p class="search-link">
+                      Get over your X: A European plan to escape American ...
+                    </p>
+                    <p class="search-desc">
+                      Despite the transformative potential of AI, the EU is
+                      reliant on the US for the chips and compute that AI
+                      requires as well as for the AI models ...
+                    </p>
+                  </div>
+                </div>
               </div>
-              <p class="column-label fragment" data-fragment-index="1">Query</p>
-
-              <p class="column-item fragment" data-fragment-index="2">→</p>
-              <p class="column-label fragment" data-fragment-index="2"></p>
-
-              <div class="column-item fragment" data-fragment-index="2">
-                <p style="font-size: 2em; margin: 0">🔍</p>
-              </div>
-              <p class="column-label fragment" data-fragment-index="2">
-                Retrieval engine
-              </p>
-
-              <p class="column-item fragment" data-fragment-index="3">→</p>
-              <p class="column-label fragment" data-fragment-index="3"></p>
-
-              <div class="column-item fragment" data-fragment-index="3">
-                <p class="tr-ranking-doc">
-                  #1 <span class="tr-ranking-doc-icon">📄</span> D371 (0.95)
-                </p>
-                <p class="tr-ranking-doc">
-                  #2 <span class="tr-ranking-doc-icon">📄</span> D222 (0.85)
-                </p>
-                <p class="tr-ranking-doc">
-                  #3 <span class="tr-ranking-doc-icon">📄</span> D984 (0.71)
-                </p>
-                <p class="tr-ranking-doc">
-                  #4 <span class="tr-ranking-doc-icon">📄</span> D105 (0.60)
-                </p>
-                <p class="tr-ranking-doc">
-                  #5 <span class="tr-ranking-doc-icon">📄</span> D090 (0.51)
-                </p>
-              </div>
-              <p class="column-label fragment" data-fragment-index="3">
-                Ranked documents
-              </p>
             </div>
+          </section>
 
+          <section id="ranking-adhoc">
+            <h2>Ad-hoc ranking</h2>
             <hr class="divider" />
+            <p>
+              Given an <b>input query $q$</b>, return a list of $k$
+              <b>documents $d_i$</b> from a corpus,
+              <b>ordered by their relevance</b> with respect to $q$.
+            </p>
+            <hr class="divider" />
+            <div class="h-center fragment" data-fragment-index="1">
+              <div class="rqd-ranking">
+                <div class="search-result-header">
+                  <p class="rqd-docid">$d_1$</p>
+                  <div class="search-result-icon r-stack">
+                    <div class="search-result-icon-background"></div>
+                    <img src="img/search/aleph_alpha.png" />
+                  </div>
+                  <div>
+                    <p class="search-title">Aleph Alpha</p>
+                  </div>
+                </div>
 
-            <p class="fragment" data-fragment-index="4">
-              <b>Applications</b>: Web search, retrieval-augmented generation
-              (RAG).
+                <div class="search-result-header">
+                  <p class="rqd-docid">$d_2$</p>
+                  <div class="search-result-icon r-stack">
+                    <div class="search-result-icon-background"></div>
+                    <img src="img/search/nvidia.png" />
+                  </div>
+                  <div>
+                    <p class="search-title">NVIDIA Blog</p>
+                  </div>
+                </div>
+
+                <div class="search-result-header">
+                  <p class="rqd-docid">$d_3$</p>
+                  <div class="search-result-icon r-stack">
+                    <div class="search-result-icon-background"></div>
+                    <img src="img/search/ecfr.png" />
+                  </div>
+                  <div>
+                    <p class="search-title">
+                      European Council on Foreign Relations (ECFR)
+                    </p>
+                  </div>
+                </div>
+
+                <p>. . .</p>
+                <p>$d_k$</p>
+              </div>
+            </div>
+            <p class="caption fragment" data-fragment-index="1">
+              Ranking for the query "<i style="font-family: sans-serif"
+                >AI sovereignty</i
+              >".
             </p>
           </section>
 
-          <section id="fast-forward">
-            <h2>Fast-Forward indexes</h2>
+          <section id="ranking-examples">
+            <h2>Ranking is everywhere</h2>
 
             <hr class="divider" />
 
-            <p>
-              Focus on <b>efficient text ranking</b> with neural Transformer
-              models:
-            </p>
-            <ol>
-              <li class="fragment" data-fragment-index="1">
-                Re-scoring a <b>candidate set</b> (e.g., from ElasticSearch)
-              </li>
-              <li class="fragment" data-fragment-index="2">
-                Utilizing <b>independent pre-computed</b> document
-                representations
-              </li>
-            </ol>
+            <div class="mr-grid">
+              <p>
+                <span class="r-blue">W</span><span class="r-red">e</span
+                ><span class="r-yellow">b</span> <span class="r-blue">S</span
+                ><span class="r-red">e</span><span class="r-yellow">a</span
+                ><span class="r-green">r</span><span class="r-red">c</span
+                ><span class="r-yellow">h</span>
+              </p>
+              <p>
+                <i>Ad-hoc retrieval</i>
+              </p>
+              <p>Online shopping</p>
+              <p><i>Recommender systems</i></p>
+              <p>Chatbots</p>
+              <p><i>Retrieval-augmented generation</i></p>
+            </div>
+            <hr class="divider" />
+            <p>thus...</p>
+          </section>
+
+          <section id="ranking-efficiency">
+            <h2>Ranking should be <i>efficient</i></h2>
 
             <hr class="divider" />
 
-            <p class="fragment" data-fragment-index="3">
-              From a <b>technical standpoint</b>:
-            </p>
-            <p class="fragment" data-fragment-index="3">
-              $ \underbrace{\operatorname{score}(q, d)}_{\text{query-document
-              score}} = \underbrace{ \zeta (q) }_{\text{query vector,} \atop
-              \text{computed online}} \cdot \underbrace{\eta^{FF}
-              (d)}_{\text{document vector,} \atop \text{pre-computed}}$
+            <img
+              class="fragment"
+              data-fragment-index="1"
+              style="margin-bottom: 0"
+              src="../2023-phd/img/emissions_out.svg"
+            />
+            <p
+              class="fragment"
+              data-fragment-index="1"
+              style="font-size: x-small; margin-top: 0"
+            >
+              Data from: Scells, Zhuang, and Zuccon. “Reduce, Reuse, Recycle:
+              Green Information Retrieval Research”. SIGIR 2022.
             </p>
 
             <hr class="divider" />
 
-            <p class="fragment" data-fragment-index="4">
-              For each query: one <b>encoder forward pass</b>,
-              <b>$n$ vector look-ups</b>, a <b>matrix multiplication</b>.
+            <p class="fragment" data-fragment-index="1">
+              But <b>state-of-the-art neural models</b>
+              <span style="font-size: small">(often)</span> aren't.
             </p>
           </section>
         </section>
-        <!-- end: problem -->
+        <!-- end: ranking -->
 
-        <!-- design -->
+        <!-- background -->
         <section>
-          <section id="design-goals">
-            <h2>Design goals</h2>
-
-            <hr class="divider" />
-
-            <p>Target audience: <b>reseachers</b>. Consequently, we need:</p>
-            <ul>
-              <li class="fragment">A <b>Python</b> API</li>
-              <li class="fragment">
-                <b>Usability</b> (allow for rapid prototying)
-              </li>
-              <li class="fragment"><b>Extensibility</b></li>
-              <li class="fragment"><b>Efficiency</b> (after all)</li>
-            </ul>
+          <section class="sec-title" id="background">
+            <h2>
+              <b>Background</b>
+            </h2>
           </section>
 
-          <section id="usability">
-            <h2>Usability</h2>
-
+          <section id="sparse-retrieval">
+            <h2>Sparse retrieval</h2>
             <hr class="divider" />
+            <p>
+              <i>Sparse retrieval</i> (mostly) uses <b>lexical matching</b> for
+              <b>ad-hoc retrieval</b>.
+            </p>
+            <hr class="divider" />
+            <img
+              class="fig"
+              style="margin: 0"
+              src="../2023-phd/img/background/sparse_retrieval_example_out.svg"
+            />
+            <p class="caption">Sparse retrieval example.</p>
+            <hr class="divider" />
+            <p class="fragment" data-fragment-index="1">
+              Lexical matching is
+              <span
+                class="fragment"
+                data-fragment-index="1"
+                style="color: green"
+                >fast and efficient,</span
+              >
+              <span
+                class="fragment"
+                data-fragment-index="1"
+                style="color: green"
+                >explainable by design,</span
+              >
+              <span class="fragment" style="color: red"
+                >limited to matching terms.</span
+              >
+            </p>
+          </section>
 
-            <div class="column-layout" style="grid-template-columns: 45% auto">
+          <section id="dense-retrieval">
+            <h2>Dense retrieval (vector search)</h2>
+            <hr class="divider" />
+            <div class="column-layout">
               <div class="column-item">
-                <ul>
-                  <li class="fragment" data-fragment-index="1">Typing</li>
-                  <li class="fragment" data-fragment-index="2">
-                    In-line documentation
-                  </li>
-                  <li class="fragment" data-fragment-index="3">
-                    Error handling
-                  </li>
-                  <li class="fragment" data-fragment-index="4">Logging</li>
-                  <li class="fragment" data-fragment-index="5">
-                    GitHub actions:
-                    <ul>
-                      <li>Testing: <code>pytest</code></li>
-                      <li>Type checking: <code>pyright</code></li>
-                      <li>Documentation: <code>pdoc</code></li>
-                      <li>Formatting, linting: <code>ruff</code></li>
-                    </ul>
-                  </li>
-                </ul>
+                <div class="c-wide">
+                  <p>
+                    Documents and query are embedded in a common vector space
+                    using <b>dual-encoder</b> models.
+                  </p>
+                  <p class="fragment" data-fragment-index="1">
+                    Retrieval is performed as an (approximate)
+                    <b>nearest neighbor search</b> operation.
+                  </p>
+                  <p class="fragment">
+                    This is the de facto standard for current RAG setups.
+                  </p>
+                </div>
               </div>
               <div class="column-item">
-                <pre class="python">
-                  <code data-trim data-noescape data-fragment-index="1" data-line-numbers="|12-22|24-47|45,46,48,49|61|">
-                    class OnDiskIndex(Index):
-                      """Fast-Forward index that is read on-demand from disk.
-                  
-                      Uses HDF5 via h5py under the hood.
-                      The `max_indexing_size` argument works around
-                      an [h5py limitation]
-                      (https://docs.h5py.org/en/latest/high/dataset.html#fancy-indexing).
-                      """
-                  
-                      def __init__(
-                        self,
-                        index_file: "Path",
-                        query_encoder: "Encoder | None" = None,
-                        quantizer: Quantizer | None = None,
-                        mode: Mode = Mode.MAXP,
-                        encoder_batch_size: int = 32,
-                        init_size: int = 2**14,
-                        resize_min_val: int = 2**10,
-                        hdf5_chunk_size: int | None = None,
-                        max_id_length: int = 8,
-                        overwrite: bool = False,
-                        max_indexing_size: int = 2**10,
-                      ) -> None:
-                        """Create an index on disk.
-                
-                        :param index_file: The index file to
-                          create (or overwrite).
-                        :param query_encoder: The query encoder.
-                        :param quantizer: The quantizer to use.
-                        :param mode: The ranking mode.
-                        :param encoder_batch_size: Batch size for
-                          the query encoder.
-                        :param init_size: Initial size to allocate
-                          (number of vectors).
-                        :param resize_min_val: Minimum number of
-                          vectors to increase index size by.
-                        :param hdf5_chunk_size: Specify a chunk
-                          size used by HDF5.
-                        :param max_id_length: Maximum length of
-                          document and passage IDs (number of characters).
-                        :param overwrite: Overwrite index file
-                          if it exists.
-                        :param max_indexing_size: Maximum number of
-                          vectors to retrieve from the HDF5 dataset at once.
-                        :raises ValueError: When the file exists
-                          and `overwrite=False`.
-                        """
-                        if index_file.exists() and not overwrite:
-                          raise ValueError(f"File {index_file} exists.")
-                
-                        self._index_file = index_file.absolute()
-                        self._doc_id_to_idx = defaultdict(list)
-                        self._psg_id_to_idx = {}
-                
-                        self._init_size = init_size
-                        self._resize_min_val = resize_min_val
-                        self._hdf5_chunk_size = hdf5_chunk_size
-                        self._max_id_length = max_id_length
-                        self._max_indexing_size = max_indexing_size
-                
-                        LOGGER.debug("creating file %s", self._index_file)
-                        with h5py.File(self._index_file, "w") as fp:
-                          fp.attrs["num_vectors"] = 0
-                          fp.attrs["ff_version"] = fast_forward.__version__
-                
-                      super().__init__(
-                          query_encoder=query_encoder,
-                          quantizer=quantizer,
-                          mode=mode,
-                          encoder_batch_size=encoder_batch_size,
-                        )
-                  </code>
-                </pre>
+                <div class="vector-space">
+                  <div>
+                    <span class="dr-icon" style="top: 15rem; left: 4rem"
+                      >📄</span
+                    >
+                    <span class="dr-icon" style="top: 3rem; left: 5rem"
+                      >📄</span
+                    >
+                    <span class="dr-icon" style="top: 4rem; left: 7rem"
+                      >📄</span
+                    >
+                    <span class="dr-icon" style="top: 3rem; left: 8rem"
+                      >📄</span
+                    >
+                    <span class="dr-icon" style="top: 2rem; left: 6rem"
+                      >📄</span
+                    >
+                    <span class="dr-icon" style="top: 8rem; left: 7rem"
+                      >📄</span
+                    >
+                    <span class="dr-icon" style="top: 10rem; left: 9rem"
+                      >📄</span
+                    >
+                    <span class="dr-icon" style="top: 7rem; left: 8rem"
+                      >📄</span
+                    >
+                    <span class="dr-icon" style="top: 9rem; left: 11rem"
+                      >📄</span
+                    >
+                    <span class="dr-icon" style="top: 10rem; left: 1rem"
+                      >📄</span
+                    >
+                  </div>
+                  <div
+                    id="dr-query-radius"
+                    class="fragment"
+                    data-fragment-index="1"
+                  ></div>
+                  <span class="dr-icon" style="top: 5rem; left: 10rem">🤔</span>
+                </div>
+                <p class="caption">
+                  The vector space is often $768$-dimensional.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section id="reranking">
+            <h2>Retrieve-and-re-rank</h2>
+            <hr class="divider" />
+            <p>
+              <i>Retrieve-and-re-rank</i> is a <b>telescoping</b> setting that
+              has two stages.
+            </p>
+            <hr class="divider" />
+
+            <div class="column-desc-layout" id="rr-layout" style="gap: 0">
+              <div class="column-item fragment" data-fragment-index="1">
+                <p style="font-size: 2em; margin: 0">📚</p>
+              </div>
+              <p class="column-label fragment" data-fragment-index="1">
+                Corpus
+              </p>
+
+              <p class="column-item rr-arrow fragment" data-fragment-index="2">
+                →
+              </p>
+              <p class="column-label fragment" data-fragment-index="2"></p>
+
+              <div
+                class="column-item rr-stage fragment"
+                data-fragment-index="2"
+              >
+                <p class="rr-stage-num">1</p>
+                <p class="rr-operation">Lexical retrieval</p>
+              </div>
+              <p class="column-label fragment" data-fragment-index="2"></p>
+
+              <p class="column-item rr-arrow fragment" data-fragment-index="2">
+                →
+              </p>
+              <p class="column-label fragment" data-fragment-index="2"></p>
+
+              <div
+                class="column-item fragment"
+                data-fragment-index="2"
+                id="rr-candidate-docs"
+              >
+                📄📄📄📄📄<br />📄📄📄📄📄<br />📄📄📄📄📄<br />📄📄📄📄📄<br />📄📄📄📄📄
+              </div>
+              <p class="column-label fragment" data-fragment-index="2">
+                Candidates
+              </p>
+
+              <p class="column-item rr-arrow fragment" data-fragment-index="3">
+                →
+              </p>
+              <p class="column-label fragment" data-fragment-index="3"></p>
+
+              <div
+                class="column-item rr-stage fragment"
+                data-fragment-index="3"
+              >
+                <p class="rr-stage-num">2</p>
+                <p class="rr-operation">Semantic re-ranking</p>
+              </div>
+              <p class="column-label fragment" data-fragment-index="3"></p>
+
+              <p class="column-item rr-arrow fragment" data-fragment-index="3">
+                →
+              </p>
+              <p class="column-label fragment" data-fragment-index="3"></p>
+
+              <div class="column-item fragment" data-fragment-index="3">
+                <p class="rr-ranking-doc">
+                  #1 <span class="rr-ranking-doc-icon">📄</span> D371 (0.95)
+                </p>
+                <p class="rr-ranking-doc">
+                  #2 <span class="rr-ranking-doc-icon">📄</span> D222 (0.85)
+                </p>
+                <p class="rr-ranking-doc">
+                  #3 <span class="rr-ranking-doc-icon">📄</span> D984 (0.71)
+                </p>
+              </div>
+              <p class="column-label fragment" data-fragment-index="3">
+                Final ranking
+              </p>
+            </div>
+          </section>
+        </section>
+        <!-- end: background -->
+
+        <!-- fast-forward -->
+        <section>
+          <section class="sec-title" id="background">
+            <h2>
+              <b><span class="textsc">Fast-Forward</span> indexes</b>
+            </h2>
+          </section>
+
+          <section
+            id="fast-forward-idea"
+            data-auto-animate
+            data-auto-animate-id="fast-forward"
+          >
+            <h2><span class="textsc">Fast-Forward</span> indexes</h2>
+            <hr class="divider" />
+            <p>
+              <b>Interpolating lexical</b> retrieval and
+              <b>semantic</b> re-ranking scores improves the performance:
+            </p>
+            <p>
+              $\phi (q, d) = \alpha \cdot \underbrace{\phi_S (q,
+              d)}_{\text{retrieval}} + (1 - \alpha) \ \cdot$
+              <span class="fragment highlight-green" data-fragment-index="1">
+                $\underbrace{\phi_D(q, d)}_{\text{re-ranking}}$
+              </span>
+            </p>
+            <p class="fragment" data-fragment-index="1">
+              Our approach:
+              <b class="fragment highlight-green" data-fragment-index="1">
+                Efficient re-ranking with dual-encoders</b
+              >.
+            </p>
+            <hr class="divider" />
+            <p class="fragment" data-fragment-index="2">
+              A <b><span class="textsc">Fast-Forward</span> index</b> is a
+              look-up table for pre-computed document representations:
+            </p>
+            <p class="fragment" data-fragment-index="2">
+              <span class="fragment highlight-green" data-fragment-index="2">
+                $\phi_D^{FF} (q, d)$
+              </span>
+              $= \zeta (q) \cdot \eta^{FF} (d)$
+            </p>
+          </section>
+
+          <section
+            id="fast-forward-efficiency"
+            data-auto-animate
+            data-auto-animate-id="fast-forward"
+          >
+            <h2><span class="textsc">Fast-Forward</span> indexes</h2>
+            <hr class="divider" />
+            <p>
+              The <b>look-up</b> operation is much more <b>efficient</b> than
+              actual re-ranking:
+            </p>
+            <hr class="divider" />
+            <img
+              class="fig"
+              src="../2023-phd/img/fast_forward/results/comparison_out.svg"
+              style="margin: 0"
+            />
+            <p class="caption">
+              <span class="textsc">TCT-ColBERT</span> on
+              <span class="textsc">TREC-DL-Doc’19</span>.
+            </p>
+          </section>
+
+          <section id="fast-forward-es">
+            <h2>Early stopping</h2>
+            <hr class="divider" />
+            <div class="column-layout" style="grid-template-columns: 40% auto">
+              <div class="column-item c-wide">
+                <p>
+                  Many tasks require only a
+                  <b>small number of documents</b> (e.g., the top-$10$).
+                </p>
+                <p class="fragment" data-fragment-index="1">
+                  <b>Early stopping</b> exploits correlations of retriever and
+                  re-ranker to
+                  <b>limit the number of documents to be re-ranked</b>.
+                </p>
+              </div>
+              <div class="column-item fragment" data-fragment-index="1">
+                <img
+                  class="fig"
+                  src="../2023-phd/img/fast_forward/results/early_stopping_out.svg"
+                />
+                <p class="caption">
+                  ANCE on <span class="textsc">TREC-DL-Psg’19</span> with early
+                  stopping.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section id="fast-forward-encoders">
+            <h2>Efficient encoders</h2>
+            <hr class="divider" />
+            <p>
+              Queries and documents have <b>different characteristics</b> in
+              terms of length and complexity.
+            </p>
+            <img
+              class="fig"
+              src="../2023-phd/img/fast_forward/length_stats_out.svg"
+            />
+            <p class="caption">
+              The distribution of query and passage lengths in the MS MARCO
+              corpus.
+            </p>
+            <hr class="divider" />
+            <p class="fragment">
+              <b>Intuition</b>: Encoders should be adapted to these
+              characteristics.
+            </p>
+          </section>
+
+          <section
+            id="fast-forward-query-encoders"
+            data-auto-animate
+            data-auto-animate-id="qenc"
+          >
+            <h2>Efficient query encoders</h2>
+            <hr class="divider" />
+            <p>
+              Queries are <b>short</b> and <b>concise</b>; a
+              <b>simple model</b> should be able to represent them.
+            </p>
+            <hr class="divider" />
+            <div class="column-layout fragment">
+              <div class="column-item">
+                <img
+                  class="fig"
+                  src="../2023-phd/img/fast_forward/query_encoder_out.svg"
+                />
+                <p class="caption">Self-attention-based query encoder.</p>
+              </div>
+              <div class="column-item">
+                <div class="c-wide">
+                  <p>Hyperparameters:</p>
+                  <ul>
+                    <li>Number of layers $L$</li>
+                    <li>Number of attention heads $A$</li>
+                    <li>Representation size $H$</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <hr class="divider" />
+            <p class="fragment">
+              BERT<sub>base</sub>: $L=12$, $A=12$, $H=768$.
+              <span class="fragment"><b>Can we go lower?</b></span>
+            </p>
+          </section>
+
+          <section
+            id="fast-forward-query-encoders-results"
+            data-auto-animate
+            data-auto-animate-id="qenc"
+          >
+            <h2>Efficient query encoders</h2>
+            <hr class="divider" />
+            <img
+              src="../2023-phd/img/fast_forward/results/query_encoders/comparison_out.svg"
+              class="fig"
+            />
+            <p class="caption">
+              Latency and ranking performance. Latency measured with batch size
+              $256$.
+            </p>
+            <hr class="divider" />
+            <p class="fragment">
+              Lightweight query encoders are <b>much faster</b> and can achieve
+              <b>good performance</b>.
+            </p>
+          </section>
+
+          <section
+            id="fast-forward-document-encoders"
+            data-auto-animate
+            data-auto-animate-id="denc"
+          >
+            <h2>Selective document encoders</h2>
+            <hr class="divider" data-fragment-index="1" />
+            <div class="column-layout" style="grid-template-columns: 60% auto">
+              <div class="column-item">
+                <div class="c-wide">
+                  <p>
+                    Documents are often long; <b>encoding</b> (indexing) is
+                    expensive.
+                  </p>
+                  <hr class="divider" />
+                  <p>
+                    <b>Complex encoders</b> are required to capture the
+                    semantics of the documents.
+                  </p>
+                  <hr class="divider" />
+                  <p class="fragment" data-fragment-index="1">
+                    Can we <b>shorten documents</b> instead?
+                  </p>
+                </div>
+              </div>
+
+              <div class="column-item">
+                <p
+                  class="fig"
+                  style="
+                    font-family: monospace;
+                    text-align: left;
+                    border: 0.1em solid gray;
+                    border-radius: 0.5em;
+                    padding: 1em;
+                    background-color: white;
+                  "
+                >
+                  [...]
+                  <br />
+                  <br />
+                  <span class="fragment fade-out" data-fragment-index="2">
+                    <span
+                      class="fragment highlight-red"
+                      data-fragment-index="1"
+                    >
+                      This is a
+                    </span>
+                  </span>
+                  web article
+                  <span class="fragment fade-out" data-fragment-index="2">
+                    <span
+                      class="fragment highlight-red"
+                      data-fragment-index="1"
+                    >
+                      which is
+                    </span>
+                  </span>
+                  unnecessarily long
+                  <span class="fragment fade-out" data-fragment-index="2">
+                    <span
+                      class="fragment highlight-red"
+                      data-fragment-index="1"
+                    >
+                      and
+                    </span>
+                  </span>
+                  contains
+                  <span class="fragment fade-out" data-fragment-index="2">
+                    <span
+                      class="fragment highlight-red"
+                      data-fragment-index="1"
+                    >
+                      ads, repetitions, and, finally, some
+                    </span>
+                  </span>
+                  useful content.
+                  <br />
+                  <br />
+                  [...]
+                </p>
+                <p class="caption">Example document.</p>
               </div>
             </div>
           </section>
 
           <section
-            id="documentation"
-            data-background-iframe="https://mrjleo.github.io/fast-forward-indexes/docs/v0.7.1/fast_forward/index.html#OnDiskIndex"
-            data-background-interactive
+            id="fast-forward-selective-document-encoders"
+            data-auto-animate
+            data-auto-animate-id="denc"
           >
-            <div
-              style="
-                position: absolute;
-                width: 30%;
-                right: 0;
-                box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5),
-                  0 5px 25px rgba(0, 0, 0, 0.2);
-                background-color: rgba(0, 0, 0, 0.9);
-                color: white;
-                padding: 1em;
-                font-size: x-large;
-                text-align: center;
-              "
-            >
-              <h2 style="color: white">API documentation</h2>
-              <hr />
-              <p style="color: white">Automatically generated on release</p>
-            </div>
-          </section>
-
-          <section id="extensibility">
-            <h2>Extensibility</h2>
-
+            <h2>Selective document encoders</h2>
             <hr class="divider" />
-
-            <div class="column-layout" style="grid-template-columns: 35% auto">
-              <div class="column-item">
-                <ul>
-                  <li class="fragment" data-fragment-index="1">
-                    Modular design
-                  </li>
-                  <li class="fragment" data-fragment-index="2">
-                    Abstract classes for <code>Index</code>,
-                    <code>Encoder</code>, <code>Quantizer</code>
-                  </li>
-                  <li class="fragment" data-fragment-index="3">
-                    Enables reasearch on individual components
-                  </li>
-                </ul>
-              </div>
-              <div class="column-item fragment" data-fragment-index="1">
-                <pre class="python">
-                  <code data-trim data-noescape data-fragment-index="2" data-line-numbers="|1-6|17-31">
-                    class Encoder(abc.ABC):
-                      """Base class for encoders."""
-                  
-                      @abc.abstractmethod
-                      def _encode(self, texts: "Sequence[str]") -> "np.ndarray":
-                        pass
-                  
-                      def __call__(self, texts: "Sequence[str]") -> "np.ndarray":
-                        """Encode a list of texts.
-                
-                        :param texts: The texts to encode.
-                        :return: The resulting vector representations.
-                        """
-                        return self._encode(texts)
-
-
-                    class TransformerEncoder(Encoder):
-                      """Uses a pre-trained Transformer model for encoding.
-                  
-                      The outputs corresponding to the CLS token from the
-                      last hidden layer are used.
-                      """
-                      # [...]
-
-                      def _encode(self, texts: "Sequence[str]") -> "np.ndarray":
-                        model_inputs = self._tokenizer(
-                          self._get_tokenizer_inputs(texts),
-                          return_tensors="pt",
-                          **self._tokenizer_call_args,
-                        ).to(self._device)
-                        # [...]
-                  </code>
-                </pre>
-              </div>
-            </div>
-          </section>
-
-          <section id="efficiency">
-            <h2>Efficiency</h2>
-
-            <hr class="divider" />
-
             <div class="column-layout" style="grid-template-columns: 50% auto">
               <div class="column-item">
-                <ul>
-                  <li class="fragment" data-fragment-index="1">
-                    Native Python is too slow.
-                  </li>
-                  <li class="fragment" data-fragment-index="2">
-                    Off-load as much as possible to efficient libraries:
-                    <ul>
-                      <li class="fragment" data-fragment-index="3">
-                        Rankings (queries, string IDs) using <b>pandas</b>
-                      </li>
-                      <li class="fragment" data-fragment-index="4">
-                        Computations using <b>NumPy</b>
-                      </li>
-                    </ul>
-                  </li>
-                  <li class="fragment" data-fragment-index="5">
-                    <b>Vector quantization</b> for memory efficiency
-                  </li>
-                  <li class="fragment" data-fragment-index="6">
-                    Process data in large batches
-                  </li>
-                </ul>
+                <img
+                  class="fig"
+                  src="../2023-phd/img/fast_forward/selbert_out.svg"
+                />
+                <p class="caption">Selective document encoder.</p>
               </div>
-              <div class="column-item fragment" data-fragment-index="2">
-                <pre class="python">
-                  <code data-trim data-noescape data-fragment-index="3" data-line-numbers="|3,10|20|12,13|">
-                    # batch encode queries
-                    query_vectors = self.encode_queries(
-                      query_df["query"].to_list()
-                    )
-
-                    # [...]
-
-                    # get all required vectors from the FF index
-                    vectors = self._get_vectors(
-                      ranking_df["id"].to_list()
-                    )
-                    if self.quantizer is not None:
-                      vectors = self.quantizer.decode(vectors)
-                    
-                    # [...]
-
-                    # compute all dot products (scores)
-                    q_reps = query_vectors[select_query_vectors]
-                    d_reps = vectors[select_vectors]
-                    scores = np.sum(q_reps * d_reps, axis=1)
-                  </code>
-                </pre>
-                <p style="font-size: small; margin: 0">Code is simplified</p>
+              <div class="column-item">
+                <div class="c-wide">
+                  <p>
+                    <i>Selective document encoders</i>
+                    <b>dynamically shorten</b> batches of input documents during
+                    inference.
+                  </p>
+                  <hr class="divider" />
+                  <p class="fragment">
+                    Each <b>document token</b> is assigned a score, and the
+                    <b>lowest scoring tokens are removed</b>.
+                  </p>
+                  <hr class="divider" />
+                  <p class="fragment">
+                    The degree to which documents are shortened is controlled by
+                    a hyperparameter $p \in [0,1]$.
+                  </p>
+                </div>
               </div>
             </div>
           </section>
+
+          <section
+            id="fast-forward-selective-document-encoders-results"
+            data-auto-animate
+            data-auto-animate-id="denc"
+          >
+            <h2>Selective document encoders</h2>
+            <hr class="divider" />
+            <img
+              class="fig"
+              src="../2023-phd/img/fast_forward/results/doc_encoders/comparison_out.svg"
+            />
+            <p class="caption">
+              Indexing latency and ranking performance on
+              <span class="textsc">MSM-Psg-Dev</span>. Latency measured with
+              batch size $256$.
+            </p>
+            <hr class="divider" />
+            <p class="fragment">
+              <b>Up to 50%</b> of the document tokens can be removed without
+              difference in performance.
+            </p>
+          </section>
         </section>
-        <!-- end: design -->
-
-        <section id="next-steps">
-          <h2>Next steps</h2>
-
-          <hr class="divider" />
-
-          <div class="column-layout" style="grid-template-columns: 50% auto">
-            <div class="column-item">
-              <ol>
-                <li class="fragment" data-fragment-index="1">
-                  Exploring <code>h5py</code> alternatives
-                </li>
-                <ul>
-                  <li class="fragment" data-fragment-index="1">
-                    <code>h5py</code> is convenient, but not optimal for random
-                    reads along a single axis
-                  </li>
-                  <li class="fragment" data-fragment-index="2">
-                    Memory-mapped arrays are significantly faster
-                  </li>
-                  <li class="fragment" data-fragment-index="3">
-                    Potential alternatives: Zarr, tileDB
-                  </li>
-                </ul>
-                <li class="fragment" data-fragment-index="4">
-                  Identify other bottlenecks
-                </li>
-                <ul class="fragment" data-fragment-index="4">
-                  <li>Remaining operations implemente in Python</li>
-                </ul>
-              </ol>
-            </div>
-            <div class="column-item fragment" data-fragment-index="2">
-              <img src="img/benchmark.png" />
-              <p style="font-size: small; margin: 0">
-                50k random reads along axis 0, array shape (1M, 768).
-              </p>
-            </div>
-          </div>
-        </section>
+        <!-- end: fast-forward -->
       </div>
     </div>
 
@@ -482,6 +805,23 @@
           RevealZoom,
           RevealNotes,
         ],
+      });
+
+      // query typing animation
+      var query_typed = null;
+      Reveal.on("fragmentshown", (event) => {
+        if (event.fragment.id == "query-anim-fragment") {
+          if (query_typed != null) {
+            query_typed.destroy();
+          }
+          query_typed = new Typed("#query-anim", {
+            strings: ["AI ^50 sovereignty"],
+            typeSpeed: 50,
+          });
+        } else if (event.fragment.id == "search-results-fragment") {
+          // remove distracting cursor once the search results are visible
+          query_typed.cursor.remove();
+        }
       });
     </script>
   </body>
