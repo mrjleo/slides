@@ -1,0 +1,38 @@
+\documentclass{standalone}
+\input{../../../2023-phd/img/_common.tex}
+
+\begin{document}
+\begin{tikzpicture}
+    \begin{axis}[
+            nodes near coords,
+            width=12cm,
+            height=10cm,
+            ymin=0.6,
+            ymax=0.75,
+            xlabel={Index size [GB]},
+            ylabel={\ndcg{}@\num{10}},
+            grid=major,
+        ]
+        \addplot[
+            very thick,
+            mark=o,
+            only marks,
+            mark options={
+                draw=red,
+                outer sep=0.1em,
+            },
+            point meta=explicit symbolic,
+            coordinate style/.condition={\coordindex==0}{align=left,left},
+            coordinate style/.condition={\coordindex==1}{align=left,right},
+            coordinate style/.condition={\coordindex==2}{align=right,left},
+            coordinate style/.condition={\coordindex==3}{align=left,right},
+            color=black,
+        ] coordinates {
+            (27.2, 0.670) [\tct{}\\(dense retrieval)]
+            (0.83, 0.677) [JPQ\\(dense retrieval)]
+            (27.2, 0.719) [\tct{}\\(\textbf{\fastforward})]
+            (3.48, 0.701) [\tct{}\\(OPQ, \textbf{\fastforward})]
+        };
+    \end{axis}
+\end{tikzpicture}
+\end{document}

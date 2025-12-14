@@ -1202,37 +1202,55 @@
             </h2>
           </section>
 
-          <section id="ff-index-compression">
-            <h2>Index compression</h2>
-          </section>
-
           <section id="ff-implementation">
             <h2>Implementation</h2>
 
             <hr class="divider" />
 
             <div class="column-layout">
-              <div class="column-item">
-                <ul>
-                  <li>
-                    <b>Core requirement</b>: Fast disk-based lookup of vectors.
-                  </li>
-                  <li>
-                    Specific use-case: Matrix selection along
-                    <b>single axis</b>.
-                  </li>
-                  <li class="fragment" data-fragment-index="1">
-                    Memory-mapped arrays perform very well.
-                  </li>
-                  <li class="fragment">
-                    Consequence: HDF5 implementation with optional memory
-                    mapping.
-                  </li>
-                </ul>
+              <div class="column-item c-wide">
+                <p>
+                  <b>Core requirement</b>: Fast disk-based lookup of vectors.
+                </p>
+                <p>
+                  Specific use-case: Matrix selection along
+                  <b>single axis</b>.
+                </p>
+                <p class="fragment" data-fragment-index="1">
+                  HDF5 and memory-mapped arrays perform well.
+                </p>
+                <p class="fragment">
+                  Consequence: HDF5 implementation with optional memory mapping.
+                </p>
               </div>
               <div class="column-item fragment" data-fragment-index="1">
                 <img class="fig" src="img/implementation/benchmark_out.svg" />
                 <p class="caption">Randomly accessing 50k out of 1M vectors.</p>
+              </div>
+            </div>
+          </section>
+
+          <section id="ff-index-compression">
+            <h2>Index compression</h2>
+
+            <hr class="divider" />
+
+            <div class="column-layout">
+              <div class="column-item c-wide">
+                <p>
+                  <b>Product quantization</b> commonly used to compress vectors
+                  for dense retrieval.
+                </p>
+                <p class="fragment" data-fragment-index="1">
+                  <span class="textsc">Fast-Forward</span> indexes can be
+                  significantly compressed using PQ as well.
+                </p>
+              </div>
+              <div class="column-item fragment" data-fragment-index="1">
+                <img class="fig" src="img/implementation/compression_out.svg" />
+                <p class="caption">
+                  Results on <span class="textsc">TREC-DL-Psg’19</span>.
+                </p>
               </div>
             </div>
           </section>
