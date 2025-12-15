@@ -13,9 +13,9 @@
             legend entries={Without early stopping, With early stopping},
             legend cell align={left},
             legend style={
-                at={(0.025, 0.5)},
-                anchor=west,
-            },
+                    at={(0.025, 0.5)},
+                    anchor=west,
+                },
         ]
 
         \addplot[
@@ -23,34 +23,34 @@
             mark=o,
             only marks,
             mark options={
-                draw=plotColor1,
-                outer sep=0.1em,
-            },
+                    draw=plotColor1,
+                    outer sep=0.1em,
+                },
             point meta=explicit symbolic,
             coordinate style/.condition={\coordindex==0}{align=left,left},
             coordinate style/.condition={\coordindex==1}{align=left,left},
             color=black,
         ] coordinates {
-            (114, 0.902) [\tct{}]
-            (114, 0.864) [\ance{}]
-        };
+                (114, 0.902) [\tct{}]
+                (114, 0.864) [\ance{}]
+            };
 
         \addplot[
             very thick,
             mark=square,
             only marks,
             mark options={
-                draw=plotColor2,
-                outer sep=0.1em,
-            },
+                    draw=plotColor2,
+                    outer sep=0.1em,
+                },
             point meta=explicit symbolic,
             coordinate style/.condition={\coordindex==0}{align=left,left},
             coordinate style/.condition={\coordindex==1}{align=left,right},
             color=black,
         ] coordinates {
-            (72, 0.902) [\tct{}]
-            (52, 0.864) [\ance{}]
-        };
+                (72, 0.902) [\tct{}]
+                (52, 0.864) [\ance{}]
+            };
     \end{axis}
 \end{tikzpicture}
 \end{document}
