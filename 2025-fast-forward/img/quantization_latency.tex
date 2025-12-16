@@ -1,0 +1,67 @@
+\documentclass{standalone}
+\input{../../2023-phd/img/_common.tex}
+
+\begin{document}
+\begin{tikzpicture}
+    \begin{axis}[
+            xbar stacked,
+            bar width=12pt,
+            height=3cm,
+            width=12cm,
+            xmin=0,
+            xlabel={Latency [s]},
+            enlarge y limits=0.5,
+            symbolic y coords={Uncompressed, OPQ},
+            ytick=data,
+            legend entries={
+                    Look-up,
+                    Reconstruction,
+                    Query encoding,
+                    Other,
+                },
+            legend cell align={left},
+            legend columns=2,
+            legend style={
+                    at={(0, 1.1)},
+                    anchor=south west,
+                    /tikz/column 2/.style={
+                            column sep=1cm,
+                        },
+                },
+        ]
+        \addplot+[
+            xbar,
+            thick,
+            draw=black,
+            fill=plotColor1*,
+            postaction={
+                    pattern=north east lines
+                },
+        ] plot coordinates {(6.2,Uncompressed) (3.03,OPQ)};
+        \addplot+[
+            xbar,
+            thick,
+            draw=black,
+            fill=plotColor2*,
+            postaction={
+                    pattern=north west lines
+                },
+        ] plot coordinates {(0,Uncompressed) (0.537,OPQ)};
+        \addplot+[
+            xbar,
+            thick,
+            draw=black,
+            fill=plotColor3*,
+            postaction={
+                    pattern=vertical lines
+                },
+        ] plot coordinates {(0.365,Uncompressed) (0.271,OPQ)};
+        \addplot+[
+            xbar,
+            thick,
+            draw=black,
+            fill=plotColorNeutral*,
+        ] plot coordinates {(0.025,Uncompressed) (0.202,OPQ)};
+    \end{axis}
+\end{tikzpicture}
+\end{document}

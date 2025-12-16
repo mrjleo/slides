@@ -1295,14 +1295,27 @@
             <hr class="divider" />
 
             <div class="column-layout">
-              <div class="column-item c-wide">
-                <p>
-                  <b>Product quantization</b> commonly used to compress vectors
-                  for dense retrieval.
-                </p>
-                <p class="fragment" data-fragment-index="1">
-                  <span class="textsc">Fast-Forward</span> indexes can be
-                  significantly compressed using PQ as well.
+              <div class="column-item">
+                <div class="c-wide">
+                  <p>
+                    <b>Product quantization</b> commonly used to compress
+                    vectors for dense retrieval.
+                  </p>
+                  <p class="fragment" data-fragment-index="1">
+                    <span class="textsc">Fast-Forward</span> indexes can be
+                    significantly compressed using PQ as well.
+                  </p>
+                </div>
+
+                <hr class="divider" />
+
+                <img
+                  class="fig fragment"
+                  src="img/quantization_latency_out.svg"
+                  data-fragment-index="2"
+                />
+                <p class="caption fragment" data-fragment-index="2">
+                  Latency for re-ranking 1k documents each for 43 queries.
                 </p>
               </div>
               <div class="column-item fragment" data-fragment-index="1">
