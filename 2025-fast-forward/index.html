@@ -313,78 +313,6 @@
             </p>
           </section>
 
-          <section id="dense-retrieval">
-            <h2>Dense retrieval (vector search)</h2>
-            <hr class="divider" />
-            <div class="column-layout">
-              <div class="column-item">
-                <div class="c-wide">
-                  <p>
-                    Documents and query are embedded in a common vector space
-                    using <b>dual-encoder</b> models:
-                  </p>
-                </div>
-                <p style="margin-top: 0">
-                  $\phi_D(q, d) = \zeta(q) \cdot \eta(d)$
-                </p>
-                <div class="c-wide">
-                  <p class="fragment" data-fragment-index="1">
-                    Retrieval is performed as an (approximate)
-                    <b>nearest neighbor search</b> operation.
-                  </p>
-                  <p class="fragment">
-                    This is the de facto standard for current RAG setups.
-                  </p>
-                </div>
-              </div>
-              <div class="column-item">
-                <div class="vector-space">
-                  <div>
-                    <span class="dr-icon" style="top: 15rem; left: 4rem"
-                      >📄</span
-                    >
-                    <span class="dr-icon" style="top: 3rem; left: 5rem"
-                      >📄</span
-                    >
-                    <span class="dr-icon" style="top: 4rem; left: 7rem"
-                      >📄</span
-                    >
-                    <span class="dr-icon" style="top: 3rem; left: 8rem"
-                      >📄</span
-                    >
-                    <span class="dr-icon" style="top: 2rem; left: 6rem"
-                      >📄</span
-                    >
-                    <span class="dr-icon" style="top: 8rem; left: 7rem"
-                      >📄</span
-                    >
-                    <span class="dr-icon" style="top: 10rem; left: 9rem"
-                      >📄</span
-                    >
-                    <span class="dr-icon" style="top: 7rem; left: 8rem"
-                      >📄</span
-                    >
-                    <span class="dr-icon" style="top: 9rem; left: 11rem"
-                      >📄</span
-                    >
-                    <span class="dr-icon" style="top: 10rem; left: 1rem"
-                      >📄</span
-                    >
-                  </div>
-                  <div
-                    id="dr-query-radius"
-                    class="fragment"
-                    data-fragment-index="1"
-                  ></div>
-                  <span class="dr-icon" style="top: 5rem; left: 10rem">🤔</span>
-                </div>
-                <p class="caption">
-                  The vector space is often $768$-dimensional.
-                </p>
-              </div>
-            </div>
-          </section>
-
           <section id="reranking">
             <h2>Retrieve-and-re-rank</h2>
             <hr class="divider" />
@@ -465,6 +393,78 @@
               <p class="column-label fragment" data-fragment-index="3">
                 Final ranking
               </p>
+            </div>
+          </section>
+
+          <section id="dense-retrieval">
+            <h2>Dense retrieval (vector search)</h2>
+            <hr class="divider" />
+            <div class="column-layout">
+              <div class="column-item">
+                <div class="c-wide">
+                  <p>
+                    Documents and query are embedded in a common vector space
+                    using <b>dual-encoder</b> models:
+                  </p>
+                </div>
+                <p style="margin-top: 0">
+                  $\phi_D(q, d) = \zeta(q) \cdot \eta(d)$
+                </p>
+                <div class="c-wide">
+                  <p class="fragment" data-fragment-index="1">
+                    Retrieval is performed as an (approximate)
+                    <b>nearest neighbor search</b> operation.
+                  </p>
+                  <p class="fragment">
+                    This is the de facto standard for current RAG setups.
+                  </p>
+                </div>
+              </div>
+              <div class="column-item">
+                <div class="vector-space">
+                  <div>
+                    <span class="dr-icon" style="top: 15rem; left: 4rem"
+                      >📄</span
+                    >
+                    <span class="dr-icon" style="top: 3rem; left: 5rem"
+                      >📄</span
+                    >
+                    <span class="dr-icon" style="top: 4rem; left: 7rem"
+                      >📄</span
+                    >
+                    <span class="dr-icon" style="top: 3rem; left: 8rem"
+                      >📄</span
+                    >
+                    <span class="dr-icon" style="top: 2rem; left: 6rem"
+                      >📄</span
+                    >
+                    <span class="dr-icon" style="top: 8rem; left: 7rem"
+                      >📄</span
+                    >
+                    <span class="dr-icon" style="top: 10rem; left: 9rem"
+                      >📄</span
+                    >
+                    <span class="dr-icon" style="top: 7rem; left: 8rem"
+                      >📄</span
+                    >
+                    <span class="dr-icon" style="top: 9rem; left: 11rem"
+                      >📄</span
+                    >
+                    <span class="dr-icon" style="top: 10rem; left: 1rem"
+                      >📄</span
+                    >
+                  </div>
+                  <div
+                    id="dr-query-radius"
+                    class="fragment"
+                    data-fragment-index="1"
+                  ></div>
+                  <span class="dr-icon" style="top: 5rem; left: 10rem">🤔</span>
+                </div>
+                <p class="caption">
+                  The vector space is often $768$-dimensional.
+                </p>
+              </div>
             </div>
           </section>
         </section>
