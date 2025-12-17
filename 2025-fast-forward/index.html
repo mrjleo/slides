@@ -299,9 +299,17 @@
                 style="color: green"
                 >explainable by design,</span
               >
-              <span class="fragment" style="color: red"
+              <span class="fragment" style="color: red" data-fragment-index="2"
                 >limited to matching terms.</span
               >
+            </p>
+            <hr class="divider" />
+            <p class="fragment" data-fragment-index="2">
+              $ \phi_{\operatorname{BM25}}(q, d) = \sum_{t \in q \cap d} \log
+              \frac{N - \operatorname{df}(t) + 0.5}{\operatorname{df}(t) + 0.5}
+              \cdot \frac{\operatorname{tf}(t, d) \cdot \left(k_1 + 1
+              \right)}{\operatorname{tf}(t, d) + k_1 \cdot\left(1 - b + b \cdot
+              \frac{l_d}{L} \right)}$
             </p>
           </section>
 
@@ -313,8 +321,13 @@
                 <div class="c-wide">
                   <p>
                     Documents and query are embedded in a common vector space
-                    using <b>dual-encoder</b> models.
+                    using <b>dual-encoder</b> models:
                   </p>
+                </div>
+                <p style="margin-top: 0">
+                  $\phi_D(q, d) = \zeta(q) \cdot \eta(d)$
+                </p>
+                <div class="c-wide">
                   <p class="fragment" data-fragment-index="1">
                     Retrieval is performed as an (approximate)
                     <b>nearest neighbor search</b> operation.
