@@ -16,14 +16,14 @@
             ylabel={\ndcg@\num{10}},
             area legend,
             legend entries={
-                    $\alpha = 0$,
-                    Pairwise optimization,
+                    $\alpha = 0$ (no fusion),
                     Manual tuning,
+                    Pairwise optimization,
                 },
             legend cell align={left},
             legend style={
-                    at={(0.5, 1.05)},
-                    anchor=south,
+                    at={(1.025, 1)},
+                    anchor=north west,
                 },
         ]
         \addplot[
@@ -31,10 +31,16 @@
             fill=plotColorNeutral*,
             draw=black,
             thick,
+        ] plot coordinates {(1, 0.6789) (2, 0.6915)};
+        \addplot[
+            ybar,
+            fill=plotColor2*,
+            draw=black,
+            thick,
             postaction={
                     pattern=north west lines
                 },
-        ] plot coordinates {(1, 0.6789) (2, 0.6915)};
+        ] plot coordinates {(1, 0.6892) (2, 0.6997)};
         \addplot[
             ybar,
             fill=plotColor1*,
@@ -44,12 +50,6 @@
                     pattern=north east lines
                 },
         ] plot coordinates {(1, 0.6842) (2, 0.6969)};
-        \addplot[
-            ybar,
-            fill=plotColor2*,
-            draw=black,
-            thick,
-        ] plot coordinates {(1, 0.6892) (2, 0.6997)};
     \end{axis}
 \end{tikzpicture}
 \end{document}
