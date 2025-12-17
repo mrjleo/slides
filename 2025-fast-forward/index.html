@@ -1268,26 +1268,6 @@
                 ><span class="textsc">Fast-Forward</span> indexes in practice</b
               >
             </h2>
-
-            <div>
-              <div class="pub">
-                <p>Catalin-Petru Lupau</p>
-                <p>
-                  <span class="pub-title"
-                    >Quantization for Compact Neural Passage Re-Ranking</span
-                  >, <span class="pub-venue">Master's thesis, 2024</span>
-                </p>
-              </div>
-              <div class="pub">
-                <p>Adrian Segura Lorente</p>
-                <p>
-                  <span class="pub-title"
-                    >Dynamic Hybrid Re-Ranking with Parameter-Efficient
-                    Adaptors</span
-                  >, <span class="pub-venue">Master's thesis, 2025</span>
-                </p>
-              </div>
-            </div>
           </section>
 
           <section id="ff-implementation">
@@ -1352,6 +1332,14 @@
                 </p>
               </div>
             </div>
+            <div class="pub">
+              <p>
+                Catalin-Petru Lupau.
+                <span class="pub-title"
+                  >Quantization for Compact Neural Passage Re-Ranking</span
+                >. <span class="pub-venue">Master's thesis, 2024</span>
+              </p>
+            </div>
           </section>
 
           <section id="ff-rank-fusion" data-auto-animate>
@@ -1378,6 +1366,18 @@
                 \max\{0, \gamma + \phi(q, d_i^-) - \phi(q, d_i^+) \}$
               </p>
             </div>
+
+            <hr class="divider" />
+
+            <div class="pub">
+              <p>
+                Adrian Segura Lorente.
+                <span class="pub-title"
+                  >Dynamic Hybrid Re-Ranking with Parameter-Efficient
+                  Adaptors</span
+                >. <span class="pub-venue">Master's thesis, 2025</span>
+              </p>
+            </div>
           </section>
 
           <section id="ff-rank-fusion-results" data-auto-animate>
@@ -1390,10 +1390,26 @@
               \phi_D(q, d)$
             </p>
 
-            <img class="fig" src="img/rank_fusion_results_out.svg" />
+            <img
+              class="fig"
+              src="img/rank_fusion_results_out.svg"
+              style="margin-bottom: 0"
+            />
             <p class="caption">
               Rank fusion results on <span class="textsc">TREC-DL-Psg’20</span>.
             </p>
+
+            <hr class="divider" />
+
+            <div class="pub">
+              <p>
+                Adrian Segura Lorente.
+                <span class="pub-title"
+                  >Dynamic Hybrid Re-Ranking with Parameter-Efficient
+                  Adaptors</span
+                >. <span class="pub-venue">Master's thesis, 2025</span>
+              </p>
+            </div>
           </section>
 
           <section
@@ -1457,13 +1473,13 @@
                 <p class="caption">
                   Retrieval results on 2AIRTC, an Amharic IR collection.
                 </p>
+                <p style="font-size: x-small">
+                  Data from: Yeshambel, Garouani, Molina, and Mothe. “Dense
+                  Retrieval for Low Resource languages - the Case of Amharic
+                  Language”. SIGIR 2025.
+                </p>
               </div>
             </div>
-            <p style="font-size: small">
-              Data from: Yeshambel, Garouani, Molina, and Mothe. “Dense
-              Retrieval for Low Resource languages - the Case of Amharic
-              Language”. SIGIR 2025.
-            </p>
           </section>
 
           <section id="next-steps-other-modalities">
@@ -1486,22 +1502,21 @@
             <p class="caption fragment" data-fragment-index="1">
               INQUIRE re-ranking leaderboard.
             </p>
-
-            <p class="fragment" style="margin: 2em" data-fragment-index="2">
-              <b
-                >Can we do efficient and effective hybrid re-ranking on image
-                data?</b
-              >
-            </p>
-
             <p
-              style="font-size: small"
+              style="font-size: x-small"
               class="fragment"
               data-fragment-index="1"
             >
               Vendrow, Pantazis, Shepard, Brostow, Jones, Aodha, Beery, Van
               Horn. “INQUIRE: A Natural World Text-to-Image Retrieval
               Benchmark”. NeurIPS 2024.
+            </p>
+
+            <p class="fragment" style="margin: 2em" data-fragment-index="2">
+              <b
+                >Can we do efficient and effective hybrid re-ranking on image
+                data?</b
+              >
             </p>
           </section>
         </section>
