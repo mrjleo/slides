@@ -1230,7 +1230,7 @@
               <span class="textsc">TREC-DL-Psg’19</span>.
             </p>
             <hr class="divider" />
-            <p>
+            <p class="fragment">
               Our trained models
               <b>do not achieve competitive performance in dense retrieval</b>.
             </p>
@@ -1329,7 +1329,7 @@
                   </p>
                   <p class="fragment" data-fragment-index="1">
                     <span class="textsc">Fast-Forward</span> indexes can be
-                    significantly compressed using PQ as well.
+                    compressed significantly using PQ as well.
                   </p>
                 </div>
 
@@ -1354,7 +1354,7 @@
             </div>
           </section>
 
-          <section id="ff-rank-fusion">
+          <section id="ff-rank-fusion" data-auto-animate>
             <h2>Rank fusion</h2>
 
             <hr class="divider" />
@@ -1378,6 +1378,17 @@
                 \max\{0, \gamma + \phi(q, d_i^-) - \phi(q, d_i^+) \}$
               </p>
             </div>
+          </section>
+
+          <section id="ff-rank-fusion-results" data-auto-animate>
+            <h2>Rank fusion</h2>
+
+            <hr class="divider" />
+
+            <img class="fig" src="img/rank_fusion_results_out.svg" />
+            <p class="caption">
+              Rank fusion results on <span class="textsc">TREC-DL-Psg’20</span>.
+            </p>
           </section>
 
           <section
