@@ -1199,7 +1199,7 @@
             </p>
           </section>
 
-          <section id="efficient-query-encoder-training">
+          <section id="query-encoder-training">
             <h2>Query encoder training</h2>
 
             <hr class="divider" />
@@ -1214,21 +1214,34 @@
               \in D^- \cup \{d^+\}} \exp \left(\zeta(q) \cdot \eta(d^-) / \tau
               \right)} \right) $$
             </p>
+          </section>
+
+          <section id="lightweight-encoders-dense-retrieval">
+            <h2>Lightweight encoders: Dense retrieval</h2>
 
             <hr class="divider" />
 
-            <p class="fragment">
-              The resulting models
+            <img
+              class="fig"
+              src="img/lightweight_encoders_dense_retrieval_out.svg"
+            />
+            <p class="caption">
+              Dense retrieval results on
+              <span class="textsc">TREC-DL-Psg’19</span>.
+            </p>
+            <hr class="divider" />
+            <p>
+              Our trained models
               <b>do not achieve competitive performance in dense retrieval</b>.
             </p>
           </section>
 
           <section
-            id="lightweight-query-encoders-results"
+            id="lightweight-query-encoders-reranking"
             data-auto-animate
             data-auto-animate-id="qenc"
           >
-            <h2>Efficient query encoders</h2>
+            <h2>Lightweight encoders: Re-ranking</h2>
             <hr class="divider" />
             <img
               src="../2023-phd/img/fast_forward/results/query_encoders/comparison_out.svg"
@@ -1437,7 +1450,7 @@
             </p>
           </section>
 
-          <section id="other-modalities">
+          <section id="next-steps-other-modalities">
             <h2>Other modalities</h2>
 
             <hr class="divider" />
