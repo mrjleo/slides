@@ -1,0 +1,25 @@
+\documentclass{standalone}
+\input{../../2023-phd/img/_common.tex}
+
+\begin{document}
+\begin{tabular}{p{9em}cc}
+    \toprule
+                               & \recall{}@\num{1000} & \ndcg{}@\num{10} \\
+    \midrule
+    \multicolumn{3}{l}{\bfseries \sparseretrieval}                       \\
+    \textRed{\bfseries\bm}     & \num{0.697}          & \num{0.519}      \\
+    \midrule
+    \multicolumn{3}{l}{\bfseries \denseretrieval}                        \\
+    \tct                       & \num{0.576}          & \num{0.612}      \\
+    \ance                      & \num{0.510}          & \num{0.633}      \\
+    \midrule
+    \multicolumn{3}{l}{\bfseries \reranking}                             \\
+    \textGreen{\bfseries\tct}  & \num{0.697}          & \num{0.685}      \\
+    \textGreen{\bfseries\ance} & \num{0.697}          & \num{0.654}      \\
+    \midrule
+    \multicolumn{3}{l}{\bfseries \interpolatedreranking}                 \\
+    \textBlue{\bfseries\tct}   & \num{0.697}          & \num{0.696}      \\
+    \textBlue{\bfseries\ance}  & \num{0.697}          & \num{0.673}      \\
+    \bottomrule
+\end{tabular}
+\end{document}

@@ -1,0 +1,27 @@
+\documentclass{standalone}
+\input{../../2023-phd/img/_common.tex}
+
+\begin{document}
+\begin{tikzpicture}
+    \begin{axis}
+        [
+            ybar,
+            width=16cm,
+            height=8cm,
+            bar width=1cm,
+            ylabel={\ndcg{}@\num{10}},
+            symbolic x coords={bm25,tiny,base,tct},
+            xticklabels={BM25,BERT-tiny (\textbf{ours}),BERT-base (\textbf{ours}),TCT-ColBERT},
+            ymin=0,
+            ymax=0.8,
+            xtick=data,
+            grid=major,
+            nodes near coords,
+        ]
+        \addplot[
+            thick,
+            fill=plotColorNeutral*,
+        ] coordinates {(bm25, 0.506) (tiny, 0.424) (base, 0.545) (tct, 0.670)};
+    \end{axis}
+\end{tikzpicture}
+\end{document}

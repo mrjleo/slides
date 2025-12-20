@@ -1,0 +1,56 @@
+\documentclass{standalone}
+\input{../../2023-phd/img/_common.tex}
+
+\begin{document}
+\begin{tikzpicture}
+    \begin{axis}[
+            nodes near coords,
+            width=12cm,
+            height=7cm,
+            xlabel={Latency [ms]},
+            ylabel={\rr{}@\num{10}},
+            grid=major,
+            legend entries={Without early stopping, With early stopping},
+            legend cell align={left},
+            legend style={
+                    at={(0.025, 0.5)},
+                    anchor=west,
+                },
+        ]
+
+        \addplot[
+            very thick,
+            mark=o,
+            only marks,
+            mark options={
+                    draw=plotColor1,
+                    outer sep=0.1em,
+                },
+            point meta=explicit symbolic,
+            coordinate style/.condition={\coordindex==0}{align=left,left},
+            coordinate style/.condition={\coordindex==1}{align=left,left},
+            color=black,
+        ] coordinates {
+                (114, 0.902) [\tct{}]
+                (114, 0.864) [\ance{}]
+            };
+
+        \addplot[
+            very thick,
+            mark=square,
+            only marks,
+            mark options={
+                    draw=plotColor2,
+                    outer sep=0.1em,
+                },
+            point meta=explicit symbolic,
+            coordinate style/.condition={\coordindex==0}{align=left,left},
+            coordinate style/.condition={\coordindex==1}{align=left,right},
+            color=black,
+        ] coordinates {
+                (72, 0.902) [\tct{}]
+                (52, 0.864) [\ance{}]
+            };
+    \end{axis}
+\end{tikzpicture}
+\end{document}

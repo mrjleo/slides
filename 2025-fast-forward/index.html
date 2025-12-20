@@ -1,0 +1,1568 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Efficient Neural Ranking using Forward Indexes</title>
+    <link rel="stylesheet" href="../node_modules/reveal.js/dist/reveal.css" />
+    <link
+      rel="stylesheet"
+      href="../node_modules/reveal.js/dist/theme/serif.css"
+    />
+    <link
+      rel="stylesheet"
+      href="../node_modules/reveal.js/plugin/highlight/monokai.css"
+    />
+    <link rel="stylesheet" href="../common.css" />
+    <link rel="stylesheet" href="../2023-phd/style.css" />
+    <script src="../node_modules/typed.js/dist/typed.umd.js"></script>
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <!-- title -->
+        <section id="title">
+          <hr class="hide" style="height: 2em" />
+          <h2><b>Efficient Neural Ranking</b></h2>
+          <h3>using Forward Indexes</h3>
+          <hr class="hide" style="height: 0.5em" />
+          <p style="font-size: large">
+            <b><u>Jurek Leonhardt</u></b>
+          </p>
+        </section>
+        <!-- end: title -->
+
+        <!-- ranking -->
+        <section>
+          <section
+            id="ranking"
+            data-auto-animate
+            data-auto-animate-id="ranking"
+          >
+            <h2>But what <i>is</i> ranking?</h2>
+          </section>
+
+          <section
+            id="ranking-websearch"
+            data-auto-animate
+            data-auto-animate-id="ranking"
+          >
+            <h2>But what <i>is</i> ranking?</h2>
+            <div class="column-layout r-stretch">
+              <div class="column-item">
+                <div class="se-logo">
+                  <span class="r-blue">W</span><span class="r-red">e</span
+                  ><span class="r-yellow">b</span> <span class="r-blue">S</span
+                  ><span class="r-red">e</span><span class="r-yellow">a</span
+                  ><span class="r-green">r</span><span class="r-red">c</span
+                  ><span class="r-yellow">h</span>
+                </div>
+                <div class="search-bar">
+                  <img
+                    src="img/search/search.svg"
+                    style="height: 0.4em; margin: 0; padding-right: 0.5em"
+                  />
+                  <div class="search-query fragment" id="query-anim-fragment">
+                    <p
+                      id="query-anim"
+                      style="margin: 0; margin-right: 0.1em"
+                    ></p>
+                  </div>
+                </div>
+                <div
+                  class="fragment search-results"
+                  id="search-results-fragment"
+                >
+                  <div class="search-result">
+                    <div class="search-result-header">
+                      <div class="search-result-icon r-stack">
+                        <div class="search-result-icon-background"></div>
+                        <img src="img/search/aleph_alpha.png" />
+                      </div>
+                      <div>
+                        <p class="search-title">Aleph Alpha</p>
+                        <p class="search-url">https://aleph-alpha.com</p>
+                      </div>
+                    </div>
+                    <p class="search-link">
+                      Sovereign AI Solutions for Enterprises and Governments by
+                      ...
+                    </p>
+                    <p class="search-desc">
+                      Our mission is to <b>secure your sovereignty</b>. We
+                      enable you to build and retain your own competencies,
+                      protect your data and IP, run, change and scale operations
+                      ...
+                    </p>
+                  </div>
+
+                  <div class="search-result">
+                    <div class="search-result-header">
+                      <div class="search-result-icon r-stack">
+                        <div class="search-result-icon-background"></div>
+                        <img src="img/search/nvidia.png" />
+                      </div>
+                      <div>
+                        <p class="search-title">NVIDIA Blog</p>
+                        <p class="search-url">
+                          https://blogs.nvidia.com › blog › what-is-sovereign-ai
+                        </p>
+                      </div>
+                    </div>
+                    <p class="search-link">What is Sovereign AI?</p>
+                    <p class="search-desc">
+                      <b>Sovereign AI</b> refers to a nation's capabilities to
+                      produce artificial intelligence using its own
+                      infrastructure, data, workforce and business ...
+                    </p>
+                  </div>
+
+                  <div class="search-result">
+                    <div class="search-result-header">
+                      <div class="search-result-icon r-stack">
+                        <div class="search-result-icon-background"></div>
+                        <img src="img/search/ecfr.png" />
+                      </div>
+                      <div>
+                        <p class="search-title">
+                          European Council on Foreign Relations (ECFR)
+                        </p>
+                        <p class="search-url">
+                          https://ecfr.eu › Publications › European Power
+                        </p>
+                      </div>
+                    </div>
+                    <p class="search-link">
+                      Get over your X: A European plan to escape American ...
+                    </p>
+                    <p class="search-desc">
+                      Despite the transformative potential of AI, the EU is
+                      reliant on the US for the chips and compute that AI
+                      requires as well as for the AI models ...
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="ranking-adhoc">
+            <h2>Ad-hoc ranking</h2>
+            <hr class="divider" />
+            <p>
+              Given an <b>input query $q$</b>, return a list of $k$
+              <b>documents $d_i$</b> from a corpus,
+              <b>ordered by their relevance</b> with respect to $q$.
+            </p>
+            <hr class="divider" />
+            <div class="h-center fragment" data-fragment-index="1">
+              <div class="rqd-ranking">
+                <div class="search-result-header">
+                  <p class="rqd-docid">$d_1$</p>
+                  <div class="search-result-icon r-stack">
+                    <div class="search-result-icon-background"></div>
+                    <img src="img/search/aleph_alpha.png" />
+                  </div>
+                  <div>
+                    <p class="search-title">Aleph Alpha</p>
+                  </div>
+                </div>
+
+                <div class="search-result-header">
+                  <p class="rqd-docid">$d_2$</p>
+                  <div class="search-result-icon r-stack">
+                    <div class="search-result-icon-background"></div>
+                    <img src="img/search/nvidia.png" />
+                  </div>
+                  <div>
+                    <p class="search-title">NVIDIA Blog</p>
+                  </div>
+                </div>
+
+                <div class="search-result-header">
+                  <p class="rqd-docid">$d_3$</p>
+                  <div class="search-result-icon r-stack">
+                    <div class="search-result-icon-background"></div>
+                    <img src="img/search/ecfr.png" />
+                  </div>
+                  <div>
+                    <p class="search-title">
+                      European Council on Foreign Relations (ECFR)
+                    </p>
+                  </div>
+                </div>
+
+                <p>. . .</p>
+                <p>$d_k$</p>
+              </div>
+            </div>
+            <p class="caption fragment" data-fragment-index="1">
+              Ranking for the query "<i style="font-family: sans-serif"
+                >AI sovereignty</i
+              >".
+            </p>
+          </section>
+
+          <section id="ranking-examples">
+            <h2>Ranking is everywhere</h2>
+
+            <hr class="divider" />
+
+            <div class="mr-grid">
+              <p>
+                <span class="r-blue">W</span><span class="r-red">e</span
+                ><span class="r-yellow">b</span> <span class="r-blue">S</span
+                ><span class="r-red">e</span><span class="r-yellow">a</span
+                ><span class="r-green">r</span><span class="r-red">c</span
+                ><span class="r-yellow">h</span>
+              </p>
+              <p>
+                <i>Ad-hoc retrieval</i>
+              </p>
+              <p>Online shopping</p>
+              <p><i>Recommender systems</i></p>
+              <p>Chatbots</p>
+              <p><i>Retrieval-augmented generation</i></p>
+            </div>
+            <hr class="divider" />
+            <p>thus...</p>
+          </section>
+
+          <section id="ranking-efficiency">
+            <h2>Ranking should be <i>efficient</i></h2>
+
+            <hr class="divider" />
+
+            <img
+              class="fragment"
+              data-fragment-index="1"
+              style="margin-bottom: 0"
+              src="../2023-phd/img/emissions_out.svg"
+            />
+            <p
+              class="fragment"
+              data-fragment-index="1"
+              style="font-size: x-small; margin-top: 0"
+            >
+              Data from: Scells, Zhuang, and Zuccon. “Reduce, Reuse, Recycle:
+              Green Information Retrieval Research”. SIGIR 2022.
+            </p>
+
+            <hr class="divider" />
+
+            <p class="fragment" data-fragment-index="1">
+              But <b>state-of-the-art neural models</b>
+              <span style="font-size: small">(often)</span> aren't.
+            </p>
+          </section>
+        </section>
+        <!-- end: ranking -->
+
+        <!-- background -->
+        <section>
+          <section class="sec-title" id="background">
+            <h2>
+              <b>Background</b>
+            </h2>
+          </section>
+
+          <section id="sparse-retrieval">
+            <h2>Sparse retrieval</h2>
+            <hr class="divider" />
+            <p>
+              <i>Sparse retrieval</i> (mostly) uses <b>lexical matching</b> for
+              <b>ad-hoc retrieval</b>.
+            </p>
+            <hr class="divider" />
+            <img
+              class="fig"
+              style="margin: 0"
+              src="../2023-phd/img/background/sparse_retrieval_example_out.svg"
+            />
+            <p class="caption">Sparse retrieval example.</p>
+            <hr class="divider" />
+            <p class="fragment" data-fragment-index="1">
+              Lexical matching is
+              <span
+                class="fragment"
+                data-fragment-index="1"
+                style="color: green"
+                >fast and efficient,</span
+              >
+              <span
+                class="fragment"
+                data-fragment-index="1"
+                style="color: green"
+                >explainable by design,</span
+              >
+              <span class="fragment" style="color: red" data-fragment-index="2"
+                >limited to matching terms.</span
+              >
+            </p>
+            <hr class="divider" />
+            <p class="fragment" data-fragment-index="2">
+              $ \phi_{\operatorname{BM25}}(q, d) = \sum_{t \in q \cap d} \log
+              \frac{N - \operatorname{df}(t) + 0.5}{\operatorname{df}(t) + 0.5}
+              \cdot \frac{\operatorname{tf}(t, d) \cdot \left(k_1 + 1
+              \right)}{\operatorname{tf}(t, d) + k_1 \cdot\left(1 - b + b \cdot
+              \frac{l_d}{L} \right)}$
+            </p>
+          </section>
+
+          <section id="reranking">
+            <h2>Retrieve-and-re-rank</h2>
+            <hr class="divider" />
+            <p>
+              <i>Retrieve-and-re-rank</i> is a <b>telescoping</b> setting that
+              has two stages.
+            </p>
+            <hr class="divider" />
+
+            <div class="column-desc-layout" id="rr-layout" style="gap: 0">
+              <div class="column-item fragment" data-fragment-index="1">
+                <p style="font-size: 2em; margin: 0">📚</p>
+              </div>
+              <p class="column-label fragment" data-fragment-index="1">
+                Corpus
+              </p>
+
+              <p class="column-item rr-arrow fragment" data-fragment-index="2">
+                →
+              </p>
+              <p class="column-label fragment" data-fragment-index="2"></p>
+
+              <div
+                class="column-item rr-stage fragment"
+                data-fragment-index="2"
+              >
+                <p class="rr-stage-num">1</p>
+                <p class="rr-operation">Lexical retrieval</p>
+              </div>
+              <p class="column-label fragment" data-fragment-index="2"></p>
+
+              <p class="column-item rr-arrow fragment" data-fragment-index="2">
+                →
+              </p>
+              <p class="column-label fragment" data-fragment-index="2"></p>
+
+              <div
+                class="column-item fragment"
+                data-fragment-index="2"
+                id="rr-candidate-docs"
+              >
+                📄📄📄📄📄<br />📄📄📄📄📄<br />📄📄📄📄📄<br />📄📄📄📄📄<br />📄📄📄📄📄
+              </div>
+              <p class="column-label fragment" data-fragment-index="2">
+                Candidates
+              </p>
+
+              <p class="column-item rr-arrow fragment" data-fragment-index="3">
+                →
+              </p>
+              <p class="column-label fragment" data-fragment-index="3"></p>
+
+              <div
+                class="column-item rr-stage fragment"
+                data-fragment-index="3"
+              >
+                <p class="rr-stage-num">2</p>
+                <p class="rr-operation">Semantic re-ranking</p>
+              </div>
+              <p class="column-label fragment" data-fragment-index="3"></p>
+
+              <p class="column-item rr-arrow fragment" data-fragment-index="3">
+                →
+              </p>
+              <p class="column-label fragment" data-fragment-index="3"></p>
+
+              <div class="column-item fragment" data-fragment-index="3">
+                <p class="rr-ranking-doc">
+                  #1 <span class="rr-ranking-doc-icon">📄</span> D371 (0.95)
+                </p>
+                <p class="rr-ranking-doc">
+                  #2 <span class="rr-ranking-doc-icon">📄</span> D222 (0.85)
+                </p>
+                <p class="rr-ranking-doc">
+                  #3 <span class="rr-ranking-doc-icon">📄</span> D984 (0.71)
+                </p>
+              </div>
+              <p class="column-label fragment" data-fragment-index="3">
+                Final ranking
+              </p>
+            </div>
+          </section>
+
+          <section id="dense-retrieval">
+            <h2>Dense retrieval (vector search)</h2>
+            <hr class="divider" />
+            <div class="column-layout">
+              <div class="column-item">
+                <div class="c-wide">
+                  <p>
+                    Documents and query are embedded in a common vector space
+                    using <b>dual-encoder</b> models:
+                  </p>
+                </div>
+                <p style="margin-top: 0">
+                  $\phi_D(q, d) = \zeta(q) \cdot \eta(d)$
+                </p>
+                <div class="c-wide">
+                  <p class="fragment" data-fragment-index="1">
+                    Retrieval is performed as an (approximate)
+                    <b>nearest neighbor search</b> operation.
+                  </p>
+                  <p class="fragment">
+                    This is the de facto standard for current RAG setups.
+                  </p>
+                </div>
+              </div>
+              <div class="column-item">
+                <div class="vector-space">
+                  <div>
+                    <span class="dr-icon" style="top: 15rem; left: 4rem"
+                      >📄</span
+                    >
+                    <span class="dr-icon" style="top: 3rem; left: 5rem"
+                      >📄</span
+                    >
+                    <span class="dr-icon" style="top: 4rem; left: 7rem"
+                      >📄</span
+                    >
+                    <span class="dr-icon" style="top: 3rem; left: 8rem"
+                      >📄</span
+                    >
+                    <span class="dr-icon" style="top: 2rem; left: 6rem"
+                      >📄</span
+                    >
+                    <span class="dr-icon" style="top: 8rem; left: 7rem"
+                      >📄</span
+                    >
+                    <span class="dr-icon" style="top: 10rem; left: 9rem"
+                      >📄</span
+                    >
+                    <span class="dr-icon" style="top: 7rem; left: 8rem"
+                      >📄</span
+                    >
+                    <span class="dr-icon" style="top: 9rem; left: 11rem"
+                      >📄</span
+                    >
+                    <span class="dr-icon" style="top: 10rem; left: 1rem"
+                      >📄</span
+                    >
+                  </div>
+                  <div
+                    id="dr-query-radius"
+                    class="fragment"
+                    data-fragment-index="1"
+                  ></div>
+                  <span class="dr-icon" style="top: 5rem; left: 10rem">🤔</span>
+                </div>
+                <p class="caption">
+                  The vector space is often $768$-dimensional.
+                </p>
+              </div>
+            </div>
+          </section>
+        </section>
+        <!-- end: background -->
+
+        <!-- fast-forward -->
+        <section>
+          <section class="sec-title" id="fast-forward-indexes">
+            <h2>
+              <b><span class="textsc">Fast-Forward</span> indexes</b>
+            </h2>
+            <div class="pub">
+              <p>
+                Jurek Leonhardt, Koustav Rudra, Megha Khosla, Abhijit Anand, and
+                Avishek Anand
+              </p>
+              <p>
+                <span class="pub-title"
+                  >Efficient Neural Ranking Using Forward Indexes</span
+                >, <span class="pub-venue">TheWebConf 2022</span>
+              </p>
+            </div>
+          </section>
+
+          <section id="fast-forward-motivation">
+            <h2>Motivation</h2>
+            <hr class="divider" />
+            <div class="column-layout" style="grid-template-columns: auto 50%">
+              <div class="column-item">
+                <div class="c-wide">
+                  <p class="fragment" data-fragment-index="1">
+                    <span class="fragment highlight-red" data-fragment-index="1"
+                      >Sparse retrieval</span
+                    >
+                    is fast, but not competitive on its own.
+                  </p>
+                  <hr class="divider" />
+                  <p class="fragment" data-fragment-index="2">
+                    <span
+                      class="fragment highlight-green"
+                      data-fragment-index="2"
+                    >
+                      Re-ranking using dense retrieval models
+                    </span>
+                    works well.
+                  </p>
+                  <hr class="divider" />
+                  <p class="fragment" data-fragment-index="3">
+                    <span
+                      class="fragment highlight-blue"
+                      data-fragment-index="3"
+                    >
+                      Score interpolation
+                    </span>
+                    further helps:
+                  </p>
+                  <p class="eq fragment" data-fragment-index="3">
+                    <span
+                      class="fragment highlight-blue"
+                      data-fragment-index="3"
+                    >
+                      $\phi (q, d)$
+                    </span>
+                    $= \alpha$
+                    <span
+                      class="fragment highlight-red"
+                      data-fragment-index="3"
+                    >
+                      $\phi_S (q, d)$
+                    </span>
+                    $+\ (1 - \alpha) $
+                    <span
+                      class="fragment highlight-green"
+                      data-fragment-index="3"
+                    >
+                      $\phi_D(q, d)$
+                    </span>
+                  </p>
+                </div>
+              </div>
+
+              <div class="column-item">
+                <img src="img/motivation_results_out.svg" class="tab" />
+                <p class="caption">
+                  Results on <span class="textsc">TREC-DL-Doc’19</span>.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section
+            id="fast-forward-idea"
+            data-auto-animate
+            data-auto-animate-id="fast-forward"
+          >
+            <h2><span class="textsc">Fast-Forward</span> indexes</h2>
+            <hr class="divider" />
+            <p>
+              <b>Interpolating lexical</b> retrieval and
+              <b>semantic</b> re-ranking scores improves the performance:
+            </p>
+            <p>
+              $\phi (q, d) = \alpha \cdot \underbrace{\phi_S (q,
+              d)}_{\text{retrieval}} + (1 - \alpha) \ \cdot$
+              <span class="fragment highlight-green" data-fragment-index="1">
+                $\underbrace{\phi_D(q, d)}_{\text{re-ranking}}$
+              </span>
+            </p>
+            <p class="fragment" data-fragment-index="1">
+              Our approach:
+              <b class="fragment highlight-green" data-fragment-index="1">
+                Efficient re-ranking with dual-encoders</b
+              >.
+            </p>
+            <hr class="divider" />
+            <p class="fragment" data-fragment-index="2">
+              A <b><span class="textsc">Fast-Forward</span> index</b> is a
+              look-up table for pre-computed document representations:
+            </p>
+            <p class="fragment" data-fragment-index="2">
+              <span class="fragment highlight-green" data-fragment-index="2">
+                $\phi_D^{FF} (q, d)$
+              </span>
+              $= \zeta (q) \cdot \eta^{FF} (d)$
+            </p>
+          </section>
+
+          <section
+            id="fast-forward-efficiency"
+            data-auto-animate
+            data-auto-animate-id="fast-forward"
+          >
+            <h2><span class="textsc">Fast-Forward</span> indexes</h2>
+
+            <hr class="divider" />
+
+            <img class="fig" src="img/comparison_out.svg" style="margin: 0" />
+            <p class="caption">
+              <span class="textsc">TCT-ColBERT</span> on
+              <span class="textsc">TREC-DL-Doc’19</span>.
+            </p>
+          </section>
+
+          <section id="fast-forward-results">
+            <h2>Passage ranking results</h2>
+            <hr class="divider" />
+            <img
+              class="tab"
+              style="margin: 0"
+              src="img/passage_ranking_results_out.svg"
+            />
+            <p class="caption">
+              Passage ranking results. Latency measured on CPU.
+            </p>
+          </section>
+
+          <section
+            id="fast-forward-es-idea"
+            data-auto-animate
+            data-auto-animate-id="es"
+          >
+            <h2>Early stopping</h2>
+            <hr class="divider" />
+            <p>
+              Many tasks require only a <b>small number of documents</b> (e.g.,
+              the top-$3$).
+            </p>
+            <hr class="divider" />
+            <p class="fragment" data-fragment-index="1">
+              <b>Lexical</b> (sparse) and <b>semantic</b> (dense) scores are
+              <b>usually correlated</b>.
+            </p>
+            <p class="fragment" data-fragment-index="1">
+              In many cases, it is
+              <b>not necessary to compute all semantic scores</b>.
+            </p>
+          </section>
+
+          <section
+            id="fast-forward-es"
+            data-auto-animate
+            data-auto-animate-id="es"
+          >
+            <h2>Early stopping</h2>
+            <hr class="divider" />
+            <img class="fig" src="img/early_stopping_approach_out.svg" />
+            <p class="caption">The <i>early stopping</i> approach.</p>
+          </section>
+
+          <section
+            id="fast-forward-es-demo"
+            data-auto-animate
+            data-auto-animate-id="es"
+          >
+            <h2>Early stopping</h2>
+            <hr class="divider" />
+            <div class="column-layout">
+              <div class="column-item" id="es-example-left-col">
+                <div class="c-wide">
+                  <p>We set $k=3$ and $\alpha = 0.5$:</p>
+                  <p class="eq">
+                    $\phi (q, d) = 0.5 \cdot \phi_S (q, d) + 0.5 \cdot \phi_D
+                    (q, d)$
+                  </p>
+                  <hr class="divider" />
+                  <p class="hide">
+                    <i>
+                      Stop the computation once the
+                      <b>highest possible score</b> $\phi_{\text{max}} (q, d)$
+                      is <b>too low to make a difference</b>.
+                    </i>
+                  </p>
+                  <hr class="divider" />
+                  <p class="hide">
+                    $\phi_D$ is <b>not normalized</b>. We
+                    <b>approximate its maximum</b> as the
+                    <b>highest observed score</b>:
+                  </p>
+                  <p class="hide">
+                    $\phi_{\text{max}} (q, \text{D224}) = 0.5 \cdot 0.73 + 0.5
+                    \cdot 0.67 = 0.70$
+                  </p>
+                </div>
+              </div>
+              <div class="column-item" id="es-example-right-col">
+                <table class="tab" id="es-tab">
+                  <thead data-id="es-tab-head">
+                    <tr>
+                      <th></th>
+                      <th>$\phi_S$</th>
+                      <th>$\phi_D$</th>
+                      <th>$\phi$ ↓</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <ul>
+                          <li>D123</li>
+                          <li>D215</li>
+                          <li>D300</li>
+                        </ul>
+                      </td>
+                      <td>
+                        <ul>
+                          <li>0.89</li>
+                          <li>0.85</li>
+                          <li>0.81</li>
+                        </ul>
+                      </td>
+                      <td>
+                        <ul class="fragment" data-fragment-index="1">
+                          <li>0.61</li>
+                          <li>0.51</li>
+                          <li>0.67</li>
+                        </ul>
+                      </td>
+                      <td>
+                        <ul class="fragment" data-fragment-index="1">
+                          <li>0.75</li>
+                          <li>0.68</li>
+                          <li>0.74</li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr class="hide">
+                      <td>
+                        <ul>
+                          <li>x</li>
+                          <li>x</li>
+                          <li>x</li>
+                        </ul>
+                      </td>
+                      <td>
+                        <ul>
+                          <li>x</li>
+                          <li>x</li>
+                          <li>x</li>
+                        </ul>
+                      </td>
+                      <td>
+                        <ul>
+                          <li>x</li>
+                          <li>x</li>
+                          <li>x</li>
+                        </ul>
+                      </td>
+                      <td>
+                        <ul>
+                          <li>x</li>
+                          <li>x</li>
+                          <li>x</li>
+                        </ul>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p class="caption">Ranked documents.</p>
+              </div>
+            </div>
+          </section>
+
+          <section
+            id="fast-forward-es-demo"
+            data-auto-animate
+            data-auto-animate-id="es"
+          >
+            <h2>Early stopping</h2>
+            <hr class="divider" />
+            <div class="column-layout">
+              <div class="column-item" id="es-example-left-col">
+                <div class="c-wide">
+                  <p>We set $k=3$ and $\alpha = 0.5$:</p>
+                  <p class="eq">
+                    $\phi (q, d) = 0.5 \cdot \phi_S (q, d) + 0.5 \cdot \phi_D
+                    (q, d)$
+                  </p>
+                  <hr class="divider" />
+                  <p class="fragment" data-fragment-index="2">
+                    <i>
+                      Stop the computation once the
+                      <b>highest possible score</b> $\phi_{\text{max}} (q, d)$
+                      is <b>too low to make a difference</b>.
+                    </i>
+                  </p>
+                  <hr class="divider" />
+                  <p class="fragment" data-fragment-index="3">
+                    $\phi_D$ is <b>not normalized</b>. We
+                    <b>approximate its maximum</b> as the
+                    <span
+                      class="fragment highlight-green"
+                      data-fragment-index="3"
+                    >
+                      <b>highest observed score</b></span
+                    >:
+                  </p>
+                  <p class="fragment eq" data-fragment-index="4">
+                    $\phi_{\text{max}} (q, \text{D224}) = 0.5\ \cdot$
+                    <span class="fragment highlight-red" data-fragment-index="4"
+                      >$0.73$</span
+                    >
+                    $ +\ 0.5\ \cdot$
+                    <span
+                      class="fragment highlight-green"
+                      data-fragment-index="4"
+                      >$0.67$</span
+                    >
+                    $ \gt $
+                    <span
+                      class="fragment highlight-blue"
+                      data-fragment-index="4"
+                      >$0.68$</span
+                    >
+                  </p>
+                </div>
+              </div>
+              <div class="column-item" id="es-example-right-col">
+                <table id="es-tab" class="tab">
+                  <thead data-id="es-tab-head">
+                    <tr>
+                      <th></th>
+                      <th>$\phi_S$</th>
+                      <th>$\phi_D$</th>
+                      <th>$\phi$ ↓</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <ul>
+                          <li>D123</li>
+                          <li>D300</li>
+                          <li>D215</li>
+                        </ul>
+                      </td>
+                      <td>
+                        <ul>
+                          <li>0.89</li>
+                          <li>0.81</li>
+                          <li>0.85</li>
+                        </ul>
+                      </td>
+                      <td>
+                        <ul>
+                          <li>0.61</li>
+                          <li>
+                            <span
+                              class="fragment highlight-green"
+                              data-fragment-index="3"
+                            >
+                              0.67
+                            </span>
+                          </li>
+                          <li>0.51</li>
+                        </ul>
+                      </td>
+                      <td>
+                        <ul>
+                          <li>0.75</li>
+                          <li>0.74</li>
+                          <li>
+                            <span
+                              class="fragment highlight-blue"
+                              data-fragment-index="4"
+                            >
+                              0.68
+                            </span>
+                          </li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr class="fragment" data-fragment-index="1">
+                      <td>
+                        <ul>
+                          <li>D224</li>
+                          <li>D105</li>
+                          <li>D900</li>
+                        </ul>
+                      </td>
+                      <td>
+                        <ul>
+                          <li>
+                            <span
+                              class="fragment highlight-red"
+                              data-fragment-index="4"
+                            >
+                              0.73
+                            </span>
+                          </li>
+                          <li>0.49</li>
+                          <li>0.42</li>
+                        </ul>
+                      </td>
+                      <td>
+                        <ul>
+                          <li class="fragment" data-fragment-index="5">0.71</li>
+                          <li class="hide">x</li>
+                          <li class="hide">x</li>
+                        </ul>
+                      </td>
+                      <td>
+                        <ul>
+                          <li class="fragment" data-fragment-index="5">0.72</li>
+                          <li class="hide">x</li>
+                          <li class="hide">x</li>
+                        </ul>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p class="caption">Ranked documents.</p>
+              </div>
+            </div>
+          </section>
+
+          <section
+            id="fast-forward-es-demo"
+            data-auto-animate
+            data-auto-animate-id="es"
+          >
+            <h2>Early stopping</h2>
+            <hr class="divider" />
+            <div class="column-layout">
+              <div class="column-item" id="es-example-left-col">
+                <div class="c-wide">
+                  <p>We set $k=3$ and $\alpha = 0.5$:</p>
+                  <p class="eq">
+                    $\phi (q, d) = 0.5 \cdot \phi_S (q, d) + 0.5 \cdot \phi_D
+                    (q, d)$
+                  </p>
+                  <hr class="divider" />
+                  <p>
+                    <i>
+                      Stop the computation once the
+                      <b>highest possible score</b> $\phi_{\text{max}} (q, d)$
+                      is <b>too low to make a difference</b>.
+                    </i>
+                  </p>
+                  <hr class="divider" />
+                  <p>
+                    $\phi_D$ is <b>not normalized</b>. We
+                    <b>approximate its maximum</b> as the
+                    <span
+                      class="fragment highlight-green"
+                      data-fragment-index="1"
+                    >
+                      <b>highest observed score</b></span
+                    >:
+                  </p>
+                  <p class="fragment eq" data-fragment-index="1">
+                    $\phi_{\text{max}} (q, \text{D105}) = 0.5\ \cdot$
+                    <span class="fragment highlight-red" data-fragment-index="1"
+                      >$0.49$</span
+                    >
+                    $ +\ 0.5\ \cdot$
+                    <span
+                      class="fragment highlight-green"
+                      data-fragment-index="1"
+                      >$0.71$</span
+                    >
+                    $ \lt $
+                    <span
+                      class="fragment highlight-blue"
+                      data-fragment-index="1"
+                      >$0.72$</span
+                    >
+                  </p>
+                </div>
+              </div>
+              <div class="column-item" id="es-example-right-col">
+                <table class="tab" id="es-tab">
+                  <thead data-id="es-tab-head">
+                    <tr>
+                      <th></th>
+                      <th>$\phi_S$</th>
+                      <th>$\phi_D$</th>
+                      <th>$\phi$ ↓</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <ul>
+                          <li>D123</li>
+                          <li>D300</li>
+                          <li>D224</li>
+                        </ul>
+                      </td>
+                      <td>
+                        <ul>
+                          <li>0.89</li>
+                          <li>0.81</li>
+                          <li>0.73</li>
+                        </ul>
+                      </td>
+                      <td>
+                        <ul>
+                          <li>0.61</li>
+                          <li>0.67</li>
+                          <li>
+                            <span
+                              class="fragment highlight-green"
+                              data-fragment-index="1"
+                            >
+                              0.71
+                            </span>
+                          </li>
+                        </ul>
+                      </td>
+                      <td>
+                        <ul>
+                          <li>0.75</li>
+                          <li>0.74</li>
+                          <li>
+                            <span
+                              class="fragment highlight-blue"
+                              data-fragment-index="1"
+                            >
+                              0.72
+                            </span>
+                          </li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <ul>
+                          <li>D215</li>
+                          <li>D105</li>
+                          <li>D900</li>
+                        </ul>
+                      </td>
+                      <td>
+                        <ul>
+                          <li>0.85</li>
+                          <li>
+                            <span
+                              class="fragment highlight-red"
+                              data-fragment-index="1"
+                            >
+                              0.49
+                            </span>
+                          </li>
+                          <li>0.42</li>
+                        </ul>
+                      </td>
+                      <td>
+                        <ul>
+                          <li>0.51</li>
+                          <li class="hide">x</li>
+                          <li class="hide">x</li>
+                        </ul>
+                      </td>
+                      <td>
+                        <ul>
+                          <li>0.68</li>
+                          <li class="hide">x</li>
+                          <li class="hide">x</li>
+                        </ul>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p class="caption">Ranked documents.</p>
+              </div>
+            </div>
+          </section>
+
+          <section
+            id="fast-forward-es-results"
+            data-auto-animate
+            data-auto-animate-id="es"
+          >
+            <h2>Early stopping</h2>
+            <hr class="divider" />
+            <div class="column-layout">
+              <div class="column-item">
+                <img
+                  class="fig"
+                  src="../2023-phd/img/fast_forward/results/early_stopping_out.svg"
+                />
+                <p class="caption">
+                  ANCE on <span class="textsc">TREC-DL-Psg’19</span> with early
+                  stopping.
+                </p>
+              </div>
+              <div class="column-item fragment">
+                <img class="fig" src="img/early_stopping_results_out.svg" />
+                <p class="caption">
+                  Ranking performance on
+                  <span class="textsc">TREC-DL-Psg’19</span>.
+                </p>
+              </div>
+            </div>
+          </section>
+        </section>
+        <!-- end: fast-forward -->
+
+        <!-- encoders -->
+        <section>
+          <section class="sec-title" id="lightweigh-encoders">
+            <h2>
+              <b>Lightweight encoders</b>
+            </h2>
+            <div class="pub">
+              <p>
+                Jurek Leonhardt, Henrik Müller, Koustav Rudra, Megha Khosla,
+                Abhijit Anand, Avishek Anand
+              </p>
+              <p>
+                <span class="pub-title"
+                  >Efficient Neural Ranking using Forward Indexes and
+                  Lightweight Encoders</span
+                >, <span class="pub-venue">TOIS 2024</span>
+              </p>
+            </div>
+          </section>
+
+          <section id="query-encoding">
+            <h2>Query encoding</h2>
+
+            <hr class="divider" />
+
+            <p>For some settings, query encoding can become a bottleneck:</p>
+            <img class="fig" width="75%" src="img/profiler.png" />
+            <p class="caption">
+              Profile of re-ranking 1k passages each for 43 queries.
+            </p>
+          </section>
+
+          <section id="query-characteristics">
+            <h2>Query characteristics</h2>
+            <hr class="divider" />
+            <p>Web search queries are often <b>short and simple</b>:</p>
+            <img
+              class="fig"
+              src="../2023-phd/img/fast_forward/length_stats_out.svg"
+            />
+            <p class="caption">
+              The distribution of query and passage lengths in the MS MARCO
+              corpus.
+            </p>
+            <hr class="divider" />
+            <p class="fragment">
+              <b>Intuition</b>: Encoders should be adapted to these
+              characteristics.
+            </p>
+          </section>
+
+          <section
+            id="lightweight-query-encoders"
+            data-auto-animate
+            data-auto-animate-id="qenc"
+          >
+            <h2>Lightweight query encoders</h2>
+            <hr class="divider" />
+            <p>
+              Queries are <b>short</b> and <b>concise</b>; a
+              <b>simple model</b> should be able to represent them.
+            </p>
+            <hr class="divider" />
+            <div class="column-layout fragment">
+              <div class="column-item">
+                <img
+                  class="fig"
+                  src="../2023-phd/img/fast_forward/query_encoder_out.svg"
+                />
+                <p class="caption">Self-attention-based query encoder.</p>
+              </div>
+              <div class="column-item">
+                <div class="c-wide">
+                  <p>Hyperparameters:</p>
+                  <ul>
+                    <li>Number of layers $L$</li>
+                    <li>Number of attention heads $A$</li>
+                    <li>Representation size $H$</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <hr class="divider" />
+            <p class="fragment">
+              BERT<sub>base</sub>: $L=12$, $A=12$, $H=768$.
+              <span class="fragment"><b>Can we go lower?</b></span>
+            </p>
+          </section>
+
+          <section id="query-encoder-training">
+            <h2>Query encoder training</h2>
+
+            <hr class="divider" />
+
+            <p>
+              We train <b>asymmetric dual-encoder models</b> with a simple
+              contrastive loss:
+            </p>
+            <p>
+              $$ \mathcal{L} \left( q, d^+, D^- \right) = -\log \left( \frac
+              {\exp \left(\zeta(q) \cdot \eta(d^+) / \tau \right)} {\sum_{d^-
+              \in D^- \cup \{d^+\}} \exp \left(\zeta(q) \cdot \eta(d^-) / \tau
+              \right)} \right) $$
+            </p>
+          </section>
+
+          <section id="lightweight-encoders-dense-retrieval">
+            <h2>Lightweight encoders: Dense retrieval</h2>
+
+            <hr class="divider" />
+
+            <img
+              class="fig"
+              src="img/lightweight_encoders_dense_retrieval_out.svg"
+            />
+            <p class="caption">
+              Dense retrieval results on
+              <span class="textsc">TREC-DL-Psg’19</span>.
+            </p>
+            <hr class="divider" />
+            <p class="fragment">
+              Our trained models
+              <b>do not achieve competitive performance in dense retrieval</b>.
+            </p>
+          </section>
+
+          <section
+            id="lightweight-query-encoders-reranking"
+            data-auto-animate
+            data-auto-animate-id="qenc"
+          >
+            <h2>Lightweight encoders: Re-ranking</h2>
+            <hr class="divider" />
+            <img
+              src="../2023-phd/img/fast_forward/results/query_encoders/comparison_out.svg"
+              class="fig"
+            />
+            <p class="caption">
+              Latency and ranking performance. Latency measured with batch size
+              $256$.
+            </p>
+            <hr class="divider" />
+            <p class="fragment">
+              Lightweight query encoders can achieve
+              <b>good performance as re-rankers</b>.
+            </p>
+          </section>
+        </section>
+        <!-- end: encoders -->
+
+        <!-- practical aspects -->
+        <section>
+          <section class="sec-title" id="practical-aspects">
+            <h2>
+              <b
+                ><span class="textsc">Fast-Forward</span> indexes in practice</b
+              >
+            </h2>
+          </section>
+
+          <section id="ff-implementation">
+            <h2>Implementation</h2>
+
+            <hr class="divider" />
+
+            <div class="column-layout">
+              <div class="column-item c-wide">
+                <p>
+                  <b>Core requirement</b>: Fast disk-based look-up of vectors.
+                </p>
+                <p>
+                  Specific use-case: Array slicing along
+                  <b>single axis</b>.
+                </p>
+                <p class="fragment" data-fragment-index="1">
+                  Current implementation: HDF5 with optional memory mapping.
+                </p>
+              </div>
+              <div class="column-item fragment" data-fragment-index="1">
+                <img class="fig" src="img/benchmark_out.svg" />
+                <p class="caption">Randomly accessing 50k out of 1M vectors.</p>
+              </div>
+            </div>
+          </section>
+
+          <section id="ff-index-compression">
+            <h2>Index compression</h2>
+
+            <hr class="divider" />
+
+            <div class="column-layout">
+              <div class="column-item">
+                <div class="c-wide">
+                  <p>
+                    <b>Product quantization</b> is commonly used to compress
+                    vectors for dense retrieval.
+                  </p>
+                  <p class="fragment" data-fragment-index="1">
+                    <span class="textsc">Fast-Forward</span> indexes can be
+                    compressed significantly using PQ as well.
+                  </p>
+                </div>
+
+                <hr class="divider" />
+
+                <img
+                  class="fig fragment"
+                  src="img/quantization_latency_out.svg"
+                  data-fragment-index="2"
+                />
+                <p class="caption fragment" data-fragment-index="2">
+                  Latency for re-ranking 1k passages each for 43 queries.
+                </p>
+              </div>
+              <div class="column-item fragment" data-fragment-index="1">
+                <img class="fig" src="img/compression_out.svg" />
+                <p class="caption">
+                  Results on <span class="textsc">TREC-DL-Psg’19</span> (8.8M
+                  vectors).
+                </p>
+              </div>
+            </div>
+            <div class="pub">
+              <p>
+                Catalin-Petru Lupau.
+                <span class="pub-title"
+                  >Quantization for Compact Neural Passage Re-Ranking</span
+                >. <span class="pub-venue">Master's thesis, 2024</span>
+              </p>
+            </div>
+          </section>
+
+          <section id="ff-rank-fusion" data-auto-animate>
+            <h2>Rank fusion</h2>
+
+            <hr class="divider" />
+
+            <div>
+              <p>
+                Rank fusion via linear interpolation requires
+                <b>hyperparameter tuning</b> for $\alpha$:
+              </p>
+              <p>
+                $\phi(q, d) = \alpha \cdot \phi_S(q, d) + (1 - \alpha) \cdot
+                \phi_D(q, d)$
+              </p>
+              <hr class="divider" />
+              <p class="fragment" data-fragment-index="1">
+                We can <b>optimize $\alpha$ directly</b>, e.g., using a
+                max-margin ranking loss:
+              </p>
+              <p class="fragment" data-fragment-index="1">
+                $\alpha^* = \argmin_\alpha \sum_{(q_i, d_i^+, d_i^-) \in T}
+                \max\{0, \gamma + \phi(q, d_i^-) - \phi(q, d_i^+) \}$
+              </p>
+            </div>
+
+            <hr class="divider" />
+
+            <div class="pub">
+              <p>
+                Adrian Segura Lorente.
+                <span class="pub-title"
+                  >Dynamic Hybrid Re-Ranking with Parameter-Efficient
+                  Adaptors</span
+                >. <span class="pub-venue">Master's thesis, 2025</span>
+              </p>
+            </div>
+          </section>
+
+          <section id="ff-rank-fusion-results" data-auto-animate>
+            <h2>Rank fusion</h2>
+
+            <hr class="divider" />
+
+            <p>
+              $\phi(q, d) = \alpha \cdot \phi_S(q, d) + (1 - \alpha) \cdot
+              \phi_D(q, d)$
+            </p>
+
+            <img
+              class="fig"
+              src="img/rank_fusion_results_out.svg"
+              style="margin-bottom: 0"
+            />
+            <p class="caption">
+              Rank fusion results on <span class="textsc">TREC-DL-Psg’20</span>.
+            </p>
+
+            <hr class="divider" />
+
+            <div class="pub">
+              <p>
+                Adrian Segura Lorente.
+                <span class="pub-title"
+                  >Dynamic Hybrid Re-Ranking with Parameter-Efficient
+                  Adaptors</span
+                >. <span class="pub-venue">Master's thesis, 2025</span>
+              </p>
+            </div>
+          </section>
+
+          <section
+            id="ff-library-docs"
+            data-background-iframe="https://mrjleo.github.io/fast-forward-indexes/docs/main/fast_forward.html"
+            data-background-interactive
+          >
+            <div
+              style="
+                position: absolute;
+                width: 50%;
+                right: 0;
+                box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5),
+                  0 5px 25px rgba(0, 0, 0, 0.2);
+                background-color: rgba(0, 0, 0, 0.9);
+                color: white;
+                padding: 1em;
+                font-size: x-large;
+                text-align: center;
+              "
+            >
+              <p style="color: white">Demo: Python library</p>
+              <hr />
+              <p style="font-family: monospace; color: white">
+                <b>pip install fast-forward-indexes</b>
+              </p>
+            </div>
+          </section>
+        </section>
+        <!-- end: practical aspects -->
+
+        <!-- next steps -->
+        <section>
+          <section class="sec-title" id="next-steps">
+            <h2>
+              <b>What's next?</b>
+            </h2>
+          </section>
+
+          <section id="next-steps-low-resource">
+            <h2>Low-resource settings</h2>
+
+            <hr class="divider" />
+
+            <div class="column-layout">
+              <div class="column-item c-wide">
+                <p>
+                  Dense retrieval has
+                  <b>limitations in low-resource settings</b>, struggling to
+                  beat term-matching approaches (BM25).
+                </p>
+                <p class="fragment">
+                  <b>Do the same limitations apply for specialized domains?</b>
+                </p>
+                <p class="fragment">
+                  <b>How well can our approach mitigate this?</b>
+                </p>
+              </div>
+              <div class="column-item">
+                <img class="fig" src="img/low_resource_retrieval_out.svg" />
+                <p class="caption">
+                  Retrieval results on 2AIRTC, an Amharic IR collection.
+                </p>
+                <p style="font-size: x-small">
+                  Data from: Yeshambel, Garouani, Molina, and Mothe. “Dense
+                  Retrieval for Low Resource languages - the Case of Amharic
+                  Language”. SIGIR 2025.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section id="next-steps-other-modalities">
+            <h2>Other modalities</h2>
+
+            <hr class="divider" />
+
+            <p>
+              Recent <b>image retrieval</b> setups employ re-ranking using
+              <b>large multimodal models</b>.
+            </p>
+
+            <img
+              class="fig fragment"
+              data-fragment-index="1"
+              width="75%"
+              style="margin-bottom: 0"
+              src="img/inquire_leaderboard.png"
+            />
+            <p class="caption fragment" data-fragment-index="1">
+              INQUIRE re-ranking leaderboard.
+            </p>
+            <p
+              style="font-size: x-small"
+              class="fragment"
+              data-fragment-index="1"
+            >
+              Vendrow, Pantazis, Shepard, Brostow, Jones, Aodha, Beery, Van
+              Horn. “INQUIRE: A Natural World Text-to-Image Retrieval
+              Benchmark”. NeurIPS 2024.
+            </p>
+
+            <p class="fragment" style="margin: 2em" data-fragment-index="2">
+              <b
+                >Can we do efficient and effective hybrid re-ranking on image
+                data?</b
+              >
+            </p>
+          </section>
+        </section>
+        <!-- end: next steps -->
+
+        <!-- final slide -->
+        <section class="sec-title" id="final-slide">
+          <h2>
+            <b>The end</b>
+          </h2>
+        </section>
+        <!-- end: final slide -->
+      </div>
+    </div>
+
+    <script src="../node_modules/reveal.js/dist/reveal.js"></script>
+    <script src="../node_modules/reveal.js/plugin/markdown/markdown.js"></script>
+    <script src="../node_modules/reveal.js/plugin/highlight/highlight.js"></script>
+    <script src="../node_modules/reveal.js/plugin/math/math.js"></script>
+    <script src="../node_modules/reveal.js/plugin/zoom/zoom.js"></script>
+    <script src="../node_modules/reveal.js/plugin/notes/notes.js"></script>
+    <script>
+      Reveal.initialize({
+        hash: true,
+        slideNumber: true,
+        katex: {
+          local: "../node_modules/katex",
+        },
+        plugins: [
+          RevealMarkdown,
+          RevealHighlight,
+          RevealMath.KaTeX,
+          RevealZoom,
+          RevealNotes,
+        ],
+      });
+
+      // query typing animation
+      var query_typed = null;
+      Reveal.on("fragmentshown", (event) => {
+        if (event.fragment.id == "query-anim-fragment") {
+          if (query_typed != null) {
+            query_typed.destroy();
+          }
+          query_typed = new Typed("#query-anim", {
+            strings: ["AI ^50 sovereignty"],
+            typeSpeed: 50,
+          });
+        } else if (event.fragment.id == "search-results-fragment") {
+          // remove distracting cursor once the search results are visible
+          query_typed.cursor.remove();
+        }
+      });
+    </script>
+  </body>
+</html>

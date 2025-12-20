@@ -1,0 +1,44 @@
+\documentclass{standalone}
+\input{../../2023-phd/img/_common.tex}
+
+\begin{document}
+\begin{tikzpicture}
+    \pgfplotstableread[col sep=comma]{benchmark.csv}\data
+    \begin{axis}[
+            width=12cm,
+            height=10cm,
+            xlabel={Iteration},
+            ylabel={Latency [s]},
+            ymode=log,
+            grid=major,
+            legend entries={HDF5, Zarr, TileDB, \texttt{mmap}},
+            legend cell align={left},
+            legend pos=south west,
+        ]
+        \addplot[
+            const plot mark mid,
+            very thick,
+            mark=o,
+            plotColor1,
+        ] table[y index=1] {\data};
+        \addplot[
+            const plot mark mid,
+            very thick,
+            mark=square,
+            plotColor2,
+        ] table[y index=2] {\data};
+        \addplot[
+            const plot mark mid,
+            very thick,
+            mark=x,
+            plotColor3,
+        ] table[y index=3] {\data};
+        \addplot[
+            const plot mark mid,
+            very thick,
+            mark=star,
+            plotColor4,
+        ] table[y index=4] {\data};
+    \end{axis}
+\end{tikzpicture}
+\end{document}

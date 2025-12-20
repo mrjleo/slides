@@ -1,0 +1,27 @@
+\documentclass{standalone}
+\input{../../2023-phd/img/_common.tex}
+
+\begin{document}
+\begin{tikzpicture}
+    \begin{axis}
+        [
+            ybar,
+            width=8cm,
+            height=8cm,
+            bar width=1cm,
+            ylabel={\ndcg{}@\num{10}},
+            symbolic x coords={BM25,BERT,RoBERTa},
+            ymin=0,
+            ymax=0.85,
+            xtick=data,
+            grid=major,
+            nodes near coords,
+            enlarge x limits=0.25,
+        ]
+        \addplot[
+            thick,
+            fill=plotColorNeutral*,
+        ] coordinates {(BM25, 0.705) (BERT, 0.533) (RoBERTa, 0.704)};
+    \end{axis}
+\end{tikzpicture}
+\end{document}
