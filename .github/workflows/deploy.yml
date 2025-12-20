@@ -31,12 +31,7 @@ jobs:
       - name: Install dependencies (apt)
         run: |
           sudo apt update
-          sudo apt install -y pdf2svg fonts-inconsolata
-
-      - name: Install TeX Live
-        uses: teatimeguest/setup-texlive-action@v3
-        with:
-          packages: scheme-full
+          sudo apt install -y pdf2svg fonts-inconsolata texlive-full
 
       - name: Install dependencies (npm)
         run: npm install --omit=dev
