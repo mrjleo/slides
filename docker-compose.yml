@@ -2,7 +2,7 @@ services:
   slides:
     build:
       context: .
-    restart: always
+    restart: unless-stopped
     develop:
       watch:
         - action: rebuild
